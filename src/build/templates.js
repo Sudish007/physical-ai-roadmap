@@ -374,14 +374,91 @@ ${questions}
   return shell({ page: 'plan', title: 'My plan', body });
 }
 
-export function feedPage() {
+export const FEED_CLASS_FILTERS = [['all', 'All'], ['arxiv', 'arXiv'], ['proceedings', 'Proceedings'], ['lab', 'Labs'], ['release', 'Releases'], ['regulator', 'Regulators']];
+export const FEED_QUERY_FILTERS = [['Thesis narrow', 'Thesis narrow'], ['Aerial autonomy', 'Aerial autonomy'], ['Safe autonomy', 'Safe autonomy'], ['Robot-learning evaluation', 'Robot-learning evaluation'], ['listings', 'Category listings']];
+export const FEED_TRIAGE_FILTERS = [['all', 'Everything', null], ['keep', 'Kept', 'keep'], ['later', 'Read later', 'later'], ['drop', 'Dropped', 'drop']];
+export const HEALTH_HEADERS = ['Source', 'Class', 'Status', 'Fetched', 'Newest item', 'Note or error'];
+
+/**
+ * Feed. Static: the header line (filled by JS from data/meta.json), the health disclosure (rows by JS), the rule
+ * card, the three filter rows, the empty list, and the right column built from the report (§17.1 Normal-week rows
+ * with the source's own cells — DR-5 —, the §17.6 limits sentence, the §13.6 notice pages, the §17.5 labs).
+ * @param {{ feedData: object }} o
+ */
+export function feedPage(o) {
+  const d = o.feedData;
+  // DR-5 guard at the point of rendering: three rows, every cell one of the §17.1 table's own strings
+  if (d.protocol.rows.length !== 3) throw new Error(`feed page: the protocol card must have exactly 3 rows, got ${d.protocol.rows.length}`);
+  const protocolCells = new Set(d.protocol.cells);
+  for (const row of d.protocol.rows) for (const cell of row) if (!protocolCells.has(cell)) throw new Error(`feed page: "${cell}" is not a §17.1 cell`);
+  const filterRow = (name, label, list, countKey) => html`<div class="filters" role="group" aria-label="Filter by ${label}" data-filter-group="${name}">
+<span class="group-label">${label[0].toUpperCase() + label.slice(1)}</span>
+<div class="filter-btns">
+${join(list.map(([value, text], i) => html`<button class="btn" type="button" data-filter="${name}" data-value="${value}" aria-pressed="${i === 0 && name !== 'query' ? 'true' : 'false'}">${text}${countKey && list[i][2] ? html` <span class="n" data-count="${list[i][2]}">0</span>` : ''}</button>`), '\n')}
+</div>
+</div>`;
+  const protocolRows = join(d.protocol.rows.map((row) => html`<tr>${join(row.map((cell, c) => html`<td${d.protocol.aligns[c] === 'right' ? raw(' class="num"') : ''}>${cell}</td>`), '')}</tr>`));
+  const protocolHead = join(d.protocol.headers.map((h, c) => html`<th${d.protocol.aligns[c] === 'right' ? raw(' class="num"') : ''}>${h}</th>`), '');
+  const notices = join(d.notices.map((n) => html`<li data-notice="${n.id}"><span><a href="${n.url}" rel="noopener external">${n.name}</a>${n.extraHtml ? html` ${raw(n.extraHtml)}` : ''}</span><span class="count" data-notice-status>—</span></li>`));
+  const labs = join(d.labs.map((l) => html`<li><a href="${l.url}" rel="noopener external">${l.name}</a><span class="dom">${hostOfHref(l.url)}</span></li>`));
+  const manual = join(d.manualChecks.map((m) => html`<a href="${m.href}">${m.label}</a>`), raw(' · '));
   const body = html`<main class="page">
+<header class="article-head feed-head mt-6">
 <p class="kicker">Stay ahead · the §17 monitoring system, fetched daily</p>
 <h1 id="top">Feed</h1>
-<div id="feed-app"></div>
-<noscript><p>The feed needs JavaScript to render; the raw data is in <a href="data/feed.json">data/feed.json</a>.</p></noscript>
+<p class="muted small feed-updated">Last updated <span data-last-updated></span> · 30-day window · ${SITE.freshness}</p>
+<details class="health" id="feed-health">
+<summary><span data-health-summary>Source health</span><span class="muted"> · details</span></summary>
+<div class="table-wrap bare"><table class="health-table" data-cols="6">
+<thead><tr>${join(HEALTH_HEADERS.map((h) => html`<th${h === 'Fetched' ? raw(' class="num"') : ''}>${h}</th>`), '')}</tr></thead>
+<tbody data-health-rows><tr><td colspan="6">Source health is read from <a href="data/meta.json">data/meta.json</a> by JavaScript.</td></tr></tbody>
+</table></div>
+</details>
+</header>
+<div class="two-col feed-grid">
+<div>
+<div class="rule"><p><strong>Keep only if it changes an experiment or a claim.</strong> Triage is stored in this browser; the full keep/drop rule is in <a href="s17.html#s17-6">§17.6</a>.</p></div>
+${filterRow('class', 'class', FEED_CLASS_FILTERS)}
+${filterRow('query', '§17 query', FEED_QUERY_FILTERS)}
+${filterRow('triage', 'triage', FEED_TRIAGE_FILTERS, true)}
+<ol class="feed-list" data-feed-list aria-live="polite"></ol>
+<p class="small muted feed-status" data-feed-status>Items older than 30 days leave the feed; Keep and Read-later marks stay in this browser.</p>
+</div>
+<aside class="feed-aside">
+<section class="section-block pt-0" aria-labelledby="h-protocol">
+<h2 id="h-protocol" class="mt-0">Weekly protocol <a class="more small" href="s17.html#s17-1">§17.1</a></h2>
+<div class="table-wrap"><table class="protocol" data-cols="${d.protocol.headers.length}">
+<thead><tr>${protocolHead}</tr></thead>
+<tbody>
+${protocolRows}
+</tbody>
+</table></div>
+<p class="small">${d.monthEnd.text.replace(/ — see §17\.1$/, '')} — see <a href="${d.monthEnd.href}">§17.1</a>.</p>
+<p class="small muted limits">${raw(d.limits.html)} (<a href="s17.html#s17-6">§17.6</a>)</p>
+</section>
+<section class="section-block" aria-labelledby="h-notices">
+<h2 id="h-notices">Indian official notices: check manually <a class="more small" href="s13.html#s13-6">§13.6</a></h2>
+<p class="small muted">These pages are not machine-readable, so the feed records only whether each one answered. ${d.noticeSentence}</p>
+<ul class="progress-list notices" data-notices>
+${notices}
+</ul>
+</section>
+<section class="section-block" aria-labelledby="h-labs">
+<h2 id="h-labs">Labs without a feed: check monthly <a class="more small" href="s17.html#s17-5">§17.5</a></h2>
+<ul class="small list-indent labs">
+${labs}
+</ul>
+</section>
+<p class="small muted manual-checks">Manual checks: ${manual}.</p>
+</aside>
+</div>
+<noscript><p>The feed list needs JavaScript to render; the raw data is in <a href="data/feed.json">data/feed.json</a> and the source health in <a href="data/meta.json">data/meta.json</a>.</p></noscript>
 </main>`;
   return shell({ page: 'feed', title: 'Feed', body });
+}
+
+function hostOfHref(href) {
+  try { return new URL(href).hostname.replace(/^www\./, ''); } catch { return ''; }
 }
 
 export function notFoundPage() {

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Proceedings of Machine Learning Research</title>
+    <description>Proceedings of The 9th Conference on Robot Learning
+  Held in Seoul, Korea on 27-30 September 2025
+
+Published as Volume 305 by the Proceedings of Machine Learning Research on 07 October 2025.
+
+Volume Edited by:
+  Joseph Lim
+  Shuran Song
+  Hae-Won Park
+
+Series Editors:
+  Neil D. Lawrence
+</description>
+    <link>https://proceedings.mlr.press/v305/</link>
+    <atom:link href="https://proceedings.mlr.press/v305/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 07 Oct 2026 11:43:37 +0000</pubDate>
+    <lastBuildDate>Wed, 07 Oct 2026 11:43:37 +0000</lastBuildDate>
+    <generator>Jekyll v3.10.0</generator>
+    
+      <item>
+        <title>GraspQP: Differentiable Optimization of Force Closure for Diverse and Robust Dexterous Grasping</title>
+        <description>Dexterous robotic hands enable versatile interactions through the flexibility and adaptability of a multi-finger setup, allowing for a wise range of task-specific grasp configurations in diverse environments. However, access to diverse and high-quality grasp data is essential to fully exploit the capabilities of dexterous hands, be it to train grasp prediction models from point clouds, train manipulation policies, or to support high-level task planning with a broader range of action options. Existing approaches for dataset generation rely on sampling-based algorithms or simplified force-closure analysis, which tend to converge to power grasps and often exhibit limited diversity. In this work, we propose a method to synthesize large-scale, diverse, and physically feasible grasps that additionally go beyond simple power grasps to more refined manipulation, such as pinches or tri-finger precision grasps. We introduce a rigorous differentiable energy formulation of force closure, implicitly defined through a Quadratic Program (QP). In addition, we present an adjusted optimization method (MALA*) that improves performance by dynamically rejecting gradient steps based on the global sample distribution. We extensively evaluate our approach and demonstrate significant improvements in both grasp diversity and the stability of final grasp predictions. Finally, we provide a new, large-scale grasp dataset for the 5’700 objects from DexGraspNet, consisting of five different grippers and three different grasp types.</description>
+        <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
+        <link>https://proceedings.mlr.press/v305/zurbrugg25a.html</link>
+        <guid isPermaLink="true">https://proceedings.mlr.press/v305/zurbrugg25a.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Embrace Contacts: humanoid shadowing with full body ground contacts</title>
+        <description>Previous humanoid robot research works treat the robot as a bipedal mobile manipulation platform, where only the feet and hands contact the environment. However, we humans use all body parts to interact with the world, e.g., we sit in chairs, get up from the ground, or roll on the floor. Contacting the environment using body parts other than feet and hands brings significant challenges in both model-predictive control and reinforcement learning-based methods: an unpredictable contact sequence makes it almost impossible for model-predictive control to plan ahead in real time; the success of sim-to-real reinforcement learning for humanoids heavily depends on the acceleration of the rigid-body physical simulator and the simplification of collision detection. On the other hand, lacking extreme torso movement of humanoid data makes all other components non-trivial to design, such as dataset distribution, motion commands, and task rewards. To address these challenges, we propose a general humanoid motion framework that takes discrete motion commands and controls the robot’s motor actions in real time. Using a GPU-accelerated simulator, we train a humanoid whole-body control policy that follows the high-level motion command in the real world in real time, even with stochastic contacts and extremely large robot base rotation and not-so-feasible motion commands.</description>
+        <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
+        <link>https://proceedings.mlr.press/v305/zhuang25b.html</link>
+        <guid isPermaLink="true">https://proceedings.mlr.press/v305/zhuang25b.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>MirrorDuo: Reflection-Consistent Visuomotor Learning from Mirrored Demonstration Pairs</title>
+        <description>Image-based behaviour cloning leverages demonstrations captured from ubiquitous RGB cameras, enabling impressive visuomotor performance. However, it remains constrained by the cost of collecting sufficiently diverse demonstrations, especially for generalizing across workspace variations. We propose MirrorDuo, a mirroring-based formulation that operates on image, proprioception, and full 6-DoF end-effector action tuples, generating a mirrored counterpart for each original demonstration, effectively achieving “collect one, get one for free.&quot; It can be applied as a data augmentation strategy for existing learning pipelines, such as standard behaviour cloning or diffusion policy, or as a structural prior for reflection-equivariant policy networks. By leveraging the overlap between the original and mirrored domains, MirrorDuo achieves significantly improved performance under the same data budget when demonstrations are evenly distributed across both sides of the workspace. When demonstrations are confined to one side, MirrorDuo enables efficient skill transfer to the mirrored workspace with as few as zero or just 5 demonstrations in the target arrangement.</description>
+        <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
+        <link>https://proceedings.mlr.press/v305/zhuang25a.html</link>
+        <guid isPermaLink="true">https://proceedings.mlr.press/v305/zhuang25a.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>LaVA-Man: Learning Visual Action Representations for Robot Manipulation</title>
+        <description>Visual-textual understanding is essential for language-guided robot manipulation. Recent works leverage pre-trained vision-language models to measure the similarity between encoded visual observations and textual instructions, and then train a model to map this similarity to robot actions. However, this two-step approach limits the model to capture the relationship between visual observations and textual instructions, leading to reduced precision in manipulation tasks. We propose to learn visual-textual associations through a self-supervised pretext task: reconstructing a masked goal image conditioned on an input image and textual instructions. This formulation allows the model to learn visual-action representations without robot action supervision. The learned representations can then be fine-tuned for manipulation tasks with only a few demonstrations. We also introduce the \textit{Omni-Object Pick-and-Place} dataset, which consists of annotated robot tabletop manipulation episodes, including 180 object classes and 3,200 instances with corresponding textual instructions. This dataset enables the model to acquire diverse object priors and allows for a more comprehensive evaluation of its generalisation capability across object instances. Experimental results on the five benchmarks, including both simulated and real-robot validations, demonstrate that our method outperforms prior art.</description>
+        <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
+        <link>https://proceedings.mlr.press/v305/zhu25b.html</link>
+        <guid isPermaLink="true">https://proceedings.mlr.press/v305/zhu25b.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Versatile Loco-Manipulation through Flexible Interlimb Coordination</title>
+        <description>The ability to flexibly leverage limbs for loco-manipulation is essential for enabling autonomous robots to operate in unstructured environments. Yet, prior work on loco-manipulation is often constrained to specific tasks or predetermined limb configurations. In this work, we present einforcement Learning for Interlimb Coordination (ReLIC), an approach that enables versatile loco-manipulation through flexible interlimb coordination. The key to our approach is an adaptive controller that seamlessly bridges the execution of manipulation motions and the generation of stable gaits based on task demands. Through the interplay between two controller modules, ReLIC dynamically assigns each limb for manipulation or locomotion and robustly coordinates them to achieve the task success. Using efficient reinforcement learning in simulation, ReLIC learns to perform stable gaits in accordance with the manipulation goals in the real world. To solve diverse and complex tasks, we further propose to interface the learned controller with different types of task specifications, including target trajectories, contact points, and natural language instructions. Evaluated on 12 real-world tasks that require diverse and complex coordination patterns, ReLIC demonstrates its versatility and robustness by achieving a success rate of 78.9% on average.</description>
+        <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
+        <link>https://proceedings.mlr.press/v305/zhu25a.html</link>
+        <guid isPermaLink="true">https://proceedings.mlr.press/v305/zhu25a.html</guid>
+        
+        
+      </item>
+    
+      
+    
+  </channel>
+</rss>

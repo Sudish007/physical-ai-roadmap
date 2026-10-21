@@ -1,0 +1,863 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/JpJmD/ZzB9vDrYAihtRyEZPhWHs</id>
+  <title>arXiv Query: search_query=(cat:cs.RO OR cat:eess.SY) AND (all:"precision landing" OR (all:landing AND all:quadrotor) ) AND (all:uncertainty OR all:calibration OR all:failure OR all:robustness)&amp;id_list=&amp;start=0&amp;max_results=50</title>
+  <updated>2026-10-21T13:14:04Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=(cat:cs.RO+OR+cat:eess.SY)+AND+((all:%22precision+landing%22+OR+(all:landing+AND+all:quadrotor))+AND+(all:uncertainty+OR+(all:calibration+OR+(all:failure+OR+all:robustness))))&amp;start=0&amp;max_results=50&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>50</opensearch:itemsPerPage>
+  <opensearch:totalResults>33</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2607.13830v2</id>
+    <title>Recursive ArUco Markers: A Scalable Fiducial Marker Design for Unmanned Aerial Vehicle Landing Pads</title>
+    <updated>2026-07-21T09:48:50Z</updated>
+    <link href="https://arxiv.org/abs/2607.13830v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.13830v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Unmanned Aerial Vehicles (UAVs) increasingly rely on visual fiducial markers for autonomous navigation and precision landing. However, standard markers suffer from limited operational ranges, becoming undetectable when the camera is either too far or too close. While recursive and fractal markers have been proposed to address this issue, existing approaches either require the marker's center to remain visible, making them vulnerable to occlusion, or are limited in their recursion depth and placement. We propose a novel Recursive ArUco marker design. Our method allows any standard fiducial marker to be transformed into a recursive marker with an arbitrary depth. By employing a modified bit-sampling strategy during detection, we embed complete markers within both the black and white bits of the parent marker. This approach guarantees unlimited recursion depth and robust detection even with partial occlusion, as it does not rely on the marker's center being visible. Furthermore, by maintaining a single, unique identifier across all recursive scales, our proposal provides an extensive dictionary of multiple unique landing pads. This capability allows fleets of UAVs to operate simultaneously, with each drone landing at its designated location -- a feature not supported by existing Fractal and Harco markers due to their structural and dictionary constraints.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-15T13:42:04Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Rafael Munoz-Salinas</name>
+    </author>
+    <author>
+      <name>Francisco Jose Romero-Ramirez</name>
+    </author>
+    <author>
+      <name>Sergio Garrido-Jurado</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.06535v1</id>
+    <title>Neural-ESO: A Dual-Pathway Architecture for Provably Robust Learning-Based Control</title>
+    <updated>2026-07-07T17:41:38Z</updated>
+    <link href="https://arxiv.org/abs/2607.06535v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.06535v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A learning-enabled disturbance-rejection framework based on a Neural Extended State Observer (Neural-ESO) is presented in this letter. Unlike existing learning-based control methods that largely rely on the learned model once deployed, Neural-ESO adopts a dual-pathway architecture: a predictive pathway uses a neural network to provide a feedforward disturbance estimate that accelerates convergence, while a corrective pathway employs a conventional ESO to compensate prediction errors and prevent over-reliance on the neural component. Using Lyapunov theory and a small-gain analysis, we show that enforcing a Lipschitz bound on the learning component guarantees uniform ultimate boundedness of the closed-loop error dynamics. The proposed framework is validated on a quadrotor landing task subject to strong ground-effect disturbances across normal and out-of-distribution scenarios, demonstrating accuracy-robustness trade-off and greater operational reliability during training, deployment, and transfer compared with state-of-the-art baselines.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-07T17:41:38Z</published>
+    <arxiv:comment>Accepted to IEEE RA-L</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Fan Zhang</name>
+    </author>
+    <author>
+      <name>Richie Suganda</name>
+    </author>
+    <author>
+      <name>Jinfeng Chen</name>
+    </author>
+    <author>
+      <name>Wenhua Liu</name>
+    </author>
+    <author>
+      <name>Hantao Fu</name>
+    </author>
+    <author>
+      <name>Bin Hu</name>
+    </author>
+    <author>
+      <name>Qin Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.02658v1</id>
+    <title>Fixed-Time Dynamic Landing of Quadrotors using Adaptive Unscented Kalman Filtering and Nonlinear Model Predictive Control</title>
+    <updated>2026-06-01T06:05:34Z</updated>
+    <link href="https://arxiv.org/abs/2606.02658v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.02658v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper introduces an estimation and control framework for dynamic landing of multi-rotor uncrewed aerial vehicles on moving platforms. The proposed method integrates nonlinear model predictive control with a real-time minimum-jerk trajectory planner that enforces a prescribed touchdown time, enabling consistent timing during the terminal descent. To enhance robustness in the presence of time-varying sensing quality, we utilize an adaptive unscented kalman filter that updates the process and measurement noise statistics online. In addition, we provide a reference feasibility analysis showing that minimum-jerk references induce bounded thrust and torque commands under standard tracking hypotheses. The proposed framework is evaluated in simulation and hardware experiments, and it is shown to achieve repeatable landings and improved platform velocity prediction accuracy relative to EKF/UKF-based methods.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-01T06:05:34Z</published>
+    <arxiv:comment>Accepted to the Conference on Robots and Vision (CRV 2026), Vancouver, Canada</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Mohammadreza Izadi</name>
+    </author>
+    <author>
+      <name>Zeinab Shayan</name>
+    </author>
+    <author>
+      <name>Steven Waslander</name>
+    </author>
+    <author>
+      <name>Reza Faieghi</name>
+    </author>
+    <arxiv:doi>10.21428/d82e957c.2b2a57b1</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.21428/d82e957c.2b2a57b1" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.21123v1</id>
+    <title>VisFly-Lab: Unified Differentiable Framework for First-Order Reinforcement Learning of Quadrotor Control</title>
+    <updated>2026-03-22T08:42:26Z</updated>
+    <link href="https://arxiv.org/abs/2603.21123v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.21123v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>First-order reinforcement learning with differentiable simulation is promising for quadrotor control, but practical progress remains fragmented across task-specific settings. To support more systematic development and evaluation, we present a unified differentiable framework for multi-task quadrotor control. The framework is wrapped, extensible, and equipped with deployment-oriented dynamics, providing a common interface across four representative tasks: hovering, tracking, landing, and racing. We also present the suite of first-order learning algorithms, where we identify two practical bottlenecks of standard first-order training: limited state coverage caused by horizon initialization and gradient bias caused by partially non-differentiable rewards. To address these issues, we propose Amended Backpropagation Through Time (ABPT), which combines differentiable rollout optimization, a value-based auxiliary objective, and visited-state initialization to improve training robustness. Experimental results show that ABPT yields the clearest gains in tasks with partially non-differentiable rewards, while remaining competitive in fully differentiable settings. We further provide proof-of-concept real-world deployments showing initial transferability of policies learned in the proposed framework beyond simulation.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-22T08:42:26Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Fanxing Li</name>
+    </author>
+    <author>
+      <name>Fangyu Sun</name>
+    </author>
+    <author>
+      <name>Tianbao Zhang</name>
+    </author>
+    <author>
+      <name>Shuyu Wu</name>
+    </author>
+    <author>
+      <name>Dexin Zuo</name>
+    </author>
+    <author>
+      <name>yufei Yan</name>
+    </author>
+    <author>
+      <name>Wenxian Yu</name>
+    </author>
+    <author>
+      <name>Danping Zou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.14363v1</id>
+    <title>AerialVLA: A Vision-Language-Action Model for UAV Navigation via Minimalist End-to-End Control</title>
+    <updated>2026-03-15T13:02:13Z</updated>
+    <link href="https://arxiv.org/abs/2603.14363v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.14363v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vision-Language Navigation (VLN) for Unmanned Aerial Vehicles (UAVs) demands complex visual interpretation and continuous control in dynamic 3D environments. Existing hierarchical approaches rely on dense oracle guidance or auxiliary object detectors, creating semantic gaps and limiting genuine autonomy. We propose AerialVLA, a minimalist end-to-end Vision-Language-Action framework mapping raw visual observations and fuzzy linguistic instructions directly to continuous physical control signals. First, we introduce a streamlined dual-view perception strategy that reduces visual redundancy while preserving essential cues for forward navigation and precise grounding, which additionally facilitates future simulation-to-reality transfer. To reclaim genuine autonomy, we deploy a fuzzy directional prompting mechanism derived solely from onboard sensors, completely eliminating the dependency on dense oracle guidance. Ultimately, we formulate a unified control space that integrates continuous 3-Degree-of-Freedom (3-DoF) kinematic commands with an intrinsic landing signal, freeing the agent from external object detectors for precision landing. Extensive experiments on the TravelUAV benchmark demonstrate that AerialVLA achieves state-of-the-art performance in seen environments. Furthermore, it exhibits superior generalization in unseen scenarios by achieving nearly three times the success rate of leading baselines, validating that a minimalist, autonomy-centric paradigm captures more robust visual-motor representations than complex modular systems.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-15T13:02:13Z</published>
+    <arxiv:comment>18 pages, 4 figures. Code and demo videos will be available at: https://github.com/XuPeng23/AerialVLA</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Peng Xu</name>
+    </author>
+    <author>
+      <name>Zhengnan Deng</name>
+    </author>
+    <author>
+      <name>Jiayan Deng</name>
+    </author>
+    <author>
+      <name>Zonghua Gu</name>
+    </author>
+    <author>
+      <name>Shaohua Wan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.03037v1</id>
+    <title>A Bi-directional Adaptive Framework for Agile UAV Landing</title>
+    <updated>2026-01-06T14:10:06Z</updated>
+    <link href="https://arxiv.org/abs/2601.03037v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.03037v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autonomous landing on mobile platforms is crucial for extending quadcopter operational flexibility, yet conventional methods are often too inefficient for highly dynamic scenarios. The core limitation lies in the prevalent ``track-then-descend'' paradigm, which treats the platform as a passive target and forces the quadcopter to perform complex, sequential maneuvers. This paper challenges that paradigm by introducing a bi-directional cooperative landing framework that redefines the roles of the vehicle and the platform. The essential innovation is transforming the problem from a single-agent tracking challenge into a coupled system optimization. Our key insight is that the mobile platform is not merely a target, but an active agent in the landing process. It proactively tilts its surface to create an optimal, stable terminal attitude for the approaching quadcopter. This active cooperation fundamentally breaks the sequential model by parallelizing the alignment and descent phases. Concurrently, the quadcopter's planning pipeline focuses on generating a time-optimal and dynamically feasible trajectory that minimizes energy consumption. This bi-directional coordination allows the system to execute the recovery in an agile manner, characterized by aggressive trajectory tracking and rapid state synchronization within transient windows. The framework's effectiveness, validated in dynamic scenarios, significantly improves the efficiency, precision, and robustness of autonomous quadrotor recovery in complex and time-constrained missions.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-06T14:10:06Z</published>
+    <arxiv:comment>This work has been submitted to the IEEE Robotics and Automation Letters (RA-L) for possible publication</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>IEEE Robotics and Automation Letters, 2026</arxiv:journal_ref>
+    <author>
+      <name>Chunhui Zhao</name>
+    </author>
+    <author>
+      <name>Xirui Kao</name>
+    </author>
+    <author>
+      <name>Yilin Lu</name>
+    </author>
+    <author>
+      <name>Yang Lyu</name>
+    </author>
+    <arxiv:doi>10.1109/LRA.2026.3671567</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LRA.2026.3671567" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.00238v1</id>
+    <title>SLAP: Slapband-based Autonomous Perching Drone with Failure Recovery for Vertical Tree Trunks</title>
+    <updated>2026-01-01T07:11:10Z</updated>
+    <link href="https://arxiv.org/abs/2601.00238v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.00238v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Perching allows unmanned aerial vehicles (UAVs) to reduce energy consumption, remain anchored for surface sampling operations, or stably survey their surroundings. Previous efforts for perching on vertical surfaces have predominantly focused on lightweight mechanical design solutions with relatively scant system-level integration. Furthermore, perching strategies for vertical surfaces commonly require high-speed, aggressive landing operations that are dangerous for a surveyor drone with sensitive electronics onboard. This work presents the preliminary investigation of a perching approach suitable for larger drones that both gently perches on vertical tree trunks and reacts and recovers from perch failures. The system in this work, called SLAP, consists of vision-based perch site detector, an IMU (inertial-measurement-unit)-based perch failure detector, an attitude controller for soft perching, an optical close-range detection system, and a fast active elastic gripper with microspines made from commercially-available slapbands. We validated this approach on a modified 1.2 kg commercial quadrotor with component and system analysis. Initial human-in-the-loop autonomous indoor flight experiments achieved a 75% perch success rate on a real oak tree segment across 20 flights, and 100% perch failure recovery across 2 flights with induced failures.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-01T07:11:10Z</published>
+    <arxiv:comment>Paper accepted to IEEE Aerospace Conference 2026. This is a pre-print</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Julia Di</name>
+    </author>
+    <author>
+      <name>Kenneth A. W. Hoffmann</name>
+    </author>
+    <author>
+      <name>Tony G. Chen</name>
+    </author>
+    <author>
+      <name>Tian-Ao Ren</name>
+    </author>
+    <author>
+      <name>Mark R. Cutkosky</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.14039v1</id>
+    <title>Quadrotor Morpho-Transition: Learning vs Model-Based Control Strategies</title>
+    <updated>2025-06-16T22:23:28Z</updated>
+    <link href="https://arxiv.org/abs/2506.14039v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.14039v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Quadrotor Morpho-Transition, or the act of transitioning from air to ground through mid-air transformation, involves complex aerodynamic interactions and a need to operate near actuator saturation, complicating controller design. In recent work, morpho-transition has been studied from a model-based control perspective, but these approaches remain limited due to unmodeled dynamics and the requirement for planning through contacts. Here, we train an end-to-end Reinforcement Learning (RL) controller to learn a morpho-transition policy and demonstrate successful transfer to hardware. We find that the RL control policy achieves agile landing, but only transfers to hardware if motor dynamics and observation delays are taken into account. On the other hand, a baseline MPC controller transfers out-of-the-box without knowledge of the actuator dynamics and delays, at the cost of reduced recovery from disturbances in the event of unknown actuator failures. Our work opens the way for more robust control of agile in-flight quadrotor maneuvers that require mid-air transformation.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-16T22:23:28Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Ioannis Mandralis</name>
+    </author>
+    <author>
+      <name>Richard M. Murray</name>
+    </author>
+    <author>
+      <name>Morteza Gharib</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.14938v1</id>
+    <title>Scan, Materialize, Simulate: A Generalizable Framework for Physically Grounded Robot Planning</title>
+    <updated>2025-05-20T21:55:01Z</updated>
+    <link href="https://arxiv.org/abs/2505.14938v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.14938v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autonomous robots must reason about the physical consequences of their actions to operate effectively in unstructured, real-world environments. We present Scan, Materialize, Simulate (SMS), a unified framework that combines 3D Gaussian Splatting for accurate scene reconstruction, visual foundation models for semantic segmentation, vision-language models for material property inference, and physics simulation for reliable prediction of action outcomes. By integrating these components, SMS enables generalizable physical reasoning and object-centric planning without the need to re-learn foundational physical dynamics. We empirically validate SMS in a billiards-inspired manipulation task and a challenging quadrotor landing scenario, demonstrating robust performance on both simulated domain transfer and real-world experiments. Our results highlight the potential of bridging differentiable rendering for scene reconstruction, foundation models for semantic understanding, and physics-based simulation to achieve physically grounded robot planning across diverse settings.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-20T21:55:01Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Amine Elhafsi</name>
+    </author>
+    <author>
+      <name>Daniel Morton</name>
+    </author>
+    <author>
+      <name>Marco Pavone</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.07566v1</id>
+    <title>SafeSwarm: Decentralized Safe RL for the Swarm of Drones Landing in Dense Crowds</title>
+    <updated>2025-01-13T18:54:02Z</updated>
+    <link href="https://arxiv.org/abs/2501.07566v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.07566v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper introduces a safe swarm of drones capable of performing landings in crowded environments robustly by relying on Reinforcement Learning techniques combined with Safe Learning. The developed system allows us to teach the swarm of drones with different dynamics to land on moving landing pads in an environment while avoiding collisions with obstacles and between agents.
+  The safe barrier net algorithm was developed and evaluated using a swarm of Crazyflie 2.1 micro quadrotors, which were tested indoors with the Vicon motion capture system to ensure precise localization and control.
+  Experimental results show that our system achieves landing accuracy of 2.25 cm with a mean time of 17 s and collision-free landings, underscoring its effectiveness and robustness in real-world scenarios. This work offers a promising foundation for applications in environments where safety and precision are paramount.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-13T18:54:02Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>Proceedings of the 2025 ACM/IEEE International Conference on Human-Robot Interaction</arxiv:journal_ref>
+    <author>
+      <name>Grik Tadevosyan</name>
+    </author>
+    <author>
+      <name>Maksim Osipenko</name>
+    </author>
+    <author>
+      <name>Demetros Aschu</name>
+    </author>
+    <author>
+      <name>Aleksey Fedoseev</name>
+    </author>
+    <author>
+      <name>Valerii Serpiva</name>
+    </author>
+    <author>
+      <name>Oleg Sautenkov</name>
+    </author>
+    <author>
+      <name>Sausar Karaf</name>
+    </author>
+    <author>
+      <name>Dzmitry Tsetserukou</name>
+    </author>
+    <arxiv:doi>10.5555/3721488.3721741</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.5555/3721488.3721741" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.07332v1</id>
+    <title>Model predictive control-based trajectory generation for agile landing of unmanned aerial vehicle on a moving boat</title>
+    <updated>2024-12-10T09:23:37Z</updated>
+    <link href="https://arxiv.org/abs/2412.07332v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.07332v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes a novel trajectory generation method based on Model Predictive Control (MPC) for agile landing of an Unmanned Aerial Vehicle (UAV) onto an Unmanned Surface Vehicle (USV)'s deck in harsh conditions. The trajectory generation exploits the state predictions of the USV to create periodically updated trajectories for a multirotor UAV to precisely land on the deck of a moving USV even in cases where the deck's inclination is continuously changing. We use an MPC-based scheme to create trajectories that consider both the UAV dynamics and the predicted states of the USV up to the first derivative of position and orientation. Compared to existing approaches, our method dynamically modifies the penalization matrices to precisely follow the corresponding states with respect to the flight phase. Especially during the landing maneuver, the UAV synchronizes attitude with the USV's, allowing for fast landing on a tilted deck. Simulations show the method's reliability in various sea conditions up to Rough sea (wave height 4 m), outperforming state-of-the-art methods in landing speed and accuracy, with twice the precision on average. Finally, real-world experiments validate the simulation results, demonstrating robust landings on a moving USV, while all computations are performed in real-time onboard the UAV.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-10T09:23:37Z</published>
+    <arxiv:comment>18 pages, 17 figures, Ocean Engineering</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>Ocean Engineering 313:119164, 2024</arxiv:journal_ref>
+    <author>
+      <name>Ondřej Procházka</name>
+    </author>
+    <author>
+      <name>Filip Novák</name>
+    </author>
+    <author>
+      <name>Tomáš Báča</name>
+    </author>
+    <author>
+      <name>Parakh M. Gupta</name>
+    </author>
+    <author>
+      <name>Robert Pěnička</name>
+    </author>
+    <author>
+      <name>Martin Saska</name>
+    </author>
+    <arxiv:doi>10.1016/j.oceaneng.2024.119164</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.oceaneng.2024.119164" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.21674v1</id>
+    <title>A Time and Place to Land: Online Learning-Based Distributed MPC for Multirotor Landing on Surface Vessel in Waves</title>
+    <updated>2024-10-29T02:52:23Z</updated>
+    <link href="https://arxiv.org/abs/2410.21674v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.21674v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Landing a multirotor unmanned aerial vehicle (UAV) on an uncrewed surface vessel (USV) extends the operational range and offers recharging capabilities for maritime and limnology applications, such as search-and-rescue and environmental monitoring. However, autonomous UAV landings on USVs are challenging due to the unpredictable tilt and motion of the vessel caused by waves. This movement introduces spatial and temporal uncertainties, complicating safe, precise landings. Existing autonomous landing techniques on unmanned ground vehicles (UGVs) rely on shared state information, often causing time delays due to communication limits. This paper introduces a learning-based distributed Model Predictive Control (MPC) framework for autonomous UAV landings on USVs in wave-like conditions. Each vehicle's MPC optimizes for an artificial goal and input, sharing only the goal with the other vehicle. These goals are penalized by coupling and platform tilt costs, learned as a Gaussian Process (GP). We validate our framework in comprehensive indoor experiments using a custom-designed platform attached to a UGV to simulate USV tilting motion. Our approach achieves a 53% increase in landing success compared to an approach that neglects the impact of tilt motion on landing.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-29T02:52:23Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Jess Stephenson</name>
+    </author>
+    <author>
+      <name>William S. Stewart</name>
+    </author>
+    <author>
+      <name>Melissa Greeff</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.19062v1</id>
+    <title>Robust Proximity Operations using Probabilistic Markov Models</title>
+    <updated>2024-09-27T18:01:41Z</updated>
+    <link href="https://arxiv.org/abs/2409.19062v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.19062v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A Markov decision process-based state switching is devised, implemented, and analyzed for proximity operations of various autonomous vehicles. The framework contains a pose estimator along with a multi-state guidance algorithm. The unified pose estimator leverages the extended Kalman filter for the fusion of measurements from rate gyroscopes, monocular vision, and ultra-wideband radar sensors. It is also equipped with Mahalonobis distance-based outlier rejection and under-weighting of measurements for robust performance. The use of probabilistic Markov models to transition between various guidance modes is proposed to enable robust and efficient proximity operations. Finally, the framework is validated through an experimental analysis of the docking of two small satellites and the precision landing of an aerial vehicle.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-27T18:01:41Z</published>
+    <arxiv:comment>This work has been submitted to the IEEE ICRA 2025 for possible publication. Accompanying video : https://youtu.be/8-fetyf_SrM. arXiv admin note: text overlap with arXiv:2409.09665</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Deep Parikh</name>
+    </author>
+    <author>
+      <name>Ali Hasnain Khowaja</name>
+    </author>
+    <author>
+      <name>Manoranjan Majji</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.01676v1</id>
+    <title>Prototyping of a multirotor UAV for precision landing under rotor failures</title>
+    <updated>2024-08-03T06:25:10Z</updated>
+    <link href="https://arxiv.org/abs/2408.01676v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.01676v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work presents a prototype of a multirotor aerial vehicle capable of precision landing, even under the effects of rotor failures. The manuscript presents the fault-tolerant techniques and mechanical designs to achieve a fault-tolerant multirotor, and a vision-based navigation system required to achieve a precision landing. Preliminary experimental results will be shown, to validate on one hand the fault-tolerant control vehicle and, on the other hand, the autonomous landing algorithm. Also, a prototype of the fault-tolerant UAV is presented, capable of precise autonomous landing, which will be used in future experiments.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-03T06:25:10Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Alvaro J. Gaona</name>
+    </author>
+    <author>
+      <name>Claudio D. Pose</name>
+    </author>
+    <author>
+      <name>Juan I. Giribet</name>
+    </author>
+    <author>
+      <name>Roberto Bunge</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.07175v2</id>
+    <title>Adaptive Backstepping and Non-singular Sliding Mode Control for Quadrotor UAVs with Unknown Time-varying Uncertainties</title>
+    <updated>2024-07-13T12:38:22Z</updated>
+    <link href="https://arxiv.org/abs/2407.07175v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.07175v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a novel quaternion-based nonsingular control system for underactuated vertical-take-off and landing (VTOL) Unmanned Aerial Vehicles (UAVs). Position and attitude tracking is challenging regarding singularity and accuracy. Quaternion-based Adaptive Backstepping Control (QABC) is developed to tackle the underactuated issues of UAV control systems in a cascaded way. Leveraging the virtual control (auxiliary control) developed in the QABC, desired attitude components and required thrust are produced. Afterwards, we propose Quaternion-based Sliding Mode Control (QASMC) to enhance the stability and mitigate chattering issues. The sliding surface is modified to avoid singularity compared to conventional SMC. To improve the robustness of controllers, the control parameters are updated using adaptation laws. Furthermore, the asymptotic stability of translational and rotational dynamics is guaranteed by utilizing Lyapunov stability and Barbalet Lemma. Finally, the comprehensive comparison results are provided to verify the effectiveness of the proposed controllers in the presence of unknown time-varying parameter uncertainties and significant initial errors. Keywords: Non-singular Sliding Mode Control, Adaptive Backstepping Control, Unit-quaternion, Drones, Unmanned Aerial Vehicles, Asymptotic Stability, Position and Orientation Control</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-09T18:41:22Z</published>
+    <arxiv:comment>Proceedings of the 2024 American Control Conference (ACC), Ottawa, Canada, 2024</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Arezo Shevidi</name>
+    </author>
+    <author>
+      <name>Hashim A. Hashim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.11336v1</id>
+    <title>Vision-based control for landing an aerial vehicle on a marine vessel</title>
+    <updated>2024-04-17T12:53:57Z</updated>
+    <link href="https://arxiv.org/abs/2404.11336v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.11336v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This work addresses the landing problem of an aerial vehicle, exemplified by a simple quadrotor, on a moving platform using image-based visual servo control. First, the mathematical model of the quadrotor aircraft is introduced, followed by the design of the inner-loop control. At the second stage, the image features on the textured target plane are exploited to derive a vision-based control law. The image of the spherical centroid of a set of landmarks present in the landing target is used as a position measurement, whereas the translational optical flow is used as velocity measurement. The kinematics of the vision-based system is expressed in terms of the observable features, and the proposed control law guarantees convergence without estimating the unknown distance between the vision system and the target, which is also guaranteed to remain strictly positive, avoiding undesired collisions. The performance of the proposed control law is evaluated in MATLAB and 3-D simulation software Gazebo. Simulation results for a quadrotor UAV are provided for different velocity profiles of the moving target, showcasing the robustness of the proposed controller.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-17T12:53:57Z</published>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Haohua Dong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.05591v1</id>
+    <title>Variable-Pitch-Propeller Mechanism Design, and Development of Heliquad for Mid-flight Flipping and Fault-Tolerant-Control</title>
+    <updated>2024-04-08T15:04:51Z</updated>
+    <link href="https://arxiv.org/abs/2404.05591v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.05591v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents the design of Variable-Pitch-Propeller mechanism and its application on a quadcopter called Heliquad to demonstrate its unique capabilities. The input-output relationship is estimated for a generic mechanism. Various singularities and actuator sizing requirements are also analyzed. The mechanism is manufactured, and the validated input-output relationship is implemented in the controller of Heliquad. Heliquad is controlled by a unified non-switching cascaded attitude-rate controller, followed by a unique Neural-Network-based reconfigurable control allocation to approximate nonlinear relationship between the control input and actuator command. The Heliquad prototype's mid-flight flip experiment validates the controller's tracking performance in upright as well as inverted conditions. The prototype is then flown in upright condition with only three of its working actuators. To the best of the authors' knowledge, the cambered airfoil propeller-equipped Heliquad prototype demonstrates full-attitude control, including yaw-rate, on three working actuators for the first time in the literature. Finally, the utility of this novel capability is demonstrated by safe recovery and precise landing post-mid-flight actuator failure crisis. Overall, the controller tracks the references well for all the experiments, and the output of the NN-based control allocation remains bounded throughout.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-08T15:04:51Z</published>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Eeshan Kulkarni</name>
+    </author>
+    <author>
+      <name>Suresh Sundaram</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.12378v1</id>
+    <title>Distributionally Robust Density Control with Wasserstein Ambiguity Sets</title>
+    <updated>2024-03-19T02:45:13Z</updated>
+    <link href="https://arxiv.org/abs/2403.12378v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.12378v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Precise control under uncertainty requires a good understanding and characterization of the noise affecting the system. This paper studies the problem of steering state distributions of dynamical systems subject to partially known uncertainties. We model the distributional uncertainty of the noise process in terms of Wasserstein ambiguity sets, which, based on recent results, have been shown to be an effective means of capturing and propagating uncertainty through stochastic LTI systems. To this end, we propagate the distributional uncertainty of the state through the dynamical system, and, using an affine feedback control law, we steer the ambiguity set of the state to a prescribed, terminal ambiguity set. We also enforce distributionally robust CVaR constraints for the transient motion of the state so as to reside within a prescribed constraint space. The resulting optimization problem is formulated as a semi-definite program, which can be solved efficiently using standard off-the-shelf solvers. We illustrate the proposed distributionally-robust framework on a quadrotor landing problem subject to wind turbulence.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-19T02:45:13Z</published>
+    <arxiv:comment>CDC 2024</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Joshua Pilipovsky</name>
+    </author>
+    <author>
+      <name>Panagiotis Tsiotras</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.06572v2</id>
+    <title>Lander.AI: Adaptive Landing Behavior Agent for Expertise in 3D Dynamic Platform Landings</title>
+    <updated>2024-03-12T10:46:33Z</updated>
+    <link href="https://arxiv.org/abs/2403.06572v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.06572v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Mastering autonomous drone landing on dynamic platforms presents formidable challenges due to unpredictable velocities and external disturbances caused by the wind, ground effect, turbines or propellers of the docking platform. This study introduces an advanced Deep Reinforcement Learning (DRL) agent, Lander:AI, designed to navigate and land on platforms in the presence of windy conditions, thereby enhancing drone autonomy and safety. Lander:AI is rigorously trained within the gym-pybullet-drone simulation, an environment that mirrors real-world complexities, including wind turbulence, to ensure the agent's robustness and adaptability.
+  The agent's capabilities were empirically validated with Crazyflie 2.1 drones across various test scenarios, encompassing both simulated environments and real-world conditions. The experimental results showcased Lander:AI's high-precision landing and its ability to adapt to moving platforms, even under wind-induced disturbances. Furthermore, the system performance was benchmarked against a baseline PID controller augmented with an Extended Kalman Filter, illustrating significant improvements in landing precision and error recovery. Lander:AI leverages bio-inspired learning to adapt to external forces like birds, enhancing drone adaptability without knowing force magnitudes.This research not only advances drone landing technologies, essential for inspection and emergency applications, but also highlights the potential of DRL in addressing intricate aerodynamic challenges.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-11T10:20:44Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Robinroy Peter</name>
+    </author>
+    <author>
+      <name>Lavanya Ratnabala</name>
+    </author>
+    <author>
+      <name>Demetros Aschu</name>
+    </author>
+    <author>
+      <name>Aleksey Fedoseev</name>
+    </author>
+    <author>
+      <name>Dzmitry Tsetserukou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.10729v1</id>
+    <title>A CBF-Adaptive Control Architecture for Visual Navigation for UAV in the Presence of Uncertainties</title>
+    <updated>2024-02-16T14:47:39Z</updated>
+    <link href="https://arxiv.org/abs/2402.10729v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.10729v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this article, we propose a control solution for the safe transfer of a quadrotor UAV between two surface robots positioning itself only using the visual features on the surface robots, which enforces safety constraints for precise landing and visual locking, in the presence of modeling uncertainties and external disturbances. The controller handles the ascending and descending phases of the navigation using a visual locking control barrier function (VCBF) and a parametrizable switching descending CBF (DCBF) respectively, eliminating the need for an external planner. The control scheme has a backstepping approach for the position controller with the CBF filter acting on the position kinematics to produce a filtered virtual velocity control input, which is tracked by an adaptive controller to overcome modeling uncertainties and external disturbances. The experimental validation is carried out with a UAV that navigates from the base to the target using an RGB camera.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-16T14:47:39Z</published>
+    <arxiv:comment>7 pages, 7 figures, accepted to be published in IEEE International Conference on Robotics and Automation (ICRA 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>2024 IEEE International Conference on Robotics and Automation (ICRA)</arxiv:journal_ref>
+    <author>
+      <name>Viswa Narayanan Sankaranarayanan</name>
+    </author>
+    <author>
+      <name>Akshit Saradagi</name>
+    </author>
+    <author>
+      <name>Sumeet Satpute</name>
+    </author>
+    <author>
+      <name>George Nikolakopoulos</name>
+    </author>
+    <arxiv:doi>10.1109/ICRA57147.2024.10611530</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ICRA57147.2024.10611530" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.10065v3</id>
+    <title>Visual Environment Assessment for Safe Autonomous Quadrotor Landing</title>
+    <updated>2024-05-03T15:25:54Z</updated>
+    <link href="https://arxiv.org/abs/2311.10065v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.10065v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autonomous identification and evaluation of safe landing zones are of paramount importance for ensuring the safety and effectiveness of aerial robots in the event of system failures, low battery, or the successful completion of specific tasks. In this paper, we present a novel approach for detection and assessment of potential landing sites for safe quadrotor landing. Our solution efficiently integrates 2D and 3D environmental information, eliminating the need for external aids such as GPS and computationally intensive elevation maps. The proposed pipeline combines semantic data derived from a Neural Network (NN), to extract environmental features, with geometric data obtained from a disparity map, to extract critical geometric attributes such as slope, flatness, and roughness. We define several cost metrics based on these attributes to evaluate safety, stability, and suitability of regions in the environments and identify the most suitable landing area. Our approach runs in real-time on quadrotors equipped with limited computational capabilities. Experimental results conducted in diverse environments demonstrate that the proposed method can effectively assess and identify suitable landing areas, enabling the safe and autonomous landing of a quadrotor.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T18:02:10Z</published>
+    <arxiv:comment>7 pages, 5 figures, 1 table, 2024 International Conference on Unmanned Aircraft Systems (ICUAS)</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Mattia Secchiero</name>
+    </author>
+    <author>
+      <name>Nishanth Bobbili</name>
+    </author>
+    <author>
+      <name>Yang Zhou</name>
+    </author>
+    <author>
+      <name>Giuseppe Loianno</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.13679v2</id>
+    <title>Neural Network-PSO-based Velocity Control Algorithm for Landing UAVs on a Boat</title>
+    <updated>2023-10-09T22:13:10Z</updated>
+    <link href="https://arxiv.org/abs/2309.13679v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.13679v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Precise landing of Unmanned Aerial Vehicles (UAVs) onto moving platforms like Autonomous Surface Vehicles (ASVs) is both important and challenging, especially in GPS-denied environments, for collaborative navigation of heterogeneous vehicles. UAVs need to land within a confined space onboard ASV to get energy replenishment, while ASV is subject to translational and rotational disturbances due to wind and water flow. Current solutions either rely on high-level waypoint navigation, which struggles to robustly land on varied-speed targets, or necessitate laborious manual tuning of controller parameters, and expensive sensors for target localization. Therefore, we propose an adaptive velocity control algorithm that leverages Particle Swarm Optimization (PSO) and Neural Network (NN) to optimize PID parameters across varying flight altitudes and distinct speeds of a moving boat. The cost function of PSO includes the status change rates of UAV and proximity to the target. The NN further interpolates the PSO-founded PID parameters. The proposed method implemented on a water strider hexacopter design, not only ensures accuracy but also increases robustness. Moreover, this NN-PSO can be readily adapted to suit various mission requirements. Its ability to achieve precise landings extends its applicability to scenarios, including but not limited to rescue missions, package deliveries, and workspace inspections.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-24T16:05:31Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Li-Fan Wu</name>
+    </author>
+    <author>
+      <name>Zihan Wang</name>
+    </author>
+    <author>
+      <name>Mo Rastgaar</name>
+    </author>
+    <author>
+      <name>Nina Mahmoudian</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2308.10671v1</id>
+    <title>Reducing Object Detection Uncertainty from RGB and Thermal Data for UAV Outdoor Surveillance</title>
+    <updated>2023-08-21T12:13:53Z</updated>
+    <link href="https://arxiv.org/abs/2308.10671v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2308.10671v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in Unmanned Aerial Vehicles (UAVs) have resulted in their quick adoption for wide a range of civilian applications, including precision agriculture, biosecurity, disaster monitoring and surveillance. UAVs offer low-cost platforms with flexible hardware configurations, as well as an increasing number of autonomous capabilities, including take-off, landing, object tracking and obstacle avoidance. However, little attention has been paid to how UAVs deal with object detection uncertainties caused by false readings from vision-based detectors, data noise, vibrations, and occlusion. In most situations, the relevance and understanding of these detections are delegated to human operators, as many UAVs have limited cognition power to interact autonomously with the environment. This paper presents a framework for autonomous navigation under uncertainty in outdoor scenarios for small UAVs using a probabilistic-based motion planner. The framework is evaluated with real flight tests using a sub 2 kg quadrotor UAV and illustrated in victim finding Search and Rescue (SAR) case study in a forest/bushland. The navigation problem is modelled using a Partially Observable Markov Decision Process (POMDP), and solved in real time onboard the small UAV using Augmented Belief Trees (ABT) and the TAPIR toolkit. Results from experiments using colour and thermal imagery show that the proposed motion planner provides accurate victim localisation coordinates, as the UAV has the flexibility to interact with the environment and obtain clearer visualisations of any potential victims compared to the baseline motion planner. Incorporating this system allows optimised UAV surveillance operations by diminishing false positive readings from vision-based object detectors.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-08-21T12:13:53Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>IEEE Aerospace Conference, 2022</arxiv:journal_ref>
+    <author>
+      <name>Juan Sandino</name>
+    </author>
+    <author>
+      <name>Peter A. Caccetta</name>
+    </author>
+    <author>
+      <name>Conrad Sanderson</name>
+    </author>
+    <author>
+      <name>Frederic Maire</name>
+    </author>
+    <author>
+      <name>Felipe Gonzalez</name>
+    </author>
+    <arxiv:doi>10.1109/AERO53065.2022.9843611</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/AERO53065.2022.9843611" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.00929v1</id>
+    <title>Learning Flight Control Systems from Human Demonstrations and Real-Time Uncertainty-Informed Interventions</title>
+    <updated>2023-05-01T16:31:07Z</updated>
+    <link href="https://arxiv.org/abs/2305.00929v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.00929v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper describes a methodology for learning flight control systems from human demonstrations and interventions while considering the estimated uncertainty in the learned models. The proposed approach uses human demonstrations to train an initial model via imitation learning and then iteratively, improve its performance by using real-time human interventions. The aim of the interventions is to correct undesired behaviors and adapt the model to changes in the task dynamics. The learned model uncertainty is estimated in real-time via Monte Carlo Dropout and the human supervisor is cued for intervention via an audiovisual signal when this uncertainty exceeds a predefined threshold. This proposed approach is validated in an autonomous quadrotor landing task on both fixed and moving platforms. It is shown that with this algorithm, a human can rapidly teach a flight task to an unmanned aerial vehicle via demonstrating expert trajectories and then adapt the learned model by intervening when the learned controller performs any undesired maneuver, the task changes, and/or the model uncertainty exceeds a threshold</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-01T16:31:07Z</published>
+    <arxiv:comment>IFAC 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Prashant Ganesh</name>
+    </author>
+    <author>
+      <name>J. Humberto Ramos</name>
+    </author>
+    <author>
+      <name>Vinicius G. Goecks</name>
+    </author>
+    <author>
+      <name>Jared Paquet</name>
+    </author>
+    <author>
+      <name>Matthew Longmire</name>
+    </author>
+    <author>
+      <name>Nicholas R. Waytowich</name>
+    </author>
+    <author>
+      <name>Kevin Brink</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.12082v3</id>
+    <title>A Hybrid Model and Learning-Based Adaptive Navigation Filter</title>
+    <updated>2022-09-02T10:26:27Z</updated>
+    <link href="https://arxiv.org/abs/2207.12082v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.12082v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The fusion between an inertial navigation system and global navigation satellite systems is regularly used in many platforms such as drones, land vehicles, and marine vessels. The fusion is commonly carried out in a model-based extended Kalman filter framework. One of the critical parameters of the filter is the process noise covariance. It is responsible for the real-time solution accuracy, as it considers both vehicle dynamics uncertainty and the inertial sensors quality. In most situations, the process noise is covariance assumed to be constant. Yet, due to vehicle dynamics and sensor measurement variations throughout the trajectory, the process noise covariance is subject to change. To cope with such situations, several adaptive model-based Kalman filters were suggested in the literature. In this paper, we propose a hybrid model and learning-based adaptive navigation filter. We rely on the model-based Kalman filter and design a deep neural network model to tune the momentary system noise covariance matrix, based only on the inertial sensor readings. Once the process noise covariance is learned, it is plugged into the well-established, model-based Kalman filter. After deriving the proposed hybrid framework, field experiment results using a quadrotor are presented and a comparison to model-based adaptive approaches is given. We show that the proposed method obtained an improvement of 25% in the position error. Furthermore, the proposed hybrid learning method can be used in any navigation filter and also in any relevant estimation problem.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-14T17:10:47Z</published>
+    <arxiv:comment>11 pages. This is a preprint version</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Barak Or</name>
+    </author>
+    <author>
+      <name>Itzik Klein</name>
+    </author>
+    <arxiv:doi>10.1109/TIM.2022.3197775</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TIM.2022.3197775" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2205.05533v2</id>
+    <title>Design, Modeling and Control for a Tilt-rotor VTOL UAV in the Presence of Actuator Failure</title>
+    <updated>2023-01-02T15:23:24Z</updated>
+    <link href="https://arxiv.org/abs/2205.05533v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.05533v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Enabling vertical take-off and landing while providing the ability to fly long ranges opens the door to a wide range of new real-world aircraft applications while improving many existing tasks. Tiltrotor vertical take-off and landing (VTOL) unmanned aerial vehicles (UAVs) are a better choice than fixed-wing and multirotor aircraft for such applications. Prior works on these aircraft have addressed aerodynamic performance, design, modeling, and control. However, a less explored area is the study of their potential fault tolerance due to their inherent redundancy, which allows them to tolerate some degree of actuation failure. This paper introduces tolerance to several types of actuator failures in a tiltrotor VTOL aircraft. We discuss the design and modeling of a custom tiltrotor VTOL UAV, which is a combination of a fixed-wing aircraft and a quadrotor with tilting rotors, where the four propellers can be rotated individually. Then, we analyze the feasible wrench space the vehicle can generate and design the dynamic control allocation so that the system can adapt to actuator failures, benefiting from the configuration redundancy. The proposed approach is lightweight and is implemented as an extension to an already-existing flight control stack. Extensive experiments validate that the system can maintain the controlled flight under different actuator failures. To the best of our knowledge, this work is the first study of the tiltrotor VTOL's fault-tolerance that exploits the configuration redundancy. The source code and simulation can be accessed at https://theairlab.org/vtol.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-11T14:23:18Z</published>
+    <arxiv:comment>8 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>Proceedings of 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), pp. 4310-4317</arxiv:journal_ref>
+    <author>
+      <name>Mohammadreza Mousaei</name>
+    </author>
+    <author>
+      <name>Junyi Geng</name>
+    </author>
+    <author>
+      <name>Azarakhsh Keipour</name>
+    </author>
+    <author>
+      <name>Dongwei Bai</name>
+    </author>
+    <author>
+      <name>Sebastian Scherer</name>
+    </author>
+    <arxiv:doi>10.1109/IROS47612.2022.9981806</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/IROS47612.2022.9981806" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2109.10488v1</id>
+    <title>A Model-free Deep Reinforcement Learning Approach To Maneuver A Quadrotor Despite Single Rotor Failure</title>
+    <updated>2021-09-22T02:16:21Z</updated>
+    <link href="https://arxiv.org/abs/2109.10488v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.10488v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Ability to recover from faults and continue mission is desirable for many quadrotor applications. The quadrotor's rotor may fail while performing a mission and it is essential to develop recovery strategies so that the vehicle is not damaged. In this paper, we develop a model-free deep reinforcement learning approach for a quadrotor to recover from a single rotor failure. The approach is based on Soft-actor-critic that enables the vehicle to hover, land, and perform complex maneuvers. Simulation results are presented to validate the proposed approach using a custom simulator. The results show that the proposed approach achieves hover, landing, and path following in 2D and 3D. We also show that the proposed approach is robust to wind disturbances.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-09-22T02:16:21Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Paras Sharma</name>
+    </author>
+    <author>
+      <name>Prithvi Poddar</name>
+    </author>
+    <author>
+      <name>P. B. Sujit</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.16551v1</id>
+    <title>Online Policies for Real-Time Control Using MRAC-RL</title>
+    <updated>2021-03-30T17:56:59Z</updated>
+    <link href="https://arxiv.org/abs/2103.16551v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.16551v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we propose the Model Reference Adaptive Control &amp; Reinforcement Learning (MRAC-RL) approach to developing online policies for systems in which modeling errors occur in real-time. Although reinforcement learning (RL) algorithms have been successfully used to develop control policies for dynamical systems, discrepancies between simulated dynamics and the true target dynamics can cause trained policies to fail to generalize and adapt appropriately when deployed in the real-world. The MRAC-RL framework generates online policies by utilizing an inner-loop adaptive controller together with a simulation-trained outer-loop RL policy. This structure allows MRAC-RL to adapt and operate effectively in a target environment, even when parametric uncertainties exists. We propose a set of novel MRAC algorithms, apply them to a class of nonlinear systems, derive the associated control laws, provide stability guarantees for the resulting closed-loop system, and show that the adaptive tracking objective is achieved. Using a simulation study of an automated quadrotor landing task, we demonstrate that the MRAC-RL approach improves upon state-of-the-art RL algorithms and techniques through the generation of online policies.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-30T17:56:59Z</published>
+    <arxiv:comment>Submitted to CDC 2021</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Anubhav Guha</name>
+    </author>
+    <author>
+      <name>Anuradha Annaswamy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1912.07735v1</id>
+    <title>Evolution of Robust High Speed Optical-Flow-Based Landing for Autonomous MAVs</title>
+    <updated>2019-12-16T22:22:21Z</updated>
+    <link href="https://arxiv.org/abs/1912.07735v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.07735v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Automatic optimization of robotic behavior has been the long-standing goal of Evolutionary Robotics. Allowing the problem at hand to be solved by automation often leads to novel approaches and new insights. A common problem encountered with this approach is that when this optimization occurs in a simulated environment, the optimized policies are subject to the reality gap when implemented in the real world. This often results in sub-optimal behavior, if it works at all. This paper investigates the automatic optimization of neurocontrollers to perform quick but safe landing maneuvers for a quadrotor micro air vehicle using the divergence of the optical flow field of a downward looking camera. The optimized policies showed that a piece-wise linear control scheme is more effective than the simple linear scheme commonly used, something not yet considered by human designers. Additionally, we show the utility in using abstraction on the input and output of the controller as a tool to improve the robustness of the optimized policies to the reality gap by testing our policies optimized in simulation on real world vehicles. We tested the neurocontrollers using two different methods to generate and process the visual input, one using a conventional CMOS camera and one a dynamic vision sensor, both of which perform significantly differently than the simulated sensor. The use of the abstracted input resulted in near seamless transfer to the real world with the controllers showing high robustness to a clear reality gap.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-16T22:22:21Z</published>
+    <arxiv:comment>This is an accepted manuscript preprint of published work available at https://doi.org/10.1016/j.robot.2019.103380. Please cite with Kirk Y.W Scheper and Guido C.H.E. de Croon, Evolution of robust high speed optical-flow-based landing for autonomous MAVs, Robotics and Autonomous Systems 124, 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>Robotics and Autonomous Systems, Volume 124, 2020, 103380, ISSN 0921-8890</arxiv:journal_ref>
+    <author>
+      <name>Kirk Y. W. Scheper</name>
+    </author>
+    <author>
+      <name>Guido C. H. E. de Croon</name>
+    </author>
+    <arxiv:doi>10.1016/j.robot.2019.103380</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.robot.2019.103380" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1909.11071v3</id>
+    <title>Dynamic Landing of an Autonomous Quadrotor on a Moving Platform in Turbulent Wind Conditions</title>
+    <updated>2020-03-13T17:55:41Z</updated>
+    <link href="https://arxiv.org/abs/1909.11071v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.11071v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autonomous landing on a moving platform presents unique challenges for multirotor vehicles, including the need to accurately localize the platform, fast trajectory planning, and precise/robust control. Previous works studied this problem but most lack explicit consideration of the wind disturbance, which typically leads to slow descents onto the platform. This work presents a fully autonomous vision-based system that addresses these limitations by tightly coupling the localization, planning, and control, thereby enabling fast and accurate landing on a moving platform. The platform's position, orientation, and velocity are estimated by an extended Kalman filter using simulated GPS measurements when the quadrotor-platform distance is large, and by a visual fiducial system when the platform is nearby. The landing trajectory is computed online using receding horizon control and is followed by a boundary layer sliding controller that provides tracking performance guarantees in the presence of unknown, but bounded, disturbances. To improve the performance, the characteristics of the turbulent conditions are accounted for in the controller. The landing trajectory is fast, direct, and does not require hovering over the platform, as is typical of most state-of-the-art approaches. Simulations and hardware experiments are presented to validate the robustness of the approach.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-24T17:50:17Z</published>
+    <arxiv:comment>7 pages, 8 figures, ICRA2020 accepted paper</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Aleix Paris</name>
+    </author>
+    <author>
+      <name>Brett T. Lopez</name>
+    </author>
+    <author>
+      <name>Jonathan P. How</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.08027v2</id>
+    <title>Neural Lander: Stable Drone Landing Control using Learned Dynamics</title>
+    <updated>2019-03-04T23:12:01Z</updated>
+    <link href="https://arxiv.org/abs/1811.08027v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.08027v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Precise near-ground trajectory control is difficult for multi-rotor drones, due to the complex aerodynamic effects caused by interactions between multi-rotor airflow and the environment. Conventional control methods often fail to properly account for these complex effects and fall short in accomplishing smooth landing. In this paper, we present a novel deep-learning-based robust nonlinear controller (Neural Lander) that improves control performance of a quadrotor during landing. Our approach combines a nominal dynamics model with a Deep Neural Network (DNN) that learns high-order interactions. We apply spectral normalization (SN) to constrain the Lipschitz constant of the DNN. Leveraging this Lipschitz property, we design a nonlinear feedback linearization controller using the learned model and prove system stability with disturbance rejection. To the best of our knowledge, this is the first DNN-based nonlinear feedback controller with stability guarantees that can utilize arbitrarily large neural nets. Experimental results demonstrate that the proposed controller significantly outperforms a Baseline Nonlinear Tracking Controller in both landing and cross-table trajectory tracking cases. We also empirically show that the DNN generalizes well to unseen data outside the training domain.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-19T23:59:28Z</published>
+    <arxiv:comment>7 pages, 5 figures, https://youtu.be/FLLsG0S78ik</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>International Conferenceon Robotics and Automation (ICRA), 2019, pp. 9784-9790</arxiv:journal_ref>
+    <author>
+      <name>Guanya Shi</name>
+    </author>
+    <author>
+      <name>Xichen Shi</name>
+    </author>
+    <author>
+      <name>Michael O'Connell</name>
+    </author>
+    <author>
+      <name>Rose Yu</name>
+    </author>
+    <author>
+      <name>Kamyar Azizzadenesheli</name>
+    </author>
+    <author>
+      <name>Animashree Anandkumar</name>
+    </author>
+    <author>
+      <name>Yisong Yue</name>
+    </author>
+    <author>
+      <name>Soon-Jo Chung</name>
+    </author>
+    <arxiv:doi>10.1109/ICRA.2019.8794351</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ICRA.2019.8794351" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1708.06652v3</id>
+    <title>Build Your Own Visual-Inertial Drone: A Cost-Effective and Open-Source Autonomous Drone</title>
+    <updated>2018-09-06T17:50:35Z</updated>
+    <link href="https://arxiv.org/abs/1708.06652v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1708.06652v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper describes an approach to building a cost-effective and research grade visual-inertial odometry aided vertical taking-off and landing (VTOL) platform. We utilize an off-the-shelf visual-inertial sensor, an onboard computer, and a quadrotor platform that are factory-calibrated and mass-produced, thereby sharing similar hardware and sensor specifications (e.g., mass, dimensions, intrinsic and extrinsic of camera-IMU systems, and signal-to-noise ratio). We then perform a system calibration and identification enabling the use of our visual-inertial odometry, multi-sensor fusion, and model predictive control frameworks with the off-the-shelf products. This implies that we can partially avoid tedious parameter tuning procedures for building a full system. The complete system is extensively evaluated both indoors using a motion capture system and outdoors using a laser tracker while performing hover and step responses, and trajectory following tasks in the presence of external wind disturbances. We achieve root-mean-square (RMS) pose errors between a reference and actual trajectories of 0.036m, while performing hover. We also conduct relatively long distance flight (~180m) experiments on a farm site and achieve 0.82% drift error of the total distance flight. This paper conveys the insights we acquired about the platform and sensor module and returns to the community as open-source code with tutorial documentation.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-08-22T14:40:57Z</published>
+    <arxiv:comment>21 pages, 10 figures, accepted to IEEE Robotics &amp; Automation Magazine</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <arxiv:journal_ref>IEEE Robotics &amp; Automation Magazine 2017</arxiv:journal_ref>
+    <author>
+      <name>Inkyu Sa</name>
+    </author>
+    <author>
+      <name>Mina Kamel</name>
+    </author>
+    <author>
+      <name>Michael Burri</name>
+    </author>
+    <author>
+      <name>Michael Bloesch</name>
+    </author>
+    <author>
+      <name>Raghav Khanna</name>
+    </author>
+    <author>
+      <name>Marija Popovic</name>
+    </author>
+    <author>
+      <name>Juan Nieto</name>
+    </author>
+    <author>
+      <name>Roland Siegwart</name>
+    </author>
+    <arxiv:doi>10.1109/MRA.2017.2771326</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/MRA.2017.2771326" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1610.01496v1</id>
+    <title>From Tracking to Robust Maneuver Regulation: an Easy-to-Design Approach for VTOL Aerial Robots</title>
+    <updated>2016-10-05T16:02:25Z</updated>
+    <link href="https://arxiv.org/abs/1610.01496v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1610.01496v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper we present a maneuver regulation scheme for Vertical Take-Off and Landing (VTOL) micro aerial vehicles (MAV). Differently from standard trajectory tracking, maneuver regulation has an intrinsic robustness due to the fact that the vehicle is not required to chase a virtual target, but just to stay on a (properly designed) desired path with a given velocity profile. In this paper we show how a robust maneuver regulation controller can be easily designed by converting an existing tracking scheme. The resulting maneuvering controller has three main appealing features, namely it: (i) inherits the robustness properties of the tracking controller, (ii) gains the appealing features of maneuver regulation, and (iii) does not need any additional tuning with respect to the tracking controller. We prove the correctness of the proposed scheme and show its effectiveness in experiments on a nano-quadrotor. In particular, we show on a nontrivial maneuver how external disturbances acting on the quadrotor cause instabilities in the standard tracking, while marginally affect the maneuver regulation scheme.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-10-05T16:02:25Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Sara Spedicato</name>
+    </author>
+    <author>
+      <name>Antonio Franchi</name>
+    </author>
+    <author>
+      <name>Giuseppe Notarstefano</name>
+    </author>
+  </entry>
+</feed>

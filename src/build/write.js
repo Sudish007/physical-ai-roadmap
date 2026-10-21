@@ -11,6 +11,7 @@ import { extractTables } from './tables.js';
 import { buildManifest, manifestSummary } from './manifest.js';
 import { buildHomeData } from './home-data.js';
 import { buildPlanData } from './plan-data.js';
+import { buildFeedData } from './feed-data.js';
 import { indexTokens, titleRecord, assertIndexSize } from './search-index.js';
 import { sectionPage, homePage, planPage, feedPage, notFoundPage } from './templates.js';
 
@@ -69,8 +70,9 @@ export function buildSite(markdown) {
   const home = buildHomeData(sections, plainMd, (s) => renderInline(s, dataEnv()));
   const planData = buildPlanData(sections, plainMd, (s) => renderInline(s, dataEnv()));
   pages.set('index.html', homePage({ home, manifest }));
+  const feedData = buildFeedData(sections, plainMd, (s) => renderInline(s, dataEnv()));
   pages.set('plan.html', planPage({ planData }));
-  pages.set('feed.html', feedPage());
+  pages.set('feed.html', feedPage({ feedData }));
   pages.set('404.html', notFoundPage());
 
   const searchJson = JSON.stringify(search);
@@ -86,6 +88,7 @@ export function buildSite(markdown) {
     manifest,
     home,
     planData,
+    feedData,
     search,
     stats,
     counts: { pages: pages.size, h3: h3Count, chips: stats.chips, searchRecords: search.length },

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+  <id>tag:github.com,2008:https://github.com/mavlink/MAVSDK/releases</id>
+  <link type="text/html" rel="alternate" href="https://github.com/mavlink/MAVSDK/releases"/>
+  <link type="application/atom+xml" rel="self" href="https://github.com/mavlink/MAVSDK/releases.atom"/>
+  <title>Release notes from MAVSDK</title>
+  <updated>2026-10-08T10:17:20Z</updated>
+  <entry>
+    <id>tag:github.com,2008:Repository/94815442/v4.0.6</id>
+    <updated>2026-10-08T14:30:07Z</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/mavlink/MAVSDK/releases/tag/v4.0.6"/>
+    <title>v4.0.6</title>
+    <content type="html">&lt;h2&gt;What&#39;s Changed&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;jni: run JNI test with -Xcheck:jni by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/JonasVautherin/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/JonasVautherin&quot;&gt;@JonasVautherin&lt;/a&gt; in &lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5754389111&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mavlink/MAVSDK/issues/3154&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mavlink/MAVSDK/pull/3154/hovercard&quot; href=&quot;https://github.com/mavlink/MAVSDK/pull/3154&quot;&gt;#3154&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Full Changelog&lt;/strong&gt;: &lt;a class=&quot;commit-link&quot; href=&quot;https://github.com/mavlink/MAVSDK/compare/v4.0.5...v4.0.6&quot;&gt;&lt;tt&gt;v4.0.5...v4.0.6&lt;/tt&gt;&lt;/a&gt;&lt;/p&gt;</content>
+    <author>
+      <name>JonasVautherin</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/2606672?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/94815442/v4.0.5</id>
+    <updated>2026-10-07T08:13:37Z</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/mavlink/MAVSDK/releases/tag/v4.0.5"/>
+    <title>v4.0.5</title>
+    <content type="html">&lt;h2&gt;What&#39;s Changed&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;examples: show sending and receiving the custom GAS_SENSOR message by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/julianoes/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/julianoes&quot;&gt;@julianoes&lt;/a&gt; in &lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5725815749&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mavlink/MAVSDK/issues/3152&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mavlink/MAVSDK/pull/3152/hovercard&quot; href=&quot;https://github.com/mavlink/MAVSDK/pull/3152&quot;&gt;#3152&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;system_tests: don&#39;t keep the System in DestroyWithResultQueued by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/bansiesta/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/bansiesta&quot;&gt;@bansiesta&lt;/a&gt; in &lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5740785387&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mavlink/MAVSDK/issues/3153&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mavlink/MAVSDK/pull/3153/hovercard&quot; href=&quot;https://github.com/mavlink/MAVSDK/pull/3153&quot;&gt;#3153&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Full Changelog&lt;/strong&gt;: &lt;a class=&quot;commit-link&quot; href=&quot;https://github.com/mavlink/MAVSDK/compare/v4.0.4...v4.0.5&quot;&gt;&lt;tt&gt;v4.0.4...v4.0.5&lt;/tt&gt;&lt;/a&gt;&lt;/p&gt;</content>
+    <author>
+      <name>julianoes</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/1419688?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/94815442/v4.0.4</id>
+    <updated>2026-10-07T07:12:52Z</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/mavlink/MAVSDK/releases/tag/v4.0.4"/>
+    <title>v4.0.4</title>
+    <content type="html">&lt;h2&gt;What&#39;s Changed&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix discovery by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/julianoes/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/julianoes&quot;&gt;@julianoes&lt;/a&gt; in &lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5693408430&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mavlink/MAVSDK/issues/3150&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mavlink/MAVSDK/pull/3150/hovercard&quot; href=&quot;https://github.com/mavlink/MAVSDK/pull/3150&quot;&gt;#3150&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Full Changelog&lt;/strong&gt;: &lt;a class=&quot;commit-link&quot; href=&quot;https://github.com/mavlink/MAVSDK/compare/v4.0.3...v4.0.4&quot;&gt;&lt;tt&gt;v4.0.3...v4.0.4&lt;/tt&gt;&lt;/a&gt;&lt;/p&gt;</content>
+    <author>
+      <name>julianoes</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/1419688?s=60&amp;v=4"/>
+  </entry>
+  
+</feed>

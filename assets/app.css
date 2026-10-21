@@ -383,16 +383,47 @@ tr.total td { font-weight: 650; background: var(--bg-2); }
 .stat .k { color: var(--fg-2); font-size: var(--text-sm); }
 
 /* Feed */
-.feed-head { display: grid; gap: 0.75rem; margin: 1.5rem 0 1rem; }
-.health { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center; font-size: var(--text-sm); }
-.health .glyph { display: inline-block; width: 0.75em; text-align: center; margin-right: 0.3em; }
-details.health-details { border: 1px solid var(--line); border-radius: var(--radius); }
-details.health-details > summary { min-height: var(--control-h); display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: 0 0.9rem; cursor: pointer; font-size: var(--text-sm); list-style: none; }
-details.health-details > summary::-webkit-details-marker { display: none; }
+.feed-head { display: grid; gap: 0.75rem; margin-bottom: 1rem; }
+.feed-head h1 { margin: 0; }
+.feed-head .kicker { margin-bottom: 0; }
+.feed-updated { margin: 0; }
+/* Source health: a disclosure whose summary reads "■ ok N · □ empty N · ✕ failed N · N sources · details" (DR-9) */
+details.health { border: 1px solid var(--line); border-radius: var(--radius); }
+details.health > summary { min-height: var(--control-h); display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; padding: 0 0.9rem; cursor: pointer; font-size: var(--text-sm); list-style: none; }
+details.health > summary::-webkit-details-marker { display: none; }
+details.health > .table-wrap { margin: 0; border-width: 1px 0 0; border-radius: 0; }
 .health-table { font-size: var(--text-sm); }
-.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0 0 1rem; }
-.filters .group-label { font-size: var(--text-sm); color: var(--fg-2); margin-right: 0.25rem; }
-.feed-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.health-table th, .health-table td { min-width: 6rem; }
+.health-table td:first-child { min-width: 11rem; }
+.health-table td:last-child { min-width: 14rem; }
+.health-table .status-failed { font-weight: 650; }
+/* Filter rows: the label in its own column so wrapped buttons line up under the first button, not under the label */
+.filters { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.5rem 0.75rem; align-items: start; margin: 0 0 0.75rem; }
+.filters .group-label { font-size: var(--text-sm); color: var(--fg-2); min-width: 3.5rem; min-height: var(--control-h); display: flex; align-items: center; }
+.filters .filter-btns { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.filters .btn .n { font-variant-numeric: tabular-nums; }
+/* Weekly protocol (OF-6): four narrow columns that wrap inside the right column instead of forcing a scroll */
+table.protocol th, table.protocol td { min-width: 0; overflow-wrap: normal; }
+table.protocol td.num, table.protocol th.num { min-width: 4rem; white-space: nowrap; }
+.feed-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.feed-status { margin-top: 0.75rem; }
+.feed-item .dom { margin-left: 0.4em; }
+.feed-item.dropped h3 a { color: var(--fg-2); text-decoration: line-through; }
+.feed-message .summary { max-width: none; }
+/* Notices: link + the report's wording, then the last reachability status; stacked on phones, two tracks from 720px
+   (explicit tracks: a percentage max-width on an auto-track item would wrap the status even with room) */
+.notices li { grid-template-columns: minmax(0, 1fr); gap: 0.2rem 1rem; }
+.notices li .count { white-space: normal; text-align: left; overflow-wrap: anywhere; }
+@media (min-width: 720px) {
+  .notices li { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  .notices li .count { text-align: right; }
+  /* a failure line ("Unavailable since <date> · <error class>") is long: it takes its own full-width line under the link */
+  .notices li[data-status="failed"] { grid-template-columns: minmax(0, 1fr); }
+  .notices li[data-status="failed"] .count { text-align: left; }
+}
+.labs li { display: flex; align-items: baseline; gap: 0.3rem; flex-wrap: wrap; }
+.limits { overflow-wrap: anywhere; }
+.feed-aside .section-block:first-child { padding-top: 0; }
 /* OF-1: explicit grid areas; content left, actions in a fixed-width right column from 820px; no floats.
    OF-11: from 1440px the three triage buttons form one horizontal row at the item's top-right. */
 .feed-item { display: grid; gap: 0.35rem 1.5rem; grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "meta" "summary" "actions"; padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
@@ -400,7 +431,6 @@ details.health-details > summary::-webkit-details-marker { display: none; }
 .feed-item .meta { grid-area: meta; color: var(--fg-2); font-size: var(--text-sm); display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; }
 .feed-item .summary { grid-area: summary; margin: 0; font-size: var(--text-sm); max-width: 80ch; }
 .feed-item .triage { grid-area: actions; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.feed-item.dropped { opacity: 0.6; }
 @media (min-width: 820px) {
   .feed-item { grid-template-columns: minmax(0, 1fr) 9.5rem; grid-template-areas: "title actions" "meta actions" "summary actions"; align-items: start; }
   .feed-item .triage { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; }

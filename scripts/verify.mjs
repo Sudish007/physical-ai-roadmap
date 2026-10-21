@@ -19,6 +19,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { splitSections } from '../src/build/parse.js';
+import { createPlainMd } from '../src/build/md.js';
+import { protocolTable } from '../src/build/feed-data.js';
 
 export const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const DEFAULT_PAGES = ['index', 's03', 's12', 's15', 'appendix-a', 'plan', 'feed'];
@@ -100,6 +102,15 @@ export function crawl(distDir) {
  * content/roadmap.md (s00 includes the front matter). The five relative dossier links render as text and
  * are not counted; tests/build-dist.test.js applies the same rule to the built HTML.
  */
+/** DR-5 reference for audit.py: every cell string (header and body) of the §17.1 table in content/roadmap.md. */
+export function protocolCells(markdown) {
+  const { sections } = splitSections(markdown);
+  const table = protocolTable(sections, createPlainMd());
+  const cells = new Set(table.headers);
+  for (const row of table.rows) for (const c of row.cells) cells.add(c.text);
+  return [...cells];
+}
+
 export function linkCounts(markdown) {
   const { frontMatter, sections } = splitSections(markdown);
   const count = (md) => (md.match(/\]\(https?:\/\//g) || []).length;
@@ -189,6 +200,7 @@ export async function main(argv = process.argv.slice(2)) {
   let server = null;
   let exitCode = 0;
   const tmpReport = path.join(os.tmpdir(), `pair-audit-${process.pid}-${Date.now()}.json`);
+  const tmpCells = path.join(os.tmpdir(), `pair-protocol-cells-${process.pid}-${Date.now()}.json`);
   try {
     if (opts.browser) {
       if (!existsSync(VENV_PYTHON)) {
@@ -208,8 +220,11 @@ export async function main(argv = process.argv.slice(2)) {
         report.base = base;
         const args = ['--base', base, '--pages', opts.pages.join(','), '--widths', opts.widths.join(','), '--themes', opts.themes.join(','), '--report', tmpReport];
         if (extraPages.length) args.push('--extra-pages', extraPages.join(','));
-        const links = linkCounts(readFileSync(path.join(REPO, 'content', 'roadmap.md'), 'utf8'));
+        const markdown = readFileSync(path.join(REPO, 'content', 'roadmap.md'), 'utf8');
+        const links = linkCounts(markdown);
         args.push('--link-counts', Object.entries(links).map(([k, v]) => `${k}=${v}`).join(','));
+        writeFileSync(tmpCells, JSON.stringify(protocolCells(markdown)), 'utf8');
+        args.push('--protocol-cells', tmpCells);
         if (opts.shots) args.push('--shots', opts.shots);
         const code = await runAudit(args);
         if (existsSync(tmpReport)) {
@@ -222,6 +237,7 @@ export async function main(argv = process.argv.slice(2)) {
   } finally {
     if (server) server.kill();
     rmSync(tmpReport, { force: true });
+    rmSync(tmpCells, { force: true });
   }
 
   report.summary = { pass: failures.length === 0, failures, elapsedSeconds: Math.round((Date.now() - started.getTime()) / 100) / 10 };

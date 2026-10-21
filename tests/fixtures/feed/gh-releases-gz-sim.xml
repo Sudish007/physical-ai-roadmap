@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+  <id>tag:github.com,2008:https://github.com/gazebosim/gz-sim/releases</id>
+  <link type="text/html" rel="alternate" href="https://github.com/gazebosim/gz-sim/releases"/>
+  <link type="application/atom+xml" rel="self" href="https://github.com/gazebosim/gz-sim/releases.atom"/>
+  <title>Release notes from gz-sim</title>
+  <updated>2026-10-20T22:23:56Z</updated>
+  <entry>
+    <id>tag:github.com,2008:Repository/255865265/gz-sim11_11.0.0-pre3</id>
+    <updated>2026-10-20T22:23:56Z</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/gazebosim/gz-sim/releases/tag/gz-sim11_11.0.0-pre3"/>
+    <title>gz-sim11_11.0.0-pre3: Prepare for 11.0.0 pre3 (#4087)</title>
+    <content type="html">&lt;p&gt;Signed-off-by: Addisu Z. Taddese &lt;a href=&quot;mailto:addisuzt@intrinsic.ai&quot;&gt;addisuzt@intrinsic.ai&lt;/a&gt;&lt;/p&gt;</content>
+    <author>
+      <name>azeey</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/206116?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/255865265/gz-sim11_11.0.0-pre2</id>
+    <updated>2026-10-07T04:08:36Z</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/gazebosim/gz-sim/releases/tag/gz-sim11_11.0.0-pre2"/>
+    <title>gz-sim11_11.0.0-pre2: Prepare for 11.0.0 pre2 (#4037)</title>
+    <content type="html">&lt;p&gt;Signed-off-by: Addisu Z. Taddese &lt;a href=&quot;mailto:addisuzt@intrinsic.ai&quot;&gt;addisuzt@intrinsic.ai&lt;/a&gt;&lt;/p&gt;</content>
+    <author>
+      <name>azeey</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/206116?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/255865265/gz-sim11_11.0.0-pre1</id>
+    <updated>2026-08-20T08:51:36Z</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/gazebosim/gz-sim/releases/tag/gz-sim11_11.0.0-pre1"/>
+    <title>gz-sim11_11.0.0-pre1: Fix graded buoyancy for rotated collision shapes (#3880)</title>
+    <content type="html">&lt;p&gt;Assisted-by: Claude Fable 5 &lt;a href=&quot;mailto:noreply@anthropic.com&quot;&gt;noreply@anthropic.com&lt;/a&gt;&lt;br&gt;
+Signed-off-by: Carlos Agüero &lt;a href=&quot;mailto:caguero@honurobotics.com&quot;&gt;caguero@honurobotics.com&lt;/a&gt;&lt;/p&gt;</content>
+    <author>
+      <name>caguero</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/1440739?s=60&amp;v=4"/>
+  </entry>
+  
+</feed>

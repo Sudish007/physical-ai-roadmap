@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Pqb97tWHoM4OzvTuBzM1ZptlKdU</id>
+  <title>arXiv Query: search_query=(cat:cs.RO OR cat:eess.SY) AND (all:quadrotor OR all:UAV OR all:"aerial robot") AND (all:landing OR all:"visual-inertial" OR all:"GPS-denied")&amp;id_list=&amp;start=0&amp;max_results=50</title>
+  <updated>2026-10-21T13:14:07Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=(cat:cs.RO+OR+cat:eess.SY)+AND+((all:quadrotor+OR+(all:UAV+OR+all:%22aerial+robot%22))+AND+(all:landing+OR+(all:%22visual-inertial%22+OR+all:%22GPS-denied%22)))&amp;start=0&amp;max_results=50&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>50</opensearch:itemsPerPage>
+  <opensearch:totalResults>403</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2610.22092v1</id>
+    <title>Onboard Lightweight LLM Reasoning for Human-Aware Safe UAV Navigation</title>
+    <updated>2026-10-15T15:43:49Z</updated>
+    <link href="https://arxiv.org/abs/2610.22092v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.22092v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Aerial robots operating near people must treat a pedestrian, a parked car, and a wall differently, yet conventional perception--planning stacks reduce all of them to occupied geometry---a \emph{human-aware safety gap} in which category-specific clearance is unavailable to the planner and temporary occlusions remove pedestrian-specific constraints from its map. We present a modular, fully onboard pipeline that closes this gap by turning visual observations into context-dependent safety constraints for real-time UAV navigation. A shared BLIP encoder drives scene captioning and text-conditioned segmentation, which is fused with depth to localize obstacles in 3D. Obstacle-specific risk is inferred by a lightweight LLM (Qwen-2.5-0.5B) stabilized with retrieval-augmented generation and grammar-constrained decoding that restricts its output to a planner-compatible JSON schema. The LLM reasons once per object category rather than per frame: its verdicts are cached per class, so previously seen categories are resolved without inference and new ones trigger a fresh retrieval-grounded query; detections are additionally given persistent identities and held in the map across occlusions. The perception pipeline runs at 10\,Hz on a Jetson Orin NX, while fallback LLM queries take approximately 0.8\,s and remain off the control-critical path. In Gazebo, low-altitude urban navigation among pedestrians and vehicles shows a roughly $3\times$ reduction in collision events over a geometric planner, and semantics-aware landing among moving actors raises success from 34\% to 96\%. The 224-pixel encoder input limits reliable small-object perception at range; conservative pedestrian margins and short-term persistence mitigate this limitation during navigation.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-15T15:43:49Z</published>
+    <arxiv:comment>HEAI -- IROS 2026 Workshop</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Siwei Cai</name>
+    </author>
+    <author>
+      <name>Yuwei Wu</name>
+    </author>
+    <author>
+      <name>Vijay Kumar</name>
+    </author>
+    <author>
+      <name>Lifeng Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.13190v1</id>
+    <title>Prediction-Informed Landing Window Planning for UAV Landing on USV in High Sea States</title>
+    <updated>2026-10-09T08:12:13Z</updated>
+    <link href="https://arxiv.org/abs/2610.13190v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.13190v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autonomous landing of unmanned aerial vehicle (UAV) on unmanned surface vehicle (USV) is difficult in high sea states. Existing hierarchical landing methods often infer future USV motion only implicitly from short observation histories, which limits their ability to adapt to severe and rapidly changing sea conditions. This paper presents a prediction-informed hierarchical control framework. A pretrained model is developed to explicitly predict the USV attitude during high-level landing decisions. The prediction helps identify suitable landing windows and choose the right touchdown time, while a conventional low-level flight controller maintains UAV stability and tracks motion commands. To evaluate the framework under realistic disturbances, a real-sim validation setup is constructed in which USV-motion data collected in real sea conditions are transferred to a MuJoCo USV. The experiments demonstrate the feasibility of using explicit attitude prediction to improve landing-window selection and support timing-aware UAV landing planning in rapidly varying marine environments.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-09T08:12:13Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Kaizhen Li</name>
+    </author>
+    <author>
+      <name>Xi Zhou</name>
+    </author>
+    <author>
+      <name>Dan Zhang</name>
+    </author>
+    <author>
+      <name>Xiaowei Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.11130v1</id>
+    <title>A User-Triggered UAV Dispatching System for Precise and Timely Mountain Search Missions</title>
+    <updated>2026-10-08T02:56:49Z</updated>
+    <link href="https://arxiv.org/abs/2610.11130v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.11130v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Smartphones carried by hikers routinely record routes, locations, and requests for assistance, and these records can provide precise clues for mountain search. However, they are rarely transformed in a direct and timely way into unmanned aerial vehicle (UAV) missions that support search and rescue. This paper presents a user-triggered UAV dispatching system that integrates mobile information collection, ground station mission management, and UAV search into a single workflow. In our system, a mobile application is designed to continuously track user records and synchronize these records to the cloud database, thereby initiating all subsequent search events and UAV-dispatch missions. A control platform is developed to retrieve records from the cloud database for operator verification and mission scheduling. A UAV prototype is implemented to execute the approved mission, follow waypoints, report status, relay phone records when available, and record downward-facing video for later inspection. Simulations are conducted for UAV-dispatching missions using a terrain-following flight altitude of $80$~m above ground level and demonstrate successful route generation, ordered waypoint traversal, and return to the launch site for landing of the UAV dispatching. Local software tests verified timeout detection with a 1s threshold and phone-record transfer from the mobile application through the UAV to the ground station. Outdoor trials showed that the UAV could fly autonomously and capture downward-facing imagery in which a person, a nearby footpath, and surrounding vegetation were clearly discernible, providing visual cues for operator assessment and further inspection of the search area.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-08T02:56:49Z</published>
+    <arxiv:comment>Accepted by MetaCom 2026 (workshop-TNI-Meta). Ref: metacomm.org/2026/workshop-TNI-Meta.php</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Mingyang Wang</name>
+    </author>
+    <author>
+      <name>Yi Hong</name>
+    </author>
+    <author>
+      <name>Tungchak Lee</name>
+    </author>
+    <author>
+      <name>Ashwin Sundar</name>
+    </author>
+    <author>
+      <name>Kevin Hung</name>
+    </author>
+    <author>
+      <name>Qubeijian Wang</name>
+    </author>
+    <author>
+      <name>Yalin Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.09967v1</id>
+    <title>Borrowed Eyes: Markerless Nano-UAV Flight with an Active Quadruped Observer</title>
+    <updated>2026-10-07T12:38:19Z</updated>
+    <link href="https://arxiv.org/abs/2610.09967v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.09967v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Nano unmanned aerial vehicles (nano-UAVs) can navigate confined spaces that larger robots cannot, but their payload capacity severely limits the sensors and compute available for self-localization in global navigation satellite system (GNSS)-denied environments. We present a vision-based system that localizes a nano-UAV from a quadruped robot with an arm-mounted camera. The quadruped tracks the drone, estimates its position in its own coordinate system using segmentation masks and depth, and transmits that position over a real-time radio link. To ensure continuous tracking, we developed a perception-aware nonlinear Model Predictive Controller (NMPC) that dynamically adjusts the quadruped's body and arm to maximize the drone's visibility, treating observation reliability as a primary control objective. Relying solely on this external estimate, the nano-UAV executed predefined trajectories from takeoff to landing with a median 3D localization error of 59 mm. The system demonstrates robustness against short visual occlusions by smoothly transitioning to onboard inertial flight when line-of-sight is temporarily lost. Ultimately, this framework allows a quadruped to offload the localization burden of a nano-UAV, enabling inspection of complex spaces that neither robot could navigate alone.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-07T12:38:19Z</published>
+    <arxiv:comment>8 pages, 7 figures, 2 tables. Submitted to ICRA 2027</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Alejandro Lorite Mora</name>
+    </author>
+    <author>
+      <name>Dimitrios Arapis</name>
+    </author>
+    <author>
+      <name>Andrés Faíña</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.08259v1</id>
+    <title>HexaGripper: A Single-Actuator, Winch-Deployed Gripper for Autonomous Aerial Parcel Collection</title>
+    <updated>2026-10-05T14:31:57Z</updated>
+    <link href="https://arxiv.org/abs/2610.08259v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.08259v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autonomous aerial parcel collection remains constrained by package-transfer operations that require manual loading, landing, or dedicated ground infrastructure. This letter presents HexaGripper, a single-actuator, winch-deployed six-plate gripper for autonomous collection of cuboid parcels. The proposed mechanism provides synchronized grasping with a wide capture region and tolerance to positional misalignment during pickup. The system integrates vision-based alignment, range sensing, winch deployment, and state-based control to enable autonomous collection while maintaining UAV separation from the pickup surface. Experimental evaluation covered static grasping, capture-workspace assessment, and end-to-end outdoor aerial collection. Static experiments achieved 100% pickup success (15/15 trials) across three parcel geometries, while workspace experiments achieved successful pickup at all 28 tested positions up to a 150 mm radial offset. End-to-end outdoor aerial collection achieved an 80% success rate (4/5 trials). These results demonstrate the feasibility of mechanically synchronized, winch-deployed grasping for landing-free autonomous aerial parcel collection.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-05T14:31:57Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Nimantha Adikaram</name>
+    </author>
+    <author>
+      <name>Mahen Abeyratne</name>
+    </author>
+    <author>
+      <name>Lakmina Chandrajith</name>
+    </author>
+    <author>
+      <name>A. H. T. E. De Silva</name>
+    </author>
+    <author>
+      <name>Isira Naotunna</name>
+    </author>
+    <author>
+      <name>Asanka Perera</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.05674v1</id>
+    <title>Bayesian Data Augmentation for DNN Retraining with Binomial Outcomes in Vision-Based UAV Landing</title>
+    <updated>2026-10-05T01:38:48Z</updated>
+    <link href="https://arxiv.org/abs/2610.05674v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.05674v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In GPS-denied or cluttered urban environments, vision-based landing is essential for reliable UAV missions. Real-world landing sites are often unstructured and highly variable, requiring strong generalization by the perception system. Deep Neural Networks (DNNs) trained with synthetic data augmentation offer a scalable solution for learning landing-site features across diverse vehicle and environmental states. However, computationally expensive DNN retraining, along with challenging performance validation via test flights, limits exhaustive model fine-tuning and necessitates an optimized retraining pipeline. In this work, we deploy a Bayesian data augmentation framework integrated with a photorealistic simulator featuring high-fidelity vehicle dynamics to iteratively retrain the helipad detector DNN, maximizing landing performance as the objective function.
+  We validate our framework with experiments in a photorealistic simulator under different environmental conditions and vehicle states, demonstrating improved landing performance and tighter confidence intervals on predicted landing outcomes.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-05T01:38:48Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Ashik E Rasul</name>
+    </author>
+    <author>
+      <name>Hyung-Jin Yoon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.03924v1</id>
+    <title>Barrier-Shaped Recurrent Reinforcement Learning for Autonomous Landing on a Heaving Ship Deck</title>
+    <updated>2026-10-02T18:36:57Z</updated>
+    <link href="https://arxiv.org/abs/2610.03924v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.03924v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper addresses autonomous landing of unmanned aerial vehicle (UAV) rotorcrafts on a heaving ship deck using a recurrent policy trained via asymmetric actor-critic reinforcement learning: the critic sees 6 s of future deck height during training, while the actor sees only what the onboard sensors provide in flight, a 17-dimensional state made of the vehicle's position, velocity and attitude relative to the deck and outputs world-frame velocity and yaw-rate commands. Training is performed across 4096 parallel simulated environments, followed by fine-tuning in 16 environments with an onboard vision pipeline in the loop. A control-barrier-function (CBF) stopping margin on the deck-relative vertical state is incorporated at two stages: as a reward term during training, where it halves the median simulated contact speed relative to a policy trained without it, and as a runtime safety filter at deployment, evaluated at every control step to abort and retry the descent when the margin is violated. Because the autopilot's disarm logic cannot detect the vehicle resting on a moving deck, proximity-based thrust cutoff at touchdown is commanded directly in the landing pipeline. The proposed approach is validated using a parallel-manipulator-platform-based deck emulator that reproduces the heaving motion of the ship deck (scaled to 0.70 m peak-to-peak, 7.5 s mean period) and a quadcopter UAV with an onboard camera. Across 31 motion-capture and 20 vision-based trials, the UAV landed every time, with median times to contact of 6.5 and 7.3 s; 77% and 50% landed on the first attempt, with mean deck-relative speeds of 0.29 and 0.27 m/s, respectively, at the instant of thrust cutoff, which is the last speed under the policy's control. Supplementary video: https://youtu.be/S5hDkrSZJt4</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-02T18:36:57Z</published>
+    <arxiv:comment>8 pages, 8 figures, 1 table. Submitted to the 2027 IEEE International Conference on Robotics and Automation (ICRA). Video: https://youtu.be/S5hDkrSZJt4</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Ritwik Shankar</name>
+    </author>
+    <author>
+      <name>Chiranjeev Prachand</name>
+    </author>
+    <author>
+      <name> Abhishek</name>
+    </author>
+    <author>
+      <name>Soumya Ranjan Sahoo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.39125v1</id>
+    <title>LBDU-VIO: Learned Bias Dynamics and Uncertainty for Visual-Inertial Odometry with Unreliable Vision</title>
+    <updated>2026-09-30T06:57:26Z</updated>
+    <link href="https://arxiv.org/abs/2609.39125v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.39125v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Visual-inertial odometry (VIO) for aerial robots relies on high rate inertial measurement unit (IMU) propagation between visual updates. However, conventional multi state constraint Kalman filters (MSCKFs) use random walk bias assumptions and fixed noise parameters, which can limit robustness when visual information is unreliable. To address this problem, we propose LBDU-VIO, a learning-augmented MSCKF with learned continuous time bias dynamics and an IMU uncertainty model. A neural ordinary differential equation (ODE) models continuous time bias dynamics to propagate the filter's bias states, replacing their random walk model. The IMU uncertainty model predicts motion adaptive measurement noise covariances for covariance propagation. Both models are trained with pose supervision without direct labels. Experiments on real world EuRoC and TUM-VI benchmarks show lower errors than representative visual-inertial baselines, including a 25.1% reduction in mean relative position error compared with S-MSCKF on EuRoC sequences with 10s visual outage.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T06:57:26Z</published>
+    <arxiv:comment>12 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Qizhi Guo</name>
+    </author>
+    <author>
+      <name>Junning Lyu</name>
+    </author>
+    <author>
+      <name>Defu Lin</name>
+    </author>
+    <author>
+      <name>Shaoming He</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.35482v1</id>
+    <title>ForVis: An In-Field Dataset and Benchmark for VIO Using Under-Canopy UAV Flights in Forests</title>
+    <updated>2026-09-28T15:57:39Z</updated>
+    <link href="https://arxiv.org/abs/2609.35482v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.35482v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Visual-inertial Simultaneous Localization and Mapping (VI-SLAM) for UAVs remains difficult to evaluate in real forest environments, where motion, illumination changes, repetitive vegetation, and vibration can all affect estimation. We present ForVis, an in-field dataset and benchmark for evaluating VI-SLAM during UAV flight in forest environments. The dataset contains twelve flights across open meadow, above-canopy, and under-canopy conditions in each environment. In total, it provides 563.8s of flight over 1096.8m of trajectory, recorded simultaneously with an Intel RealSense D435i and an OAK-D Pro Wide together with inertial and flight-controller data. We benchmark seven open-source VI-SLAM systems over 504 runs. The results show that sensor choice has a larger effect on trajectory error than the spread between algorithms: all seven methods achieve lower median error on the OAK-D Pro than on the D435i. ForVis is intended to support evaluation of speed, accuracy and robustness for VI-SLAM in challenging forest flight.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T15:57:39Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Arman Kiani</name>
+    </author>
+    <author>
+      <name>Masoud Ataei</name>
+    </author>
+    <author>
+      <name>Elvis Gyaase</name>
+    </author>
+    <author>
+      <name>Jeffrey Eiyike</name>
+    </author>
+    <author>
+      <name>Aaron Weiskittel</name>
+    </author>
+    <author>
+      <name>Prabuddha Chakraborty</name>
+    </author>
+    <author>
+      <name>Vikas Dhiman</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.34574v1</id>
+    <title>Robust Variable-Horizon MPC for Landing a Multirotor UAV on a Moving Platform</title>
+    <updated>2026-09-28T08:21:53Z</updated>
+    <link href="https://arxiv.org/abs/2609.34574v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.34574v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Landing a multirotor Unmanned Aerial Vehicle (UAV) on a moving platform is challenging because a UAV is underactuated and the desired landing state is generally a non-equilibrium state. Shrinking- and variable-horizon approaches are promising for reaching such non-equilibrium targets, but often lack robustness to disturbances. Robust Variable-Horizon Model Predictive Control (VH-MPC) addresses this limitation but is computationally complex for a high-dimensional system such as a multirotor UAV.
+  This paper presents a computationally efficient robust Variable-Horizon MPC method for reaching non-equilibrium targets under bounded disturbances. The online horizon search is restricted to a neighborhood of the previously selected horizon, while maintaining recursive feasibility under bounded disturbances. A fixed robust positively invariant tube provides horizon-independent constraint tightening. By exploiting the differential flatness property of a UAV, this approach is applied to a decoupled linearized system, enabling real-time implementation on an onboard Raspberry Pi 5 at 20 Hz. Simulations show that restricting the horizon search substantially reduces computation with limited impact on the objective, while real-time Gazebo simulations demonstrate the robustness of the method. Physical experiments demonstrate successful landing of a multirotor UAV on a moving Stewart platform.</summary>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T08:21:53Z</published>
+    <arxiv:comment>Submitted to ICRA 2027</arxiv:comment>
+    <arxiv:primary_category term="eess.SY"/>
+    <author>
+      <name>Sander Doodeman</name>
+    </author>
+    <author>
+      <name>Niels Berkers</name>
+    </author>
+    <author>
+      <name>Paula Chanfreut</name>
+    </author>
+    <author>
+      <name>Elena Torta</name>
+    </author>
+    <author>
+      <name>Duarte Antunes</name>
+    </author>
+  </entry>
+  
+</feed>

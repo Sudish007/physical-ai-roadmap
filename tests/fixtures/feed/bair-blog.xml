@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Berkeley Artificial Intelligence Research Blog</title>
+    <description>The BAIR Blog</description>
+    <link>http://bair.berkeley.edu/blog/</link>
+    <atom:link href="http://bair.berkeley.edu/blog/feed.xml" rel="self" type="application/rss+xml" />
+    
+     
+      <item>
+        <title>From CUDA to MLX: How K-Search Brings Decades of Kernel Expertise to Apple Silicon</title>
+        <description>&lt;!-- twitter --&gt;
+&lt;meta name=&quot;twitter:title&quot; content=&quot;From CUDA to MLX: How K-Search Brings Decades of Kernel Expertise to Apple Silicon&quot; /&gt;
+
+&lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot; /&gt;
+
+&lt;meta name=&quot;twitter:image&quot; content=&quot;https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/cover.png&quot; /&gt;
+
+&lt;meta name=&quot;keywords&quot; content=&quot;CUDA, MLX, Apple Silicon, kernel optimization, evolutionary search, K-Search, FlashAttention, Mamba, state space models, Metal&quot; /&gt;
+
+&lt;meta name=&quot;description&quot; content=&quot;IBM Research extends K-Search, the evolutionary kernel search framework from Berkeley Sky Lab, with a CUDA-to-MLX translation layer that transfers expert kernel knowledge to Apple Silicon, reaching 97% of FlashAttention performance and a ~20x faster Mamba SSM prefill.&quot; /&gt;
+
+&lt;meta name=&quot;author&quot; content=&quot;Shiyi Cao, Gal Bloch, Assaf Toledo, Michael Factor, Gil Vernik, Joseph E. Gonzalez&quot; /&gt;
+
+&lt;p class=&quot;center&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/cover.svg&quot; alt=&quot;Kernel knowledge transfer from CUDA to MLX&quot; /&gt;&lt;br /&gt;
+&lt;/p&gt;
+
+&lt;p class=&quot;cuda-mlx-fig-caption&quot;&gt;&lt;strong&gt;Figure 1: CUDA-to-MLX optimization translation map.&lt;/strong&gt; CUDA optimization knowledge can be translated into architecture-native MLX strategies rather than copied instruction-for-instruction.&lt;/p&gt;
+
+&lt;p&gt;We face a new epoch in computing. Hardware is changing rapidly — not just faster GPUs, but a growing range of chips from different vendors, each with its own architecture and often tailored to specific AI workloads. Software is changing just as fast, and AI coding tools now generate in minutes what took months of effort a few years ago.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;With so much of computing now centered on AI, GPU kernels are a crucial component of its success. These are the low-level programs that run inside the GPU, and writing efficient ones is far from obvious — it takes years of expertise to get right. Transferring a kernel from one vendor’s hardware to another is harder still, and often means rediscovering the same optimizations from scratch. The CUDA ecosystem, for example, has accumulated decades of hard-won kernel expertise: hand-tuned implementations of attention, state space models, and other critical operations representing thousands of engineering hours. Newer hardware ecosystems (Apple Silicon, custom AI accelerators, and others) are growing fast but lack this depth.&lt;/p&gt;
+
+&lt;p&gt;In this work we ask whether that expertise can be transferred automatically. We built on &lt;a href=&quot;https://arxiv.org/abs/2602.19128&quot;&gt;K-Search&lt;/a&gt;, an evolutionary kernel search framework introduced by Cao et al. at Berkeley Sky Lab that uses AI to optimize GPU kernels, and extended it with a backend for MLX — Apple’s machine-learning framework for its own Apple Silicon chips. We developed a novel structured CUDA-to-MLX translation layer that lets K-Search take existing CUDA kernels as a knowledge base and adapt them into high-quality GPU kernels for Apple Silicon, rather than rebuilding from scratch.&lt;/p&gt;
+
+&lt;p&gt;We show that our approach reaches near-expert level performance on Apple Silicon with 0.97x speedup compared to the native MLX Attention kernel, and up to a 20x prefill speedup over the community mlx-lm implementation on the Mamba SSM kernel; we report the numbers, and how much of the gain comes from the translation layer, in the sections below. Although we focus on MLX kernels for Apple Silicon, the method is not specific to MLX and applies to any ecosystem where CUDA expertise is transferable.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-mlx&quot;&gt;Why MLX?&lt;/h2&gt;
+
+&lt;p&gt;Apple’s MLX framework has seen remarkable adoption since late 2023. With Apple Silicon in hundreds of millions of MacBooks and Mac Studios, MLX enables local AI inference without cloud costs. The unified memory architecture makes it especially attractive for mid-sized models (7B–70B parameters on M series chips).&lt;/p&gt;
+
+&lt;p&gt;Yet beneath this momentum lies a significant gap: many performance-critical kernels that the NVIDIA ecosystem takes for granted: paged attention, optimized SSM scan kernels, fused MoE routing are either absent or naive without hardware-specific tuning. MLX runs models correctly but often leaves significant performance on the table.&lt;/p&gt;
+
+&lt;p&gt;This gap is what motivates the rest of this post.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-k-search&quot;&gt;What is K-Search?&lt;/h2&gt;
+
+&lt;p&gt;K-Search is an evolutionary kernel optimization framework originally developed by our first author Shiyi Cao at UC Berkeley Sky Lab. Given a naive kernel and a hardware specification, it runs an iterative optimization loop: an LLM reasons about which optimizations to try next, a code-writing model generates candidate kernels, and those candidates are compiled and benchmarked on real hardware.&lt;/p&gt;
+
+&lt;p&gt;Measurements feed back into the search, which keeps refining, pursuing promising directions and dropping dead ends until performance converges.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/algorithm-01-k-search.svg&quot; alt=&quot;Pseudocode for K-Search via co-evolving world models&quot; width=&quot;460&quot; /&gt;&lt;br /&gt;
+&lt;/p&gt;
+
+&lt;p class=&quot;cuda-mlx-fig-caption&quot;&gt;&lt;strong&gt;Algorithm 1: K-Search via co-evolving world models.&lt;/strong&gt; The search alternates between selecting the most promising action, instantiating and evaluating code until improvement stagnates, and evolving the world model through insert, update, and prune operations. Adapted from &lt;a href=&quot;https://arxiv.org/abs/2602.19128&quot;&gt;Cao et al. (2026)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Search is grounded by a Spec: a domain-specific document encoding hardware rules, optimization patterns, and mathematical constraints which keeps generated code from hallucinating invalid primitives and ensures candidates will actually compile and run efficiently.&lt;/p&gt;
+
+&lt;p&gt;In our runs, a single model (Gemini 3.5 Pro Preview) plays both roles: it maintains the reasoning state and writes the kernels. The reasoning half is prompted as a “GPU kernel performance engineer” and asked to work through a fixed analysis before proposing anything: classify the kernel (reduction, scan, attention/softmax, …), rewrite the reference computation in canonical form, map out data layout and access patterns, and hypothesize the likely bottleneck (bandwidth, latency, compute, or synchronization) in each runtime regime. Only then does it emit candidate optimizations, each as a single change implementable in one iteration.&lt;/p&gt;
+
+&lt;p&gt;We call the persistent reasoning state a &lt;em&gt;world model&lt;/em&gt;. Rather than a flat list of things to try, it is a decision (prefix) tree: each root→leaf path composes a full optimization plan, and sibling branches are competing alternatives. Every node is scored — an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;overall_rating&lt;/code&gt; in [0, 10], a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;confidence&lt;/code&gt; in [0, 1], and per-node &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;impacts&lt;/code&gt; on memory bandwidth, register pressure, and compute/hardware fit — so the search can rank partial plans and expand the most promising ones. The tree persists and grows across rounds: refining an idea adds a child node rather than overwriting its parent, and if the best score fails to improve for a few rounds (a stagnation window) the search backs off to explore an alternative branch. A single node, as it appears mid-run on the attention kernel, looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;post-code-compact&quot;&gt;
+
+  &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;action&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Replace the threadgroup-memory softmax reduction
+             with a register-only reduction: each SIMD group
+             owns 8 query rows and reduces across lanes with
+             simd_shuffle_xor, removing a threadgroup_barrier.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;difficulty_1_to_5&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;impacts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;memory_bandwidth&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;register_pressure&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;risk:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;spill&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Br&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;compute_hw_fit&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;SIMD&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;keep&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;tile&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;overall_rating_0_to_10&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;confidence_0_to_1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;p class=&quot;cuda-mlx-fig-caption&quot;&gt;&lt;strong&gt;Listing 1: Example K-Search world-model node.&lt;/strong&gt; Each candidate optimization records a concrete action, estimated hardware impacts, an overall priority rating, and the model&apos;s confidence.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/best-figure-01-ksearch-loop.svg&quot; alt=&quot;Overview of the K-Search loop&quot; width=&quot;700&quot; /&gt;&lt;br /&gt;
+&lt;/p&gt;
+
+&lt;p class=&quot;cuda-mlx-fig-caption&quot;&gt;&lt;strong&gt;Figure 2: Overview of K-Search.&lt;/strong&gt; The framework operates on a &lt;strong&gt;Search State&lt;/strong&gt; $S_t$ structured as a search tree. The tree consists of Closed nodes (blue, visited states with attached program like $x_{12}$) and a Frontier of Open nodes (orange, pending hypotheses like $u_{13}$). The workflow iterates through three phases: (1) &lt;strong&gt;Action Selection&lt;/strong&gt;, where the most promising action node is retrieved from the frontier based on world model estimated priority score $V$; (2) &lt;strong&gt;Local Refinement&lt;/strong&gt;, where a stochastic policy $\pi_{\mathrm{code}}$ samples concrete implementations until stagnation; and (3) &lt;strong&gt;World Model Update&lt;/strong&gt;, where the LLM reasons over the trajectory to update the search tree via &lt;em&gt;Insert&lt;/em&gt; (adding new actions), &lt;em&gt;Update&lt;/em&gt; (adjusting $V$, e.g., $u_{11}$ dropping from 0.9 to 0.6), and &lt;em&gt;Prune&lt;/em&gt; (removing less promising nodes like $u_{10}$).&lt;/p&gt;
+
+&lt;p&gt;The original K-Search paper evaluated this search strategy on CUDA kernels from FlashInfer. Across GQA decode, MLA decode, MLA prefill, and MoE, K-Search improved more consistently than OpenEvolve and ShinkaEvolve over the same 120-iteration budget. These results establish the search framework we build on here; the remainder of this post asks whether its optimization knowledge can transfer beyond CUDA.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/best-figure-03-ksearch-main-results.svg&quot; alt=&quot;K-Search benchmark results compared with OpenEvolve and ShinkaEvolve&quot; width=&quot;900&quot; /&gt;&lt;br /&gt;
+&lt;/p&gt;
+
+&lt;p class=&quot;cuda-mlx-fig-caption&quot;&gt;&lt;strong&gt;Figure 3: Main results from the original K-Search paper.&lt;/strong&gt; Across three runs, K-Search achieves stronger best-so-far search scores, per-workload kernel performance, and speedup distributions than OpenEvolve and ShinkaEvolve on four FlashInfer CUDA kernels. Reproduced exactly from &lt;a href=&quot;https://arxiv.org/abs/2602.19128&quot;&gt;Cao et al. (2026)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;building-an-mlx-backend&quot;&gt;Building an MLX backend&lt;/h2&gt;
+
+&lt;p&gt;To bring K-Search to Apple Silicon, we first built a native MLX backend. We implemented a full MLX-specific task adapter for K-Search, including:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;An MLX task backend in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;k_search/tasks/&lt;/code&gt; handling kernel compilation and execution on Apple Silicon via MLX’s Metal/C++ APIs.&lt;/li&gt;
+  &lt;li&gt;Updated kernel generator prompts for writing and modifying Metal/MLX kernels.&lt;/li&gt;
+  &lt;li&gt;MLX-specific benchmarking integration using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mlx.core&lt;/code&gt; measurement utilities.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;translating-cuda-expertise-to-mlx&quot;&gt;Translating CUDA expertise to MLX&lt;/h2&gt;
+
+&lt;p&gt;However, the more interesting challenge was not simply running K-Search on MLX. The key insight is that expert CUDA kernels encode decades of optimization knowledge that is transferable to Apple GPU if you can bridge the conceptual gap. Simply handing an LLM a CUDA kernel and asking it to port it is not enough: without deep hardware context, it produces code that is syntactically valid but architecturally wrong (wrong tile sizes, invalid primitives, mismatched memory assumptions).&lt;/p&gt;
+
+&lt;p&gt;Our translation layer consists of:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Concept mapping tables:&lt;/strong&gt; A structured glossary of CUDA primitives and their MLX/Metal equivalents with hard constraints. For example:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__shared__&lt;/code&gt; maps to Metal &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;threadgroup&lt;/code&gt; memory but with a hard 32 KB limit (vs. NVIDIA’s 48 KB)&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;warp_reduce&lt;/code&gt; maps to MMA (preferred)&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__syncthreads()&lt;/code&gt; becomes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;threadgroup_barrier(mem_flags::mem_tg)&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;H100’s ~3.35 TB/s HBM3 maps to M3 Max’s ~400 GB/s unified DRAM a bandwidth difference that reshapes which optimizations are worth pursuing.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;MLX-specific hints and patterns:&lt;/strong&gt; Concrete code-level patterns for operations with no direct CUDA equivalent, such as register-based row reductions using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;simd_shuffle_xor&lt;/code&gt; in an 8×8 MMA tile layout, or the “exp2 trick” (replacing $exp(x)$ with $exp_2(x \log_2 e)$) for faster softmax on Apple’s fast $exp_2$ hardware instruction.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reusable assertions:&lt;/strong&gt; Expert kernel behaviors reframed as properties the evolutionary search must preserve, rather than code to copy.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;matching-expert-kernel-performance-the-attention-kernel&quot;&gt;Matching expert kernel performance: the Attention kernel&lt;/h2&gt;
+
+&lt;p&gt;We evaluate three configurations of an MLX attention kernel for Apple Silicon: (1) a naive baseline, (2) pure evolution with no additional provided context, and (3) a full context translation layer, which supplies the optimizer with architecture-specific implementation knowledge extracted from high-performance kernels (e.g., FlashAttention-2), letting the evolutionary search reason about implementation strategies rather than starting from a naive kernel. Together, these three configurations let us isolate the exact impact of the translation layer.&lt;/p&gt;
+
+&lt;p class=&quot;center&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/cuda-to-mlx-k-search/best-figure-02-attention-optimizations.svg&quot; alt=&quot;Performance scaling of the Attention Kernel through stacked optimizations&quot; width=&quot;700&quot; /&gt;&lt;br /&gt;
+&lt;/p&gt;
+
+&lt;p class=&quot;cuda-mlx-fig-caption&quot;&gt;&lt;strong&gt;Figure 4:&lt;/strong&gt; Performance scaling of the Attention Kernel through stacked optimizations. The &quot;Full Context&quot; configuration successfully discovers and implements advanced strategies like double buffering and loop unrolling, achieving near-expert performance.&lt;/p&gt;
+
+&lt;p&gt;The jump from 0.26× to 0.97× the speed of Apple’s state-of-the-art attention kernel — illustrates how much the translation layer matters. With full context, the evolved kernel independently discovers the key optimizations in FlashAttention 2: threadgroup memory tiling, online softmax, K-transposition for memory access, and the exp2 trick. The last of these replaces every softmax exponential with a base-2 exponential,&lt;/p&gt;
+
+\[e^x = 2^{x \log_2 e},\]
+
+&lt;p&gt;which is exact and lets the kernel use Apple’s fast &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fast::exp2()&lt;/code&gt; hardware instruction directly instead of paying for a base conversion at runtime.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-20-faster-prefill-the-mamba-ssm-kernel&quot;&gt;A 20× faster prefill: the Mamba SSM kernel&lt;/h2&gt;
+
+&lt;p&gt;To evaluate whether K-Search generalizes beyond attention kernels, we applied it to the state-space model (SSM) kernel used by Mamba. Unlike attention, the computational bottleneck is a recurrent state update rather than a softmax, providing a substantially different optimization challenge. We compare the evolved implementation against the community MLX implementation (mlx-lm) and the PyTorch reference implementation (mamba.py) on an M1 Max.&lt;/p&gt;
+
+&lt;p&gt;Evaluated on mamba-370m f16, M1 Max 64GB:&lt;/p&gt;
+
+&lt;div class=&quot;cuda-mlx-results-table&quot;&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Metric&lt;/th&gt;
+        &lt;th&gt;mlx-mamba (ours)&lt;/th&gt;
+        &lt;th&gt;mlx-lm (community)&lt;/th&gt;
+        &lt;th&gt;mamba.py&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Decode&lt;/td&gt;
+        &lt;td&gt;152 tok/s&lt;/td&gt;
+        &lt;td&gt;116 tok/s&lt;/td&gt;
+        &lt;td&gt;40 tok/s&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Prefill L=512&lt;/td&gt;
+        &lt;td&gt;5,751 tok/s&lt;/td&gt;
+        &lt;td&gt;329 tok/s&lt;/td&gt;
+        &lt;td&gt;1,089 tok/s&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Prefill L=1024&lt;/td&gt;
+        &lt;td&gt;6,010 tok/s&lt;/td&gt;
+        &lt;td&gt;327 tok/s&lt;/td&gt;
+        &lt;td&gt;1,127 tok/s&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Prefill L=2048&lt;/td&gt;
+        &lt;td&gt;6,612 tok/s&lt;/td&gt;
+        &lt;td&gt;326 tok/s&lt;/td&gt;
+        &lt;td&gt;1,092 tok/s&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Prefill L=4096&lt;/td&gt;
+        &lt;td&gt;6,743 tok/s&lt;/td&gt;
+        &lt;td&gt;339 tok/s&lt;/td&gt;
+        &lt;td&gt;1,042 tok/s&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+&lt;/div&gt;
+
+&lt;p class=&quot;cuda-mlx-fig-caption&quot;&gt;&lt;strong&gt;Table 1:&lt;/strong&gt; Prefill and decode throughput on mamba-370m (f16, M1 Max 64GB). mlx-mamba (ours) reaches ~20× higher prefill throughput than the community mlx-lm baseline, while decode remains comparable.&lt;/p&gt;
+
+&lt;p&gt;The ~20× prefill speedup over mlx-lm comes down to one difference: mlx-lm does not implement a parallel scan for the SSM. The state recurrence&lt;/p&gt;
+
+\[h_t = \bar{a}_t h_{t-1} + \bar{b}_t\]
+
+&lt;p&gt;looks inherently sequential, but each step can be written as a pair $(\bar{a}_t, \bar{b}_t)$ under the associative combine&lt;/p&gt;
+
+\[(a_2, b_2) \circ (a_1, b_1) = \left(a_2 a_1,\ a_2 b_1 + b_2\right),\]
+
+&lt;p&gt;which reproduces the recurrence exactly. Because the operator is associative, the whole sequence can be evaluated with a parallel (prefix) scan in $O(\log N)$ dependent steps instead of $O(N)$. mlx-lm skips this and processes tokens one at a time, leaving most of Apple Silicon’s compute idle; our evolved Metal kernel applies the scan and makes much fuller use of GPU throughput. The gain shows up in prefill, where the full sequence is available to scan in parallel, and not in single-token decode, where there is only one new token per step and no scan to parallelize — which is why the decode row is roughly flat while prefill is ~20×.&lt;/p&gt;
+
+&lt;p&gt;mamba.py is slow on both prefill and decode because it is a PyTorch reference implementation that falls back to CPU or MPS on Apple Silicon, forgoing the hardware-specific optimizations that MLX’s Metal backend makes possible.&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h2&gt;
+
+&lt;p&gt;On the two kernels we studied, AI-driven evolutionary kernel search grounded in structured cross-platform translation knowledge reached near-expert performance on Apple Silicon without a team of GPU experts starting from scratch. We do not yet know how far this generalizes, but the result is encouraging.&lt;/p&gt;
+
+&lt;p&gt;For us the main takeaway is that the bottleneck was not the LLM’s ability to write Metal code, but the quality of the context and constraints we gave it. Our CUDA translation layer converts existing NVIDIA kernel expertise into actionable guidance for Apple Silicon, and lets K-Search’s evolutionary search do the rest.&lt;/p&gt;
+
+&lt;p&gt;We are actively extending this work in several directions: supporting new architectures, with current efforts focused on developing new kernels for the IBM Spyre AIU and broader hardware targets; adding more kernels such as paged attention and fused MoE routing; and improving integration with the K-Search evolution loop to make translation context even more automatic.&lt;/p&gt;
+
+&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h2&gt;
+
+&lt;p&gt;This work was carried out by IBM Research and builds on K-Search from the UC Berkeley Sky Lab (&lt;a href=&quot;https://arxiv.org/abs/2602.19128&quot;&gt;Cao et al., 2026&lt;/a&gt;). We welcome collaboration and feedback from the MLX and broader AI systems communities. If you are working on kernel optimization for non-CUDA hardware, we would love to hear from you.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;citation&quot;&gt;Citation&lt;/h2&gt;
+
+&lt;div class=&quot;language-bibtex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;@article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;cao2026k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{K-Search: LLM Kernel Generation via Co-Evolving Intrinsic World Model}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{Cao, Shiyi and Mao, Ziming and Gonzalez, Joseph E and Stoica, Ion}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;journal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{arXiv preprint arXiv:2602.19128}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{2026}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;post-appendix&quot;&gt;
+
+  &lt;h2 id=&quot;appendix-try-it-yourself&quot;&gt;Appendix: Try it yourself&lt;/h2&gt;
+
+  &lt;p&gt;The MLX backend is built on top of the open-source K-Search repo, so the results here can be reproduced directly. The steps are:&lt;/p&gt;
+
+  &lt;p&gt;1. Clone and install&lt;/p&gt;
+
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/caoshiyi/K-Search.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;K-Search
+
+uv pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;openai wandb
+uv pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;git+https://github.com/caoshiyi/flashinfer-bench-ksearch.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;2. Set your credentials&lt;/p&gt;
+
+  &lt;p&gt;Open the relevant script under scripts/ and set three variables at the top:&lt;/p&gt;
+
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;KSEARCH_ROOT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/K-Search
+&lt;span class=&quot;nv&quot;&gt;API_KEY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;your-llm-api-key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;3. Run kernel search&lt;/p&gt;
+
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Optimize Flash Attention on Apple Silicon (world-model mode)&lt;/span&gt;
+bash scripts/mac_flash_attention_wm.sh
+
+&lt;span class=&quot;c&quot;&gt;# Or a Mamba SSM kernel, e.g. the selective scan&lt;/span&gt;
+bash scripts/mamba_selective_scan_fwd_wm.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;Full CLI reference and documentation are in the README.&lt;/p&gt;
+
+&lt;/div&gt;
+</description>
+        <pubDate>Wed, 29 Jul 2026 02:00:00 -0700</pubDate>
+        <link>http://bair.berkeley.edu/blog/2026/07/29/cuda-to-mlx-k-search/</link>
+        <guid isPermaLink="true">http://bair.berkeley.edu/blog/2026/07/29/cuda-to-mlx-k-search/</guid>
+      </item>
+     
+    
+     
+      <item>
+        <title>Teaching LLMs to Update Beliefs for Efficient Long-Horizon Interaction</title>
+        <description>&lt;!-- twitter --&gt;
+&lt;meta name=&quot;twitter:title&quot; content=&quot;Teaching LLMs to Update Beliefs for Efficient Long-Horizon Interaction&quot; /&gt;
+
+&lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot; /&gt;
+
+&lt;meta name=&quot;twitter:image&quot; content=&quot;https://bair.berkeley.edu/static/blog/abbel/cover.png&quot; /&gt;
+
+&lt;meta name=&quot;keywords&quot; content=&quot;Long Horizon, LLM training, Summarization, Efficient Context Representation, Context Compression&quot; /&gt;
+
+&lt;meta name=&quot;description&quot; content=&quot;As task horizons grow, LLM contexts can’t scale forever. Self-summarization enables concise, interpretable contexts, but at a significant performance cost, especially for human assistance domains where high quality data is scarce, e.g., collaborative code generation. We address this with ABBEL: a framework that isolates and supervises the information content of summaries in the form of natural-language belief states.&quot; /&gt;
+
+&lt;meta name=&quot;author&quot; content=&quot;Jakob Bjorner, Aly Lidayan, Satvik Golechha, Kartik Goyal, Alane Suhr&quot; /&gt;
+
+&lt;style&gt;
+.abbel-fig {
+  display: block;
+  text-align: center;
+  margin: 2.4em 0;
+  line-height: 1.4;
+  max-width: 100%;
+}
+.abbel-fig img {
+  display: block;
+  margin: 0.65em auto 0;
+  height: auto;
+  max-width: 100%;
+}
+/* Image sizes; captions use a narrower measure below */
+.abbel-fig--wide img { width: 100%; max-width: 100%; }
+.abbel-fig--wide-90 img { width: 100%; max-width: 90%; }
+.abbel-fig--wide-lg img { width: 100%; max-width: 100%; }
+.abbel-fig--chart img { width: 100%; max-width: 82%; }
+.abbel-fig--chart-sm img { width: 100%; max-width: 64%; }
+.abbel-fig--portrait img { width: 50%; max-width: 520px; }
+.abbel-fig--equation img { width: 100%; max-width: 52%; }
+.abbel-fig--video {
+  width: 110%;
+  max-width: 110%;
+  margin-left: -5%;
+  margin-right: -5%;
+  box-sizing: border-box;
+}
+.abbel-fig--video .abbel-frames {
+  max-width: 100%;
+  width: 100%;
+}
+.abbel-frames {
+  margin: 0.65em auto 0;
+  max-width: 100%;
+  user-select: none;
+}
+.abbel-frames__stage {
+  position: relative;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  line-height: 0;
+  width: 100%;
+}
+.abbel-frames__stage img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.abbel-frames__hint {
+  position: absolute;
+  right: 0.55em;
+  bottom: 0.55em;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  font-size: 0.68em;
+  font-style: normal;
+  padding: 0.18em 0.5em;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.abbel-frames__stage:hover .abbel-frames__hint,
+.abbel-frames.is-paused .abbel-frames__hint {
+  opacity: 1;
+}
+.abbel-frames.is-playing .abbel-frames__hint {
+  opacity: 0;
+}
+.abbel-frames__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  margin-top: 0.35em;
+  flex-wrap: wrap;
+}
+.abbel-frames__controls button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #999;
+  font: inherit;
+  font-size: 0.78em;
+  padding: 0.15em 0.35em;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.abbel-frames__controls button:hover {
+  color: #666;
+  background: transparent;
+}
+.abbel-frames__controls button.abbel-frames__next,
+.abbel-frames__controls button.abbel-frames__prev {
+  color: #bbb;
+  font-weight: 400;
+}
+.abbel-frames__controls button.abbel-frames__next:hover,
+.abbel-frames__controls button.abbel-frames__prev:hover {
+  color: #999;
+}
+.abbel-frames__controls button#abbel-frames-play {
+  color: #777;
+  letter-spacing: 0.02em;
+}
+.abbel-frames__controls button[aria-pressed=&quot;true&quot;] {
+  background: transparent;
+  color: #555;
+  border-color: transparent;
+}
+.abbel-frames__meta {
+  font-size: 0.72em;
+  color: #bbb;
+  font-variant-numeric: tabular-nums;
+  min-width: 4em;
+  text-align: center;
+}
+.abbel-frames__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.25em;
+  margin-top: 0.25em;
+  flex-wrap: wrap;
+}
+.abbel-frames__dots button {
+  appearance: none;
+  width: 0.4em;
+  height: 0.4em;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+.abbel-frames__dots button[aria-current=&quot;true&quot;] {
+  background: #aaa;
+  border-color: #aaa;
+}
+.abbel-fig .abbel-fig-cap,
+i.abbel-fig-cap {
+  display: block;
+  text-align: center;
+  font-style: italic;
+  color: #444;
+  margin: 2.7em auto 0.15em;
+  max-width: 38em;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 0.5em;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+.abbel-fig .abbel-fig-cap sub,
+.abbel-fig .abbel-fig-cap sup,
+i.abbel-fig-cap sub,
+i.abbel-fig-cap sup {
+  font-size: 0.75em;
+  line-height: 0;
+}
+.abbel-fig--tight .abbel-fig-cap {
+  margin-top: 0.9em; /* ~1/3 of default figure→caption gap */
+}
+.abbel-fig--equation .abbel-fig-cap {
+  margin-top: 1.35em; /* half of default 2.7em figure→caption gap */
+}
+.abbel-fig--chart-sm .abbel-fig-cap {
+  margin-top: 1.35em; /* one line less than default 2.7em */
+}
+
+
+
+@media screen and (max-width: 40em) {
+  .abbel-fig--wide img,
+  .abbel-fig--wide-lg img,
+  .abbel-fig--wide-90 img,
+  .abbel-fig--chart img,
+  .abbel-fig--chart-sm img { max-width: 100%; }
+  .abbel-fig--equation img { max-width: 75%; }
+  .abbel-fig--portrait img { max-width: 50%; }
+  .abbel-fig--video {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .abbel-fig--video .abbel-frames { max-width: 100%; }
+  .abbel-fig .abbel-fig-cap { max-width: 100%; }
+}
+.abbel-footnotes {
+  font-size: 0.8em;
+  color: #888;
+  font-style: italic;
+  margin: 1.5em 0;
+}
+.abbel-footnotes ol {
+  padding-left: 1.25em;
+  margin: 0.4em 0 0;
+}
+.abbel-footnotes li {
+  margin: 0.55em 0;
+}
+.abbel-footnotes p {
+  margin: 0.2em 0;
+}
+.abbel-footnotes a {
+  color: #888;
+}
+.abbel-table-wrap { overflow-x: auto; margin: 0.5em auto 0; text-align: center; }
+.abbel-fig--table { margin: 2.4em 0; }
+.abbel-fig--table .abbel-table-wrap { margin: 0.65em auto 0; }
+.abbel-table {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-size: 0.88em;
+  line-height: 1.35;
+}
+.abbel-table th,
+.abbel-table td {
+  padding: 0.5em 0.7em;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+}
+.abbel-table th {
+  border-bottom: 2px solid #333;
+  font-weight: 600;
+}
+.abbel-table th:first-child,
+.abbel-table td:first-child { text-align: left; }
+.abbel-table tr.abbel-baseline td { color: #888; font-style: italic; }
+.abbel-ack a {
+  color: #1565c0;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid #90caf9;
+  padding-bottom: 0.06em;
+}
+.abbel-ack a:hover {
+  color: #0d47a1;
+  border-bottom-color: #1565c0;
+}
+
+/* Suppress &quot;View on alphaXiv&quot; badges/tags (browser extension / userscript injectors) */
+a[href*=&quot;alphaxiv.org&quot;],
+a[href*=&quot;alphaXiv&quot;],
+[class*=&quot;alphaxiv&quot;],
+[class*=&quot;alphaXiv&quot;],
+[class*=&quot;AlphaXiv&quot;],
+[id*=&quot;alphaxiv&quot;],
+[id*=&quot;alphaXiv&quot;],
+[data-alphaxiv],
+[data-alpha-xiv],
+img[src*=&quot;alphaxiv&quot;],
+img[alt*=&quot;alphaXiv&quot; i],
+img[alt*=&quot;alphaxiv&quot; i],
+button[aria-label*=&quot;alphaXiv&quot; i],
+a[title*=&quot;alphaXiv&quot; i],
+a[aria-label*=&quot;alphaXiv&quot; i],
+span[title*=&quot;alphaXiv&quot; i] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* Section / subsection spacing (title → body, and gap before next section) */
+.post-content &gt; h2 {
+  margin-top: 2.6em;
+  margin-bottom: 0.75em;
+}
+.post-content &gt; h2:first-of-type {
+  margin-top: 1.6em;
+}
+.post-content &gt; h3 {
+  margin-top: 1.85em;
+  margin-bottom: 0.6em;
+}
+&lt;/style&gt;
+
+&lt;p class=&quot;abbel-fig abbel-fig--wide abbel-fig--tight&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/abbel/ABBEL%20main%20figure.png&quot; alt=&quot;ABBEL overview&quot; /&gt;
+&lt;i class=&quot;abbel-fig-cap&quot;&gt;Overview of ABBEL compared to traditional recursive summarization. Beliefs replace the full interaction history as the agent’s working context, and belief grading improves performance by
+supervising the contents of each belief state..&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;As task horizons grow, LLM contexts can’t scale forever. Self-summarization enables concise, interpretable contexts, but at a significant performance cost, especially for human assistance domains where high quality data is scarce, e.g., collaborative code generation. We address this with &lt;a href=&quot;https://arxiv.org/abs/2512.20111&quot;&gt;ABBEL&lt;/a&gt;: a framework that isolates and supervises the information content of summaries in the form of natural-language belief states.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;motivation-the-cost-of-recursive-summarization&quot;&gt;Motivation: the cost of recursive summarization&lt;/h2&gt;
+
+&lt;p&gt;For language models to effectively assist with increasingly complex tasks such as software development, they must be able to interact with us over hundreds or even thousands of steps. For such long tasks, it is impractical to keep the history of the entire interaction in context. The heuristic approach used so far has been summary generation, sometimes called context compaction. For example, Cursor’s latest model composer 2.5 uses compaction during training for improved performance (&lt;a href=&quot;https://cursor.com/blog/self-summarization&quot;&gt;Cassano et al., 2026&lt;/a&gt;). Alongside composer, Grandcode (&lt;a href=&quot;https://arxiv.org/abs/2604.02721&quot;&gt;DeepReinforce et al., 2026&lt;/a&gt;), the first system to consistently beat all human competitors in online coding competitions, despite using one of the newest efficient attention models (Qwen 3.5-397B),&lt;sup id=&quot;fnref:efficientattn&quot;&gt;&lt;a href=&quot;#fn:efficientattn&quot; class=&quot;footnote&quot;&gt;&lt;font size=&quot;-1&quot;&gt;1&lt;/font&gt;&lt;/a&gt;&lt;/sup&gt; still found it necessary to employ context summarization.&lt;/p&gt;
+
+&lt;p&gt;But compaction has a problem. Despite seemingly low performance gaps in benchmarks, model servers like Cursor continue to recommend that users avoid compaction with their coding assistants in the middle of a task (&lt;a href=&quot;https://cursor.com/blog/continually-improving-agent-harness&quot;&gt;Heule et al., 2026&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;To understand why, see below the performance over RL fine-tuning of a Context summary model compared to full context models in Combination Lock, a Wordle-like game that allows up to 16 guesses.&lt;sup id=&quot;fnref:wordlehard&quot;&gt;&lt;a href=&quot;#fn:wordlehard&quot; class=&quot;footnote&quot;&gt;&lt;font size=&quot;-1&quot;&gt;2&lt;/font&gt;&lt;/a&gt;&lt;/sup&gt; Though both model types improve over the course of training, the summary model never closes the gap.&lt;/p&gt;
+
+&lt;p class=&quot;abbel-fig abbel-fig--chart-sm&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/abbel/Average%20attempts%20to%20guess%20target%20word%20context%20summaries.png&quot; alt=&quot;Average attempts to guess target word with context summary vs full context policies over training&quot; /&gt;
+&lt;i class=&quot;abbel-fig-cap&quot;&gt;Fig. 1: Average attempts to guess the target word on Combination Lock over RL fine-tuning (lower is better). Context-summary policies improve with training but do not close the gap to full-context policies.&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Making models self-summarize while completing a task increases the complexity of the learning problem. While this could typically be addressed by training with more data, the performance degradation observed in real world interactive settings likely arises from the difficulty we have in creating and using human simulators effectively to generate high quality training environments (&lt;a href=&quot;https://jessylin.com/2025/07/10/user-simulators-1/&quot;&gt;Lin et al., 2025&lt;/a&gt;, &lt;a href=&quot;https://nickatomlin.github.io/blog/user-simulators-2.html&quot;&gt;Tomlin et al., 2025&lt;/a&gt;). Thus, the better you can learn to summarize on the limited and messy multiturn interaction trajectories you can collect, the better off your model will be for downstream users.&lt;/p&gt;
+
+&lt;h2 id=&quot;abbel-acting-through-belief-bottlenecks&quot;&gt;ABBEL: acting through belief bottlenecks&lt;/h2&gt;
+
+&lt;p class=&quot;abbel-fig abbel-fig--wide-90&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/abbel/ABBEL%20belief%20grading%20diagram.png&quot; alt=&quot;ABBEL belief grading diagram&quot; /&gt;
+&lt;i class=&quot;abbel-fig-cap&quot;&gt;Fig. 2: Autoencoder-inspired belief grading. The model encodes prior belief, action and observation (b&lt;sub&gt;t&lt;/sub&gt;, a&lt;sub&gt;t&lt;/sub&gt;, o&lt;sub&gt;t&lt;/sub&gt;) into posterior belief b&lt;sub&gt;t+1&lt;/sub&gt; and is rewarded for how well select information from the history can be reconstructed from that belief.&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;To address poor learning efficiency, we isolate the summary generation task. Drawing inspiration from recursive Bayesian estimation, we formulate summaries as belief states, which we periodically prompt the model to update based on new information.&lt;sup id=&quot;fnref:videoabbelslow&quot;&gt;&lt;a href=&quot;#fn:videoabbelslow&quot; class=&quot;footnote&quot;&gt;&lt;font size=&quot;-1&quot;&gt;3&lt;/font&gt;&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;div class=&quot;abbel-fig abbel-fig--video&quot;&gt;
+  &lt;div class=&quot;abbel-frames is-playing&quot; id=&quot;abbel-frames&quot; data-frame-count=&quot;16&quot; data-frame-prefix=&quot;https://bair.berkeley.edu/static/blog/abbel/frames/frame_&quot; data-interval=&quot;1300&quot;&gt;
+    &lt;div class=&quot;abbel-frames__stage&quot; role=&quot;button&quot; tabindex=&quot;0&quot; aria-label=&quot;Pause or advance ABBEL overview frame&quot;&gt;
+      &lt;img id=&quot;abbel-frames-img&quot; src=&quot;https://bair.berkeley.edu/static/blog/abbel/frames/frame_00.png&quot; alt=&quot;ABBEL overview animation frame&quot; /&gt;
+      &lt;!-- &lt;span class=&quot;abbel-frames__hint&quot;&gt;Click to pause&lt;/span&gt; --&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;abbel-frames__controls&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;abbel-frames__prev&quot; id=&quot;abbel-frames-prev&quot; aria-label=&quot;Previous frame&quot;&gt;‹ Prev&lt;/button&gt;
+      &lt;button type=&quot;button&quot; id=&quot;abbel-frames-play&quot; aria-pressed=&quot;true&quot; aria-label=&quot;Play or pause animation&quot;&gt;Pause&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;abbel-frames__next&quot; id=&quot;abbel-frames-next&quot; aria-label=&quot;Next frame&quot;&gt;Next ›&lt;/button&gt;
+      &lt;span class=&quot;abbel-frames__meta&quot; id=&quot;abbel-frames-meta&quot;&gt;1 / 16&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;abbel-frames__dots&quot; id=&quot;abbel-frames-dots&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;i class=&quot;abbel-fig-cap&quot;&gt;Fig. 3: ABBEL rollout. Belief updates from the latest observation alternate with action selection conditioned only on the current posterior belief.&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;belief-grading&quot;&gt;Belief grading&lt;/h3&gt;
+
+&lt;p&gt;We then extract and supervise the contents of the belief states (Fig. 2, Belief Grading). Belief grading can be thought of as adding an auxiliary RL task, using heuristics designed to capture what makes a good belief as the reward. An example heuristic for coding could be shorter is better, but closer to being able to reconstruct the git diff is also better, so balancing these would yield a good belief. In domains where good heuristics are hard to define, we propose a general autoencoding-inspired grading function, which treats the current language model π&lt;sub&gt;θ&lt;/sub&gt; as both encoder and decoder of information from
+the history, and the belief states as the codes. We grade each belief b&lt;sub&gt;t+1&lt;/sub&gt; by how well it can be used by the current model π&lt;sub&gt;θ&lt;/sub&gt; to reconstruct the most recent observation o&lt;sub&gt;t&lt;/sub&gt;:&lt;/p&gt;
+
+&lt;p class=&quot;abbel-fig abbel-fig--equation&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/abbel/Belief%20grading%20equation.png&quot; alt=&quot;Eq. 1: Reconstruction grading objective&quot; /&gt;
+&lt;i class=&quot;abbel-fig-cap&quot;&gt;Eq. 1: Reconstruction grading objective. Here b&lt;sub&gt;t+1&lt;/sub&gt; is the updated belief, o&lt;sub&gt;t&lt;/sub&gt; the latest observation, a&lt;sub&gt;t&lt;/sub&gt; the action just taken, b&lt;sub&gt;t&lt;/sub&gt; the prior belief, p&lt;sub&gt;I&lt;/sub&gt; the task prompt, and π&lt;sub&gt;θ&lt;/sub&gt; the current model. Higher grades reward beliefs that retain information needed to decode the latest observation.&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&quot;what-do-we-gain-by-grading-beliefs&quot;&gt;What do we gain by grading beliefs?&lt;/h2&gt;
+
+&lt;h3 id=&quot;collaborative-coding-on-collabbench&quot;&gt;Collaborative coding on CollabBench&lt;/h3&gt;
+
+&lt;p&gt;We demonstrate the utility of belief grading in our motivating domain of human-driven assistive coding, with the CollabBench environment from Sweet-RL (&lt;a href=&quot;https://arxiv.org/pdf/2503.15478&quot;&gt;Zhou et al., 2025&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p class=&quot;abbel-fig abbel-fig--portrait&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/abbel/Collabbench.png&quot; alt=&quot;CollabBench collaborative coding environment&quot; /&gt;
+&lt;i class=&quot;abbel-fig-cap&quot;&gt;Fig. 4: CollabBench collaborative coding environment. The agent asks clarifying questions, then submits a function scored against hidden unit tests.&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;We see that with the general reconstruction-based belief grading function we reduce the performance gap from full context models by about 50%, and train in 50% fewer steps compared to training models to summarize without belief grading (no BG). After training, ABBEL still uses significantly less memory than the full context setting, as measured by the peak context token length (Peak Tokens).&lt;/p&gt;
+
+&lt;div class=&quot;abbel-fig abbel-fig--table&quot;&gt;
+&lt;div class=&quot;abbel-table-wrap&quot;&gt;
+&lt;table class=&quot;abbel-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Model&lt;/th&gt;
+      &lt;th&gt;Test Pass Rate ↑&lt;/th&gt;
+      &lt;th&gt;Success Rate ↑&lt;/th&gt;
+      &lt;th&gt;Peak Tokens × 10² ↓&lt;/th&gt;
+      &lt;th&gt;Training Steps ↓&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr class=&quot;abbel-baseline&quot;&gt;
+      &lt;td&gt;Full Context&lt;/td&gt;
+      &lt;td&gt;0.52±0.02&lt;/td&gt;
+      &lt;td&gt;0.39±0.02&lt;/td&gt;
+      &lt;td&gt;14.08±0.55&lt;/td&gt;
+      &lt;td&gt;100&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ABBEL (no BG)&lt;/td&gt;
+      &lt;td&gt;0.46±0.02&lt;/td&gt;
+      &lt;td&gt;0.31±0.02&lt;/td&gt;
+      &lt;td&gt;4.20±0.37&lt;/td&gt;
+      &lt;td&gt;100&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ABBEL-rec-BG&lt;/td&gt;
+      &lt;td&gt;0.48±0.01&lt;/td&gt;
+      &lt;td&gt;0.36±0.01&lt;/td&gt;
+      &lt;td&gt;6.01±0.33&lt;/td&gt;
+      &lt;td&gt;50&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;i class=&quot;abbel-fig-cap&quot;&gt;Fig. 5: CollabBench results. With reconstruction belief grading, ABBEL-rec-BG recovers about half the gap to full context while using fewer peak tokens, and trains in 50 steps instead of 100.&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;combination-lock&quot;&gt;Combination Lock&lt;/h3&gt;
+
+&lt;p&gt;Additionally, in CombinationLock, we demonstrate that ABBEL with a belief grader which leverages domain knowledge (by computing useful statistics over the history and checking that they can be reconstructed from the belief state), enables even higher learning efficiency than full context (FULL CTX) models.&lt;/p&gt;
+
+&lt;p class=&quot;abbel-fig abbel-fig--chart-sm&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/abbel/Average%20Attempts%20to%20guess%20target%20word%20ABBEL.png&quot; alt=&quot;Average Attempts to guess target word ABBEL&quot; /&gt;
+&lt;i class=&quot;abbel-fig-cap&quot;&gt;Fig. 6: Average attempts to guess the target word on Combination Lock (lower is better). With domain-knowledge belief grading, ABBEL approaches or exceeds FULL CTX in this setting; without belief grading, learning is slower.&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-objective-question-answering&quot;&gt;Multi-objective question answering&lt;/h3&gt;
+
+&lt;p&gt;In a third environment, multi-objective question answering (from MEM1 &lt;a href=&quot;https://arxiv.org/pdf/2512.24601&quot;&gt;Zhang et al., 2025&lt;/a&gt;, a recent work which performed end-to-end optimization in a modified version of typical recursive summarization), we demonstrate the utility of isolating belief states from reasoning, by showing that a Peak Belief length Penalty (more details in paper) significantly reduces memory usage with minimal performance degradation, unlike is commonly observed when penalizing reasoning lengths (&lt;a href=&quot;https://proceedings.neurips.cc/paper_files/paper/2025/file/579b5b84311e122584dedab1d3b7613f-Paper-Conference.pdf&quot;&gt;Arora et al., 2025&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p class=&quot;abbel-fig abbel-fig--wide-lg&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/abbel/Performance%20and%20memory%20usage%20in%20multi%20QA.png&quot; alt=&quot;Performance and memory usage in multi QA&quot; /&gt;
+&lt;i class=&quot;abbel-fig-cap&quot;&gt;Fig. 7: Exact-match score and peak memory versus number of objectives in multi-objective QA. ABBEL with a peak belief penalty (PBP) maintains comparable performance while using less memory than MEM1 and ABBEL without PBP in this evaluation.&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&quot;related-work&quot;&gt;Related work&lt;/h2&gt;
+&lt;p&gt;Alternative solutions to managing long contexts involve different tradeoffs, and are worth considering depending on the requirements of a deployed system. Context compression methods generate dense representations which, while computationally efficient, sacrifice human-understandability (&lt;a href=&quot;https://arxiv.org/abs/2604.09852&quot;&gt;Kontonis et al., 2026&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/pdf/2506.06266&quot;&gt;Eyuboglu et al., 2025&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/pdf/2510.19732&quot;&gt;Gupta et al., 2025&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/pdf/2305.14788&quot;&gt;Chevalier et al., 2023&lt;/a&gt;, &lt;a href=&quot;https://aclanthology.org/2025.acl-long.241.pdf&quot;&gt;Deng et al., 2025&lt;/a&gt;, &lt;a href=&quot;https://proceedings.neurips.cc/paper_files/paper/2025/file/1c93b738747776f9d3fdd077a5a07114-Paper-Conference.pdf&quot;&gt;Deng et al., 2025&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/2207.06881&quot;&gt;Bulatov et al., 2022&lt;/a&gt;). Hand-designed summarization prompts (&lt;a href=&quot;https://arxiv.org/pdf/2407.16741&quot;&gt;Wang et al., 2025&lt;/a&gt;, &lt;a href=&quot;https://github.com/aorwall/moatless-tools&quot;&gt;Örwall et al., 2025&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/pdf/2504.01848&quot;&gt;Starace et al., 2025&lt;/a&gt;) and pruning strategies (&lt;a href=&quot;https://arxiv.org/pdf/2310.06839&quot;&gt;Jiang et al., 2024&lt;/a&gt;) specific to target environments require expert human knowledge and don’t allow an agent to learn what to remember as part of its decision-making strategy. Methods that process long contexts into an external memory store (&lt;a href=&quot;https://arxiv.org/pdf/2310.08560&quot;&gt;Packer et al., 2023&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/pdf/2502.12110&quot;&gt;Xu et al., 2025&lt;/a&gt;) for the agents or subagents to query (&lt;a href=&quot;https://arxiv.org/pdf/2512.24601&quot;&gt;Zhang et al., 2025&lt;/a&gt;) are complementary, as they may benefit from better next context creation through summarization training. We would like to point out some exciting works in the space of general recursive summarization focused on math (&lt;a href=&quot;https://arxiv.org/pdf/2602.03773&quot;&gt;Wu et al., 2026&lt;/a&gt;), reasoning with belief generation (&lt;a href=&quot;https://arxiv.org/pdf/2506.15841&quot;&gt;Zhou et al., 2025&lt;/a&gt;), competitive coding with a distilled summarization module using similar autoencoding objectives to our general belief grader (&lt;a href=&quot;https://arxiv.org/abs/2604.02721&quot;&gt;DeepReinforce et al., 2026&lt;/a&gt;), and adding continuous features to summaries (&lt;a href=&quot;https://arxiv.org/abs/2604.09852&quot;&gt;Kontonis et al., 2026&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-next-for-better-memory&quot;&gt;What’s next for better memory?&lt;/h2&gt;
+&lt;p&gt;Many more possibilities are enabled through using explicit belief states as information bottlenecks for multi-step interaction. You could reward actions based on their effect on the belief state to guide exploration, transmit the explicit belief states for better communication between agents, or even improve user controllability by directly modifying the memories on which the agents’ decisions are based.&lt;/p&gt;
+
+&lt;p&gt;Some forms of information, e.g., what a person looks like, are not represented well by text alone. A continuously learning system will also have to capture such information. Additionally, if we want a system to learn to communicate in a brand new language or to play a brand new game better than any person in the world, the skills accumulated over the lifetime of conversations or games must be stored in a very compressed form, essentially taking on the role of the weights of the model itself.&lt;/p&gt;
+
+&lt;p&gt;More powerful systems will likely utilize a combination of multiple forms of memory, where the contents of the context may correspond to working memory while other approaches are used for short and long-term memory. How to instantiate these other forms of memory, for instance via test-time training, adapter memories, continuous context memories, or some combination thereof, presents an exciting challenge.&lt;/p&gt;
+
+&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h2&gt;
+
+&lt;div class=&quot;abbel-ack&quot;&gt;
+
+Acknowledgements: We would like to thank &lt;a href=&quot;https://www.alanesuhr.com/&quot;&gt;Alane Suhr&lt;/a&gt; and &lt;a href=&quot;https://kartikgo.github.io/&quot;&gt;Kartik Goyal&lt;/a&gt; for advising this research as well as &lt;a href=&quot;https://ethanm88.github.io/&quot;&gt;Ethan Mendes&lt;/a&gt;, &lt;a href=&quot;https://davidhe137.github.io/&quot;&gt;David He&lt;/a&gt;, &lt;a href=&quot;https://praeclarumjj3.github.io/&quot;&gt;Jitesh Jain&lt;/a&gt;, and &lt;a href=&quot;https://nickatomlin.github.io/&quot;&gt;Nicholas Tomlin&lt;/a&gt; for comments on early drafts of this post. We would like to thank the MEM1 authors for their email correspondence and for sharing private reviewer feedback which we found particularly insightful.
+
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;citation&quot;&gt;Citation&lt;/h2&gt;
+
+&lt;p&gt;If abbel was inspiring for your future work, please cite us with this! And here is some &lt;a href=&quot;https://jakob-bjorner.github.io/abbel-advice.html&quot;&gt;advice&lt;/a&gt; for doing similar research!&lt;/p&gt;
+&lt;div class=&quot;language-bibtex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;@misc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;lidayan2026abbellearningnaturallanguagebelief&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{ABBEL: Learning Natural-Language Belief States for Memory-Efficient Interaction}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      &lt;span class=&quot;na&quot;&gt;author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{Aly Lidayan and Jakob Bjorner and Satvik Golechha and Kartik Goyal and Alane Suhr}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{2026}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;eprint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{2512.20111}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;archivePrefix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{arXiv}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;primaryClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{cs.CL}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{https://arxiv.org/abs/2512.20111}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes abbel-footnotes&quot; style=&quot;font-size: 0.8em; color: #888; font-style: italic; margin: 1em 0;&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:efficientattn&quot;&gt;
+      &lt;p&gt;
+        With newer models the number of tokens till 50% compute spend is on attention gets much larger than 25K. Interleaving linear attention alternatives with full attention as is done with gpt-oss and DeepSeekv4, results in massive flops reductions for the attention computation. For example with DeepSeekv4-Pro (1.6T A49B) it requires nearly 450 thousand tokens to reach the 50% tradeoff point. Grandcode uses Qwen-3.5-397B-A17B a model which hits 50% FLOPs for attention at ~150 thousand tokens.
+        &lt;a href=&quot;#fnref:efficientattn&quot; class=&quot;reversefootnote&quot;&gt;↩&lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:wordlehard&quot;&gt;
+      &lt;p&gt;
+        This setting is technically solvable with much more computationally effective tools, but serves as a flexible test bed to study properties of recursive summarization. &lt;a href=&quot;https://wordle-page.s3.amazonaws.com/assets/Wordle_Paper_Final.pdf&quot;&gt;Bertsimas et al., 2022&lt;/a&gt;, showed that an exact solution for the wordle game instantiated with the original vocabulary of the javascript game can be found with dynamic programming, but evidently the general formulation of wordle as a guessing game on K letters with L attempts and some dictionary of valid words and correct words D is NP hard to determine the minimal number of moves required.
+        &lt;a href=&quot;#fnref:wordlehard&quot; class=&quot;reversefootnote&quot;&gt;↩&lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:videoabbelslow&quot;&gt;
+      &lt;p&gt;
+        In practice there is an O(N/K) overhead cost for summary. N is the total number of actions. K is the number of actions till summarization is triggered. This is necessarily true for any summary approach. For ease of illustration this gif uses K = 1. In our experiments, to put more emphasis on summarization weaknesses we also use K=1. In practice overhead is small as K can be chosen to be near the efficient hardware limit.
+        &lt;a href=&quot;#fnref:videoabbelslow&quot; class=&quot;reversefootnote&quot;&gt;↩&lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;script&gt;
+(function () {
+  var root = document.getElementById(&apos;abbel-frames&apos;);
+  if (!root) return;
+  var count = parseInt(root.getAttribute(&apos;data-frame-count&apos;) || &apos;15&apos;, 10);
+  var prefix = root.getAttribute(&apos;data-frame-prefix&apos;) || &apos;https://bair.berkeley.edu/static/blog/abbel/frames/frame_&apos;;
+  var intervalMs = parseInt(root.getAttribute(&apos;data-interval&apos;) || &apos;1300&apos;, 10);
+  var img = document.getElementById(&apos;abbel-frames-img&apos;);
+  var meta = document.getElementById(&apos;abbel-frames-meta&apos;);
+  var dots = document.getElementById(&apos;abbel-frames-dots&apos;);
+  var btnPrev = document.getElementById(&apos;abbel-frames-prev&apos;);
+  var btnNext = document.getElementById(&apos;abbel-frames-next&apos;);
+  var btnPlay = document.getElementById(&apos;abbel-frames-play&apos;);
+  var stage = root.querySelector(&apos;.abbel-frames__stage&apos;);
+  var hint = root.querySelector(&apos;.abbel-frames__hint&apos;);
+  var i = 0;
+  var playing = false;
+  var timer = null;
+  var urls = [];
+  for (var n = 0; n &lt; count; n++) {
+    urls.push(prefix + (n &lt; 10 ? &apos;0&apos; + n : &apos;&apos; + n) + &apos;.png&apos;);
+  }
+  urls.forEach(function (u) { var im = new Image(); im.src = u; });
+  if (dots) {
+    for (var d = 0; d &lt; count; d++) {
+      (function (idx) {
+        var b = document.createElement(&apos;button&apos;);
+        b.type = &apos;button&apos;;
+        b.setAttribute(&apos;aria-label&apos;, &apos;Go to frame &apos; + (idx + 1));
+        b.addEventListener(&apos;click&apos;, function (e) {
+          e.stopPropagation();
+          stop();
+          show(idx);
+        });
+        dots.appendChild(b);
+      })(d);
+    }
+  }
+  function setHint(text) {
+    if (hint) hint.textContent = text;
+  }
+  function show(idx) {
+    i = (idx + count) % count;
+    img.src = urls[i];
+    if (meta) meta.textContent = (i + 1) + &apos; / &apos; + count;
+    if (dots) {
+      var kids = dots.children;
+      for (var k = 0; k &lt; kids.length; k++) {
+        if (k === i) kids[k].setAttribute(&apos;aria-current&apos;, &apos;true&apos;);
+        else kids[k].removeAttribute(&apos;aria-current&apos;);
+      }
+    }
+  }
+  function stop() {
+    playing = false;
+    if (timer) { clearInterval(timer); timer = null; }
+    root.classList.remove(&apos;is-playing&apos;);
+    root.classList.add(&apos;is-paused&apos;);
+    if (btnPlay) {
+      btnPlay.textContent = &apos;Play&apos;;
+      btnPlay.setAttribute(&apos;aria-pressed&apos;, &apos;false&apos;);
+    }
+    //setHint(&apos;Click to advance&apos;); not pretty text, and functionality is clear already
+  }
+  function start() {
+    playing = true;
+    root.classList.add(&apos;is-playing&apos;);
+    root.classList.remove(&apos;is-paused&apos;);
+    if (btnPlay) {
+      btnPlay.textContent = &apos;Pause&apos;;
+      btnPlay.setAttribute(&apos;aria-pressed&apos;, &apos;true&apos;);
+    }
+    //setHint(&apos;Click to pause&apos;);
+    if (timer) clearInterval(timer);
+    timer = setInterval(function () { show(i + 1); }, intervalMs);
+  }
+  function advance() {
+    if (playing) { stop(); return; }
+    stop();
+    show(i + 1);
+  }
+  function back() { stop(); show(i - 1); }
+  if (stage) {
+    stage.addEventListener(&apos;click&apos;, advance);
+    stage.addEventListener(&apos;keydown&apos;, function (e) {
+      if (e.key === &apos;Enter&apos; || e.key === &apos; &apos;) { e.preventDefault(); advance(); }
+      if (e.key === &apos;ArrowRight&apos;) { e.preventDefault(); advance(); }
+      if (e.key === &apos;ArrowLeft&apos;) { e.preventDefault(); back(); }
+    });
+  }
+  if (btnNext) btnNext.addEventListener(&apos;click&apos;, function () { stop(); show(i + 1); });
+  if (btnPrev) btnPrev.addEventListener(&apos;click&apos;, back);
+  if (btnPlay) btnPlay.addEventListener(&apos;click&apos;, function () {
+    if (playing) stop(); else start();
+  });
+  show(0);
+  // Autoplay like a GIF: start once the first frame is ready, and again when scrolled into view
+  function kickoff() {
+    if (!playing) start();
+  }
+  if (img.complete) kickoff();
+  else img.addEventListener(&apos;load&apos;, kickoff, { once: true });
+  if (&apos;IntersectionObserver&apos; in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) kickoff();
+      });
+    }, { threshold: 0.35 });
+    io.observe(root);
+  }
+})();
+&lt;/script&gt;
+
+</description>
+        <pubDate>Sun, 26 Jul 2026 02:00:00 -0700</pubDate>
+        <link>http://bair.berkeley.edu/blog/2026/07/26/abbel/</link>
+        <guid isPermaLink="true">http://bair.berkeley.edu/blog/2026/07/26/abbel/</guid>
+      </item>
+     
+    
+     
+      <item>
+        <title>Intelligence is Free, Now What? &lt;br&gt; Data Systems for, of, and by Agents</title>
+        <description>&lt;!-- twitter --&gt;
+&lt;meta name=&quot;twitter:title&quot; content=&quot;Intelligence is Free, Now What? Data Systems for, of, and by Agents&quot; /&gt;
+
+&lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot; /&gt;
+
+&lt;meta name=&quot;twitter:image&quot; content=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/image6.png&quot; /&gt;
+
+&lt;meta name=&quot;keywords&quot; content=&quot;data systems, AI agents, agentic workloads, LLM inference cost, agent memory, query optimization, agent swarms, database systems&quot; /&gt;
+
+&lt;meta name=&quot;description&quot; content=&quot;As the cost of intelligence approaches zero, agents will become the dominant workload for data systems. We explore three challenges and opportunities: data systems for agents, of agents, and by agents.&quot; /&gt;
+
+&lt;meta name=&quot;author&quot; content=&quot;Aditya G. Parameswaran, Shubham Agarwal, Kerem Akillioglu, Shreya Shankar, Sepanta Zeighami, Rishabh Iyer, Matei Zaharia, Alvin Cheung, Natacha Crooks, Joseph Gonzalez, Joseph Hellerstein, Ion Stoica&quot; /&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;i&gt;... government of the people, by the people, for the people ...&lt;/i&gt;&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;mdash; Abraham Lincoln, Gettysburg Address (1863)
+&lt;/p&gt;
+
+&lt;p&gt;The cost of AI is dropping rapidly. GPT-4-class capabilities cost roughly &lt;span class=&quot;tex2jax_ignore&quot;&gt;$30&lt;/span&gt; per million tokens in early 2023; today the same runs under &lt;span class=&quot;tex2jax_ignore&quot;&gt;$1&lt;/span&gt;, and &lt;a href=&quot;https://zuplo.com/learning-center/the-10x-cheaper-ai-era-api-pricing-strategy-obsolete&quot;&gt;some providers are pushing costs below &lt;span class=&quot;tex2jax_ignore&quot;&gt;$0.10&lt;/span&gt;&lt;/a&gt;. Across benchmarks, &lt;a href=&quot;https://epochai.org/data-insights/llm-inference-price-trends&quot;&gt;inference prices have fallen between 9x and 900x per year&lt;/a&gt;, with a median decline near 50x. Even &lt;a href=&quot;https://tokenmix.ai/blog/ai-pricing-trends-history&quot;&gt;frontier models are getting dramatically cheaper&lt;/a&gt; each generation, with open-source models following closely behind. And crucially, even if “Nobel-Prize-winning genius-level” intelligence isn’t here yet, the intelligence that suffices for the vast majority of knowledge work is here today, and getting cheaper by the month. &lt;strong&gt;At this rate, we are soon entering the era of virtually free intelligence&lt;/strong&gt;—the kind that is more than enough for everyday knowledge work.&lt;/p&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/image6.png&quot; alt=&quot;A cartoon database character and an AI robot agent holding hands&quot; width=&quot;450&quot; /&gt;
+&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p style=&quot;font-size: 0.8em; color: #888; font-style: italic; margin: 1em 0;&quot;&gt;
+Disclosure: This post is a perspective led by &lt;a href=&quot;https://people.eecs.berkeley.edu/~adityagp/&quot;&gt;Aditya G. Parameswaran&lt;/a&gt;&amp;mdash;an Associate Professor of EECS and co-director of the EPIC Data Lab at UC Berkeley&amp;mdash;together with his collaborators. It is part landscape survey and part perspective, and several of the research directions discussed below (including agentic speculation, structured memory, and synthesizing custom data systems from scratch) draw on the authors&apos; own ongoing work.
+&lt;/p&gt;
+
+&lt;p&gt;So, what does this new era of near-free intelligence mean for data systems? We believe three new challenges—and opportunities—stem from near-zero inference costs:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Data Systems &lt;em&gt;For&lt;/em&gt; Agents.&lt;/strong&gt; Agents will soon become the dominant workload for data systems—with swarms of agents spun up in response to each end-user request. Given differences in characteristics between agents and humans—or applications acting on their behalf—&lt;em&gt;how should we redesign data systems for such agentic users?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Data Systems &lt;em&gt;Of&lt;/em&gt; Agents.&lt;/strong&gt; As agents start taking on the bulk of knowledge work, a new substrate is needed for thousands of agents to manage state over long-running tasks, coordinate and reach consensus, and deal with failures. &lt;em&gt;What do data systems that reliably and efficiently run and manage agent swarms look like?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Data Systems &lt;em&gt;By&lt;/em&gt; Agents.&lt;/strong&gt; Agents are rapidly becoming capable of synthesizing entire data systems in one go—meaning we can rebuild custom systems for each new workload. Verifying that such systems match intended behavior is a challenge. &lt;em&gt;What does it take to let agents synthesize data systems we can actually trust?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/for-of-by-agents.png&quot; alt=&quot;A database character and a robot agent holding up a triangle labeled &apos;of&apos;, &apos;for&apos;, and &apos;by&apos;&quot; width=&quot;500&quot; /&gt;&lt;br /&gt;
+&lt;i&gt;
+Data Systems For, Of, and By Agents
+&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Next, we will discuss each in more detail, followed by discussing the intertwined future of data systems and agents, especially as the three challenges intersect.&lt;/p&gt;
+
+&lt;h2 id=&quot;data-systems-for-agents&quot;&gt;Data Systems For Agents&lt;/h2&gt;
+
+&lt;p&gt;An agent querying a database doesn’t behave like a person or a BI tool. It performs what we call &lt;a href=&quot;https://arxiv.org/abs/2509.00997&quot;&gt;&lt;em&gt;agentic speculation&lt;/em&gt;&lt;/a&gt;: a high-volume, heterogeneous stream of work spanning schema introspection, columnar exploration, partial and then full query formulation. With multiple agents each exploring portions of the hypothesis space, each user request could amount to 1000s of individual SQL queries. Now, users can issue ‘high-level’ data tasks, e.g., root-cause analysis—e.g., ‘why did coffee sales in Berkeley drop this year’—or exploratory cohort analysis—e.g., ‘which user segments are most likely to churn next quarter’—each involving a combinatorial space of potential joins, aggregations, and filter combinations.&lt;/p&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/image5.png&quot; alt=&quot;An agent sending many SELECT SQL queries to a database and receiving results back&quot; width=&quot;600&quot; /&gt;&lt;br /&gt;
+&lt;i&gt;
+Data Systems Redesigned to More Effectively Support Agentic Speculation
+&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The requests from these agents have various opportunities for optimization. For instance, on a text-to-SQL benchmark with multiple agents attempting each task, only 10-20% of the sub-plans are distinct. Thus, 80-90% of sub-queries perform duplicate work. The same experiments show task success rates significantly increasing with more agentic attempts—so the redundancy is actually helpful. But from the data system perspective it’s wasted work.&lt;/p&gt;
+
+&lt;p&gt;An agent-first data system can exploit such properties to help agents make progress faster. It can reuse results across overlapping sub-plans, drawing on ideas from decades-old literature on &lt;a href=&quot;https://dl.acm.org/doi/10.1145/42201.42203&quot;&gt;multi-query optimization&lt;/a&gt; and &lt;a href=&quot;https://www.vldb.org/conf/2007/papers/research/p723-zukowski.pdf&quot;&gt;shared scans&lt;/a&gt;. Or the data system can try to &lt;em&gt;satisfice&lt;/em&gt;, returning approximate answers that are good enough for agents to make progress, leveraging work from &lt;a href=&quot;https://dl.acm.org/doi/10.1145/253260.253291&quot;&gt;the&lt;/a&gt; &lt;a href=&quot;https://dl.acm.org/doi/10.1145/2465351.2465355&quot;&gt;AQP&lt;/a&gt; &lt;a href=&quot;https://dl.acm.org/doi/10.1561/1900000004&quot;&gt;literature&lt;/a&gt;—or streaming the results of the final or intermediate operators to help agents decide if seeing the rest is necessary or helpful.&lt;/p&gt;
+
+&lt;p&gt;Another opportunity here is to rethink the query interface entirely: instead of agents issuing a single SQL query at a time, they could instead issue a batch of queries, each with its own approximation requirements. Since enumerating an exponential search space (as in the root cause or cohort analysis examples above) isn’t a good use of agentic reasoning ability, perhaps data systems should support higher-level primitives rather than requiring agents to list each SQL query explicitly. One idea here is to draw on &lt;a href=&quot;https://docs.getdbt.com/docs/build/jinja-macros&quot;&gt;DBT-style Jinja macros&lt;/a&gt; to provide looping-based primitives for agents to interact with data systems.&lt;/p&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/image2.png&quot; alt=&quot;A swarm of AI agents working at laptops&quot; width=&quot;450&quot; /&gt;&lt;br /&gt;
+&lt;i&gt;
+A Caffeinated Army of Agents Ready to Tirelessly Complete Your Data Tasks
+&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;A final opportunity here is to stop thinking of data systems as passive executors of queries; data systems could be &lt;a href=&quot;https://arxiv.org/abs/2502.13016&quot;&gt;proactive&lt;/a&gt;, as they possess more grounding in data and system characteristics that agents may lack a priori—they could steer agents in different directions, provide results for related queries, and also provide performance-level feedback (e.g., instead of executing an expensive query, the system could first provide the agent a latency estimate). The reason we can do this now as opposed to the past is that an agent can accept any form of textual feedback and isn’t expecting a strict SQL query result. In fact, the data system could also prepare both materialized and virtual views for an agent in advance, provided to the agent as part of context, as this may be cheaper or more effective than having an agent author or use them.&lt;/p&gt;
+
+&lt;h2 id=&quot;data-systems-of-agents&quot;&gt;Data Systems Of Agents&lt;/h2&gt;
+
+&lt;p&gt;Previously, we focused on how agents interact with data systems. Now, we consider everything else agents need to keep working: where they live, how they remember, how they coordinate with each other, and how they deal with failures of each other. This &lt;em&gt;agentic substrate&lt;/em&gt; is separate from the inference stack powering raw intelligence. However, the inference stack itself is being abstracted away through APIs (e.g., from OpenAI or Anthropic), or, for open-weight models, through &lt;a href=&quot;https://github.com/vllm-project/vllm&quot;&gt;serving&lt;/a&gt; &lt;a href=&quot;https://github.com/sgl-project/sglang&quot;&gt;frameworks&lt;/a&gt; that hide low-level details. So far, the agentic substrate has been managed through harnesses like &lt;a href=&quot;https://www.anthropic.com/claude-code&quot;&gt;Claude Code&lt;/a&gt; and &lt;a href=&quot;https://github.com/openai/codex&quot;&gt;Codex&lt;/a&gt;, coupled with various mechanisms to &lt;a href=&quot;https://mem0.ai/&quot;&gt;store&lt;/a&gt; and &lt;a href=&quot;https://www.letta.com/&quot;&gt;retrieve&lt;/a&gt; memory.&lt;/p&gt;
+
+&lt;p&gt;First, on the memory front, the current wisdom is that &lt;a href=&quot;https://www.amplifypartners.com/blog-posts/file-systems-for-agents&quot;&gt;files&lt;/a&gt; &lt;a href=&quot;https://lsvp.com/stories/filesystemsforagents/&quot;&gt;are all you need&lt;/a&gt;; agents write to unstructured markdown (MD) files, which can then be searched using grep, or via embedding-based retrieval. In fact, many argue that the solution to continual learning is having agents consume a lot (e.g., an entire codebase, slack, company wikis, …) and then write their learnings into MD files, which are then retrieved selectively on demand. Indeed, file systems, bash scripting, and MD files are and will still be important for agents. However, at scale, when agents are doing the vast majority of knowledge work, this approach will no longer be effective.&lt;/p&gt;
+
+&lt;p&gt;Given limited context windows, retrieving all MD file fragments that may be relevant and stuffing it into the context will break down at some point. Even if context windows continue to grow, there are latency benefits to not put all information into context — and in many cases, e.g., when knowledge work involves interacting with large databases or code bases, it will be infeasible to serialize all relevant data into context.&lt;/p&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/substrate-for-agent-swarms.png&quot; alt=&quot;A swarm of robot agents holding hands, each drawing state from a single large shared database platform below them&quot; width=&quot;500&quot; /&gt;&lt;br /&gt;
+&lt;i&gt;
+Data Systems As A Substrate for Multi-Agent Swarms
+&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;One could use a &lt;a href=&quot;https://mem0.ai/&quot;&gt;knowledge&lt;/a&gt; &lt;a href=&quot;https://www.getzep.com/&quot;&gt;graph&lt;/a&gt; &lt;a href=&quot;https://langchain-ai.github.io/langmem/&quot;&gt;representation&lt;/a&gt;, but knowledge graphs suffer from the same limitations as unstructured MD-based memory due to their lack of structured search. What one needs is to be able to retrieve only memory that is pertinent to the task, across multiple attributes (or facets) of interest. For example, an agent debugging a flaky test should be able to pull only the memories tagged with the relevant module, language, framework, and failure mode—rather retrieving based on keywords or embedding similarity. A separate issue is what to actually retrieve; raw agent traces with mistakes are not very useful as they will induce agents to repeat the same mistake—instead, we want the retrieved memory to be corrective.&lt;/p&gt;
+
+&lt;p&gt;We recently explored a related notion of &lt;a href=&quot;https://arxiv.org/abs/2602.13521&quot;&gt;&lt;em&gt;structured memory&lt;/em&gt;&lt;/a&gt;, where we organize memory across various attributes, each of which could be set as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt; to indicate universal applicability, or set as a list of values to be matched. For a data agent, the dimensions could include the columns and tables, type of operation, and finally, open-ended natural-language corrective instructions. So, we could include memory that only applies to a given type of operation (e.g., ‘when performing date-time operations, use fiscal year as opposed to calendar year conventions’), or a given table (e.g., ‘column product_cleaned is preferred over column product when querying on product name’). One open question is defining an &lt;em&gt;application-specific structured memory&lt;/em&gt;—or what others have called &lt;a href=&quot;https://www.linkedin.com/feed/update/urn:li:activity:7467499112523804672/&quot;&gt;world models for memory&lt;/a&gt;. We believe this is akin to defining a schema for each application—and perhaps agents themselves can help us define and refine it over time.&lt;/p&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/structured-knowledge.png&quot; alt=&quot;Diagram showing corrective knowledge stored with structured attributes (SQL keywords, tables, columns, data type) and retrieved by matching the features of a new agent query&quot; width=&quot;100%&quot; /&gt;&lt;br /&gt;
+&lt;i&gt;
+One Possible Way To Store and Retrieve Structured Knowledge &lt;a href=&quot;https://arxiv.org/abs/2602.13521&quot;&gt;[From Here]&lt;/a&gt;
+&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Structured memory will be useful also for &lt;a href=&quot;https://github.com/skydiscover-ai/skydiscover&quot;&gt;evolutionary&lt;/a&gt; &lt;a href=&quot;https://arxiv.org/abs/2506.13131&quot;&gt;frameworks&lt;/a&gt; to effectively manage search spaces. Indeed, storing, structuring, and mining large volumes of single and &lt;a href=&quot;https://sky.cs.berkeley.edu/project/mast/&quot;&gt;multi-agent traces&lt;/a&gt; can help future agents become much more efficient—potentially enabling effective recursive self-improvement through structured memory-based mechanisms.&lt;/p&gt;
+
+&lt;p&gt;Another challenge is to support concurrent edits to shared memory, and concurrent edits in general, when there are many agents performing transformations. While there have been some useful attempts at &lt;a href=&quot;https://dl.acm.org/doi/10.1145/3702634.3702955&quot;&gt;supporting&lt;/a&gt; &lt;a href=&quot;https://neon.com/docs/get-started/why-neon&quot;&gt;multiversioning&lt;/a&gt; and &lt;a href=&quot;https://docs.turso.tech/agentfs/introduction&quot;&gt;copy-on-write semantics&lt;/a&gt;, it isn’t clear that such techniques will suffice when thousands of agents are attempting to edit shared state at the same time. For instance, when agents are trying various potential transactions in response to a user request, the effects of the vast majority of these transactions need to be rolled back—with only the one ‘correct’ transaction’s result persisting. Work on supporting exactly-once semantics is relevant here, as are underlying techniques based on CRDTs and operational transformation. For updates to fuzzy mechanisms such as memory, we may be able to sacrifice on consistency for perfect correctness in the interest of latency. While agents can reason about semantics to compensate or roll back their actions to eventually finalize most tasks, the primary challenge lies in the degree to which they step on each other’s toes during the process. An important failure mode to be avoided is a form of “livelock,” where incessant compensating actions prevent any meaningful progress.&lt;/p&gt;
+
+&lt;p&gt;Beyond shared state, other concerns emerge when trying to support an army of agents, including what to do when agents fail, how agents should communicate with each other (directly or through intermediate shared state), and how we should deal with straggler agents. There have been some developments in supporting durable multi-agent execution, such as &lt;a href=&quot;https://temporal.io/solutions/ai&quot;&gt;Temporal&lt;/a&gt;, but it remains to be seen if such solutions will apply at scale across thousands of agents. On the topic of communication, we need mechanisms to enable agents to negotiate with each other. Imagine four developer agents attempting to reach consensus on a shared schema, with distinct but overlapping objectives. In a human setting, this would involve iterative discussion and compromise; for agentic swarms, we must define the mechanisms that allow them to converge on a design that reflects the underlying goals of their respective principals. Or if agents are all requiring access to a limited resource, again communication will be necessary. It remains to be seen if this is best done via centralized coordination, or if a decentralized approach is necessary.&lt;/p&gt;
+
+&lt;h2 id=&quot;data-systems-by-agents&quot;&gt;Data Systems By Agents&lt;/h2&gt;
+
+&lt;p&gt;Finally, if intelligence is effectively free, then we can employ this intelligence to synthesize new data systems from scratch. Indeed, in many settings, general-purpose data systems may be overkill, as they have to support every schema, query, and hardware target. Given a workload, recent work, including &lt;a href=&quot;https://arxiv.org/abs/2603.02001&quot;&gt;Bespoke OLAP&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/2603.02081&quot;&gt;GenDB&lt;/a&gt;, has shown that one can use an agentic pipeline to synthesize a complete, workload-specific analytical engine—in minutes to a few hours, at a cost of a few dollars. The engines are disposable: when the workload shifts, one can simply regenerate them. Analogously, our work has shown that one can synthesize custom &lt;a href=&quot;https://arxiv.org/abs/2605.24096&quot;&gt;key-value stores&lt;/a&gt; from scratch, targeted to the workload. In fact, modern IDEs, such as &lt;a href=&quot;https://kiro.dev/&quot;&gt;Kiro&lt;/a&gt;, elevate specifications for systems development to be a first-class citizen.&lt;/p&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/synthesize-from-scratch.png&quot; alt=&quot;A robot agent with a hammer and chisel carving a database character out of a block of stone&quot; width=&quot;500&quot; /&gt;&lt;br /&gt;
+&lt;i&gt;
+Agents Can Synthesize Custom Data Systems From Scratch
+&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The main issue, however, is that specifications are typically imperfect, and don’t cover all corner cases. Present-day agents will exploit the missing specifications to reward-hack their way to a high performance metric. In our custom key-value store work, we found that one way to alleviate this is to have auxiliary verification agents trying to generate test cases that catch the exploitation of corner cases, essentially expanding the specification. Yet another approach is to both generate a system and a proof for its correctness together, for which we have found some &lt;a href=&quot;https://arxiv.org/abs/2605.23109&quot;&gt;early success&lt;/a&gt;, but more needs to be done to solidify the approach. Further, it remains to be seen what is the best way to solicit human-written specifications for a system—can this be done in an iterative, human-in-the-loop manner, as opposed to a one-shot, incomplete one. Indeed, human-written specifications are incomplete even for manually authored software, so one would expect that future agents that are more aligned will increasingly exercise better judgement when making design decisions.&lt;/p&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/synthesis-pipeline.png&quot; alt=&quot;Pipeline diagram where a system builder provides a specification, planner and coder agents generate code, the code is evaluated for correctness and performance, and critic and auditor agents provide feedback and catch reward hacking&quot; width=&quot;100%&quot; /&gt;&lt;br /&gt;
+&lt;i&gt;
+One Possible Data System Synthesis Pipeline &lt;a href=&quot;https://arxiv.org/abs/2605.24096&quot;&gt;[From Here]&lt;/a&gt;
+&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Other questions here involve testing whether starting from a mature system (e.g., Postgres) and removing components/functionality can lead to higher performance or more user trust. Separately, is there an opportunity to make the design composable, comprising various verified components that are mixed and matched given a workload? For example, perhaps the workload hasn’t changed enough for the storage layer to be updated, but perhaps the query optimizer requires changes. A perhaps more viable proposition involves employing agents coupled with proof systems to target critical parts of the code associated with formal proofs, rather than doing so for the entire system.&lt;/p&gt;
+
+&lt;p&gt;A final opportunity here is to move away from the traditional data systems stack with clearly-defined interfaces (e.g., parser, query optimizer, storage manager, …) — that were each largely the prerogative of a single human team to manage. Instead, agents can find new ways to “blend” these components together, perhaps identifying new optimization opportunities as a result. Agents can also fill in missing gaps in functionality to make existing systems much more feature-complete, or reach feature-parity with other competing systems—or analogously, continuously refining open-source systems in response to feature requests or issues (perhaps filed by other agents!) Doing so in a way that prioritizes correctness, long-term maintenance, and human interpretability will be a challenge.&lt;/p&gt;
+
+&lt;h2 id=&quot;looking-further-ahead&quot;&gt;Looking Further Ahead&lt;/h2&gt;
+
+&lt;p&gt;In the era of near-free intelligence, data systems matter more than ever. As agents take on the bulk of knowledge work, the workload for data systems will change, the substrate they need to run on will have to be built, and increasingly, they will participate in designing data systems themselves. Each of these shifts opens up a new, exciting research agenda.&lt;/p&gt;
+
+&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;img src=&quot;https://bair.berkeley.edu/static/blog/intelligence-is-free-now-what/co-evolution.png&quot; alt=&quot;A half-database, half-robot character next to a yin-yang symbol formed by a database and a robot agent&quot; width=&quot;600&quot; /&gt;&lt;br /&gt;
+&lt;i&gt;
+Co-Evolution of Data Systems and Agents
+&lt;/i&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Looking further out, the boundaries between agents and data systems will likely start to blur. For instance, agents may design the data systems they themselves run on, defining both the interfaces as well as the system components underneath. Both the interfaces and internals can be evolved over time by agents in a form of recursive self-improvement. There is also an opportunity to rethink data systems as a holistic source of truth for the entirety of relevant state: including raw data, memory, and coordination state, further erasing the distinctions between the data that is being queried by agents and data generated as a result of agentic activity. Finally, data systems may themselves incorporate agentic components, fundamentally evolving from passive computation engines into intelligent, proactive, self-optimizing architectures. It is hard to predict what the future may hold. We’re in for a wild ride!&lt;/p&gt;
+
+&lt;h2 id=&quot;acknowledgments&quot;&gt;Acknowledgments&lt;/h2&gt;
+
+&lt;p&gt;The perspective and ongoing work described in this post are the product of joint research and many discussions with wonderful collaborators at the &lt;a href=&quot;https://epic.berkeley.edu/&quot;&gt;EPIC Data Lab&lt;/a&gt;, &lt;a href=&quot;https://dsf.berkeley.edu/&quot;&gt;Data Systems &amp;amp; Foundations&lt;/a&gt; group, and the broader Berkeley AI-Systems community. Thank you all!&lt;/p&gt;
+
+&lt;p&gt;BibTex for this post:&lt;/p&gt;
+&lt;div class=&quot;language-bibtex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;@misc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;intelligence-is-free-blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{Intelligence is Free, Now What? Data Systems for, of, and by Agents}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{Aditya G. Parameswaran and Shubham Agarwal and Kerem Akillioglu and Shreya Shankar
+          and Sepanta Zeighami and Rishabh Iyer and Matei Zaharia and Alvin Cheung
+          and Natacha Crooks and Joseph Gonzalez and Joseph Hellerstein and Ion Stoica}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;howpublished&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{\url{https://bair.berkeley.edu/blog/2026/07/07/intelligence-is-free-now-what/}}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{2026}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 07 Jul 2026 02:00:00 -0700</pubDate>
+        <link>http://bair.berkeley.edu/blog/2026/07/07/intelligence-is-free-now-what/</link>
+        <guid isPermaLink="true">http://bair.berkeley.edu/blog/2026/07/07/intelligence-is-free-now-what/</guid>
+      </item>
+     
+    
+     
+      
+     
+    
+  </channel>
+</rss>

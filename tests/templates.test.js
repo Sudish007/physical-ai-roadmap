@@ -9,7 +9,7 @@ import { SITE } from '../src/build/content-map.mjs';
 import { buildSite } from '../src/build/write.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const planData = buildSite(readFileSync(path.join(ROOT, 'content', 'roadmap.md'), 'utf8')).planData;
+const { planData, feedData } = buildSite(readFileSync(path.join(ROOT, 'content', 'roadmap.md'), 'utf8'));
 
 test('the html tag escapes every interpolated string and passes nested templates through', () => {
   const user = '<img src=x onerror="alert(1)"> & "quotes" \'single\'';
@@ -82,11 +82,11 @@ test('plan, feed and 404 shells', () => {
   assert.ok(plan.includes(`<p class="small muted">${planData.quarterNote}</p>`));
   assert.equal((plan.match(/data-track="/g) || []).length, 0, 'month and clause checkboxes are rendered by plan.js for the chosen plan');
   assert.equal((plan.match(/Evidence cutoff/g) || []).length, 1, 'footer only');
-  const feed = feedPage();
+  const feed = feedPage({ feedData });
   assert.ok(feed.includes('<body data-page="feed">'));
   assert.ok(feed.includes('<p class="kicker">Stay ahead · the §17 monitoring system, fetched daily</p>'));
-  assert.ok(feed.includes('<div id="feed-app"></div>'));
-  assert.ok(feed.includes('<noscript><p>The feed needs JavaScript to render; the raw data is in <a href="data/feed.json">data/feed.json</a>.</p></noscript>'));
+  assert.ok(feed.includes('<ol class="feed-list" data-feed-list aria-live="polite"></ol>'), 'the list is filled by assets/feed.js (details in tests/feed-template.test.js)');
+  assert.ok(feed.includes('<noscript><p>The feed list needs JavaScript to render; the raw data is in <a href="data/feed.json">data/feed.json</a> and the source health in <a href="data/meta.json">data/meta.json</a>.</p></noscript>'));
   const nf = notFoundPage();
   assert.ok(nf.includes('<base href="/physical-ai-roadmap/">'));
   assert.ok(nf.indexOf('<base href') < nf.indexOf('<meta http-equiv="Content-Security-Policy"'), 'base comes before the CSP meta');

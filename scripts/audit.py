@@ -108,6 +108,22 @@ THRESHOLDS = {
     "planImportInvalid": "a version-2 file and a non-JSON file each show #plan-msg.error and leave localStorage byte-identical",
     "planImportMerge": "a valid file after confirm(): imported entries overwrite (track C, rung 3 added), the rest stays (10 h, start date, rung 0)",
     "planReset": "Reset after confirm(): tracker/plan/triage keys absent, theme key kept, prompt card visible again",
+    # FEAT-005: Feed page with the real data/feed.json + data/meta.json (feed group)
+    "feedItemGeometry": "OF-1: in every .feed-item no two child boxes (h3, .meta, .summary, .triage) intersect and the title's left edge equals the item's content edge",
+    "feedActions": "OF-11: the three triage buttons share one top at the title's top and sit right of the title at >=1440; three distinct tops right of the content at 820..1439; below the meta row under 820",
+    "healthSummary": "DR-9: details.health summary matches /^■ ok \\d+ · □ empty \\d+ · ✕ failed \\d+ · \\d+ sources · details$/ (a space after each glyph)",
+    "unavailableRows": "D6: every meta source with status failed renders a health row and a notices entry reading 'Unavailable since <date> · <error class>'; no other row does",
+    "summaryEllipsis": "DR-9: no .summary text ends with '...' or exceeds 300 characters",
+    "protocolCard": "DR-5/OF-6: table.protocol has exactly 3 tbody rows, every td text is a cell string of the §17.1 table (no added numbers), and the month-end line links s17.html#s17-1",
+    "lastUpdated": "D9: [data-last-updated] equals formatLastUpdated(meta.generatedAt) ('D MMM YYYY, HH:mm UTC') and the page says 'GitHub may delay or skip scheduled runs'",
+    "feedFirstFive": "D6: the first five items' title, source and date texts equal data/feed.json's five newest items (publishedAt desc, id)",
+    "feedStatusLine": "'Showing N of N items in the window.' with N = feed.json items; triage counts 0 with a clean storage",
+    # FEAT-005: specials (feed at 1440, light)
+    "feedClassFilter": "clicking Class 'Releases' shows exactly the release items of feed.json (ids and order) and the status line counts them; 'All' restores",
+    "feedQueryFilter": "clicking Query 'Aerial autonomy' shows exactly the items whose matchedQuery or alsoMatched carries the label; clicking it again clears the filter",
+    "feedKeepPersists": "Keep on the first item: aria-pressed true, chip 'Kept 1', physical-ai-roadmap.v1.triage[id].state == 'keep'; identical after a reload",
+    "feedDropHides": "Drop on the second item hides it (N-1 visible, 'Dropped 1') until the Dropped filter is active, where it is the only item, marked .dropped with Drop pressed; the generic checks (contrast AA) pass in that state in both themes; 'Everything' restores N-1",
+    "feedLatestHome": "index 'Latest from the feed' lists the 5 newest non-dropped feed.json titles in order and the note 'Feed last updated <formatLastUpdated>. GitHub may delay or skip scheduled runs.'",
 }
 
 # DR-2: the ten best-10 titles (also asserted by tests/home-data.test.js)
@@ -443,6 +459,48 @@ def section_checks(page, width, theme, ctx):
 
 
 KICKER_RE = re.compile(r"^(Section \d+ of 24|Appendix [A-D] · part \d+ of 24)$")
+HEALTH_RE = re.compile(r"^■ ok \d+ · □ empty \d+ · ✕ failed \d+ · \d+ sources · details$")
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+# §17.1 cell strings for the DR-5 check, filled from --protocol-cells (verify.mjs writes them from content/roadmap.md)
+PROTOCOL_CELLS = set()
+_FEED_DATA = {}
+
+
+def parse_iso(value):
+    if not value or not isinstance(value, str):
+        return None
+    try:
+        return datetime.datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(datetime.timezone.utc)
+    except ValueError:
+        return None
+
+
+def fmt_date(value):
+    """assets/lib/format.js formatDate: 'D MMM YYYY' in UTC, '' when absent or invalid."""
+    d = parse_iso(value)
+    return f"{d.day} {MONTHS[d.month - 1]} {d.year}" if d else ""
+
+
+def fmt_last_updated(value):
+    """assets/lib/format.js formatLastUpdated: 'D MMM YYYY, HH:mm UTC', 'not yet' when absent or invalid."""
+    d = parse_iso(value)
+    return f"{fmt_date(value)}, {d.hour:02d}:{d.minute:02d} UTC" if d else "not yet"
+
+
+def feed_data(page):
+    """data/feed.json and data/meta.json of the served site (cached per base URL)."""
+    base = page.url.rsplit("/", 1)[0] + "/"
+    if base not in _FEED_DATA:
+        _FEED_DATA[base] = {"feed": page.request.get(f"{base}data/feed.json").json(), "meta": page.request.get(f"{base}data/meta.json").json()}
+    return _FEED_DATA[base]
+
+
+def sorted_items(feed):
+    """The client's order (assets/lib/filter.js sortNewest): publishedAt descending, then id ascending."""
+    def ts(iso):
+        d = parse_iso(iso)
+        return d.timestamp() if d else 0.0
+    return sorted(feed.get("items", []), key=lambda it: (-ts(it["publishedAt"]), it["id"]))
 FEED_NOTE_RE = re.compile(r"^Feed last updated (not yet|\d{1,2} [A-Z][a-z]{2} \d{4}, \d{2}:\d{2} UTC)\. GitHub may delay or skip scheduled runs\.$")
 OVERALL_RE = re.compile(r"^Overall \d+ of \d+ items \(plan months are counted once a plan is chosen\)\.")
 
@@ -477,6 +535,86 @@ def index_checks(page, width, theme, ctx):
     out.append(check("overallWording", bool(OVERALL_RE.match(s["overall"])), s["overall"]))
     feed_ok = bool(FEED_NOTE_RE.match(s["feedNote"])) and s["feedNoteHidden"] is False and (s["feedItems"] >= 1) and (s["feedText"].startswith("No feed items yet") or s["feedItems"] <= 5)
     out.append(check("feedWidget", feed_ok, {"items": s["feedItems"], "note": s["feedNote"], "hidden": s["feedNoteHidden"], "text": s["feedText"][:80]}))
+    return out
+
+
+FEED_JS = r"""
+() => {
+  const txt = (el) => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
+  const box = (el) => { const r = el.getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom }; };
+  const intersects = (a, b) => a.l < b.r - 0.5 && b.l < a.r - 0.5 && a.t < b.b - 0.5 && b.t < a.b - 0.5;
+  const items = [...document.querySelectorAll('.feed-item:not(.feed-message)')];
+  let overlaps = 0, misaligned = 0, placement = 0;
+  const samples = [];
+  const w = innerWidth;
+  for (const li of items) {
+    const kids = [...li.children].filter((k) => k.getClientRects().length).map((k) => ({ name: k.className || k.tagName.toLowerCase(), b: box(k) }));
+    for (let i = 0; i < kids.length; i++) for (let j = i + 1; j < kids.length; j++) if (intersects(kids[i].b, kids[j].b)) { overlaps++; if (samples.length < 3) samples.push(['overlap', kids[i].name, kids[j].name, Math.round(kids[i].b.t), Math.round(kids[j].b.t)]); }
+    const h3 = li.querySelector('h3'); const meta = li.querySelector('.meta');
+    const lb = box(li); const hb = box(h3); const mb = meta ? box(meta) : hb;
+    if (Math.abs(hb.l - (lb.l + parseFloat(getComputedStyle(li).paddingLeft))) > 0.5) misaligned++;
+    const btns = [...li.querySelectorAll('.triage .btn')].map(box);
+    const tops = new Set(btns.map((b) => Math.round(b.t)));
+    let ok;
+    if (w >= 1440) ok = btns.length === 3 && tops.size === 1 && btns.every((b) => b.l >= hb.r - 0.5) && Math.abs(btns[0].t - hb.t) <= 2;
+    else if (w >= 820) ok = btns.length === 3 && tops.size === 3 && btns.every((b) => b.l >= hb.r - 0.5);
+    else ok = btns.length === 3 && btns.every((b) => b.t >= mb.b - 0.5);
+    if (!ok) { placement++; if (samples.length < 3) samples.push(['placement', Math.round(hb.r), btns.map((b) => [Math.round(b.l), Math.round(b.t)])]); }
+  }
+  const first = items.slice(0, 5).map((li) => ({ title: txt(li.querySelector('h3 a')), source: txt(li.querySelector('.meta .src')), date: txt(li.querySelector('.meta .date')), id: li.dataset.id }));
+  const card = document.querySelector('table.protocol');
+  const rows = card ? [...card.querySelectorAll('tbody tr')] : [];
+  const monthEnd = [...document.querySelectorAll('.feed-aside p')].find((p) => /Month-end 90 min · Quarter-end 120 min — see/.test(txt(p)));
+  const healthRows = [...document.querySelectorAll('[data-health-rows] tr')].map((tr) => ({ status: tr.dataset.status, text: txt(tr) }));
+  return {
+    items: items.length, overlaps, misaligned, placement, samples, first,
+    summaries: [...document.querySelectorAll('.feed-item .summary')].map(txt),
+    health: txt(document.querySelector('details.health > summary')),
+    healthRows,
+    protocolRows: rows.length,
+    protocolCells: rows.flatMap((tr) => [...tr.querySelectorAll('td')].map(txt)),
+    monthEndLink: monthEnd ? (monthEnd.querySelector('a[href="s17.html#s17-1"]') ? 's17.html#s17-1' : 'no link') : 'no line',
+    lastUpdated: txt(document.querySelector('[data-last-updated]')),
+    freshness: txt(document.body).includes('GitHub may delay or skip scheduled runs'),
+    status: txt(document.querySelector('[data-feed-status]')),
+    notices: [...document.querySelectorAll('[data-notice]')].map((li) => ({ id: li.dataset.notice, status: txt(li.querySelector('[data-notice-status]')) })),
+    counts: Object.fromEntries([...document.querySelectorAll('[data-count]')].map((s) => [s.dataset.count, s.textContent])),
+  };
+}
+"""
+
+
+def feed_checks(page, width, theme, ctx):
+    """FEAT-005 Feed page with the real data: OF-1/OF-11 geometry, DR-9 health strip, D6 failures and first items, DR-5 protocol card, D9 freshness."""
+    p = ctx.page
+    try:
+        p.wait_for_selector("[data-feed-list][data-feed-ready]", timeout=6000)
+    except Exception:
+        pass
+    data = feed_data(p)
+    s = p.evaluate(FEED_JS)
+    out = []
+    out.append(check("feedItemGeometry", s["items"] > 0 and s["overlaps"] == 0 and s["misaligned"] == 0, {"items": s["items"], "overlaps": s["overlaps"], "misalignedTitles": s["misaligned"], "samples": s["samples"][:3]}))
+    band = "row at the top-right" if width >= 1440 else "stacked right column" if width >= 820 else "below the meta row"
+    out.append(check("feedActions", s["items"] > 0 and s["placement"] == 0, {"band": band, "itemsOff": s["placement"], "samples": [x for x in s["samples"] if x[0] == "placement"][:3]}))
+    out.append(check("healthSummary", bool(HEALTH_RE.match(s["health"])), s["health"]))
+    failed = [sid for sid, m in data["meta"]["sources"].items() if m.get("status") == "failed"]
+    rows_failed = [r for r in s["healthRows"] if r["status"] == "failed"]
+    unavailable_ok = len(rows_failed) == len(failed) and all("Unavailable since" in r["text"] and " · " in r["text"] for r in rows_failed)
+    notices_ok = all(("Unavailable since" in n["status"]) == (data["meta"]["sources"].get(n["id"], {}).get("status") == "failed") for n in s["notices"]) and len(s["notices"]) == 5
+    out.append(check("unavailableRows", unavailable_ok and notices_ok, {"failedSources": failed, "failedRows": [r["text"][:120] for r in rows_failed], "notices": s["notices"]}))
+    dots = [x for x in s["summaries"] if x.endswith("...")]
+    over = [x for x in s["summaries"] if len(x) > 300]
+    out.append(check("summaryEllipsis", not dots and not over, {"summaries": len(s["summaries"]), "endingWithDots": len(dots), "over300": len(over)}))
+    bad_cells = [c for c in s["protocolCells"] if c not in PROTOCOL_CELLS] if PROTOCOL_CELLS else ["no --protocol-cells given"]
+    out.append(check("protocolCard", s["protocolRows"] == 3 and not bad_cells and s["monthEndLink"] == "s17.html#s17-1", {"tbodyRows": s["protocolRows"], "cells": s["protocolCells"], "notInSource": bad_cells, "monthEndLink": s["monthEndLink"], "sourceCells": len(PROTOCOL_CELLS)}))
+    expected = fmt_last_updated(data["meta"].get("generatedAt"))
+    out.append(check("lastUpdated", s["lastUpdated"] == expected and s["freshness"], {"shown": s["lastUpdated"], "expected": expected, "freshnessSentence": s["freshness"]}))
+    items = sorted_items(data["feed"])[:5]
+    exp_first = [{"title": it["title"], "source": it["source"], "date": fmt_date(it["publishedAt"]), "id": it["id"]} for it in items]
+    out.append(check("feedFirstFive", s["first"] == exp_first and len(exp_first) == 5, {"dom": s["first"], "json": exp_first}))
+    status_ok = s["status"].startswith(f"Showing {len(data['feed']['items'])} of {len(data['feed']['items'])} items in the window.")
+    out.append(check("feedStatusLine", status_ok and s["counts"] == {"keep": "0", "later": "0", "drop": "0"}, {"status": s["status"][:80], "counts": s["counts"]}))
     return out
 
 
@@ -584,7 +722,7 @@ GROUPS = {
     "home": [index_checks, check_geometry],  # index.html carries body[data-page="home"]
     "section": [section_checks, section_behaviours, check_geometry],
     "plan": [shell_text_checks, plan_checks, check_geometry],
-    "feed": [shell_text_checks],
+    "feed": [shell_text_checks, feed_checks],
     "404": [shell_text_checks],
 }
 
@@ -1034,6 +1172,103 @@ class Audit:
                 except OSError:
                     pass
 
+    # ---- FEAT-005: feed filters, triage persistence, dropped state contrast, home widget ------------
+    def feed_behaviours(self, browser):
+        ctx = self.new_context(browser, 1440, 900)
+        try:
+            page = ctx.new_page()
+            page.goto(self.url("feed"), wait_until="load")
+            page.wait_for_selector("[data-feed-list][data-feed-ready='ok']", timeout=6000)
+            data = feed_data(page)
+            items = sorted_items(data["feed"])
+            total = len(items)
+            visible = "() => [...document.querySelectorAll('.feed-item:not(.feed-message)')].map((li) => li.dataset.id)"
+            state = """() => { const txt = (el) => (el ? el.textContent.replace(/\\s+/g, ' ').trim() : ''); const first = document.querySelector('.feed-item');
+                return { visible: document.querySelectorAll('.feed-item:not(.feed-message)').length, status: txt(document.querySelector('[data-feed-status]')),
+                  counts: Object.fromEntries([...document.querySelectorAll('[data-count]')].map((s) => [s.dataset.count, s.textContent])),
+                  pressed: Object.fromEntries([...document.querySelectorAll('button[data-filter][aria-pressed="true"]')].map((b) => [b.dataset.filter, b.dataset.value])),
+                  firstId: first && first.dataset.id, firstTriage: first ? [...first.querySelectorAll('.triage .btn')].map((b) => b.getAttribute('aria-pressed')) : null,
+                  dropped: [...document.querySelectorAll('.feed-item.dropped')].map((li) => li.dataset.id) }; }"""
+            s0 = page.evaluate(state)
+            # class filter
+            page.click('button[data-filter="class"][data-value="release"]')
+            page.wait_for_timeout(80)
+            releases = [it["id"] for it in items if it["sourceClass"] == "release"]
+            s1 = page.evaluate(state)
+            v1 = page.evaluate(visible)
+            class_ok = s0["visible"] == total and s1["visible"] == len(releases) and v1 == releases and s1["pressed"].get("class") == "release" and s1["status"].startswith(f"Showing {len(releases)} of {total} items")
+            page.click('button[data-filter="class"][data-value="all"]')
+            # query filter (toggle)
+            label = "Aerial autonomy"
+            page.click(f'button[data-filter="query"][data-value="{label}"]')
+            page.wait_for_timeout(80)
+            matching = [it["id"] for it in items if label in [it.get("matchedQuery")] + list(it.get("alsoMatched") or [])]
+            v2 = page.evaluate(visible)
+            s2 = page.evaluate(state)
+            page.click(f'button[data-filter="query"][data-value="{label}"]')
+            page.wait_for_timeout(80)
+            s3 = page.evaluate(state)
+            query_ok = v2 == matching and s2["pressed"].get("query") == label and s3["visible"] == total and "query" not in s3["pressed"]
+            self.record("feed", 1440, "light", [check("feedClassFilter", class_ok, {"all": s0["visible"], "releases": s1["visible"], "expected": len(releases), "status": s1["status"][:60], "pressed": s1["pressed"]}),
+                                                check("feedQueryFilter", query_ok, {"label": label, "visible": len(v2), "expected": len(matching), "afterToggle": s3["visible"]})])
+            print(f"{'feed':11}  1440 class filter {'OK' if class_ok else 'FAIL'} releases={s1['visible']}/{len(releases)} · query filter {'OK' if query_ok else 'FAIL'} {label}={len(v2)}/{len(matching)}")
+            # Keep on the first item persists across a reload
+            first_id = s0["firstId"]
+            page.click('.feed-item:first-child .triage button[data-triage="keep"]')
+            page.wait_for_timeout(80)
+            k1 = page.evaluate(state)
+            stored = page.evaluate("(k) => JSON.parse(localStorage.getItem(k) || 'null')", TRIAGE_KEY)
+            page.reload(wait_until="load")
+            page.wait_for_selector("[data-feed-list][data-feed-ready='ok']", timeout=6000)
+            k2 = page.evaluate(state)
+            keep_ok = (k1["firstTriage"] == ["true", "false", "false"] and k1["counts"]["keep"] == "1" and stored and stored.get(first_id, {}).get("state") == "keep"
+                       and k2["firstId"] == first_id and k2["firstTriage"] == ["true", "false", "false"] and k2["counts"]["keep"] == "1")
+            self.record("feed", 1440, "light", [check("feedKeepPersists", keep_ok, {"afterClick": k1["firstTriage"], "stored": stored and stored.get(first_id), "afterReload": k2["firstTriage"], "counts": k2["counts"]})])
+            print(f"{'feed':11}  1440 keep persists {'OK' if keep_ok else 'FAIL'} {k2['firstTriage']} stored={stored and stored.get(first_id)}")
+            # Drop hides the second item until the Dropped filter is active; the dropped state stays AA in both themes
+            second_id = items[1]["id"]
+            page.click(f'.feed-item[data-id="{second_id}"] .triage button[data-triage="drop"]')
+            page.wait_for_timeout(80)
+            d1 = page.evaluate(state)
+            v3 = page.evaluate(visible)
+            page.click('button[data-filter="triage"][data-value="drop"]')
+            page.wait_for_timeout(80)
+            d2 = page.evaluate(state)
+            v4 = page.evaluate(visible)
+            drop_pressed = page.evaluate("(id) => [...document.querySelector(`.feed-item[data-id=\"${id}\"] .triage`).querySelectorAll('.btn')].map((b) => b.getAttribute('aria-pressed'))", second_id)
+            drop_ok = (second_id not in v3 and d1["visible"] == total - 1 and d1["counts"]["drop"] == "1" and d1["status"].startswith(f"Showing {total - 1} of {total} items")
+                       and v4 == [second_id] and d2["dropped"] == [second_id] and drop_pressed == ["false", "false", "true"])
+            contrast = {}
+            for theme in self.themes:
+                page.evaluate("(t) => { document.documentElement.dataset.theme = t; }", theme)
+                page.wait_for_timeout(60)
+                a = page.evaluate(AUDIT_JS)
+                items_ = generic_checks(1440, a)
+                self.record("feed", 1440, f"{theme} dropped-state", items_)
+                contrast[theme] = a["pairs"][0]["ratio"] if a["pairs"] else None
+                drop_ok = drop_ok and all(c["pass"] for c in items_)
+            page.evaluate("() => { document.documentElement.dataset.theme = 'light'; }")
+            page.click('button[data-filter="triage"][data-value="all"]')
+            page.wait_for_timeout(80)
+            d3 = page.evaluate(state)
+            drop_ok = drop_ok and d3["visible"] == total - 1
+            self.record("feed", 1440, "light", [check("feedDropHides", drop_ok, {"hiddenAfterDrop": second_id not in v3, "visibleAfterDrop": d1["visible"], "droppedFilterShows": v4, "pressed": drop_pressed, "minContrastDroppedState": contrast, "afterEverything": d3["visible"]})])
+            print(f"{'feed':11}  1440 drop hides {'OK' if drop_ok else 'FAIL'} visible={d1['visible']}/{total} droppedFilter={len(v4)} contrast={contrast}")
+            # Home "Latest from the feed": the 5 newest non-dropped items from feed.json
+            page.goto(self.url("index"), wait_until="load")
+            try:
+                page.wait_for_selector("[data-feed-updated]:not([hidden])", timeout=4000)
+            except Exception:
+                pass
+            home = page.evaluate("""() => { const txt = (el) => (el ? el.textContent.replace(/\\s+/g, ' ').trim() : '');
+                return { titles: [...document.querySelectorAll('#latest-feed li h3 a')].map(txt), note: txt(document.querySelector('[data-feed-updated]')) }; }""")
+            exp_titles = [it["title"] for it in items if it["id"] != second_id][:5]
+            home_ok = home["titles"] == exp_titles and len(exp_titles) == 5 and home["note"] == f"Feed last updated {fmt_last_updated(data['meta'].get('generatedAt'))}. GitHub may delay or skip scheduled runs."
+            self.record("index", 1440, "light", [check("feedLatestHome", home_ok, {"dom": home["titles"], "expected": exp_titles, "note": home["note"]})])
+            print(f"{'index':11}  1440 latest from the feed {'OK' if home_ok else 'FAIL'} {len(home['titles'])} items, dropped item excluded={second_id not in [it['id'] for it in items if it['title'] in home['titles']]}")
+        finally:
+            ctx.close()
+
     # ---- screenshots ----------------------------------------------------------------------------
     def shots(self, browser, names, prefix):
         written = []
@@ -1080,6 +1315,7 @@ class Audit:
                         self.search(browser, w)
                     self.tracker_round_trip(browser)
                     self.plan_behaviours(browser)
+                    self.feed_behaviours(browser)
                 if self.args.shots:
                     report["shots"] = self.shots(browser, self.args.shot_pages or self.args.pages, self.args.shots)
             finally:
@@ -1131,7 +1367,10 @@ def parse_args(argv=None):
     ap.add_argument("--report", default="", help="write the JSON report here")
     ap.add_argument("--no-specials", action="store_true", help="skip the keyboard (s11), print (s12), reading-position (s06), search (index), tracker round trip (s12/index/s04) and My plan behaviour checks")
     ap.add_argument("--link-counts", default="", help="OF-7 link parity reference: page=markdownHttpLinks pairs, e.g. s12=21,s03=23 (verify.mjs computes them)")
+    ap.add_argument("--protocol-cells", default="", help="DR-5 reference: path of a JSON array with every cell string of the §17.1 table (verify.mjs writes it)")
     a = ap.parse_args(argv)
+    if a.protocol_cells:
+        PROTOCOL_CELLS.update(json.loads(pathlib.Path(a.protocol_cells).read_text(encoding="utf-8")))
     split = lambda s: [x.strip() for x in s.split(",") if x.strip()]  # noqa: E731
     a.pages = split(a.pages)
     a.extra_pages = [x for x in split(a.extra_pages) if x not in a.pages]

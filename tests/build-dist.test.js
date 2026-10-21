@@ -34,7 +34,16 @@ test('the summary line reports the expected numbers and every expected file exis
   assert.ok(!existsSync(`${out}.tmp`), 'the tmp dir was swapped away');
   assert.ok(statSync(path.join(out, 'search-index.json')).size <= 500 * 1024);
   assert.equal(readFileSync(path.join(out, 'assets', 'app.css'), 'utf8'), readFileSync(path.join(ROOT, 'assets', 'app.css'), 'utf8'));
-  assert.deepEqual(JSON.parse(readFileSync(path.join(out, 'data', 'feed.json'), 'utf8')), { generatedAt: null, windowDays: 30, items: [] });
+  // data/*.json are copied byte-for-byte; since FEAT-005 they carry a real local run (plan Decision 26)
+  for (const f of ['feed.json', 'meta.json']) assert.equal(readFileSync(path.join(out, 'data', f), 'utf8'), readFileSync(path.join(ROOT, 'data', f), 'utf8'), f);
+  const feed = JSON.parse(readFileSync(path.join(out, 'data', 'feed.json'), 'utf8'));
+  assert.match(feed.generatedAt, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/);
+  assert.equal(feed.windowDays, 30);
+  assert.ok(Array.isArray(feed.items) && feed.items.length > 0, 'real items from the local proof run');
+  const meta = JSON.parse(readFileSync(path.join(out, 'data', 'meta.json'), 'utf8'));
+  assert.equal(meta.runner, 'local');
+  assert.equal(Object.keys(meta.sources).length, 24);
+  assert.equal(meta.itemCount, feed.items.length);
   assert.deepEqual(result.site.stats.crossrefs.skipped.map((s) => s.ref).sort(), ['§2', '§4', '§43', '§43', '§5']);
   assert.deepEqual(result.site.stats.warnings, []);
 });

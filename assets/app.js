@@ -5,13 +5,12 @@ import { initKeys } from './keys.js';
 import { initSearch } from './search.js';
 import { init as initTracker } from './tracker.js';
 
-// Page modules, loaded on demand. Each module exports init({ keys }). Later FEATs fill the table:
-//   FEAT-005  feed: () => import('./feed.js')
+// Page modules, loaded on demand. Each module exports init({ keys }).
 const PAGE_MODULES = {
   home: () => import('./home.js'),
   section: () => import('./sections.js'),
   plan: () => import('./plan.js'),
-  feed: null,
+  feed: () => import('./feed.js'),
   '404': null,
 };
 

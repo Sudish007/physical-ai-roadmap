@@ -1,0 +1,375 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/ARKnIEHyTLQd2o/EEEJ9+3yJECs</id>
+  <title>arXiv Query: search_query=cat:cs.RO&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-10-21T13:11:23Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=cat:cs.RO&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>61217</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2610.28632v1</id>
+    <title>Joints, Camera, Action! Co-Generating 3D Motion and Video for Arbitrary Rigs</title>
+    <updated>2026-10-20T17:59:56Z</updated>
+    <link href="https://arxiv.org/abs/2610.28632v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.28632v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Video generation models can now depict remarkably realistic motion. Yet it is unclear how to use this motion beyond pixels: to animate a specific 3D asset and replay the animation in its 3D scene. For instance, a video model can show a monkey jumping over a crossbar, but it cannot return that jump as replayable 3D motion placed in the 3D scene. Here we present a model that directly co-generates the video and 3D motion for any supplied rig, along with a camera that registers this motion to the scene. Prior video-motion models either handle only human skeletons, often adding billions of parameters, or triangulate 3D motion from generated 2D pose maps. We instead keep 3D motion in a separate model that supports arbitrary skeletons, and connect it to a pretrained video model through a small set of cross-attention layers. This separation lets the motion model first learn how skeletons move from motion-only data, which is easier to obtain and augment than paired video. Additionally, our model learns to locate each joint in the video frames, which lets us recover the camera and place the 3D motion in the scene. To train across many skeletons, we use a generative video editor to place animated 3D assets in scenes suited to their actions, curating the edits so their known motion remains valid. Together with human and robot video, this yields nearly 200K training pairs. Our evaluations demonstrate that our model animates diverse rigs from text more faithfully than video-first pipelines, and its motion responds to the surrounding scene. It also turns video into rig motion, rig motion into video, and enables keyframe-based control of the 3D motion. Videos and additional results are available on our project page: https://research.nvidia.com/labs/par/projects/jca/.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T17:59:56Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Noam Rotstein</name>
+    </author>
+    <author>
+      <name>Yoad Tewel</name>
+    </author>
+    <author>
+      <name>Chen Tessler</name>
+    </author>
+    <author>
+      <name>Haggai Maron</name>
+    </author>
+    <author>
+      <name>Gal Chechik</name>
+    </author>
+    <author>
+      <name>Or Litany</name>
+    </author>
+    <author>
+      <name>Yoni Kasten</name>
+    </author>
+    <author>
+      <name>Yuval Atzmon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.28628v1</id>
+    <title>Learning Adaptable Dexterous Skills via Hybrid Dexterous Mimicking</title>
+    <updated>2026-10-20T17:59:32Z</updated>
+    <link href="https://arxiv.org/abs/2610.28628v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.28628v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dexterous multi-finger hands hold promise to unlock diverse skills like functional grasps, in-hand reorientation, and dynamic handover that the human-designed world assumes, yet existing learning recipes force a trade-off. Goal-reaching reinforcement learning generalizes to arbitrary object poses but, lacking any human prior, converges to unnatural and unreliable finger strategies; motion tracking reproduces human-like behavior from a single clip but cannot deviate from it. We present AdaDex, a goal-conditioned RL framework that turns a single hand-object trajectory of a few seconds---from mocap data or HOI reconstruction from in-the-wild RGB(D) video---into an adaptable dexterous skill. At the core of AdaDex is Hybrid Dexterous Mimicking: a shared policy is trained on two populations of massively parallel environments: motion tracking environments trained with dense motion tracking objective, which instill the human prior from human motion; and generalization environments with noised initial states and goals and a sparse object-success reward, which force the skill to work far off the reference. From seconds of human motion per skill, the resulting policies can learn diverse adaptable dexterous skills, such as functional grasping, object reposing, in-hand reorientation with finger gaiting, and dynamic behaviors like throw-and-catch. Our method outperforms baselines in terms of generalization and functionality, and we demonstrate transfer across simulators and to the real world. Project page: https://yuxuank.com/AdaDex/.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T17:59:32Z</published>
+    <arxiv:comment>Project page: https://yuxuank.com/AdaDex/</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Yuxuan Kuang</name>
+    </author>
+    <author>
+      <name>Jiashun Wang</name>
+    </author>
+    <author>
+      <name>Yixuan Sun</name>
+    </author>
+    <author>
+      <name>Yufei Ye</name>
+    </author>
+    <author>
+      <name>Sungjae Park</name>
+    </author>
+    <author>
+      <name>Umar Iqbal</name>
+    </author>
+    <author>
+      <name>Katerina Fragkiadaki</name>
+    </author>
+    <author>
+      <name>Shubham Tulsiani</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.28626v1</id>
+    <title>UniWALM: Unified World Action Language Model for Embodied Robot Control</title>
+    <updated>2026-10-20T17:59:04Z</updated>
+    <link href="https://arxiv.org/abs/2610.28626v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.28626v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Motivated by the human ability to integrate experience across language, perception, and action, we introduce UniWALM, a unified world-action-language model that learns video, action, and language in a single shared representation, where each modality is both a conditioning signal and a supervision target. We ask: can jointly generating language enrich this shared representation, improving manipulation and supporting memory-dependent behavior? Unlike prior approaches that attach a reasoning or vision-language model to a video-action backbone and run them as distinct stages, UniWALM unifies all three modalities inside a single mixture-of-transformers backbone whose per-modality diffusion heads co-denoise synchronously, decoding subtask and textual memory in the same pass as action with no separate planning stage; the generated language is re-consumed on the next step, closing a language-as-memory loop without an external planner or memory bank. To keep the action stream reliable under this richer objective, we further introduce Flow Matching with Correction (FMC), a training objective that teaches recovery from perturbed action trajectories at no inference-time cost. UniWALM consistently improves over same-backbone baselines (e.g., FastWAM) on compositional pick-and-place (MolmoSpaces) and across the memory-dependent subset of RMBench, where it reaches 34.5% without any pretrained language or reasoning model and exceeds Mem-0's keyframe-equipped setup (28.5%) using only a single anchor frame. On a real-world Find-the-Item task, generating textual memory lifts success from 11.1% to 61.1%, while state-of-the-art VLAs stay at or below chance (&lt;=33.3%).</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T17:59:04Z</published>
+    <arxiv:comment>Preprint: 25 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Rahul Sajnani</name>
+    </author>
+    <author>
+      <name>Diego Romeres</name>
+    </author>
+    <author>
+      <name>Mingyuan Zhang</name>
+    </author>
+    <author>
+      <name>Kai Gao</name>
+    </author>
+    <author>
+      <name>Carl Qi</name>
+    </author>
+    <author>
+      <name>Baichuan Huang</name>
+    </author>
+    <author>
+      <name>Srinath Sridhar</name>
+    </author>
+    <author>
+      <name>Dylan Randle</name>
+    </author>
+    <author>
+      <name>Lillian J. Ratliff</name>
+    </author>
+    <author>
+      <name>Jose Barreiros</name>
+    </author>
+    <author>
+      <name>Manikantan Nambi</name>
+    </author>
+    <author>
+      <name>Jeroen Vanbaar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.28624v1</id>
+    <title>Industrial ReMEmbR: Scaling Spatiotemporal Memory to Robot Fleets</title>
+    <updated>2026-10-20T17:58:32Z</updated>
+    <link href="https://arxiv.org/abs/2610.28624v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.28624v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Warehouse robot fleets continuously observe operational conditions, but preserving these observations as reusable semantic memory incurs substantial computation, communication, and storage costs. For example, explaining recurring aisle blockages can require reviewing video from multiple robots across several shifts. We present IndustrialRemembr, a shared spatiotemporal memory system that extends NVIDIA ReMEmbR to robot fleets and reduces server-side computation by generating scene descriptions only on demand. On each robot, an NVIDIA Jetson encodes video clips into retrieval embeddings with Cosmos-Embed1, vision tokens with Cosmos3-Edge, and reconstruction latents with the Wan2.2 VAE, without uploading raw camera frames. The encoding models are re-used to detect people in image patches, zeroing them out to support PII abstraction for GDPR-compliant deployments. We split Cosmos3-Edge at its vision-language boundary, placing the vision encoder on the robot and the language decoder on an on-premises server. A Nemotron agent retrieves memories by content, position, and time and queries the decoder using cached vision tokens. This design eliminates caption generation at write time, while cached-token decoding reproduces the unsplit model's output in all 450 tested decodes.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T17:58:32Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Jad Yammine</name>
+    </author>
+    <author>
+      <name>Malek Wahidi</name>
+    </author>
+    <author>
+      <name>Abrar Anwar</name>
+    </author>
+    <author>
+      <name>Yan Chang</name>
+    </author>
+    <author>
+      <name>Mihir Acharya</name>
+    </author>
+    <author>
+      <name>Anthony Rizk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.28623v1</id>
+    <title>Planning under Noise with Neural Operators</title>
+    <updated>2026-10-20T17:58:30Z</updated>
+    <link href="https://arxiv.org/abs/2610.28623v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.28623v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Planning under uncertain control execution noise requires reliable feedback policies across diverse environments. We introduce Planning Under Noise (PUN), a neural operator that learns noise-aware value fields for planning in unseen geometries. Building on an established screened-Poisson formulation of stochastic optimal control, we address two challenges: specifying boundary conditions that support navigation across varying geometries and efficiently computing fields with reliable gradients. Zero-Dirichlet obstacle boundaries terminate sampled paths at walls, weakening the goal signal along long routes and making it harder to estimate reliably. We instead impose reflecting Neumann conditions on obstacles and a Dirichlet condition at the goal, allowing sampled paths to continue exploring free space until they reach the target. To solve the resulting PDE without a configuration-space mesh, we extend a Monte Carlo (MC) solver, Walk on Stars (WoSt), to higher dimensions. However, local MC fluctuations can reverse estimated gradient directions and cause planning failures, making direct planning require costly sampling. PUN amortizes this computation by learning geometry-to-field mappings from noisy, partially converged Monte Carlo labels, avoiding expensive convergence for every training example. At inference, test-time scaling uses bounded local search guided by the predicted global field. We evaluate PUN on planning tasks across dimensions. Across four noise levels, PUN matches or outperforms all compared planners, achieving 95-100% success on the 4D replanning benchmark while maintaining the lowest runtime. At the highest tested noise level in 4D, PUN achieves 10.7-60.6% relative gains in success rate over other methods while running 3.29-32.15 times faster.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T17:58:30Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Michael Chen</name>
+    </author>
+    <author>
+      <name>Hong Chul Nam</name>
+    </author>
+    <author>
+      <name>Xi Deng</name>
+    </author>
+    <author>
+      <name>Anima Anandkumar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.28613v1</id>
+    <title>Physical Canvas: A Vision Tactile World Model For Robot Policy Evaluation And Learning</title>
+    <updated>2026-10-20T17:54:03Z</updated>
+    <link href="https://arxiv.org/abs/2610.28613v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.28613v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Evaluating and post-training robot policies through physical interaction is costly and difficult to scale, motivating action-conditioned world models as interactive simulators. However, visually plausible predictions can misrepresent contact dynamics, providing unreliable feedback for policy evaluation and learning. We introduce PhysCanvas, a state-consistent visuo-tactile world model for contact-rich robot manipulation. PhysCanvas unifies multi-view RGB, tactile images, marker displacement, task state, and actions within a unified vision space. All modalities share a video VAE and pretrained generative backbone, allowing optical touch to reuse visual and temporal priors. Motion images derived through forward kinematics and camera projection provide spatially aligned action conditioning, while an initial RGB anchor and updated reference observations guide sequential generation. Our consistency-aware post-training uses the frozen Scene Reward Model, Modality Reward Model, and State Reward Model to supervise scene preservation, visual-tactile compatibility, and agreement with real task outcomes. The resulting world model supports closed-loop policy rollouts for evaluation and provides imagined interactions and rewards for GRPO policy updates. Across four real-world manipulation tasks, when policies are rolled out in the world model, State Reward Model supervision increases the arithmetic mean of task-wise Pearson correlations between world-model and real-world success rates from 0.602 to 0.885. Policy post-training in the reward-guided world model further increases $π_{0.5}$'s mean real-world success rate from a 59.1% SFT baseline to 70.8%. These results demonstrate the value of unified multimodal modeling and consistency-aware post-training for robot policy evaluation and learning. Project page: https://zebinx.github.io/PhysCanvas_HomePage/.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T17:54:03Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Zebin Xing</name>
+    </author>
+    <author>
+      <name>Yuhang Zheng</name>
+    </author>
+    <author>
+      <name>Yupeng Zheng</name>
+    </author>
+    <author>
+      <name>Yichen Zhang</name>
+    </author>
+    <author>
+      <name>Zichen Li</name>
+    </author>
+    <author>
+      <name>Shangqing Zhou</name>
+    </author>
+    <author>
+      <name>Yujie Zang</name>
+    </author>
+    <author>
+      <name>Yuchen Liu</name>
+    </author>
+    <author>
+      <name>Zhongpu Xia</name>
+    </author>
+    <author>
+      <name>Haoran Li</name>
+    </author>
+    <author>
+      <name>Qichao Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.28589v1</id>
+    <title>AgenticRoboRL: Bringing Coding-Agent Post-Training to Agentic Robotics</title>
+    <updated>2026-10-20T17:41:09Z</updated>
+    <link href="https://arxiv.org/abs/2610.28589v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.28589v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Agentic robotics systems combine planners with robot harnesses to perform complex manipulation tasks. Recent work improves these systems through better harnesses and external memory, but relies on powerful closed-source models as planners and does not improve the planners' own capabilities. In contrast, coding agents have improved substantially by post-training the model itself. We therefore investigate whether post-training can also improve robot planners. However, applying it across robot harnesses requires accommodating different execution mechanisms, including VLA skill invocation and control-code generation. To this end, we introduce AgenticRoboRL, a framework for post-training robot planners across different harnesses. The training recipe combines supervised fine-tuning with multi-turn reinforcement learning. To accommodate different execution mechanisms, harness-specific adapters connect recorded planner interactions with task outcomes, enabling a common RL training pipeline while keeping execution components fixed. On LIBERO-PRO, AgenticRoboRL raises the success rate of a 9B-parameter planner from 18.1% to 71.0% without external memory, approaching the 72.1% achieved by Codex (GPT-5.5) with external memory. These results demonstrate post-training as an effective approach for improving robot planners. We will release the framework and trained planner checkpoints.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T17:41:09Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Xinxin Liu</name>
+    </author>
+    <author>
+      <name>Bingxin Xu</name>
+    </author>
+    <author>
+      <name>Wenrui Bao</name>
+    </author>
+    <author>
+      <name>Ming Li</name>
+    </author>
+    <author>
+      <name>Wentao Bao</name>
+    </author>
+    <author>
+      <name>Chen Chen</name>
+    </author>
+    <author>
+      <name>Yuzhang Shang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.28109v1</id>
+    <title>FIT-MAC: A Closed-Loop Multi-Agent Framework for Robust Vision-Language-Action Models</title>
+    <updated>2026-10-20T12:21:24Z</updated>
+    <link href="https://arxiv.org/abs/2610.28109v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.28109v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vision-language-action (VLA) models have achieved strong performance on standard robotic manipulation benchmarks. However, their reliability can degrade substantially when task conditions deviate from the nominal setting. Perturbations in object positions and task instructions may lead to complete task failure. Existing VLA policies generally lack an explicit runtime mechanism for distinguishing these failure modes and selecting an appropriate recovery strategy. To systematically mitigate this issue, we propose FIT-MAC, a failure-aware, closed-loop multi-agent control framework for improving the robustness of VLA policies at inference time. FIT-MAC augments a VLA policy with an inference-time control layer. First, the Planner Agent parses the language instruction into a structured task specification that captures the manipulation goal and spatial constraints, and the Grounder Agent resolves each instruction-level reference to a visual target. Next, the Verifier Agent tracks phase-specific execution progress, distinguishes target-binding errors from local execution failures, and determines whether intervention is warranted. The Correction Agent then routes permitted interventions to target rebinding or bounded grasping or placement recovery, depending on the failure type. When no intervention is required, the pretrained VLA remains the default action generator. Extensive experiments on LIBERO-PRO demonstrate that FIT-MAC improves robustness across multiple VLA backbones, consistently increasing success rates and achieving state-of-the-art performance under diverse perturbations.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T12:21:24Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Jiatong Li</name>
+    </author>
+    <author>
+      <name>Jisheng Dang</name>
+    </author>
+    <author>
+      <name>Qiangqiang Ma</name>
+    </author>
+    <author>
+      <name>Bimei Wang</name>
+    </author>
+    <author>
+      <name>Jingwen Zhao</name>
+    </author>
+    <author>
+      <name>Wenjun Ma</name>
+    </author>
+    <author>
+      <name>Juncheng Li</name>
+    </author>
+    <author>
+      <name>Hong Peng</name>
+    </author>
+    <author>
+      <name>Bin Hu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.27861v1</id>
+    <title>RoboCasa-Shift: Stage-Aware Robustness Evaluation of Vision-Language-Action Policies in Long-Horizon Household Manipulation</title>
+    <updated>2026-10-20T08:42:42Z</updated>
+    <link href="https://arxiv.org/abs/2610.27861v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.27861v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Vision-language-action (VLA) robustness is commonly summarized by aggregate task success, which obscures how individual executions change under distribution shifts and where failures emerge in long-horizon tasks. We introduce \textbf{RoboCasa-Shift}, a diagnostic robustness benchmark built on RoboCasa365 that combines controlled single-factor shifts, matched clean-perturbed rollouts in which each pair shares the same underlying settings and differs only in the target shift, and simulator-grounded stage-aware diagnostics. We evaluate GR00T N1.5 on four long-horizon tasks that pass a predefined clean-performance gate under four perturbation factors and three calibrated severity levels, including conditions that drive the evaluated policy to complete task failure, totaling 1,040 formal rollouts. Robustness responses vary substantially across factors and tasks, and increasing severity does not always produce monotonic degradation. For example, one camera condition yields $Δ\mathrm{SR}=0$ despite 8 of 80 matched episodes changing outcome. Stage-aware analysis further shows that the same end-to-end degradation can correspond to different execution-depth profiles. Camera $L_2$ and Gaussian blur $L_1$ both yield $Δ\mathrm{SR}=0.188$, yet their first-stage failure rates are 19.0\% and 36.4\%, respectively. Our findings suggest that VLA robustness should be viewed as a multi-dimensional property of execution rather than a single end-to-end performance measure, motivating evaluation protocols that jointly capture outcome degradation, paired outcome sensitivity, and failure progression. The code is publicly available at https://github.com/HaochengWang23/RoboCasa-Shift.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T08:42:42Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Haocheng Wang</name>
+    </author>
+    <author>
+      <name>Youquan Liu</name>
+    </author>
+    <author>
+      <name>Weiyu Guo</name>
+    </author>
+    <author>
+      <name>Aokai Zhang</name>
+    </author>
+    <author>
+      <name>Donghang Wu</name>
+    </author>
+    <author>
+      <name>Hongyu Liu</name>
+    </author>
+    <author>
+      <name>Sha Zhang</name>
+    </author>
+    <author>
+      <name>Weidong Yang</name>
+    </author>
+    <author>
+      <name>Ben Fei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.27414v1</id>
+    <title>Real-Time Disturbance-Aware Koopman Model Predictive Control for Quadrotors in Spatially Varying Winds</title>
+    <updated>2026-10-20T00:09:22Z</updated>
+    <link href="https://arxiv.org/abs/2610.27414v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.27414v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Reliable quadrotor flight in disturbed environments requires predictive models that remain accurate as unmodeled aerodynamic effects change during deployment. We introduce a disturbance-aware Koopman Control Family (DA-KCF) framework that preserves an offline-identified nominal model while learning only a disturbance-induced correction online. A reference-dependent KCF is first learned from simulation data and calibrated using limited hardware data. During deployment, the nominal KCF remains fixed while a lightweight residual ensemble learns a low-dimensional disturbance correction from causal state-command-state transitions. The Adaptive DA-KCF model is incorporated into MPC, where disturbance corrections are evaluated along the prediction horizon to optimize position and yaw references sent to the onboard stabilizing controller. Hardware experiments on a nano-quadrotor under uniform wind and a spatially varying wake demonstrate that online adaptation improves multi-step prediction and trajectory tracking as disturbance-induced model mismatch increases, while satisfying real-time control requirements.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-20T00:09:22Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Stella Kombo</name>
+    </author>
+    <author>
+      <name>Masih Haseli</name>
+    </author>
+    <author>
+      <name>Alejandro A. Stefan-Zavala</name>
+    </author>
+    <author>
+      <name>Peter I. Renn</name>
+    </author>
+    <author>
+      <name>Morteza Gharib</name>
+    </author>
+    <author>
+      <name>Joel W. Burdick</name>
+    </author>
+  </entry>
+</feed>
