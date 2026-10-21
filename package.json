@@ -10,7 +10,8 @@
     "build": "node scripts/build.mjs",
     "serve": "node scripts/serve.mjs",
     "test": "node --test \"tests/**/*.test.js\"",
-    "sync-content": "node scripts/sync-content.mjs"
+    "sync-content": "node scripts/sync-content.mjs",
+    "verify": "node scripts/verify.mjs"
   },
   "dependencies": {
     "markdown-it": "14.1.0"

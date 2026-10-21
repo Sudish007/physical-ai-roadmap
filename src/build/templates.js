@@ -46,7 +46,12 @@ export function cspValue({ baseUri = "'none'" } = {}) {
 
 const WORDMARK_SVG = raw('<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="20" width="7" height="8" fill="currentColor"/><rect x="12.5" y="12" width="7" height="16" fill="currentColor"/><rect x="21" y="4" width="7" height="24" fill="currentColor"/></svg>');
 const SEARCH_SVG = raw('<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>');
-const THEME_SVG = raw('<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>');
+// Theme icon (OF-3): three monochrome glyphs; CSS shows the one named by data-mode, which assets/theme.js updates.
+const THEME_SVG = raw('<svg viewBox="0 0 24 24" aria-hidden="true" data-mode="light">'
+  + '<g class="ic-light"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1l2.1-2.1M17 7l2.1-2.1" fill="none" stroke="currentColor" stroke-width="2"/></g>'
+  + '<g class="ic-dark"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor"/></g>'
+  + '<g class="ic-system"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></g>'
+  + '</svg>');
 
 const NAV = [
   { id: 'home', href: 'index.html', label: 'Home' },
@@ -87,6 +92,8 @@ export function footer() {
 
 /**
  * @param {{ page: string, title: string, headExtra?: Raw, body: Raw, baseHref?: string }} o
+ * The skip link is the first body child on every page except 404.html: under its `<base href>` a
+ * `#top` fragment would resolve to the site root instead of the current document.
  */
 export function shell(o) {
   const title = o.title ? `${o.title} — ${SITE.title}` : SITE.title;
@@ -102,7 +109,7 @@ ${o.baseHref ? `<base href="${escapeHtml(o.baseHref)}">\n` : ''}<meta http-equiv
 <link rel="stylesheet" href="assets/app.css">
 ${o.headExtra ? render(o.headExtra) : ''}</head>
 <body data-page="${escapeHtml(o.page)}">
-${render(header(o.page))}
+${o.baseHref ? '' : '<a class="skip" href="#top">Skip to content</a>\n'}${render(header(o.page))}
 ${render(o.body)}
 ${render(footer())}
 <script type="module" src="assets/app.js"></script>
@@ -218,7 +225,7 @@ export function homePage(o) {
   const plan10 = manifest.sets.find((s) => s.id === 'plan-10h');
   const overallTotal = nonPlan.reduce((a, s) => a + s.items.length, 0);
   const planRow = plan10 ? html`<li data-set="plan"><span>Plan months (§15, choose a plan first)</span><span class="count"><span data-done>0</span> of <span data-total>${plan10.items.length}</span></span><div class="bar"><i data-bar></i></div></li>` : '';
-  const body = html`<main class="page">
+  const body = html`<main class="page" id="top">
 <div class="hero-grid">
 <section class="hero">
 <p class="lead">${SITE.heroLead}</p>
