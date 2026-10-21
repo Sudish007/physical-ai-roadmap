@@ -1,3 +1,4 @@
 node_modules/
+dist/
+dist.tmp/
 *.log
-# dist/ handling (ignore vs. commit for deploy) is decided in FEAT-001.
