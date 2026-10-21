@@ -2,6 +2,13 @@
   "name": "physical-ai-roadmap",
   "version": "0.1.0",
   "private": true,
+  "description": "Physical AI, robotics and drone research roadmap with progress tracking and a low-noise research feed",
+  "homepage": "https://sudish007.github.io/physical-ai-roadmap/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sudish007/physical-ai-roadmap.git"
+  },
+  "license": "MIT",
   "type": "module",
   "engines": {
     "node": ">=24"

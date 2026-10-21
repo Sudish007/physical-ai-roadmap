@@ -5,3 +5,4 @@
 - Lines: 1510 (LF line endings, UTF-8, 296,305 characters)
 `content/roadmap.md` is the site's single source of truth. `npm run sync-content`
 re-copies it from the origin path when the origin exists; the build never reads the origin.
+Rights: content/roadmap.md is © Sudish Kumar, all rights reserved unless he changes it; the MIT licence in LICENSE covers the code only.

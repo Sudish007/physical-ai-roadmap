@@ -4,10 +4,17 @@
   "title": "build-deploy workflow, README, MIT licence, repo hygiene",
   "goal": "One GitHub Actions workflow (push main + dispatch + daily cron at an off-peak minute) that tests, fetches (on schedule/dispatch), commits data back, builds dist/ and deploys the whole folder to Pages in a single job; a plain README; MIT for the code with the content-rights note; package metadata.",
   "description": ".github/workflows/build-deploy.yml exactly as designed (D9), README.md (what/why/how to run, data flow, freshness sentence, source list, not-in-v1, licence), LICENSE (MIT), content/SOURCE.md rights sentence, package.json description/homepage/repository, .gitignore final.",
-  "status": "pending",
-  "dependsOn": ["FEAT-005"],
+  "status": "completed",
+  "dependsOn": [
+    "FEAT-005"
+  ],
   "files": [
-    ".github/workflows/build-deploy.yml", "README.md", "LICENSE", "content/SOURCE.md", "package.json", ".gitignore"
+    ".github/workflows/build-deploy.yml",
+    "README.md",
+    "LICENSE",
+    "content/SOURCE.md",
+    "package.json",
+    ".gitignore"
   ],
   "steps": [
     "Read FIRST: context.json, this file, plan.md Decisions 9, 22, 27, design.md 'Actions workflow' (copy its YAML), 'Decision notes' (no 'verified' as a descriptor), the brief's D5/D9/D10/§2D (in the step prompt), the Ahead README.md for tone and structure (no marketing), FEAT-001…005 findings (scripts, source table, statuses).",
@@ -19,10 +26,22 @@
     "Commit on main: `feat(FEAT-006): build-deploy workflow, README, MIT licence, repo hygiene` with the commands and results in the body. Never push."
   ],
   "acceptance": [
-    { "outcome": "One workflow does test → fetch → data commit → build → deploy in a single job on push, dispatch and an off-peak daily cron (D9).", "audit": "PyYAML scratch check: triggers, cron '23 2 * * *' (minute 23), permissions, one job, step order, continue-on-error on fetch and commit, 'git pull --rebase' before push, upload path 'dist'." },
-    { "outcome": "The README explains what, why and how without marketing (D5).", "audit": "contains the freshness sentence; none of the banned phrases; no 'verified' in title/first paragraph; lists every npm script that exists in package.json." },
-    { "outcome": "Licensing is explicit and does not pick a content licence for the owner.", "audit": "LICENSE is MIT with 2026 Sudish Kumar; README and content/SOURCE.md carry the all-rights-reserved sentence." },
-    { "outcome": "Nothing else regressed.", "audit": "`npm test` and `npm run build` pass." }
+    {
+      "outcome": "One workflow does test → fetch → data commit → build → deploy in a single job on push, dispatch and an off-peak daily cron (D9).",
+      "audit": "PyYAML scratch check: triggers, cron '23 2 * * *' (minute 23), permissions, one job, step order, continue-on-error on fetch and commit, 'git pull --rebase' before push, upload path 'dist'."
+    },
+    {
+      "outcome": "The README explains what, why and how without marketing (D5).",
+      "audit": "contains the freshness sentence; none of the banned phrases; no 'verified' in title/first paragraph; lists every npm script that exists in package.json."
+    },
+    {
+      "outcome": "Licensing is explicit and does not pick a content licence for the owner.",
+      "audit": "LICENSE is MIT with 2026 Sudish Kumar; README and content/SOURCE.md carry the all-rights-reserved sentence."
+    },
+    {
+      "outcome": "Nothing else regressed.",
+      "audit": "`npm test` and `npm run build` pass."
+    }
   ],
   "acceptance_criteria": [
     "workflow YAML passes the structural check",
@@ -43,5 +62,13 @@
   ],
   "commit": "feat(FEAT-006): build-deploy workflow, README, MIT licence, repo hygiene",
   "blocked_reason": null,
-  "findings": ""
+  "findings": [
+    "COMMIT: feat(FEAT-006) on main; the hash is recorded by the follow-up docs(FEAT-006) commit because a commit cannot contain its own hash (same procedure as FEAT-001…005).",
+    "WORKFLOW: .github/workflows/build-deploy.yml is the design.md \"Actions workflow\" YAML verbatim except the env var rename FEED_RUNNER=github-actions (plan Decision 27) and a 5-line top comment (one job because GITHUB_TOKEN pushes trigger no runs; whole dist/ upload, never a file list). PyYAML scratch check (venv python, $env:TEMP, removed): name \"Build and deploy\"; on.push.branches [main], paths-ignore [data/**]; workflow_dispatch; schedule cron \"23 2 * * *\" (minute 23); permissions exactly {contents, pages, id-token: write}; concurrency group build-deploy, cancel-in-progress false; 1 job build-deploy on ubuntu-latest, timeout-minutes 20, environment github-pages with url steps.deployment.outputs.page_url; 10 steps in order checkout@v7 (fetch-depth 0, persist-credentials true) → setup-node@v7 (24, cache npm) → npm ci → npm test → Fetch the §17 sources → Commit refreshed data back to main → npm run build → configure-pages@v6 (enablement true) → upload-pages-artifact@v5 (path dist) → deploy-pages@v5 (id deployment); fetch and commit share `if: github.event_name == schedule || workflow_dispatch` and continue-on-error true; commit run: git config github-actions[bot] + 41898282+github-actions[bot]@users.noreply.github.com, git add data/feed.json data/meta.json, exit 0 when nothing staged, commit \"data: refresh <UTC>\", git pull --rebase origin main BEFORE git push origin HEAD:main; the string \"secrets.\" does not occur.",
+    "SHIP STEP MUST KNOW: (1) enable Pages BEFORE the first dispatch: gh api -X POST repos/Sudish007/physical-ai-roadmap/pages -f build_type=workflow (configure-pages enablement:true is only the fallback); (2) dispatch: gh workflow run build-deploy.yml --repo Sudish007/physical-ai-roadmap; list: gh run list --repo Sudish007/physical-ai-roadmap --workflow build-deploy.yml --limit 3; watch: gh run watch <id> --repo Sudish007/physical-ai-roadmap --exit-status; (3) the push that creates the repo also triggers the workflow (push on main) — that run skips fetch/commit (push event) and deploys the committed data; the dispatch run fetches and commits data as github-actions[bot], so run git pull --rebase origin main before any further local commit; (4) NIST rule = plan.md Decision 8: if the live data/meta.json records HTTP 403 or \"blocked: 403 Cloudflare\" for reg-nist, remove the source from sources.config.mjs AND the README source table in the commit `fix(feed): drop NIST news feed (Cloudflare 403 from GitHub runners)`; (5) the live data commit will carry runner \"github-actions\"; tests/build-dist.test.js now accepts /^(local|github-actions)$/, so npm test stays green on the runner after the first data commit.",
+    "README: 116 lines. Sections: intro + live URL, Content, Run locally (table of all 7 npm scripts: ci, build, serve with both local URLs, test, fetch with its flags, verify with the venv/Edge requirement and VERIFY_PYTHON override, sync-content), How the feed works (data-flow block, registry summary, 30-day window, ok/empty/failed with error classes, 02:23 UTC + dispatch, the sentence \"GitHub may delay or skip scheduled runs\", Last updated = meta.generatedAt, no LLM/relay/keys), Sources table (24 rows: id, class, what, expected status, notes — yearly volumes empty most of the year, eGazette fails TLS, NIST provisional, reachability-only regulators; plus the 21 Oct 2026 local run numbers ok 16 · empty 7 · failed 1, 129 items), Progress tracker (localStorage only, versioned keys, export/import/reset), Repository layout, Deployment (one job, bot commit with pull --rebase, whole dist/, Pages build_type=workflow), Not in v1 (§10.4 newsletters/press feeds, OpenReview API, LLM summaries, relay/paid services, manual Scholar/venue/benchmark watches; reading-position restore IS included), Licence. Select-String: freshness sentence ×1; hand-coded / zero build step / view source / AI-powered ×0; \"verified\" ×0 in the whole file.",
+    "LICENCE + METADATA: LICENSE = standard MIT text, \"Copyright (c) 2026 Sudish Kumar\". content/SOURCE.md gained the line \"Rights: content/roadmap.md is © Sudish Kumar, all rights reserved unless he changes it; the MIT licence in LICENSE covers the code only.\" and the same line was added to the SOURCE.md template in scripts/sync-content.mjs (FEAT-001 finding: edit the template, not only the file) so npm run sync-content keeps it. package.json: description \"Physical AI, robotics and drone research roadmap with progress tracking and a low-noise research feed\", homepage https://sudish007.github.io/physical-ai-roadmap/, repository {type git, url git+https://github.com/Sudish007/physical-ai-roadmap.git}, license MIT (added; not in the FEAT text, harmless with private:true).",
+    "DEVIATIONS: (a) .gitignore unchanged = node_modules/, dist/, dist.tmp/, *.log — dist.tmp/ kept (plan Decision 22, FEAT-001) because src/build/write.js builds into dist.tmp and swaps, so a failed build would otherwise leave an untracked folder that git add could pick up; the FEAT text's \"nothing else\" is read as \"no new entries\". (b) Two files outside the FEAT's files list were edited on the strength of earlier findings: scripts/sync-content.mjs (template) and tests/build-dist.test.js (runner regex). (c) No browser audit run: no page, CSS or client file changed; npm test (136/136) and npm run build (summary line unchanged: pages 28 · h3 89 · chips 127 · crossrefs 113 rewritten / 5 skipped · manifest 7/10/36/12/14/26/9/24/24/8 · search 965 records · bytes 1375657) are the regression evidence.",
+    "TESTS: npm test = 136 tests / 30 files pass, 0 fail, ≈4.2 s, no network. The only test change is the meta.runner assertion in tests/build-dist.test.js."
+  ]
 }

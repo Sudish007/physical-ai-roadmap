@@ -41,7 +41,7 @@ test('the summary line reports the expected numbers and every expected file exis
   assert.equal(feed.windowDays, 30);
   assert.ok(Array.isArray(feed.items) && feed.items.length > 0, 'real items from the local proof run');
   const meta = JSON.parse(readFileSync(path.join(out, 'data', 'meta.json'), 'utf8'));
-  assert.equal(meta.runner, 'local');
+  assert.match(meta.runner, /^(local|github-actions)$/, 'data written by a local run or by the workflow (FEED_RUNNER)');
   assert.equal(Object.keys(meta.sources).length, 24);
   assert.equal(meta.itemCount, feed.items.length);
   assert.deepEqual(result.site.stats.crossrefs.skipped.map((s) => s.ref).sort(), ['§2', '§4', '§43', '§43', '§5']);
