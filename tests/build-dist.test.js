@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { writeSite } from '../src/build/write.js';
 import { splitSections } from '../src/build/parse.js';
 import { SECTION_FILES } from '../src/build/content-map.mjs';
+import { sources } from '../sources.config.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const content = readFileSync(path.join(ROOT, 'content', 'roadmap.md'), 'utf8');
@@ -42,7 +43,10 @@ test('the summary line reports the expected numbers and every expected file exis
   assert.ok(Array.isArray(feed.items) && feed.items.length > 0, 'real items from the local proof run');
   const meta = JSON.parse(readFileSync(path.join(out, 'data', 'meta.json'), 'utf8'));
   assert.match(meta.runner, /^(local|github-actions)$/, 'data written by a local run or by the workflow (FEED_RUNNER)');
-  assert.equal(Object.keys(meta.sources).length, 24);
+  // every registry source has a health row; rows of a source removed from the registry (plan Decision 8) may linger
+  // until the next fetch rewrites meta.json, so the count is >=, not ==, the registry size
+  for (const s of sources) assert.ok(meta.sources[s.id], `meta.sources lacks ${s.id}`);
+  assert.ok(Object.keys(meta.sources).length >= sources.length);
   assert.equal(meta.itemCount, feed.items.length);
   assert.deepEqual(result.site.stats.crossrefs.skipped.map((s) => s.ref).sort(), ['§2', '§4', '§43', '§43', '§5']);
   assert.deepEqual(result.site.stats.warnings, []);

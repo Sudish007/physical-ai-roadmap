@@ -90,7 +90,7 @@ test('fixture run with a throwing globalThis.fetch: statuses, dedupe, reachabili
   // meta shape
   assert.deepEqual(Object.keys(r.meta), ['generatedAt', 'durationMs', 'windowDays', 'itemCount', 'newItemCount', 'runner', 'sources']);
   assert.equal(r.meta.runner, 'test');
-  assert.equal(Object.keys(r.meta.sources).length, 24);
+  assert.deepEqual(Object.keys(r.meta.sources), sources.map((s) => s.id), 'one health row per registry source, in registry order');
   for (const [id, m] of Object.entries(r.meta.sources)) {
     assert.deepEqual(Object.keys(m), META_FIELDS, id);
     assert.equal(m.checkedAt, r.meta.generatedAt);

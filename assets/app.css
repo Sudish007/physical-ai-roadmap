@@ -76,6 +76,9 @@ p, ul, ol { margin: 0 0 1rem; }
 .small { font-size: var(--text-sm); }
 .xs { font-size: var(--text-xs); }
 .sr-only, .skip:not(:focus) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* The hidden attribute wins over every author display rule (an author `display: grid` would otherwise show a
+   [hidden] element: the My plan stat grid stayed visible before a plan was chosen) */
+[hidden] { display: none !important; }
 hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
 
 /* Spacing utilities (the mock used inline margins; the CSP forbids style attributes — DR-1) */
@@ -314,6 +317,7 @@ tr[data-done] > td:first-child strong { color: var(--fg-2); }
 .prevnext { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--line); flex-wrap: wrap; }
 .prevnext a { text-decoration: none; color: var(--fg); min-height: var(--control-h); display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.5rem; border: 1px solid var(--line); border-radius: var(--radius); max-width: 100%; }
 .prevnext a span.dir { color: var(--fg-2); font-size: var(--text-sm); white-space: nowrap; }
+.prevnext a[rel="next"] { margin-left: auto; }  /* stays right-aligned when a long title wraps the two links onto two rows */
 .prevnext a:hover { border-color: var(--fg); }
 
 /* ---------- Tables: scroll container, sticky first column, full width on wide screens ---------- */
@@ -452,10 +456,22 @@ table.protocol td.num, table.protocol th.num { min-width: 4rem; white-space: now
 /* My plan */
 .plan-grid { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1fr); align-items: start; }
 @media (min-width: 1440px) { .plan-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); } }
+/* Until a plan is chosen (data-ready="prompt", or before plan.js runs) the left column has nothing to show — its
+   month, gate, log and month-list sections are hidden — so the §4 questions take the full width, two per row from
+   1440px, instead of leaving the wider column empty (D4) */
+#plan-app:not([data-ready="plan"]) .plan-grid { grid-template-columns: minmax(0, 1fr); }
+#plan-app:not([data-ready="plan"]) .plan-grid > div:first-child { display: none; }
+@media (min-width: 1440px) { #plan-app:not([data-ready="plan"]) .q-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gap); } }
 /* Prompt card shown until a plan is chosen (quotes the §4 Q7 rule in a .notice) */
 .plan-prompt { border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.25rem 0.9rem; margin: 1.5rem 0 0; }
 .plan-prompt h2 { margin-top: 0; border: 0; padding: 0; font-size: 1.15rem; }
 .plan-prompt p, .plan-prompt .notice { max-width: 80ch; }
+/* From 1440px the card uses its width by composition: the explanation left, the quoted §4 Q7 rule right */
+@media (min-width: 1440px) {
+  .plan-prompt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--gap); align-items: start; }
+  .plan-prompt > h2, .plan-prompt > p:last-child { grid-column: 1 / -1; }
+  .plan-prompt > .notice { margin: 0 0 1rem; }
+}
 /* Setup row: columns of at least 20rem so the two hours buttons, the four track options (OF-9, one row from
    1024px) and the three data buttons each keep one line; one column on phones */
 .plan-setup { grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr)); }

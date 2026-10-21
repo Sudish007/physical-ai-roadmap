@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { applyFilters, sortNewest, triageOf, nextTriage, withTriage, triageCounts, statusLine, healthCounts, healthSummary, noteOrError, noticeStatus, unavailableText, matchesQuery, hostLabel, LISTINGS, CLASS_LABELS } from '../assets/lib/filter.js';
+import { applyFilters, sortNewest, triageOf, nextTriage, withTriage, triageCounts, statusLine, healthCounts, healthSummary, noteOrError, noticeStatus, unavailableText, matchesQuery, hostLabel, itemTags, LISTINGS, CLASS_LABELS } from '../assets/lib/filter.js';
 import { formatDate } from '../assets/lib/format.js';
 import { ROOT } from './helpers.js';
 
@@ -74,4 +74,13 @@ test('health counts, the DR-9 summary string and the D6 failure line against the
   assert.equal(hostLabel('https://www.ri.cmu.edu/p'), 'ri.cmu.edu');
   assert.equal(hostLabel('nope'), '');
   assert.deepEqual(Object.keys(CLASS_LABELS), ['arxiv', 'proceedings', 'lab', 'release', 'regulator']);
+});
+
+test('D5 item tags (feed page and home widget): the query or class label only when the source name does not already say it', () => {
+  assert.deepEqual(itemTags({ source: 'arXiv query: Robot-learning evaluation', sourceClass: 'arxiv', matchedQuery: 'Robot-learning evaluation', alsoMatched: [] }), []);
+  assert.deepEqual(itemTags({ source: 'arXiv cs.RO', sourceClass: 'arxiv', matchedQuery: 'cs.RO listing', alsoMatched: ['Safe autonomy'] }), ['cs.RO listing', 'also Safe autonomy']);
+  assert.deepEqual(itemTags({ source: 'gazebosim/gz-sim releases', sourceClass: 'release', matchedQuery: null, alsoMatched: [] }), [], 'the class label "Releases" is already in the source name');
+  assert.deepEqual(itemTags({ source: 'UPenn GRASP news', sourceClass: 'lab', matchedQuery: null }), ['Labs'], 'the class label, not the raw class');
+  assert.deepEqual(itemTags({ source: 'NIST news', sourceClass: 'regulator', matchedQuery: null, alsoMatched: [3, ''] }), ['Regulators'], 'non-string alsoMatched entries are ignored');
+  assert.deepEqual(itemTags({ sourceClass: 'other' }), ['other']);
 });

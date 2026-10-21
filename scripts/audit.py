@@ -108,7 +108,7 @@ THRESHOLDS = {
     # FEAT-004: specials
     "trackerRoundTrip": "D6/OF-2: tick Rung 0 on s12 -> rail 'Rungs 1 of 9', tr[data-done], both inputs checked -> index rungs row '1 of 9', overall 1 of 122 -> 10 h plan + month 1 ticked: plan row '1 of 24', overall 2 of 146 -> back on s12 the box is still checked",
     "answersCount": "Decision 21: with two non-empty plan.answers the s04 rail reads 'Answers (§4) 2 of 18' and the inline summary ' · Answers 2 of 18'",
-    "planPrompt": "empty storage: prompt card visible, its quote == the §4 Q7 rule text of plan-data.json, no stat grid, no month rows, no digits in the stat values",
+    "planPrompt": "empty storage at 1440: prompt card rendered, its quote == the §4 Q7 rule text of plan-data.json; stat grid and the empty left plan column not rendered (computed display); no month rows, no digits in the stat values; the §4 questions span the full grid width in two columns (9 rows for 18 questions)",
     "planExport": "Export JSON downloads physical-ai-roadmap-export-<YYYY-MM-DD>.json with version 1, keys tracker/plan/triage and the fixture plan",
     "planImportInvalid": "a version-2 file and a non-JSON file each show #plan-msg.error and leave localStorage byte-identical",
     "planImportMerge": "a valid file after confirm(): imported entries overwrite (track C, rung 3 added), the rest stays (10 h, start date, rung 0)",
@@ -368,9 +368,16 @@ PLAN_JS = r"""
   const stats = {};
   for (const s of document.querySelectorAll('#plan-stats .stat')) stats[s.dataset.stat] = [...s.children].map(txt).join(' ');
   const hidden = (id) => { const e = document.getElementById(id); return e ? e.hidden : null; };
+  // rendered = the computed display, not the attribute: an author display rule could override [hidden]
+  const rendered = (sel) => { const e = document.querySelector(sel); return e ? getComputedStyle(e).display !== 'none' : null; };
+  const questions = document.querySelector('#plan-questions');
+  const grid = document.querySelector('.plan-grid');
   return {
     ready: !!document.querySelector('#plan-app[data-ready]'),
     stats, statsHidden: hidden('plan-stats'), promptHidden: hidden('plan-prompt'),
+    statsRendered: rendered('#plan-stats'), promptRendered: rendered('#plan-prompt'), leftRendered: rendered('.plan-grid > div:first-child'),
+    questionsWidth: questions && grid ? Math.round(questions.getBoundingClientRect().width / grid.getBoundingClientRect().width * 100) / 100 : null,
+    questionTops: [...new Set([...document.querySelectorAll('.q-list > li')].map((li) => Math.round(li.getBoundingClientRect().top)))].length,
     pressedHours: [...document.querySelectorAll('button[data-hours]')].map((b) => b.getAttribute('aria-pressed')),
     pressedTrack: [...document.querySelectorAll('.track-group button')].map((b) => b.getAttribute('aria-pressed')),
     trackTops: [...document.querySelectorAll('.track-group button')].map((b) => Math.round(b.getBoundingClientRect().top)),
@@ -1119,10 +1126,13 @@ class Audit:
             s = page.evaluate(PLAN_JS)
             rule_html = page.request.get(f"{self.base}plan-data.json").json()["hoursRule"]["ruleHtml"]
             rule_text = re.sub(r"\s+", " ", html_mod.unescape(re.sub(r"<[^>]+>", "", rule_html))).strip()
-            ok = (s["promptHidden"] is False and s["ruleText"] == rule_text and rule_text.startswith("≤12 → 10 h plan. ≥18 → 20 h plan. Between →")
-                  and s["statsHidden"] is True and s["monthRows"] == 0 and all(v == "—" for v in s["statValues"]) and not re.search(r"\d", "".join(s["statValues"])))
-            self.record("plan", 1440, "light", [check("planPrompt", ok, {"promptHidden": s["promptHidden"], "rule": s["ruleText"][:90], "ruleMatches": s["ruleText"] == rule_text, "statsHidden": s["statsHidden"], "statValues": s["statValues"], "monthRows": s["monthRows"]})])
-            print(f"{'plan':11}  1440 prompt(empty storage) {'OK' if ok else 'FAIL'} rule={s['ruleText'][:50]!r}")
+            # the stat grid and the empty left column must not be rendered (computed display), and the §4 questions
+            # take the full grid width in two columns at 1440 (no empty half, D4)
+            ok = (s["promptHidden"] is False and s["promptRendered"] is True and s["ruleText"] == rule_text and rule_text.startswith("≤12 → 10 h plan. ≥18 → 20 h plan. Between →")
+                  and s["statsHidden"] is True and s["statsRendered"] is False and s["leftRendered"] is False and s["questionsWidth"] == 1.0 and s["questionTops"] == 9
+                  and s["monthRows"] == 0 and all(v == "—" for v in s["statValues"]) and not re.search(r"\d", "".join(s["statValues"])))
+            self.record("plan", 1440, "light", [check("planPrompt", ok, {"promptHidden": s["promptHidden"], "promptRendered": s["promptRendered"], "rule": s["ruleText"][:90], "ruleMatches": s["ruleText"] == rule_text, "statsHidden": s["statsHidden"], "statsRendered": s["statsRendered"], "leftRendered": s["leftRendered"], "questionsWidth": s["questionsWidth"], "questionRows": s["questionTops"], "statValues": s["statValues"], "monthRows": s["monthRows"]})])
+            print(f"{'plan':11}  1440 prompt(empty storage) {'OK' if ok else 'FAIL'} rule={s['ruleText'][:50]!r} statsRendered={s['statsRendered']} questions={s['questionsWidth']}x{s['questionTops']}rows")
         finally:
             ctx.close()
         # 2–4. with the fixture: export, invalid import, merge import, reset

@@ -463,8 +463,10 @@ function hostOfHref(href) {
 
 export function notFoundPage() {
   const body = html`<main class="page">
+<header class="article-head mt-6">
 <p class="kicker">404</p>
 <h1 id="top">Page not found</h1>
+</header>
 <p>There is no page at this address; the links below lead back into the site.</p>
 <nav class="btn-row" aria-label="Page not found">
 <a class="btn" href="index.html">Home</a>

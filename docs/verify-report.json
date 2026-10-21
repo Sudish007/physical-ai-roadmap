@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-21T15:30:57.032Z",
+ "generatedAt": "2026-10-21T17:01:30.979Z",
  "mode": "local",
  "base": "http://127.0.0.1:8790/physical-ai-roadmap/",
  "pages": [
@@ -58,7 +58,7 @@
   "externalHrefs": 428
  },
  "audit": {
-  "generatedAt": "2026-10-21T15:30:57.859986+00:00",
+  "generatedAt": "2026-10-21T17:01:31.802807+00:00",
   "base": "http://127.0.0.1:8790/physical-ai-roadmap/",
   "browser": "msedge headless, --disable-lcd-text",
   "pages": [
@@ -158,7 +158,7 @@
    "checkSize": "OF-2: every visible label.check is 44x44 and its native checkbox 22x22 (plan, index, section pages)",
    "trackerRoundTrip": "D6/OF-2: tick Rung 0 on s12 -> rail 'Rungs 1 of 9', tr[data-done], both inputs checked -> index rungs row '1 of 9', overall 1 of 122 -> 10 h plan + month 1 ticked: plan row '1 of 24', overall 2 of 146 -> back on s12 the box is still checked",
    "answersCount": "Decision 21: with two non-empty plan.answers the s04 rail reads 'Answers (§4) 2 of 18' and the inline summary ' · Answers 2 of 18'",
-   "planPrompt": "empty storage: prompt card visible, its quote == the §4 Q7 rule text of plan-data.json, no stat grid, no month rows, no digits in the stat values",
+   "planPrompt": "empty storage at 1440: prompt card rendered, its quote == the §4 Q7 rule text of plan-data.json; stat grid and the empty left plan column not rendered (computed display); no month rows, no digits in the stat values; the §4 questions span the full grid width in two columns (9 rows for 18 questions)",
    "planExport": "Export JSON downloads physical-ai-roadmap-export-<YYYY-MM-DD>.json with version 1, keys tracker/plan/triage and the fixture plan",
    "planImportInvalid": "a version-2 file and a non-JSON file each show #plan-msg.error and leave localStorage byte-identical",
    "planImportMerge": "a valid file after confirm(): imported entries overwrite (track C, rung 3 added), the rest stays (10 h, start date, rung 0)",
@@ -6510,14 +6510,14 @@
    {"name":"search","pass":true,"value":{"focused":{"id":"search","visible":true,"open":true},"groups":8,"panel":{"role":"dialog","label":"Search results","hits":17,"marks":20,"status":"17 results in 8 sections · Enter opens the first","right":374,"left":16,"top":122,"headerBottom":123,"overflow":true,"firstHref":"s01.html#the-ten-decisions"},"arrowDown":{"tag":"A","inPanel":true},"arrowDown2":1,"arrowUp":"search","afterEsc":{"hidden":true,"active":"BODY","open":false},"reopened":true,"landed":{"url":"http://127.0.0.1:8790/physical-ai-roadmap/s01.html#the-ten-decisions","hasTerm":true,"page":"section"}},"page":"index","width":390,"theme":"light"},
    {"name":"trackerRoundTrip","pass":true,"value":{"s12Before":{"count":"0 of 9","bar":"0%","checked":[false,false],"rowDone":false,"summary":"On this page · Rungs 0 of 9 done"},"s12After":{"count":"1 of 9","bar":"11%","checked":[true,true],"rowDone":true,"summary":"On this page · Rungs 1 of 9 done"},"index":{"rungs":"1 of 9","plan":"0 of 24","planLabel":"Plan months (§15, choose a plan first)","overall":"Overall 1 of 122 items (plan months are counted once a plan is chosen). Stored in this browser only."},"indexWithPlan":{"rungs":"1 of 9","plan":"1 of 24","planLabel":"Plan months, 10 h plan (§15)","overall":"Overall 2 of 146 items (plan months are counted once a plan is chosen). Stored in this browser only."},"s12Back":{"count":"1 of 9","bar":"11%","checked":[true,true],"rowDone":true,"summary":"On this page · Rungs 1 of 9 done"}},"page":"s12","width":1440,"theme":"light"},
    {"name":"answersCount","pass":true,"value":{"label":"Answers (§4)","count":"2 of 18","summary":"On this page · Answers 2 of 18","bar":"11%"},"page":"s04","width":1440,"theme":"light"},
-   {"name":"planPrompt","pass":true,"value":{"promptHidden":false,"rule":"≤12 → 10 h plan. ≥18 → 20 h plan. Between → follow the 10 h contract; treat surplus as rec","ruleMatches":true,"statsHidden":true,"statValues":["—","—","—","—","—"],"monthRows":0},"page":"plan","width":1440,"theme":"light"},
+   {"name":"planPrompt","pass":true,"value":{"promptHidden":false,"promptRendered":true,"rule":"≤12 → 10 h plan. ≥18 → 20 h plan. Between → follow the 10 h contract; treat surplus as rec","ruleMatches":true,"statsHidden":true,"statsRendered":false,"leftRendered":false,"questionsWidth":1,"questionRows":9,"statValues":["—","—","—","—","—"],"monthRows":0},"page":"plan","width":1440,"theme":"light"},
    {"name":"planExport","pass":true,"value":{"filename":"physical-ai-roadmap-export-2026-10-21.json","keys":["exportedAt","plan","tracker","triage","version"],"version":1,"plan":{"hoursPerWeek":10,"track":"B","startDate":"2026-10-07","weeklyHours":{"1":10,"2":8},"answers":{}}},"page":"plan","width":1440,"theme":"light"},
-   {"name":"planImportInvalid","pass":true,"value":[{"file":"version2","msg":{"text":"Import failed: Unsupported export version 2; this site reads version 1. Nothing was changed.","error":true,"hidden":false,"visible":true,"role":"alert"},"unchanged":true},{"file":"notjson","msg":{"text":"Import failed: pair-import-notjson-1712.json is not valid JSON. Nothing was changed.","error":true,"hidden":false,"visible":true,"role":"alert"},"unchanged":true}],"page":"plan","width":1440,"theme":"light"},
-   {"name":"planImportMerge","pass":true,"value":{"trackerIds":["s12:rungs:0","s12:rungs:3"],"plan":{"hoursPerWeek":10,"track":"C","startDate":"2026-10-07","weeklyHours":{"1":10,"2":8},"answers":{}},"msg":"Imported 2 entries from pair-import-good-1712.json.","pressedTrack":["false","false","false","true"]},"page":"plan","width":1440,"theme":"light"},
+   {"name":"planImportInvalid","pass":true,"value":[{"file":"version2","msg":{"text":"Import failed: Unsupported export version 2; this site reads version 1. Nothing was changed.","error":true,"hidden":false,"visible":true,"role":"alert"},"unchanged":true},{"file":"notjson","msg":{"text":"Import failed: pair-import-notjson-29632.json is not valid JSON. Nothing was changed.","error":true,"hidden":false,"visible":true,"role":"alert"},"unchanged":true}],"page":"plan","width":1440,"theme":"light"},
+   {"name":"planImportMerge","pass":true,"value":{"trackerIds":["s12:rungs:0","s12:rungs:3"],"plan":{"hoursPerWeek":10,"track":"C","startDate":"2026-10-07","weeklyHours":{"1":10,"2":8},"answers":{}},"msg":"Imported 2 entries from pair-import-good-29632.json.","pressedTrack":["false","false","false","true"]},"page":"plan","width":1440,"theme":"light"},
    {"name":"planReset","pass":true,"value":{"physical-ai-roadmap.v1.tracker":null,"physical-ai-roadmap.v1.plan":null,"physical-ai-roadmap.v1.triage":null,"physical-ai-roadmap.v1.theme":"dark"},"page":"plan","width":1440,"theme":"light"},
    {"name":"feedClassFilter","pass":true,"value":{"all":129,"releases":15,"expected":15,"status":"Showing 15 of 129 items in the window. Items older than 30 d","pressed":{"class":"release","triage":"all"}},"page":"feed","width":1440,"theme":"light"},
    {"name":"feedQueryFilter","pass":true,"value":{"label":"Aerial autonomy","visible":12,"expected":12,"afterToggle":129},"page":"feed","width":1440,"theme":"light"},
-   {"name":"feedKeepPersists","pass":true,"value":{"afterClick":["true","false","false"],"stored":{"state":"keep","at":"2026-10-21T15:33:23.771Z"},"afterReload":["true","false","false"],"counts":{"keep":"1","later":"0","drop":"0"}},"page":"feed","width":1440,"theme":"light"},
+   {"name":"feedKeepPersists","pass":true,"value":{"afterClick":["true","false","false"],"stored":{"state":"keep","at":"2026-10-21T17:03:32.967Z"},"afterReload":["true","false","false"],"counts":{"keep":"1","later":"0","drop":"0"}},"page":"feed","width":1440,"theme":"light"},
    {"name":"noOverflow","pass":true,"value":{"scrollWidth":1440,"clientWidth":1440},"page":"feed","width":1440,"theme":"light dropped-state"},
    {"name":"bodyFont","pass":true,"value":19.2,"page":"feed","width":1440,"theme":"light dropped-state"},
    {"name":"minFont12","pass":true,"value":{"minFont":14.4,"el":"kbd"},"page":"feed","width":1440,"theme":"light dropped-state"},
@@ -6960,7 +6960,7 @@
        "rootFs": 17,
        "minFont": 12.75,
        "minFontEl": "span.chip",
-       "textEls": 215,
+       "textEls": 211,
        "contentRatio": 0.9,
        "gutter": 16,
        "controls": [
@@ -7009,7 +7009,7 @@
          "bg": "#ffffff",
          "ratio": 7.23,
          "large": false,
-         "count": 96,
+         "count": 92,
          "sample": "Evidence cutoff 20 October 2026. Everyth",
          "el": "p.cutoff"
         },
@@ -7058,7 +7058,7 @@
        "rootFs": 17,
        "minFont": 12.75,
        "minFontEl": "span.chip",
-       "textEls": 215,
+       "textEls": 211,
        "contentRatio": 0.9,
        "gutter": 16,
        "controls": [
@@ -7107,7 +7107,7 @@
          "bg": "#0f1215",
          "ratio": 8.38,
          "large": false,
-         "count": 96,
+         "count": 92,
          "sample": "Evidence cutoff 20 October 2026. Everyth",
          "el": "p.cutoff"
         },
@@ -7158,7 +7158,7 @@
        "rootFs": 17,
        "minFont": 12.75,
        "minFontEl": "span.chip",
-       "textEls": 215,
+       "textEls": 211,
        "contentRatio": 0.911,
        "gutter": 16,
        "controls": [
@@ -7207,7 +7207,7 @@
          "bg": "#ffffff",
          "ratio": 7.23,
          "large": false,
-         "count": 96,
+         "count": 92,
          "sample": "Evidence cutoff 20 October 2026. Everyth",
          "el": "p.cutoff"
         },
@@ -7256,7 +7256,7 @@
        "rootFs": 17,
        "minFont": 12.75,
        "minFontEl": "span.chip",
-       "textEls": 215,
+       "textEls": 211,
        "contentRatio": 0.911,
        "gutter": 16,
        "controls": [
@@ -7305,7 +7305,7 @@
          "bg": "#0f1215",
          "ratio": 8.38,
          "large": false,
-         "count": 96,
+         "count": 92,
          "sample": "Evidence cutoff 20 October 2026. Everyth",
          "el": "p.cutoff"
         },
@@ -7356,7 +7356,7 @@
        "rootFs": 17,
        "minFont": 12.75,
        "minFontEl": "span.chip",
-       "textEls": 215,
+       "textEls": 211,
        "contentRatio": 0.918,
        "gutter": 16,
        "controls": [
@@ -7405,7 +7405,7 @@
          "bg": "#ffffff",
          "ratio": 7.23,
          "large": false,
-         "count": 96,
+         "count": 92,
          "sample": "Evidence cutoff 20 October 2026. Everyth",
          "el": "p.cutoff"
         },
@@ -7454,7 +7454,7 @@
        "rootFs": 17,
        "minFont": 12.75,
        "minFontEl": "span.chip",
-       "textEls": 215,
+       "textEls": 211,
        "contentRatio": 0.918,
        "gutter": 16,
        "controls": [
@@ -7503,7 +7503,7 @@
          "bg": "#0f1215",
          "ratio": 8.38,
          "large": false,
-         "count": 96,
+         "count": 92,
          "sample": "Evidence cutoff 20 October 2026. Everyth",
          "el": "p.cutoff"
         },
@@ -7554,7 +7554,7 @@
        "rootFs": 17.65,
        "minFont": 13.2375,
        "minFontEl": "span.chip",
-       "textEls": 215,
+       "textEls": 211,
        "contentRatio": 0.93,
        "gutter": 28.7,
        "controls": [
@@ -7603,7 +7603,7 @@
          "bg": "#ffffff",
          "ratio": 7.23,
          "large": false,
-         "count": 96,
+         "count": 92,
          "sample": "Evidence cutoff 20 October 2026. Everyth",
          "el": "p.cutoff"
         },
@@ -7652,7 +7652,7 @@
        "rootFs": 17.65,
        "minFont": 13.2375,
        "minFontEl": "span.chip",
-       "textEls": 215,
+       "textEls": 211,
        "contentRatio": 0.93,
        "gutter": 28.7,
        "controls": [
@@ -7701,7 +7701,7 @@
          "bg": "#0f1215",
          "ratio": 8.38,
          "large": false,
-         "count": 96,
+         "count": 92,
          "sample": "Evidence cutoff 20 October 2026. Everyth",
          "el": "p.cutoff"
         },
@@ -7752,7 +7752,7 @@
        "rootFs": 18.16,
        "minFont": 13.62,
        "minFontEl": "kbd",
-       "textEls": 217,
+       "textEls": 213,
        "contentRatio": 0.93,
        "gutter": 35.84,
        "controls": [
@@ -7801,7 +7801,7 @@
          "bg": "#ffffff",
          "ratio": 7.23,
          "large": false,
-         "count": 97,
+         "count": 93,
          "sample": "/",
          "el": "kbd"
         },
@@ -7850,7 +7850,7 @@
        "rootFs": 18.16,
        "minFont": 13.62,
        "minFontEl": "kbd",
-       "textEls": 217,
+       "textEls": 213,
        "contentRatio": 0.93,
        "gutter": 35.84,
        "controls": [
@@ -7899,7 +7899,7 @@
          "bg": "#0f1215",
          "ratio": 8.38,
          "large": false,
-         "count": 97,
+         "count": 93,
          "sample": "/",
          "el": "kbd"
         },
@@ -7950,7 +7950,7 @@
        "rootFs": 19.2,
        "minFont": 14.4,
        "minFontEl": "kbd",
-       "textEls": 217,
+       "textEls": 213,
        "contentRatio": 0.93,
        "gutter": 50.4,
        "controls": [
@@ -7999,7 +7999,7 @@
          "bg": "#ffffff",
          "ratio": 7.23,
          "large": false,
-         "count": 97,
+         "count": 93,
          "sample": "/",
          "el": "kbd"
         },
@@ -8048,7 +8048,7 @@
        "rootFs": 19.2,
        "minFont": 14.4,
        "minFontEl": "kbd",
-       "textEls": 217,
+       "textEls": 213,
        "contentRatio": 0.93,
        "gutter": 50.4,
        "controls": [
@@ -8097,7 +8097,7 @@
          "bg": "#0f1215",
          "ratio": 8.38,
          "large": false,
-         "count": 97,
+         "count": 93,
          "sample": "/",
          "el": "kbd"
         },
@@ -8148,7 +8148,7 @@
        "rootFs": 20.4,
        "minFont": 15.3,
        "minFontEl": "kbd",
-       "textEls": 217,
+       "textEls": 213,
        "contentRatio": 0.93,
        "gutter": 67.2,
        "controls": [
@@ -8197,7 +8197,7 @@
          "bg": "#ffffff",
          "ratio": 7.23,
          "large": false,
-         "count": 97,
+         "count": 93,
          "sample": "/",
          "el": "kbd"
         },
@@ -8246,7 +8246,7 @@
        "rootFs": 20.4,
        "minFont": 15.3,
        "minFontEl": "kbd",
-       "textEls": 217,
+       "textEls": 213,
        "contentRatio": 0.93,
        "gutter": 67.2,
        "controls": [
@@ -8295,7 +8295,7 @@
          "bg": "#0f1215",
          "ratio": 8.38,
          "large": false,
-         "count": 97,
+         "count": 93,
          "sample": "/",
          "el": "kbd"
         },
@@ -8346,7 +8346,7 @@
        "rootFs": 22,
        "minFont": 16.5,
        "minFontEl": "kbd",
-       "textEls": 217,
+       "textEls": 213,
        "contentRatio": 0.93,
        "gutter": 89.6,
        "controls": [
@@ -8395,7 +8395,7 @@
          "bg": "#ffffff",
          "ratio": 7.23,
          "large": false,
-         "count": 97,
+         "count": 93,
          "sample": "/",
          "el": "kbd"
         },
@@ -8444,7 +8444,7 @@
        "rootFs": 22,
        "minFont": 16.5,
        "minFontEl": "kbd",
-       "textEls": 217,
+       "textEls": 213,
        "contentRatio": 0.93,
        "gutter": 89.6,
        "controls": [
@@ -8493,7 +8493,7 @@
          "bg": "#0f1215",
          "ratio": 8.38,
          "large": false,
-         "count": 97,
+         "count": 93,
          "sample": "/",
          "el": "kbd"
         },
@@ -25520,7 +25520,7 @@
     "1920": 0.93,
     "2560": 0.93
    },
-   "elapsedSeconds": 188.1
+   "elapsedSeconds": 152.3
   }
  },
  "external": {
@@ -25548,7 +25548,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1230,
+    "ms": 1680,
     "note": ""
    },
    {
@@ -25558,7 +25558,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 177,
+    "ms": 687,
     "note": ""
    },
    {
@@ -25568,7 +25568,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 991,
+    "ms": 1039,
     "note": ""
    },
    {
@@ -25578,7 +25578,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1783,
+    "ms": 3021,
     "note": ""
    },
    {
@@ -25588,7 +25588,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 194,
+    "ms": 761,
     "note": ""
    },
    {
@@ -25598,7 +25598,7 @@
     "status": 404,
     "class": "404",
     "headStatus": 404,
-    "ms": 1884,
+    "ms": 3523,
     "note": ""
    },
    {
@@ -25608,7 +25608,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1188,
+    "ms": 1502,
     "note": ""
    },
    {
@@ -25618,7 +25618,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 217,
+    "ms": 461,
     "note": ""
    },
    {
@@ -25628,7 +25628,7 @@
     "status": 302,
     "class": "3xx",
     "headStatus": 302,
-    "ms": 164,
+    "ms": 302,
     "note": "redirects to http://jama.jamanetwork.com/article.aspx?doi=10.1001/jama.1983.03330370053031"
    },
    {
@@ -25638,7 +25638,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 409,
+    "ms": 451,
     "note": ""
    },
    {
@@ -25648,7 +25648,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1453,
+    "ms": 1526,
     "note": ""
    },
    {
@@ -25658,7 +25658,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 745,
+    "ms": 725,
     "note": ""
    },
    {
@@ -25668,7 +25668,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 356,
+    "ms": 426,
     "note": ""
    },
    {
@@ -25678,7 +25678,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 578,
+    "ms": 722,
     "note": ""
    },
    {
@@ -25688,7 +25688,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1301,
+    "ms": 1417,
     "note": ""
    },
    {
@@ -25698,7 +25698,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 283,
+    "ms": 495,
     "note": ""
    },
    {
@@ -25708,7 +25708,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 998,
+    "ms": 1866,
     "note": ""
    },
    {
@@ -25718,7 +25718,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 375,
+    "ms": 729,
     "note": ""
    },
    {
@@ -25728,7 +25728,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1002,
+    "ms": 1592,
     "note": ""
    },
    {
@@ -25738,7 +25738,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 120,
+    "ms": 709,
     "note": ""
    },
    {
@@ -25748,7 +25748,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 443,
+    "ms": 641,
     "note": ""
    },
    {
@@ -25758,7 +25758,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1141,
+    "ms": 1634,
     "note": ""
    },
    {
@@ -25768,7 +25768,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1126,
+    "ms": 1530,
     "note": ""
    },
    {
@@ -25778,7 +25778,7 @@
     "status": 503,
     "class": "5xx",
     "headStatus": 503,
-    "ms": 1548,
+    "ms": 2020,
     "note": ""
    },
    {
@@ -25788,7 +25788,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 367,
+    "ms": 453,
     "note": ""
    },
    {
@@ -25798,7 +25798,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 385,
+    "ms": 1084,
     "note": ""
    },
    {
@@ -25808,7 +25808,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 658,
+    "ms": 1179,
     "note": ""
    },
    {
@@ -25818,7 +25818,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1329,
+    "ms": 3924,
     "note": ""
    },
    {
@@ -25828,7 +25828,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 473,
+    "ms": 990,
     "note": ""
    },
    {
@@ -25838,7 +25838,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 499,
+    "ms": 674,
     "note": ""
    },
    {
@@ -25848,7 +25848,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 2328,
+    "ms": 1848,
     "note": ""
    },
    {
@@ -25858,7 +25858,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 131,
+    "ms": 501,
     "note": ""
    },
    {
@@ -25868,7 +25868,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1156,
+    "ms": 983,
     "note": ""
    },
    {
@@ -25878,7 +25878,7 @@
     "status": 301,
     "class": "3xx",
     "headStatus": 301,
-    "ms": 280,
+    "ms": 647,
     "note": "redirects to https://betaflight.com/docs/development/SITL"
    },
    {
@@ -25888,7 +25888,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 625,
+    "ms": 853,
     "note": ""
    },
    {
@@ -25898,7 +25898,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 965,
+    "ms": 1471,
     "note": ""
    },
    {
@@ -25908,7 +25908,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 124,
+    "ms": 248,
     "note": ""
    },
    {
@@ -25918,7 +25918,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 221,
+    "ms": 259,
     "note": ""
    },
    {
@@ -25928,7 +25928,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 1807,
+    "ms": 1978,
     "note": ""
    },
    {
@@ -25938,7 +25938,7 @@
     "status": 200,
     "class": "2xx",
     "headStatus": 200,
-    "ms": 419,
+    "ms": 929,
     "note": ""
    }
   ]
@@ -26128,7 +26128,7 @@
  "summary": {
   "pass": true,
   "failures": [],
-  "elapsedSeconds": 189.3,
+  "elapsedSeconds": 153.3,
   "pagesAudited": 28,
   "widths": [
    320,

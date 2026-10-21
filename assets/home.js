@@ -2,6 +2,7 @@
 // line, read from data/feed.json and data/meta.json. Progress rows are filled by tracker.js (FEAT-004).
 import { KEYS, get, isPlainObject } from './lib/store.js';
 import { formatLastUpdated, formatDate } from './lib/format.js';
+import { itemTags } from './lib/filter.js';
 
 export const LATEST_COUNT = 5;
 
@@ -45,8 +46,8 @@ function renderItem(item) {
   if (item.source) meta.append(span(item.source));
   const date = formatDate(item.publishedAt);
   if (date) meta.append(span(date));
-  const tag = item.matchedQuery || item.sourceClass;
-  if (tag) meta.append(span(tag));
+  // the same rule as the Feed page: the query or class label only when the source name does not already carry it (D5)
+  for (const tag of itemTags(item)) meta.append(span(tag));
   li.append(h3, meta);
   return li;
 }

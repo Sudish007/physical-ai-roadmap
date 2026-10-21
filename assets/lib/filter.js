@@ -117,3 +117,21 @@ export function noticeStatus(entry, formatDate) {
 export function hostLabel(url) {
   try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; }
 }
+
+/**
+ * The matched query or the class label, shown only when the source name does not already say it (D5: each fact
+ * once), plus "also <other matching queries>". Shared by the Feed page and the home "Latest from the feed" widget.
+ */
+export function itemTags(item) {
+  const tags = [];
+  const source = String(item.source || '').toLowerCase();
+  if (item.matchedQuery) {
+    if (!source.includes(item.matchedQuery.toLowerCase())) tags.push(item.matchedQuery);
+  } else {
+    const cls = CLASS_LABELS[item.sourceClass] || item.sourceClass || '';
+    if (cls && !source.includes(cls.toLowerCase())) tags.push(cls);
+  }
+  const also = Array.isArray(item.alsoMatched) ? item.alsoMatched.filter((l) => typeof l === 'string' && l) : [];
+  if (also.length) tags.push(`also ${also.join(', ')}`);
+  return tags;
+}

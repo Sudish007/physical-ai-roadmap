@@ -3,7 +3,7 @@
 // notices' reachability status and the single "Last updated" derivation (assets/lib/format.js).
 import { KEYS, get, set, isPlainObject } from './lib/store.js';
 import { formatLastUpdated, formatDate } from './lib/format.js';
-import { applyFilters, triageOf, nextTriage, withTriage, triageCounts, statusLine, healthCounts, healthSummary, noteOrError, noticeStatus, hostLabel, CLASS_LABELS } from './lib/filter.js';
+import { applyFilters, triageOf, nextTriage, withTriage, triageCounts, statusLine, healthCounts, healthSummary, noteOrError, noticeStatus, hostLabel, itemTags } from './lib/filter.js';
 
 const TRIAGE_LABELS = { keep: 'Keep', later: 'Read later', drop: 'Drop' };
 
@@ -30,21 +30,6 @@ function h(tag, attrs = {}, ...children) {
 
 function readTriage() {
   return get(KEYS.triage, isPlainObject) || {};
-}
-
-/** The matched query or the class, shown only when the source name does not already say it (D5: each fact once), plus the other matching queries. */
-export function itemTags(item) {
-  const tags = [];
-  const source = String(item.source || '').toLowerCase();
-  if (item.matchedQuery) {
-    if (!source.includes(item.matchedQuery.toLowerCase())) tags.push(item.matchedQuery);
-  } else {
-    const cls = CLASS_LABELS[item.sourceClass] || item.sourceClass || '';
-    if (cls && !source.includes(cls.toLowerCase())) tags.push(cls);
-  }
-  const also = Array.isArray(item.alsoMatched) ? item.alsoMatched.filter((l) => typeof l === 'string' && l) : [];
-  if (also.length) tags.push(`also ${also.join(', ')}`);
-  return tags;
 }
 
 function renderItem(item) {
