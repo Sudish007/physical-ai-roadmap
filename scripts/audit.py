@@ -4,7 +4,7 @@ Driven by scripts/verify.mjs (`npm run verify`), which serves dist/ and passes -
 
     python scripts/audit.py --base http://127.0.0.1:8790/physical-ai-roadmap/ --pages index,s12 \
         [--extra-pages s00,s01] [--widths 320,390,2560] [--themes light,dark] \
-        [--shots <prefix>] [--report <path>]
+        [--shots <prefix> [--shot-pages index,s12,plan,feed] [--shot-extras s03:1920:light]] [--report <path>]
 
 Generic checks run for every page x width x theme with all <details> opened: horizontal overflow, body
 font size, smallest visible text, content box ratio, composited WCAG contrast, control heights, gutters,
@@ -37,6 +37,11 @@ from playwright.sync_api import sync_playwright  # noqa: E402  (after the stdout
 DEFAULT_WIDTHS = [320, 360, 390, 820, 1024, 1440, 1920, 2560]
 HEIGHTS = {320: 568, 360: 740, 390: 844, 820: 1180, 1024: 768, 1440: 900, 1920: 1080, 2560: 1440}
 SHOT_VIEWPORTS = [(390, 844, 1), (1440, 900, 1), (1920, 1080, 1), (2560, 1440, 0.75)]
+# FEAT-007: the committed screenshot set = SHOT_PAGES x SHOT_VIEWPORTS x --themes plus one extra shot per
+# SHOT_EXTRAS entry ("<page>:<width>:<theme>"); every PNG is viewport-only and <= SHOT_MAX_SIDE px per side.
+SHOT_PAGES = ["index", "s12", "plan", "feed"]
+SHOT_EXTRAS = "s03:1920:light"
+SHOT_MAX_SIDE = 1920
 DEFAULT_THEMES = ["light", "dark"]
 FOOTER_TEXT = "Sudish Kumar · sudish.dev · GitHub repository · Evidence cutoff 20 Oct 2026 · Not legal advice"
 THEME_KEY = "physical-ai-roadmap.v1.theme"
@@ -124,6 +129,8 @@ THRESHOLDS = {
     "feedKeepPersists": "Keep on the first item: aria-pressed true, chip 'Kept 1', physical-ai-roadmap.v1.triage[id].state == 'keep'; identical after a reload",
     "feedDropHides": "Drop on the second item hides it (N-1 visible, 'Dropped 1') until the Dropped filter is active, where it is the only item, marked .dropped with Drop pressed; the generic checks (contrast AA) pass in that state in both themes; 'Everything' restores N-1",
     "feedLatestHome": "index 'Latest from the feed' lists the 5 newest non-dropped feed.json titles in order and the note 'Feed last updated <formatLastUpdated>. GitHub may delay or skip scheduled runs.'",
+    # FEAT-007: screenshots (--shots)
+    "shotPixels": "each PNG's IHDR size == viewport x device_scale_factor (390x844, 1440x900, 1920x1080; 2560x1440 at 0.75 -> 1920x1080) and <= 1920 px per side",
 }
 
 # DR-2: the ten best-10 titles (also asserted by tests/home-data.test.js)
@@ -488,11 +495,33 @@ def fmt_last_updated(value):
 
 
 def feed_data(page):
-    """data/feed.json and data/meta.json of the served site (cached per base URL)."""
+    """data/feed.json and data/meta.json of the served site (cached per base URL; `?cb=<ts>` defeats a CDN cache on --live)."""
     base = page.url.rsplit("/", 1)[0] + "/"
     if base not in _FEED_DATA:
-        _FEED_DATA[base] = {"feed": page.request.get(f"{base}data/feed.json").json(), "meta": page.request.get(f"{base}data/meta.json").json()}
+        cb = int(datetime.datetime.now(datetime.timezone.utc).timestamp())
+        _FEED_DATA[base] = {"feed": page.request.get(f"{base}data/feed.json?cb={cb}").json(), "meta": page.request.get(f"{base}data/meta.json?cb={cb}").json()}
     return _FEED_DATA[base]
+
+
+def png_size(path):
+    """(width, height) from the PNG IHDR chunk, or None when the file is not a PNG."""
+    with open(path, "rb") as f:
+        head = f.read(24)
+    if head[:8] != b"\x89PNG\r\n\x1a\n" or head[12:16] != b"IHDR":
+        return None
+    return int.from_bytes(head[16:20], "big"), int.from_bytes(head[20:24], "big")
+
+
+def parse_shot_extras(text):
+    """'s03:1920:light,index:390:dark' -> [(page, width, theme), ...]; the width must be one of SHOT_VIEWPORTS."""
+    out = []
+    widths = {w for (w, _h, _d) in SHOT_VIEWPORTS}
+    for part in [p.strip() for p in text.split(",") if p.strip()]:
+        page, width, theme = part.split(":")
+        if int(width) not in widths or theme not in DEFAULT_THEMES:
+            raise ValueError(f"bad --shot-extras entry {part!r}: width must be one of {sorted(widths)}, theme light|dark")
+        out.append((page, int(width), theme))
+    return out
 
 
 def sorted_items(feed):
@@ -1269,27 +1298,45 @@ class Audit:
         finally:
             ctx.close()
 
-    # ---- screenshots ----------------------------------------------------------------------------
-    def shots(self, browser, names, prefix):
+    # ---- screenshots (FEAT-007) -----------------------------------------------------------------
+    def shot(self, browser, name, w, h, dsf, theme, prefix):
+        """One viewport-only PNG <prefix><name>-<w>-<theme>.png; the theme is seeded in storage so the real bootstrap paints it."""
+        ctx = browser.new_context(viewport={"width": w, "height": h}, device_scale_factor=dsf, reduced_motion="reduce")
+        ctx.add_init_script("(() => { try { localStorage.setItem('%s', '%s'); } catch (e) {} })();" % (THEME_KEY, theme))
+        if name in PAGE_INIT:
+            ctx.add_init_script(PAGE_INIT[name])
+        try:
+            page = ctx.new_page()
+            page.goto(self.url(name), wait_until="load")
+            if name in ("index", "feed"):
+                try:  # home.js / feed.js fill their lists after fetching data/*.json
+                    page.wait_for_selector("[data-feed-updated]:not([hidden]), [data-feed-list][data-feed-ready]", timeout=4000)
+                except Exception:
+                    pass
+            page.wait_for_timeout(120)
+            out = pathlib.Path(f"{prefix}{name}-{w}-{theme}.png")
+            out.parent.mkdir(parents=True, exist_ok=True)
+            page.screenshot(path=str(out), full_page=False)
+            expected = [round(w * dsf), round(h * dsf)]
+            measured = png_size(out)
+            ok = measured is not None and list(measured) == expected and max(measured) <= SHOT_MAX_SIDE
+            self.record(name, w, theme, [check("shotPixels", ok, {"file": str(out), "expected": expected, "measured": list(measured) if measured else None})])
+            print(f"shot {out} {measured[0]}x{measured[1]} {'OK' if ok else 'FAIL'}" if measured else f"shot {out} not a PNG FAIL")
+            return {"file": str(out), "page": name, "width": w, "theme": theme, "dsf": dsf, "pixels": expected, "measured": list(measured) if measured else None, "ok": ok}
+        finally:
+            ctx.close()
+
+    def shots(self, browser, names, prefix, extras=()):
+        """SHOT_PAGES x SHOT_VIEWPORTS x --themes, then the extras; returns the list the report carries as `shots`."""
         written = []
         for name in names:
             for (w, h, dsf) in SHOT_VIEWPORTS:
                 for theme in self.themes:
-                    ctx = browser.new_context(viewport={"width": w, "height": h}, device_scale_factor=dsf, reduced_motion="reduce")
-                    ctx.add_init_script("(() => { try { localStorage.setItem('%s', '%s'); } catch (e) {} })();" % (THEME_KEY, theme))
-                    if name in PAGE_INIT:
-                        ctx.add_init_script(PAGE_INIT[name])
-                    try:
-                        page = ctx.new_page()
-                        page.goto(self.url(name), wait_until="load")
-                        page.wait_for_timeout(120)
-                        out = pathlib.Path(f"{prefix}{name}-{w}-{theme}.png")
-                        out.parent.mkdir(parents=True, exist_ok=True)
-                        page.screenshot(path=str(out), full_page=False)
-                        written.append({"file": str(out), "page": name, "width": w, "theme": theme, "pixels": [round(w * dsf), round(h * dsf)]})
-                        print("shot", out)
-                    finally:
-                        ctx.close()
+                    written.append(self.shot(browser, name, w, h, dsf, theme, prefix))
+        viewport = {w: (h, dsf) for (w, h, dsf) in SHOT_VIEWPORTS}
+        for (name, w, theme) in extras:
+            h, dsf = viewport[w]
+            written.append(self.shot(browser, name, w, h, dsf, theme, prefix))
         return written
 
     # ---- driver ---------------------------------------------------------------------------------
@@ -1317,7 +1364,7 @@ class Audit:
                     self.plan_behaviours(browser)
                     self.feed_behaviours(browser)
                 if self.args.shots:
-                    report["shots"] = self.shots(browser, self.args.shot_pages or self.args.pages, self.args.shots)
+                    report["shots"] = self.shots(browser, self.args.shot_pages, self.args.shots, self.args.shot_extras)
             finally:
                 browser.close()
         failures = [c for c in self.checks if not c["pass"]]
@@ -1363,7 +1410,8 @@ def parse_args(argv=None):
     ap.add_argument("--widths", default=",".join(map(str, DEFAULT_WIDTHS)))
     ap.add_argument("--themes", default=",".join(DEFAULT_THEMES))
     ap.add_argument("--shots", default="", help="PNG path prefix; writes <prefix><page>-<width>-<theme>.png (viewport only, 2560 at dsf 0.75)")
-    ap.add_argument("--shot-pages", default="", help="pages to screenshot (default: --pages)")
+    ap.add_argument("--shot-pages", default=",".join(SHOT_PAGES), help="pages to screenshot at every SHOT_VIEWPORTS x --themes (default: %s)" % ",".join(SHOT_PAGES))
+    ap.add_argument("--shot-extras", default=SHOT_EXTRAS, help="extra single shots as <page>:<width>:<theme>, comma-separated (default: %s; '' for none)" % SHOT_EXTRAS)
     ap.add_argument("--report", default="", help="write the JSON report here")
     ap.add_argument("--no-specials", action="store_true", help="skip the keyboard (s11), print (s12), reading-position (s06), search (index), tracker round trip (s12/index/s04) and My plan behaviour checks")
     ap.add_argument("--link-counts", default="", help="OF-7 link parity reference: page=markdownHttpLinks pairs, e.g. s12=21,s03=23 (verify.mjs computes them)")
@@ -1377,6 +1425,7 @@ def parse_args(argv=None):
     a.widths = [int(x) for x in split(a.widths)]
     a.themes = split(a.themes)
     a.shot_pages = split(a.shot_pages)
+    a.shot_extras = parse_shot_extras(a.shot_extras)
     for pair in split(a.link_counts):
         name, _, n = pair.partition("=")
         if name and n.isdigit():

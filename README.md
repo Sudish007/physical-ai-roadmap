@@ -102,6 +102,43 @@ dist/               build output (gitignored; deployed by the workflow)
 
 `.github/workflows/build-deploy.yml` is one job: `npm ci`, `npm test`, then on schedule or dispatch `node scripts/fetch.mjs` and a data commit back to `main` as `github-actions[bot]` (with `git pull --rebase origin main` before the push), then `npm run build` and a Pages deployment of the whole `dist/` folder. Pushes made with the default `GITHUB_TOKEN` do not trigger other runs, which is why fetch, build and deploy sit in the same job. The fetch and commit steps are `continue-on-error`, so a network-dark runner still redeploys the site from the committed data. Pages must be enabled with `build_type=workflow` before the first dispatch.
 
+## Verification
+
+`npm run verify` (after `npm run build`) is the acceptance tool for the built site and, with `--live <url>`, for the deployed one. One run:
+
+1. serves `dist/` under `/physical-ai-roadmap/` on the first free port in 8790–8799 and stops the server afterwards (local mode only);
+2. crawls every internal link and fragment of the 28 pages; in live mode it fetches each page from the site and HEADs every asset;
+3. runs `scripts/audit.py` in Microsoft Edge (Playwright, headless, `--disable-lcd-text`, reduced motion) on the seven page types `index`, `s03`, `s12`, `s15`, `appendix-a`, `plan`, `feed` at 320, 360, 390, 820, 1024, 1440, 1920 and 2560 px, light and dark; `--all` adds the generic checks on the other 21 pages;
+4. samples 40 external links deterministically (hosts sorted, every k-th host, first URL each; HEAD then GET, 10 s timeout, browser-like headers) and counts the answers as 2xx / 3xx / 403 / 404 / 429 / 5xx / timeout / other. A 403 or anti-bot answer is reported, never counted as a failure; `--no-external` skips the sample;
+5. prints the per-source table of `data/meta.json` (id, class, status, newest item, error or note), read with a cache-busting query in live mode;
+6. writes the report and exits 1 on any threshold failure (2 when the venv Python is missing).
+
+| Check | Threshold |
+|---|---|
+| Horizontal overflow | `documentElement.scrollWidth <= clientWidth` on every page, width and theme, with all `<details>` open |
+| Body font | computed `body` font-size ≥17 px at ≤390, 21–22.5 px at 2560 |
+| Text floor | smallest visible text ≥12 px |
+| Content box | content box of the page ≥ 0.88 × innerWidth at 1920 and 2560 |
+| Gutters | `padding-inline` of the page equals `clamp(16px, 3.5vw, 96px)` ±0.5 px |
+| Contrast | every composited text/background pair ≥4.5:1 (≥3.0:1 for text ≥24 px or bold ≥18.66 px) |
+| Controls | every button, text/date/number/search input, select and checkbox label 40–44 px tall |
+| Light first paint | with `prefers-color-scheme: dark` emulated and empty storage, `data-theme` is `light` and the background `#ffffff` |
+| Theme control | `t` ×3 and click ×3 cycle Light → Dark → System → Light with the aria-label, `data-theme` and icon following |
+| Markup | 0 `style` attributes before scripts, 0 CSP violations, wide tables `min-width = cols × 13rem` |
+| Links | 0 broken internal links or fragments; link count per section equals the markdown's |
+| Page behaviours | keyboard shortcuts, print layout, reading position, search, tracker round trip, My plan import/export/reset, feed filters and triage, feed geometry (no overlapping boxes) |
+| Screenshots | each PNG has its expected pixel size and no side above 1920 px |
+
+Flags: `--pages a,b` (pages that get every check), `--all`, `--widths`, `--themes`, `--shots <prefix>`, `--live <url>`, `--no-external`, `--no-browser`, `--report <path>`.
+
+The report is `docs/verify-report.json` (`summary` carries pages, widths, themes, check count, failures, minimum contrast per theme, smallest text size, body size at 390 and 2560, content ratio at 1920 and 2560, the external-link counts and the screenshot list; `external.links` lists every sampled link with its status; `meta.rows` is the source table). `--shots docs/screenshots/` writes 33 viewport-only screenshots to `docs/screenshots/`: `index`, `s12`, `plan`, `feed` at 390×844, 1440×900, 1920×1080 and 2560×1440 (device scale 0.75, so a 1920×1080 file) in both themes, plus `s03` at 1920 light. The committed set is the evidence the code review and the ship step rely on; the My plan shots show a fixture plan (10 h, Track B, started 14 days before the run).
+
+The ship step runs the same checks against the deployed site and commits the live screenshots as `docs/screenshots/live-*.png`:
+
+```
+node scripts/verify.mjs --live https://sudish007.github.io/physical-ai-roadmap/ --shots docs/screenshots/live-
+```
+
 ## Not in v1
 
 - The §10.4 newsletters and press feeds (Import AI, IEEE Spectrum robotics, OSRA Discourse, Robot Report podcast). The feed scope is §17.
