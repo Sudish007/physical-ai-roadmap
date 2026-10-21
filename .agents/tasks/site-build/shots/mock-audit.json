@@ -1,0 +1,6332 @@
+{
+ "generatedAt": "2026-10-21T05:23:58.478352+00:00",
+ "browser": "msedge headless, --disable-lcd-text (grayscale antialiasing; see OF-7)",
+ "thresholds": {
+  "feedItemGeometry": "no two child boxes of a .feed-item intersect; title left edge == content column left edge (OF-1)",
+  "overflow": "scrollWidth <= clientWidth",
+  "bodyFont": ">=17px at 390, >=21px at 2560",
+  "minFont": ">=12px",
+  "contentRatio": ">=0.88 at >=1920",
+  "contrast": "AA: >=4.5 normal, >=3.0 large",
+  "controls": "40-44px (checkbox hit target 44)"
+ },
+ "pages": {
+  "home": {
+   "320": {
+    "light": {
+     "scrollWidth": 320,
+     "clientWidth": 320,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 201,
+     "contentBox": 288,
+     "contentRatio": 0.9,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 74,
+       "sample": "Evidence cutoff 20 October 2026. Everyth",
+       "el": "p.cutoff"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 83,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 320,
+     "clientWidth": 320,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 201,
+     "contentBox": 288,
+     "contentRatio": 0.9,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 74,
+       "sample": "Evidence cutoff 20 October 2026. Everyth",
+       "el": "p.cutoff"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 83,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    }
+   },
+   "360": {
+    "light": {
+     "scrollWidth": 360,
+     "clientWidth": 360,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 201,
+     "contentBox": 328,
+     "contentRatio": 0.911,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 74,
+       "sample": "Evidence cutoff 20 October 2026. Everyth",
+       "el": "p.cutoff"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 83,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 360,
+     "clientWidth": 360,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 201,
+     "contentBox": 328,
+     "contentRatio": 0.911,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 74,
+       "sample": "Evidence cutoff 20 October 2026. Everyth",
+       "el": "p.cutoff"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 83,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    }
+   },
+   "390": {
+    "light": {
+     "scrollWidth": 390,
+     "clientWidth": 390,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 201,
+     "contentBox": 358,
+     "contentRatio": 0.918,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 74,
+       "sample": "Evidence cutoff 20 October 2026. Everyth",
+       "el": "p.cutoff"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 83,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 390,
+     "clientWidth": 390,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 201,
+     "contentBox": 358,
+     "contentRatio": 0.918,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 74,
+       "sample": "Evidence cutoff 20 October 2026. Everyth",
+       "el": "p.cutoff"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 83,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    }
+   },
+   "820": {
+    "light": {
+     "scrollWidth": 820,
+     "clientWidth": 820,
+     "bodyFont": 17.65,
+     "minFont": 13.2375,
+     "minFontEl": "span.chip",
+     "textEls": 201,
+     "contentBox": 763,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 74,
+       "sample": "Evidence cutoff 20 October 2026. Everyth",
+       "el": "p.cutoff"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 83,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 820,
+     "clientWidth": 820,
+     "bodyFont": 17.65,
+     "minFont": 13.2375,
+     "minFontEl": "span.chip",
+     "textEls": 201,
+     "contentBox": 763,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 74,
+       "sample": "Evidence cutoff 20 October 2026. Everyth",
+       "el": "p.cutoff"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 83,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    }
+   },
+   "1024": {
+    "light": {
+     "scrollWidth": 1024,
+     "clientWidth": 1024,
+     "bodyFont": 18.16,
+     "minFont": 13.62,
+     "minFontEl": "kbd",
+     "textEls": 203,
+     "contentBox": 952,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 75,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 84,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1024,
+     "clientWidth": 1024,
+     "bodyFont": 18.16,
+     "minFont": 13.62,
+     "minFontEl": "kbd",
+     "textEls": 203,
+     "contentBox": 952,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 75,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 84,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    }
+   },
+   "1440": {
+    "light": {
+     "scrollWidth": 1440,
+     "clientWidth": 1440,
+     "bodyFont": 19.2,
+     "minFont": 14.4,
+     "minFontEl": "kbd",
+     "textEls": 203,
+     "contentBox": 1339,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 75,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 84,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1440,
+     "clientWidth": 1440,
+     "bodyFont": 19.2,
+     "minFont": 14.4,
+     "minFontEl": "kbd",
+     "textEls": 203,
+     "contentBox": 1339,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 75,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 84,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    }
+   },
+   "1920": {
+    "light": {
+     "scrollWidth": 1920,
+     "clientWidth": 1920,
+     "bodyFont": 20.4,
+     "minFont": 15.3,
+     "minFontEl": "kbd",
+     "textEls": 203,
+     "contentBox": 1786,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 75,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 84,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1920,
+     "clientWidth": 1920,
+     "bodyFont": 20.4,
+     "minFont": 15.3,
+     "minFontEl": "kbd",
+     "textEls": 203,
+     "contentBox": 1786,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 75,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 84,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    }
+   },
+   "2560": {
+    "light": {
+     "scrollWidth": 2560,
+     "clientWidth": 2560,
+     "bodyFont": 22,
+     "minFont": 16.5,
+     "minFontEl": "kbd",
+     "textEls": 203,
+     "contentBox": 2381,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 75,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 84,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 2560,
+     "clientWidth": 2560,
+     "bodyFont": 22,
+     "minFont": 16.5,
+     "minFontEl": "kbd",
+     "textEls": 203,
+     "contentBox": 2381,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 5,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a70",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 30,
+       "sample": "\u00a72 Seven sessions, exactly 10 mandatory ",
+       "el": "a.more"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 75,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 8,
+       "sample": "Labels used throughout \u00a70",
+       "el": "h2"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 84,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "Read from \u00a70",
+       "el": "a.btn"
+      }
+     ]
+    }
+   }
+  },
+  "section": {
+   "320": {
+    "light": {
+     "scrollWidth": 320,
+     "clientWidth": 320,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 316,
+     "contentBox": 288,
+     "contentRatio": 0.9,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 48,
+       "sample": "0 How to read this report",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 3,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 29,
+       "sample": "Section 12 of 24",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 16,
+       "sample": "UNCERTAIN",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 193,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 320,
+     "clientWidth": 320,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 316,
+     "contentBox": 288,
+     "contentRatio": 0.9,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 3,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 48,
+       "sample": "0 How to read this report",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 29,
+       "sample": "Section 12 of 24",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 16,
+       "sample": "UNCERTAIN",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 193,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    }
+   },
+   "360": {
+    "light": {
+     "scrollWidth": 360,
+     "clientWidth": 360,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 316,
+     "contentBox": 328,
+     "contentRatio": 0.911,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 48,
+       "sample": "0 How to read this report",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 3,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 29,
+       "sample": "Section 12 of 24",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 16,
+       "sample": "UNCERTAIN",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 193,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 360,
+     "clientWidth": 360,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 316,
+     "contentBox": 328,
+     "contentRatio": 0.911,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 3,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 48,
+       "sample": "0 How to read this report",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 29,
+       "sample": "Section 12 of 24",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 16,
+       "sample": "UNCERTAIN",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 193,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    }
+   },
+   "390": {
+    "light": {
+     "scrollWidth": 390,
+     "clientWidth": 390,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 316,
+     "contentBox": 358,
+     "contentRatio": 0.918,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 48,
+       "sample": "0 How to read this report",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 3,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 29,
+       "sample": "Section 12 of 24",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 16,
+       "sample": "UNCERTAIN",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 193,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 390,
+     "clientWidth": 390,
+     "bodyFont": 17,
+     "minFont": 12.75,
+     "minFontEl": "span.chip",
+     "textEls": 316,
+     "contentBox": 358,
+     "contentRatio": 0.918,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 3,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 48,
+       "sample": "0 How to read this report",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 29,
+       "sample": "Section 12 of 24",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 16,
+       "sample": "UNCERTAIN",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 193,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    }
+   },
+   "820": {
+    "light": {
+     "scrollWidth": 820,
+     "clientWidth": 820,
+     "bodyFont": 17.65,
+     "minFont": 13.2375,
+     "minFontEl": "span.chip",
+     "textEls": 316,
+     "contentBox": 763,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 48,
+       "sample": "0 How to read this report",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 3,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 29,
+       "sample": "Section 12 of 24",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 16,
+       "sample": "UNCERTAIN",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 193,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 820,
+     "clientWidth": 820,
+     "bodyFont": 17.65,
+     "minFont": 13.2375,
+     "minFontEl": "span.chip",
+     "textEls": 316,
+     "contentBox": 763,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 3,
+       "sample": "STALE-BUT-FOUNDATIONAL",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 48,
+       "sample": "0 How to read this report",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 29,
+       "sample": "Section 12 of 24",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 16,
+       "sample": "UNCERTAIN",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 193,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    }
+   },
+   "1024": {
+    "light": {
+     "scrollWidth": 1024,
+     "clientWidth": 1024,
+     "bodyFont": 18.16,
+     "minFont": 13.62,
+     "minFontEl": "kbd",
+     "textEls": 342,
+     "contentBox": 952,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 24,
+       "sample": "12.1 Purchase rule",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 4,
+       "sample": "12",
+       "el": "span.num"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 54,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 17,
+       "sample": "12 Project ladder, hardware gates, and d",
+       "el": "a"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 216,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1024,
+     "clientWidth": 1024,
+     "bodyFont": 18.16,
+     "minFont": 13.62,
+     "minFontEl": "kbd",
+     "textEls": 342,
+     "contentBox": 952,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 4,
+       "sample": "12",
+       "el": "span.num"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 24,
+       "sample": "12.1 Purchase rule",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 54,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 17,
+       "sample": "12 Project ladder, hardware gates, and d",
+       "el": "a"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 216,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    }
+   },
+   "1440": {
+    "light": {
+     "scrollWidth": 1440,
+     "clientWidth": 1440,
+     "bodyFont": 19.2,
+     "minFont": 14.4,
+     "minFontEl": "kbd",
+     "textEls": 351,
+     "contentBox": 1339,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 18,
+       "sample": "\u00a715.4",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 4,
+       "sample": "12",
+       "el": "span.num"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 63,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 18,
+       "sample": "12 Project ladder, hardware gates, and d",
+       "el": "a"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 221,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1440,
+     "clientWidth": 1440,
+     "bodyFont": 19.2,
+     "minFont": 14.4,
+     "minFontEl": "kbd",
+     "textEls": 351,
+     "contentBox": 1339,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 4,
+       "sample": "12",
+       "el": "span.num"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 18,
+       "sample": "\u00a715.4",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 63,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 18,
+       "sample": "12 Project ladder, hardware gates, and d",
+       "el": "a"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 221,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    }
+   },
+   "1920": {
+    "light": {
+     "scrollWidth": 1920,
+     "clientWidth": 1920,
+     "bodyFont": 20.4,
+     "minFont": 15.3,
+     "minFontEl": "kbd",
+     "textEls": 351,
+     "contentBox": 1786,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 18,
+       "sample": "\u00a715.4",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 4,
+       "sample": "12",
+       "el": "span.num"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 63,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 18,
+       "sample": "12 Project ladder, hardware gates, and d",
+       "el": "a"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 221,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1920,
+     "clientWidth": 1920,
+     "bodyFont": 20.4,
+     "minFont": 15.3,
+     "minFontEl": "kbd",
+     "textEls": 351,
+     "contentBox": 1786,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 4,
+       "sample": "12",
+       "el": "span.num"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 18,
+       "sample": "\u00a715.4",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 63,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 18,
+       "sample": "12 Project ladder, hardware gates, and d",
+       "el": "a"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 221,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    }
+   },
+   "2560": {
+    "light": {
+     "scrollWidth": 2560,
+     "clientWidth": 2560,
+     "bodyFont": 22,
+     "minFont": 16.5,
+     "minFontEl": "kbd",
+     "textEls": 351,
+     "contentBox": 2381,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 18,
+       "sample": "\u00a715.4",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 4,
+       "sample": "12",
+       "el": "span.num"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 63,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 18,
+       "sample": "12 Project ladder, hardware gates, and d",
+       "el": "a"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 221,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 2560,
+     "clientWidth": 2560,
+     "bodyFont": 22,
+     "minFont": 16.5,
+     "minFontEl": "kbd",
+     "textEls": 351,
+     "contentBox": 2381,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a715.3",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 4,
+       "sample": "12",
+       "el": "span.num"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 18,
+       "sample": "\u00a715.4",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 63,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 24,
+       "sample": "JUDGMENT",
+       "el": "span.chip"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 18,
+       "sample": "12 Project ladder, hardware gates, and d",
+       "el": "a"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 221,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "FACT",
+       "el": "span.chip"
+      }
+     ]
+    }
+   }
+  },
+  "my-plan": {
+   "320": {
+    "light": {
+     "scrollWidth": 320,
+     "clientWidth": 320,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 265,
+     "contentBox": 288,
+     "contentRatio": 0.9,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 45,
+       "sample": "Personal tracker \u00b7 stored in this browse",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 190,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 320,
+     "clientWidth": 320,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 265,
+     "contentBox": 288,
+     "contentRatio": 0.9,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 45,
+       "sample": "Personal tracker \u00b7 stored in this browse",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 190,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "360": {
+    "light": {
+     "scrollWidth": 360,
+     "clientWidth": 360,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 265,
+     "contentBox": 328,
+     "contentRatio": 0.911,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 45,
+       "sample": "Personal tracker \u00b7 stored in this browse",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 190,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 360,
+     "clientWidth": 360,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 265,
+     "contentBox": 328,
+     "contentRatio": 0.911,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 45,
+       "sample": "Personal tracker \u00b7 stored in this browse",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 190,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "390": {
+    "light": {
+     "scrollWidth": 390,
+     "clientWidth": 390,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 265,
+     "contentBox": 358,
+     "contentRatio": 0.918,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 45,
+       "sample": "Personal tracker \u00b7 stored in this browse",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 190,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 390,
+     "clientWidth": 390,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 265,
+     "contentBox": 358,
+     "contentRatio": 0.918,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 45,
+       "sample": "Personal tracker \u00b7 stored in this browse",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 190,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "820": {
+    "light": {
+     "scrollWidth": 820,
+     "clientWidth": 820,
+     "bodyFont": 17.65,
+     "minFont": 14.2082,
+     "minFontEl": "code",
+     "textEls": 265,
+     "contentBox": 763,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 45,
+       "sample": "Personal tracker \u00b7 stored in this browse",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 190,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 820,
+     "clientWidth": 820,
+     "bodyFont": 17.65,
+     "minFont": 14.2082,
+     "minFontEl": "code",
+     "textEls": 265,
+     "contentBox": 763,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 42,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 45,
+       "sample": "Personal tracker \u00b7 stored in this browse",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 190,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "1024": {
+    "light": {
+     "scrollWidth": 1024,
+     "clientWidth": 1024,
+     "bodyFont": 18.16,
+     "minFont": 13.62,
+     "minFontEl": "kbd",
+     "textEls": 267,
+     "contentBox": 952,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 46,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 191,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1024,
+     "clientWidth": 1024,
+     "bodyFont": 18.16,
+     "minFont": 13.62,
+     "minFontEl": "kbd",
+     "textEls": 267,
+     "contentBox": 952,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 46,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 191,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "1440": {
+    "light": {
+     "scrollWidth": 1440,
+     "clientWidth": 1440,
+     "bodyFont": 19.2,
+     "minFont": 14.4,
+     "minFontEl": "kbd",
+     "textEls": 267,
+     "contentBox": 1339,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 46,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 191,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1440,
+     "clientWidth": 1440,
+     "bodyFont": 19.2,
+     "minFont": 14.4,
+     "minFontEl": "kbd",
+     "textEls": 267,
+     "contentBox": 1339,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 46,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 191,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "1920": {
+    "light": {
+     "scrollWidth": 1920,
+     "clientWidth": 1920,
+     "bodyFont": 20.4,
+     "minFont": 15.3,
+     "minFontEl": "kbd",
+     "textEls": 267,
+     "contentBox": 1786,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 46,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 191,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1920,
+     "clientWidth": 1920,
+     "bodyFont": 20.4,
+     "minFont": 15.3,
+     "minFontEl": "kbd",
+     "textEls": 267,
+     "contentBox": 1786,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 46,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 191,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "2560": {
+    "light": {
+     "scrollWidth": 2560,
+     "clientWidth": 2560,
+     "bodyFont": 22,
+     "minFont": 16.5,
+     "minFontEl": "kbd",
+     "textEls": 267,
+     "contentBox": 2381,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#f3f4f6",
+       "ratio": 6.57,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 46,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 191,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 2560,
+     "clientWidth": 2560,
+     "bodyFont": 22,
+     "minFont": 16.5,
+     "minFontEl": "kbd",
+     "textEls": 267,
+     "contentBox": 2381,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 44
+     },
+     "feedGeom": {
+      "items": 0,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#a6aeb8",
+       "bg": "#171b20",
+       "ratio": 7.72,
+       "large": false,
+       "count": 1,
+       "sample": "W1\u20134 \u00b7 40/80",
+       "el": "span.muted"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 10,
+       "sample": "\u00a715.3 time accounting",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 46,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 2,
+       "sample": "Category",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 14,
+       "sample": "Month 1W1\u20134 \u00b7 40/80",
+       "el": "span.m"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 191,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 3,
+       "sample": "10 h/week \u00b7 1,040 h",
+       "el": "button.btn"
+      }
+     ]
+    }
+   }
+  },
+  "feed": {
+   "320": {
+    "light": {
+     "scrollWidth": 320,
+     "clientWidth": 320,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 327,
+     "contentBox": 288,
+     "contentRatio": 0.9,
+     "controlHeights": {
+      "min": 42,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 59,
+       "sample": "Stay ahead \u00b7 the \u00a717 monitoring system, ",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 227,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 320,
+     "clientWidth": 320,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 327,
+     "contentBox": 288,
+     "contentRatio": 0.9,
+     "controlHeights": {
+      "min": 42,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 59,
+       "sample": "Stay ahead \u00b7 the \u00a717 monitoring system, ",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 227,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "360": {
+    "light": {
+     "scrollWidth": 360,
+     "clientWidth": 360,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 327,
+     "contentBox": 328,
+     "contentRatio": 0.911,
+     "controlHeights": {
+      "min": 42,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 59,
+       "sample": "Stay ahead \u00b7 the \u00a717 monitoring system, ",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 227,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 360,
+     "clientWidth": 360,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 327,
+     "contentBox": 328,
+     "contentRatio": 0.911,
+     "controlHeights": {
+      "min": 42,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 59,
+       "sample": "Stay ahead \u00b7 the \u00a717 monitoring system, ",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 227,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "390": {
+    "light": {
+     "scrollWidth": 390,
+     "clientWidth": 390,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 327,
+     "contentBox": 358,
+     "contentRatio": 0.918,
+     "controlHeights": {
+      "min": 42,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 59,
+       "sample": "Stay ahead \u00b7 the \u00a717 monitoring system, ",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 227,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 390,
+     "clientWidth": 390,
+     "bodyFont": 17,
+     "minFont": 13.685,
+     "minFontEl": "code",
+     "textEls": 327,
+     "contentBox": 358,
+     "contentRatio": 0.918,
+     "controlHeights": {
+      "min": 42,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 59,
+       "sample": "Stay ahead \u00b7 the \u00a717 monitoring system, ",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 227,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "820": {
+    "light": {
+     "scrollWidth": 820,
+     "clientWidth": 820,
+     "bodyFont": 17.65,
+     "minFont": 14.2082,
+     "minFontEl": "code",
+     "textEls": 327,
+     "contentBox": 763,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 42,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 59,
+       "sample": "Stay ahead \u00b7 the \u00a717 monitoring system, ",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 227,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 820,
+     "clientWidth": 820,
+     "bodyFont": 17.65,
+     "minFont": 14.2082,
+     "minFontEl": "code",
+     "textEls": 327,
+     "contentBox": 763,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 42,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 59,
+       "sample": "Stay ahead \u00b7 the \u00a717 monitoring system, ",
+       "el": "p.kicker"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 227,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "1024": {
+    "light": {
+     "scrollWidth": 1024,
+     "clientWidth": 1024,
+     "bodyFont": 18.16,
+     "minFont": 13.62,
+     "minFontEl": "kbd",
+     "textEls": 329,
+     "contentBox": 952,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 60,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 228,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1024,
+     "clientWidth": 1024,
+     "bodyFont": 18.16,
+     "minFont": 13.62,
+     "minFontEl": "kbd",
+     "textEls": 329,
+     "contentBox": 952,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 60,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 228,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "1440": {
+    "light": {
+     "scrollWidth": 1440,
+     "clientWidth": 1440,
+     "bodyFont": 19.2,
+     "minFont": 14.4,
+     "minFontEl": "kbd",
+     "textEls": 329,
+     "contentBox": 1339,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 60,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 228,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1440,
+     "clientWidth": 1440,
+     "bodyFont": 19.2,
+     "minFont": 14.4,
+     "minFontEl": "kbd",
+     "textEls": 329,
+     "contentBox": 1339,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 60,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 228,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "1920": {
+    "light": {
+     "scrollWidth": 1920,
+     "clientWidth": 1920,
+     "bodyFont": 20.4,
+     "minFont": 15.3,
+     "minFontEl": "kbd",
+     "textEls": 329,
+     "contentBox": 1786,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 60,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 228,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 1920,
+     "clientWidth": 1920,
+     "bodyFont": 20.4,
+     "minFont": 15.3,
+     "minFontEl": "kbd",
+     "textEls": 329,
+     "contentBox": 1786,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 60,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 228,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    }
+   },
+   "2560": {
+    "light": {
+     "scrollWidth": 2560,
+     "clientWidth": 2560,
+     "bodyFont": 22,
+     "minFont": 16.5,
+     "minFontEl": "kbd",
+     "textEls": 329,
+     "contentBox": 2381,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#0e7490",
+       "bg": "#f3f4f6",
+       "ratio": 4.87,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#0e7490",
+       "bg": "#ffffff",
+       "ratio": 5.36,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#4f5862",
+       "bg": "#ffffff",
+       "ratio": 7.23,
+       "large": false,
+       "count": 60,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#e8eaee",
+       "ratio": 14.64,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#f3f4f6",
+       "ratio": 16.02,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#16191d",
+       "bg": "#ffffff",
+       "ratio": 17.63,
+       "large": false,
+       "count": 228,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#ffffff",
+       "bg": "#16191d",
+       "ratio": 17.63,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    },
+    "dark": {
+     "scrollWidth": 2560,
+     "clientWidth": 2560,
+     "bodyFont": 22,
+     "minFont": 16.5,
+     "minFontEl": "kbd",
+     "textEls": 329,
+     "contentBox": 2381,
+     "contentRatio": 0.93,
+     "controlHeights": {
+      "min": 40,
+      "max": 42
+     },
+     "feedGeom": {
+      "items": 12,
+      "overlaps": 0,
+      "titleMisaligned": 0
+     },
+     "checks": {
+      "noOverflow": true,
+      "bodyFont": true,
+      "minFont12": true,
+      "contentRatio88": true,
+      "contrastAA": true,
+      "controls40to44": true,
+      "feedItemGeometry": true
+     },
+     "pairs": [
+      {
+       "fg": "#06b6d4",
+       "bg": "#171b20",
+       "ratio": 7.12,
+       "large": false,
+       "count": 1,
+       "sample": "\u00a717.6",
+       "el": "a"
+      },
+      {
+       "fg": "#06b6d4",
+       "bg": "#0f1215",
+       "ratio": 7.74,
+       "large": false,
+       "count": 26,
+       "sample": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0",
+       "el": "a"
+      },
+      {
+       "fg": "#a6aeb8",
+       "bg": "#0f1215",
+       "ratio": 8.38,
+       "large": false,
+       "count": 60,
+       "sample": "/",
+       "el": "kbd"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#212730",
+       "ratio": 12.11,
+       "large": false,
+       "count": 10,
+       "sample": "Source",
+       "el": "th"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#171b20",
+       "ratio": 13.94,
+       "large": false,
+       "count": 2,
+       "sample": "Keep only if it changes an experiment or",
+       "el": "p"
+      },
+      {
+       "fg": "#e4e7eb",
+       "bg": "#0f1215",
+       "ratio": 15.15,
+       "large": false,
+       "count": 228,
+       "sample": "Physical AI Roadmap",
+       "el": "a.wordmark"
+      },
+      {
+       "fg": "#0f1215",
+       "bg": "#e4e7eb",
+       "ratio": 15.15,
+       "large": false,
+       "count": 2,
+       "sample": "All",
+       "el": "button.btn"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "failures": [],
+ "summary": {
+  "pass": true,
+  "failureCount": 0
+ }
+}

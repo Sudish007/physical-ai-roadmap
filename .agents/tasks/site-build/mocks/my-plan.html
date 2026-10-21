@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t='light';try{var s=localStorage.getItem('physical-ai-roadmap.v1.theme');if(s==='dark'||s==='light'||s==='system')t=s;}catch(e){}if(t==='system'){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);})();</script>
+<title>My plan — Physical AI Roadmap</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="mock.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="page row">
+    <a class="wordmark" href="home.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="20" width="7" height="8" fill="currentColor"/><rect x="12.5" y="12" width="7" height="16" fill="currentColor"/><rect x="21" y="4" width="7" height="24" fill="currentColor"/></svg>Physical AI Roadmap</a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="home.html">Home</a>
+      <a href="section.html">Sections</a>
+      <a href="my-plan.html" aria-current="page">My plan</a>
+      <a href="feed.html">Feed</a>
+    </nav>
+    <div class="header-tools">
+      <label class="search-box"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="sr-only">Search the report</span><input type="search" placeholder="Search the report"><kbd>/</kbd></label>
+      <button class="btn theme-btn" type="button" aria-label="Theme: Light. Activate for Dark" title="Theme (t)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span class="label">Light</span></button>
+    </div>
+  </div>
+  <nav class="page nav-strip" aria-label="Primary">
+    <a href="home.html">Home</a>
+    <a href="section.html">Sections</a>
+    <a href="my-plan.html" aria-current="page">My plan</a>
+    <a href="feed.html">Feed</a>
+    <a class="search-link" href="#search">Search</a>
+  </nav>
+</header>
+
+<main class="page">
+  <header class="article-head" style="padding-top:1.5rem">
+    <p class="kicker">Personal tracker · stored in this browser only</p>
+    <h1>My plan</h1>
+    <p class="muted" style="max-width:80ch">Choose 10 h/week or 20 h/week, a track, and a start date. Every number below is taken from the report's own tables (<a href="section.html">§15.3 time accounting</a>, <a href="section.html">§15.5 month by month</a>, <a href="section.html">§15.6 quarterly gates</a>); the track choice itself happens at the end of month 9 (<a href="section.html">§14</a>).</p>
+  </header>
+
+  <section aria-labelledby="h-setup" class="section-block">
+    <h2 id="h-setup">Plan</h2>
+    <div class="form-grid">
+      <div class="field"><span>Hours per week</span><div class="btn-row" role="group" aria-label="Hours per week"><button class="btn" type="button" aria-pressed="true">10 h/week · 1,040 h</button><button class="btn" type="button" aria-pressed="false">20 h/week · 2,080 h</button></div></div>
+      <div class="field"><span>Track (choose at the end of month 9)</span><div class="track-group" role="group" aria-label="Track"><button class="btn" type="button" aria-pressed="true">Undecided</button><button class="btn" type="button" aria-pressed="false">A</button><button class="btn" type="button" aria-pressed="false">B (default)</button><button class="btn" type="button" aria-pressed="false">C</button></div></div>
+      <label class="field"><span>Start date (week 1 begins)</span><input type="date" value="2026-10-20"></label>
+      <div class="field"><span>Your data</span><div class="btn-row"><button class="btn" type="button">Export JSON</button><button class="btn" type="button">Import JSON</button><button class="btn quiet" type="button">Reset…</button></div></div>
+    </div>
+  </section>
+
+  <div class="stat-grid" style="margin-top:1.5rem">
+    <div class="stat"><div class="v">Week 1</div><div class="k">of 104 · started 20 Oct 2026</div></div>
+    <div class="stat"><div class="v">Month 1</div><div class="k">W1–4 · 40 h planned (10 h plan)</div></div>
+    <div class="stat"><div class="v">Quarter 1</div><div class="k">Numerical work, mathematics, mechanics, research habits</div></div>
+    <div class="stat"><div class="v">0 h</div><div class="k">expected so far (0 completed weeks × 10 h)</div></div>
+    <div class="stat"><div class="v">0 h</div><div class="k">logged (manual weekly entries)</div></div>
+  </div>
+
+  <div class="plan-grid">
+    <div>
+      <section class="section-block" aria-labelledby="h-month">
+        <h2 id="h-month">This month <a class="more small" href="section.html">§15.5</a></h2>
+        <ul class="month-list">
+          <li class="current"><span class="m">Month 1<br><span class="muted">W1–4 · 40/80</span></span><div><p><strong>Shared work.</strong> Entry diagnostic; Python numerical refresh; units, plots, seeds, environment capture; start lab notes</p><p><strong>Required deliverable.</strong> Diagnostic memo; reproducible noisy-line and first-order-system experiment; gap list</p><p><strong>10 h reduced scope.</strong> Notebook or script, no framework</p><div class="check-row"><label class="check"><input type="checkbox" aria-label="Done: Month 1 (10 h plan)"></label><span class="small">Month 1 deliverable done</span></div></div></li>
+        </ul>
+      </section>
+
+      <section class="section-block" aria-labelledby="h-gate">
+        <h2 id="h-gate">Gate Q1 (W13) foundations <a class="more small" href="section.html">§15.6</a></h2>
+        <p class="small muted">A gate asks whether the evidence is trustworthy enough to continue; a positive thesis result is never required.</p>
+        <ul class="gate-list">
+          <li><label class="check"><input type="checkbox" aria-label="Gate Q1: Seeded rerun works"></label><span>Seeded rerun works</span></li>
+          <li><label class="check"><input type="checkbox" aria-label="Gate Q1: units in code and plots"></label><span>Units in code and plots</span></li>
+          <li><label class="check"><input type="checkbox" aria-label="Gate Q1: least squares explained"></label><span>Least squares explained</span></li>
+          <li><label class="check"><input type="checkbox" aria-label="Gate Q1: feedback simulation stable"></label><span>Feedback simulation stable under one prespecified perturbation</span></li>
+          <li><label class="check"><input type="checkbox" aria-label="Gate Q1: 500-word memo"></label><span>500-word memo separates result from interpretation</span></li>
+        </ul>
+        <p class="small" style="margin-top:0.75rem"><strong>If it fails:</strong> Four remediation weeks; drop LQR and C++ extensions; do not start ROS.</p>
+      </section>
+
+      <section class="section-block" aria-labelledby="h-log">
+        <h2 id="h-log">Hours log</h2>
+        <div class="form-grid">
+          <label class="field"><span>Week</span><input type="number" min="1" max="104" value="1"></label>
+          <label class="field"><span>Hours worked</span><input type="number" min="0" max="168" step="0.5" placeholder="0"></label>
+          <div class="field"><span>&nbsp;</span><button class="btn primary" type="button">Save week</button></div>
+        </div>
+        <p class="small muted" style="margin-top:0.75rem">No entries yet. Expected-versus-logged compares completed weeks × hours/week with the sum of these entries.</p>
+      </section>
+
+      <section class="section-block" aria-labelledby="h-months">
+        <h2 id="h-months">Month by month, 10 h plan <a class="more small" href="section.html">§15.5</a></h2>
+        <p class="small muted">Months 1–9 are common. From month 10 the table shows Track B wording as the default; the A/C replacements are in <a href="section.html">§14.3</a>.</p>
+        <ul class="month-list">
+          <li class="current"><span class="m">1 · W1–4 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 1"></label>Entry diagnostic; Python numerical refresh; units, plots, seeds, environment capture; start lab notes. <strong>Deliverable:</strong> Diagnostic memo; reproducible noisy-line and first-order-system experiment; gap list. <em>Notebook or script, no framework.</em></div></li>
+          <li><span class="m">2 · W5–8 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 2"></label>Selected linear algebra, derivatives/integrals, numerical integration, probability, force/torque, inertia (M0, MML chs. 2–6). <strong>Deliverable:</strong> 2-D transform and point-mass simulation with units and tests. <em>Skip proofs beyond what the calculation needs.</em></div></li>
+          <li><span class="m">3 · W9–13 · 50 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 3"></label>ODE intuition, feedback, PID, train/validation/test discipline, first paper memos (M1 selections). <strong>Deliverable:</strong> Controlled first/second-order plant; <strong>Q1 gate report</strong>; one two-page paper critique. <em>One controller, one disturbance.</em></div></li>
+          <li><span class="m">4 · W14–17 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 4"></label>Rigid transforms, frames, rotations, forward kinematics, calibration concepts (M2 begins). <strong>Deliverable:</strong> Transform library; frame diagram; synthetic calibration-error experiment. <em>Planar plus minimal 3-D.</em></div></li>
+          <li><span class="m">5 · W18–21 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 5"></label>Rigid-body dynamics, actuator/sensor models, PID tuning, optimization basics (M2). <strong>Deliverable:</strong> One bounded plant, such as a planar quadrotor or simple arm, with tracking and logs (Rung 1). <em>PID only.</em></div></li>
+          <li><span class="m">6 · W22–26 · 50 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 6"></label>Electronics literacy without hardware: V/I/P, PWM, UART/I²C/SPI, IMU and camera timing, batteries, motors/ESCs, aliasing (M4 literacy); stress the controller. <strong>Deliverable:</strong> Virtual sensor/actuator interface spec; mass/latency/noise disturbance report; <strong>Q2 gate</strong>. <em>Datasheets and simulated sensors only.</em></div></li>
+          <li><span class="m">7 · W27–30 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 7"></label>Conditional probability, Gaussian models, Bayes filtering, Kalman filter (Rung 2; Barfoot early chapters; M3 begins). <strong>Deliverable:</strong> Seeded estimation experiment with RMSE, residual, and interval-coverage plots. <em>Linear Kalman filter.</em></div></li>
+          <li><span class="m">8 · W31–34 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 8"></label>Search- and sampling-based planning, collision checking, trajectory representation (LaValle selections; M3). <strong>Deliverable:</strong> A*/RRT planner over fixed seeded maps; failure taxonomy. <em>One planner and one baseline.</em></div></li>
+          <li><span class="m">9 · W35–39 · 50 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 9"></label>ROS 2 concepts, timestamps, transforms, recording/replay, latency, deterministic evaluation (M5; Rung 3); complete the §14 decision memo. <strong>Deliverable:</strong> Integrated simulated sense-estimate-plan loop; replay regenerates the metrics table; <strong>Q3 gate and Track A/B/C choice</strong>. <em>One process graph, one recording format.</em></div></li>
+          <li><span class="m">10 · W40–43 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 10"></label>Freeze the stack; PX4 SITL, simulator reset, mission state, logs, emergency-state semantics (Rung 4; use the NPTEL PX4 lectures as just-in-time reference). <strong>Deliverable:</strong> Scripted nominal takeoff, approach, landing, abort, and reset protocol with complete logs. <em>One airframe, one world.</em></div></li>
+          <li><span class="m">11 · W44–47 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 11"></label>Small visual landing-pad detector/pose estimator; data split by scene, texture, seed (M6–M7 material). <strong>Deliverable:</strong> Data card; baseline model; nominal and shifted metrics; latency profile. <em>One compact CPU-capable model.</em></div></li>
+          <li><span class="m">12 · W48–52 · 50 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 12"></label>Join perception to the fixed landing controller; define failure events; collect nominal and disturbed pilot episodes; confirm the month-9 choice (A/C use §14.3 replacements). <strong>Deliverable:</strong> Closed-loop baseline package; 50 nominal and ≥20 disturbed pilot episodes; <strong>Q4 gate</strong>. <em>No RL, no hardware.</em></div></li>
+          <li><span class="m">13 · W53–56 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 13"></label>Focused literature table; thesis hypothesis, causal comparison, metrics, exclusions, compute ceiling, stop rules. <strong>Deliverable:</strong> Two-page protocol and analysis plan; frozen partitions; ethics/safety checklist. <em>About 20 anchors for discovery; the eight completed deep reads must be named §7 spine/branch items.</em></div></li>
+          <li><span class="m">14 · W57–60 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 14"></label>Run the §11.5 track artifact unchanged first (Rung 5); B/C use <code>safe-control-gym</code> <code>v1.0.0</code>, A only after its GPU pilot. <strong>Deliverable:</strong> Artifact run, immutable identity and hashes, resolved manifest, scenario/seed table, paper-result mapping, discrepancy log. <em>One CPU artifact plus honest checkpoint-only/full-reproduction label.</em></div></li>
+          <li><span class="m">15 · W61–65 · 50 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 15"></label>Diagnose gaps; clean rerun; check the pilot task is neither floor nor ceiling. <strong>Deliverable:</strong> Artifact/reproduction-boundary report; independent rerun if available; <strong>Q5 gate</strong>; protocol revisions close. <em>A well-explained mismatch can pass.</em></div></li>
+          <li><span class="m">16 · W66–69 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 16"></label>Implement held-out calibration, temporal disagreement, and the predefined gate. <strong>Deliverable:</strong> Unit tests for state transitions; nominal risk-coverage curves; no-gate and matched-abort controls. <em>Raw, calibrated, temporal gate only.</em></div></li>
+          <li><span class="m">17 · W70–73 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 17"></label>Run the prespecified shifts; track inference and control-loop timing. <strong>Deliverable:</strong> Complete exploratory matrix with intervals; every failed run retained. <em>Main effects only.</em></div></li>
+          <li><span class="m">18 · W74–78 · 50 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 18"></label>Core ablations; threshold sensitivity on validation only; error taxonomy; negative-result analysis. <strong>Deliverable:</strong> Ablation report; frozen confirmatory configuration; <strong>Q6 gate</strong>. <em>At most four gate variants and four shifts.</em></div></li>
+          <li><span class="m">19 · W79–82 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 19"></label>Frozen confirmatory test; no condition-by-condition retuning. <strong>Deliverable:</strong> Locked results, intervals, calibration/risk plots, compute ledger. <em>One simulator; §11.5's 10 h seed/episode minimum.</em></div></li>
+          <li><span class="m">20 · W83–86 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 20"></label>Independent rerun and robustness check; methodological reviewer sought (A/C use §14.3 replacements). <strong>Deliverable:</strong> Reproduction checklist completed by someone else; response memo. <em>Configuration inspection plus one rerun.</em></div></li>
+          <li><span class="m">21 · W87–91 · 50 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 21"></label>Artifact, limitations, negative outcomes, model/data/system cards, licence review, safe-use note. <strong>Deliverable:</strong> Release candidate installable from a clean environment; <strong>Q7 gate</strong>. <em>One repository, one archival candidate.</em></div></li>
+          <li><span class="m">22 · W92–95 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 22"></label>Write from claim to evidence; A/C use §14.3 thesis wording. <strong>Deliverable:</strong> Full draft with every claim linked to a result or source. <em>Thesis-style technical report first.</em></div></li>
+          <li><span class="m">23 · W96–99 · 40 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 23"></label>Two external reviews; revision; artifact freeze; talk/poster; submission decision by venue fit. <strong>Deliverable:</strong> Revised manuscript; public artifact if legal and safe; submission or explicit no-submit memo. <em>Workshop or technical-report route suffices.</em></div></li>
+          <li><span class="m">24 · W100–104 · 50 h</span><div><label class="check" style="float:right"><input type="checkbox" aria-label="Done: Month 24"></label>Portfolio audit, mentor debrief, applications, next 12-month question. <strong>Deliverable:</strong> <strong>Q8 gate</strong>; evidence portfolio; application packet; retrospective including stopped work. <em>At most three strongly matched applications.</em></div></li>
+        </ul>
+      </section>
+    </div>
+
+    <div>
+      <section class="section-block" aria-labelledby="h-budget">
+        <h2 id="h-budget">Quarter 1 budget, 10 h plan <a class="more small" href="section.html">§15.3</a></h2>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Category</th><th class="num">Hours</th></tr></thead>
+          <tbody>
+            <tr><td>F foundations/coursework</td><td class="num">50</td></tr>
+            <tr><td>P paper discovery and deep reading</td><td class="num">10</td></tr>
+            <tr><td>B implementation</td><td class="num">35</td></tr>
+            <tr><td>E controlled experiments</td><td class="num">8</td></tr>
+            <tr><td>W writing</td><td class="num">12</td></tr>
+            <tr><td>C community, mentors, career</td><td class="num">5</td></tr>
+            <tr><td>R review/buffer</td><td class="num">10</td></tr>
+            <tr class="total"><td><strong>Total</strong></td><td class="num"><strong>130</strong></td></tr>
+          </tbody>
+        </table></div>
+        <p class="small muted">104 weeks in eight 13-week quarters: 11 build weeks, one integration/reproduction week, one gate/buffer week.</p>
+      </section>
+
+      <section class="section-block" aria-labelledby="h-q4">
+        <h2 id="h-q4">Personalization questions <a class="more small" href="section.html">§4</a></h2>
+        <p class="small muted">Answer these in writing during Session 7. Answers stay in this browser; export them with your plan.</p>
+        <ol class="q-list">
+          <li><span class="q">1. Can you, today, compute a least-squares fit and explain eigenvalues, Jacobians, and conditional probability without notes?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">Fewer than two of three → use the full 30-hour M0 core slice and diagnosed MIT 18.06SC/18.05 exercises inside Q1; do not start ROS before Q1 passes. All three → challenge the M0 outputs, then reassign at most 15 saved hours to Rung 1; never skip the gate.</p></details><textarea aria-label="Answer to question 1" placeholder="Your answer"></textarea></li>
+          <li><span class="q">2. How comfortable are you with Linux, Python, and C++ (none / use / fluent)?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">Linux or Python below <code>use</code> → month 1 is tooling practice before any robotics content. C++ <code>none</code> is acceptable until Rung 3; add a small C++ exercise in the 20 h plan.</p></details><textarea aria-label="Answer to question 2" placeholder="Your answer"></textarea></li>
+          <li><span class="q">3. Have you trained and evaluated a neural network with held-out data and multiple seeds?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">No → take the 5-hour M6 primer and 15-hour M7 core slice, then spend the already-budgeted Rung 5/6 implementation hours on the baseline. Yes with documented seeds and split hygiene → challenge M6 and move its five hours to M7, without increasing total F hours.</p></details><textarea aria-label="Answer to question 3" placeholder="Your answer"></textarea></li>
+          <li><span class="q">4. Have you implemented any feedback controller or state estimator?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">No → keep all Rung 1/2 hours and the 25-hour M3 core slice; use the Bonn lecture within M3, not on top. Yes with a reproducible artifact → challenge at most 10 M3 hours and move them to the same quarter's Rung 1 disturbances.</p></details><textarea aria-label="Answer to question 4" placeholder="Your answer"></textarea></li>
+          <li><span class="q">5. Degree and career stage (student / early-career engineer / mid-career / other)?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">Student with access to faculty → pursue the research-master's or RA route at month 18 (§16). Mid-career with income needs → systems/evaluation-engineer route and the 10 h plan.</p></details><textarea aria-label="Answer to question 5" placeholder="Your answer"></textarea></li>
+          <li><span class="q">6. Have you written a technical report or paper that someone else reviewed?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">No → monthly two-page memos start in month 1 and the month-15 artifact/reproduction-boundary report is mandatory before the confirmatory thesis experiment.</p></details><textarea aria-label="Answer to question 6" placeholder="Your answer"></textarea></li>
+          <li><span class="q">7. Hours per week you can protect for 104 weeks (not a best week)?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">≤12 → 10 h plan. ≥18 → 20 h plan. Between → follow the 10 h contract; treat surplus as recovery or choose one 20 h extension only by logging the extra hours separately. Never claim the 1,040-hour completion if hidden overtime was used.</p></details><textarea aria-label="Answer to question 7" placeholder="Your answer"></textarea></li>
+          <li><span class="q">8. Budget in INR over 24 months for hardware and fees?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">Any budget → Scenario A until Rung 6. Scenarios B and C remain <strong>illustrative foreign-goods arithmetic, not orderable Indian budgets</strong>, regardless of the nominal INR conversion. Compare written landed Indian quotes with institutional access only after every §12.6 field is complete; no unverified rupee threshold routes a purchase.</p></details><textarea aria-label="Answer to question 8" placeholder="Your answer"></textarea></li>
+          <li><span class="q">9. Computer: CPU cores, RAM, free SSD, discrete GPU and VRAM?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">No NVIDIA GPU → choose Track B or C and use the <code>safe-control-gym</code> <code>v1.0.0</code> artifact study, whose local result is a <strong>single-machine smoke observation with a partial manifest</strong>; do not call a checkpoint-only run a full-paper reproduction. No Diffusion Policy author run, VLA fine-tuning, or Isaac Sim. OpenVLA's repository reported ≈27 GB GPU memory for LoRA; Isaac Sim's official minimum was RTX 4080/16 GB. Any GPU → first run the exact Track-A pilot and record peak VRAM/runtime; Track A becomes feasible only if that pilot fits.</p></details><textarea aria-label="Answer to question 9" placeholder="Your answer"></textarea></li>
+          <li><span class="q">10. Do you have access to a lab, makerspace, or mentor who can inspect your work?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">No → use the three-role mentor board in §16 via reproductions and issues; prefer Track B or C, which need no physical facility. Yes → Rung 7–8 can be scheduled in the 20 h plan.</p></details><textarea aria-label="Answer to question 10" placeholder="Your answer"></textarea></li>
+          <li><span class="q">11. Do you have a safe indoor enclosure or institutional flight space?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">No → Rung 8 drone hardware is removed; hardware questions route to a tabletop arm or an institution. Never substitute outdoor flight.</p></details><textarea aria-label="Answer to question 11" placeholder="Your answer"></textarea></li>
+          <li><span class="q">12. City/state, and can you travel for supervised test days?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">Near IISc/ARTPARK (Bengaluru), IIIT Hyderabad, IIT Kanpur/Bombay/Madras → investigate seminars and collaboration leads in §14 and §16. Remote → remote testbeds and online reproductions.</p></details><textarea aria-label="Answer to question 12" placeholder="Your answer"></textarea></li>
+          <li><span class="q">13. Comfort with electronics and mechanics (none / hobby / trained)?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">None → M4 stays simulation/literacy-only and any bench work is supervised. Trained → replace M4's 10-hour core/5-hour extension with equal-hour extracts from the UT Austin embedded course; do not add its full 72 hours.</p></details><textarea aria-label="Answer to question 13" placeholder="Your answer"></textarea></li>
+          <li><span class="q">14. Which problem pulls you: manipulation, flight, legged/humanoid, evaluation and safety, scientific robotics?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">Manipulation → Track A if Q9 and Q10 are favourable. Flight → Track B. Evaluation/safety → Track C. Humanoid → Track A in simulation only (HumanoidBench); humanoid hardware is out of individual scope. Scientific robotics → Track C with the F12 entry experiment.</p></details><textarea aria-label="Answer to question 14" placeholder="Your answer"></textarea></li>
+          <li><span class="q">15. Theory versus building (prefer derivations / prefer systems / both)?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">Derivations → Track C and the 5-hour M11 safety/control extract, plus only the 20 h plan's allocated extension. Systems → Track B and the already-budgeted Rungs 3–4.</p></details><textarea aria-label="Answer to question 15" placeholder="Your answer"></textarea></li>
+          <li><span class="q">16. Career target in five years (industry research engineer / PhD / startup / academic)?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">PhD → month-18 route decision requires letters and a thesis protocol; publish a reproduction first. Startup → add the IERA/commercialization lens in §18 but do not skip the evidence ladder.</p></details><textarea aria-label="Answer to question 16" placeholder="Your answer"></textarea></li>
+          <li><span class="q">17. When do you want a first external review or submission?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">&lt; 12 months → submit a reproduction or negative-result report to a workshop or technical-report venue; do not promise a method paper. 18–24 months → the plan's month-22–23 manuscript.</p></details><textarea aria-label="Answer to question 17" placeholder="Your answer"></textarea></li>
+          <li><span class="q">18. Any constraints from employer, institution, or law (IP, export, flight, data)?</span><details class="rule-details"><summary>Decision rule</summary><p class="small">Any → write them into the protocol at month 13 and the ethics checklist in §16; employer IP rules can determine whether artifacts can be released.</p></details><textarea aria-label="Answer to question 18" placeholder="Your answer"></textarea></li>
+        </ol>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="page site-footer">
+  <span>Sudish Kumar</span><span class="sep">·</span>
+  <a href="https://sudish.dev" rel="noopener external">sudish.dev</a><span class="sep">·</span>
+  <a href="https://github.com/Sudish007/physical-ai-roadmap" rel="noopener external">GitHub repository</a><span class="sep">·</span>
+  <span>Evidence cutoff 20 Oct 2026</span><span class="sep">·</span>
+  <span>Not legal advice</span>
+</footer>
+<script>(function(){var b=document.querySelector('.theme-btn');if(!b)return;var names={light:'Light',dark:'Dark',system:'System'},next={light:'Dark',dark:'System',system:'Light'};function u(){var t=document.documentElement.getAttribute('data-theme')||'light';b.querySelector('.label').textContent=names[t];b.setAttribute('aria-label','Theme: '+names[t]+'. Activate for '+next[t]);}new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});u();})();</script>
+</body>
+</html>

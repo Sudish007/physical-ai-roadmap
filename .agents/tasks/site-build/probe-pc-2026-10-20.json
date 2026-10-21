@@ -1,0 +1,993 @@
+{
+ "probedAt": "2026-10-21T04:49:42.487Z",
+ "from": "Sudish PC (Windows 11), Node v24.16.0",
+ "results": [
+  {
+   "id": "arxiv-cs.RO",
+   "class": "arxiv",
+   "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.RO&start=0&max_results=100&sortBy=submittedDate&sortOrder=descending",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "Google Frontend",
+   "bytes": 255748,
+   "ms": 659,
+   "items": 100,
+   "sample": [
+    {
+     "title": "Joints, Camera, Action! Co-Generating 3D Motion and Video for Arbitrary Rigs",
+     "date": "2026-10-20T17:59:56Z",
+     "link": "https://arxiv.org/abs/2610.28632v1",
+     "summary": "Video generation models can now depict remarkably realistic motion. Yet it is unclear how to use this motion beyond pixels: to animate a specific 3D asset and replay the animation in its 3D scene. For"
+    },
+    {
+     "title": "Learning Adaptable Dexterous Skills via Hybrid Dexterous Mimicking",
+     "date": "2026-10-20T17:59:32Z",
+     "link": "https://arxiv.org/abs/2610.28628v1",
+     "summary": "Dexterous multi-finger hands hold promise to unlock diverse skills like functional grasps, in-hand reorientation, and dynamic handover that the human-designed world assumes, yet existing learning reci"
+    },
+    {
+     "title": "UniWALM: Unified World Action Language Model for Embodied Robot Control",
+     "date": "2026-10-20T17:59:04Z",
+     "link": "https://arxiv.org/abs/2610.28626v1",
+     "summary": "Motivated by the human ability to integrate experience across language, perception, and action, we introduce UniWALM, a unified world-action-language model that learns video, action, and language in a"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "arxiv-eess.SY",
+   "class": "arxiv",
+   "url": "https://export.arxiv.org/api/query?search_query=cat%3Aeess.SY&start=0&max_results=100&sortBy=submittedDate&sortOrder=descending",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "Google Frontend",
+   "bytes": 231695,
+   "ms": 660,
+   "items": 100,
+   "sample": [
+    {
+     "title": "Adaptive Multi-Token Prediction: How far should we go?",
+     "date": "2026-10-20T17:56:32Z",
+     "link": "https://arxiv.org/abs/2610.28619v1",
+     "summary": "Multi-token prediction (MTP) can accelerate language-model decoding by drafting several tokens and verifying them in a single target-model pass. However, the best speculation horizon changes with cont"
+    },
+    {
+     "title": "A Comparative Study of LED Lighting Control Strategies for Energy-Efficient Greenhouse Operations",
+     "date": "2026-10-20T17:28:44Z",
+     "link": "https://arxiv.org/abs/2610.28570v1",
+     "summary": "Greenhouse supplemental lighting is essential for meeting crop Daily Light Integral (DLI) requirement. However, conventional always-on and rule-based strategies are inherently energy-inefficient since"
+    },
+    {
+     "title": "Proof-Carrying Contracts: Commitments AI Agents Cannot Break",
+     "date": "2026-10-20T16:30:34Z",
+     "link": "https://arxiv.org/abs/2610.28484v1",
+     "summary": "AI agents increasingly act on behalf of people or other agents, purchasing services, exchanging information and delegating work. What an agent must respect is written in instructions, policies or agre"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "arxiv-q-thesis-narrow",
+   "class": "arxiv",
+   "url": "https://export.arxiv.org/api/query?search_query=(cat%3Acs.RO%20OR%20cat%3Aeess.SY)%20AND%20(all%3A%22precision%20landing%22%20OR%20(all%3Alanding%20AND%20all%3Aquadrotor))%20AND%20(all%3Auncertainty%20OR%20all%3Acalibration%20OR%20all%3Afailure%20OR%20all%3Arobustness)&start=0&max_results=50&sortBy=submittedDate&sortOrder=descending",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "Google Frontend",
+   "bytes": 76668,
+   "ms": 736,
+   "items": 33,
+   "sample": [
+    {
+     "title": "Recursive ArUco Markers: A Scalable Fiducial Marker Design for Unmanned Aerial Vehicle Landing Pads",
+     "date": "2026-07-21T09:48:50Z",
+     "link": "https://arxiv.org/abs/2607.13830v2",
+     "summary": "Unmanned Aerial Vehicles (UAVs) increasingly rely on visual fiducial markers for autonomous navigation and precision landing. However, standard markers suffer from limited operational ranges, becoming"
+    },
+    {
+     "title": "Neural-ESO: A Dual-Pathway Architecture for Provably Robust Learning-Based Control",
+     "date": "2026-07-07T17:41:38Z",
+     "link": "https://arxiv.org/abs/2607.06535v1",
+     "summary": "A learning-enabled disturbance-rejection framework based on a Neural Extended State Observer (Neural-ESO) is presented in this letter. Unlike existing learning-based control methods that largely rely "
+    },
+    {
+     "title": "Fixed-Time Dynamic Landing of Quadrotors using Adaptive Unscented Kalman Filtering and Nonlinear Model Predictive Control",
+     "date": "2026-06-01T06:05:34Z",
+     "link": "https://arxiv.org/abs/2606.02658v1",
+     "summary": "This paper introduces an estimation and control framework for dynamic landing of multi-rotor uncrewed aerial vehicles on moving platforms. The proposed method integrates nonlinear model predictive con"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "arxiv-q-aerial-autonomy",
+   "class": "arxiv",
+   "url": "https://export.arxiv.org/api/query?search_query=(cat%3Acs.RO%20OR%20cat%3Aeess.SY)%20AND%20(all%3Aquadrotor%20OR%20all%3AUAV%20OR%20all%3A%22aerial%20robot%22)%20AND%20(all%3Alanding%20OR%20all%3A%22visual-inertial%22%20OR%20all%3A%22GPS-denied%22)&start=0&max_results=50&sortBy=submittedDate&sortOrder=descending",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "Google Frontend",
+   "bytes": 120020,
+   "ms": 1030,
+   "items": 50,
+   "sample": [
+    {
+     "title": "Onboard Lightweight LLM Reasoning for Human-Aware Safe UAV Navigation",
+     "date": "2026-10-15T15:43:49Z",
+     "link": "https://arxiv.org/abs/2610.22092v1",
+     "summary": "Aerial robots operating near people must treat a pedestrian, a parked car, and a wall differently, yet conventional perception--planning stacks reduce all of them to occupied geometry---a \\emph{human-"
+    },
+    {
+     "title": "Prediction-Informed Landing Window Planning for UAV Landing on USV in High Sea States",
+     "date": "2026-10-09T08:12:13Z",
+     "link": "https://arxiv.org/abs/2610.13190v1",
+     "summary": "Autonomous landing of unmanned aerial vehicle (UAV) on unmanned surface vehicle (USV) is difficult in high sea states. Existing hierarchical landing methods often infer future USV motion only implicit"
+    },
+    {
+     "title": "A User-Triggered UAV Dispatching System for Precise and Timely Mountain Search Missions",
+     "date": "2026-10-08T02:56:49Z",
+     "link": "https://arxiv.org/abs/2610.11130v1",
+     "summary": "Smartphones carried by hikers routinely record routes, locations, and requests for assistance, and these records can provide precise clues for mountain search. However, they are rarely transformed in "
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "arxiv-q-safe-autonomy",
+   "class": "arxiv",
+   "url": "https://export.arxiv.org/api/query?search_query=(cat%3Acs.RO%20OR%20cat%3Aeess.SY%20OR%20cat%3Acs.LG)%20AND%20(all%3A%22runtime%20assurance%22%20OR%20all%3A%22control%20barrier%20function%22%20OR%20all%3A%22safe%20reinforcement%20learning%22)%20AND%20(all%3Arobot%20OR%20all%3Aquadrotor%20OR%20all%3Aautonomous)&start=0&max_results=50&sortBy=submittedDate&sortOrder=descending",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "Google Frontend",
+   "bytes": 118986,
+   "ms": 1232,
+   "items": 50,
+   "sample": [
+    {
+     "title": "Interruption-Aware Recurrent Reinforcement Learning for UAS Navigation Under Temporary Overrides",
+     "date": "2026-10-20T12:30:41Z",
+     "link": "https://arxiv.org/abs/2610.28121v1",
+     "summary": "Safe autonomous navigation of UASs requires tactical deconfliction to address conflicts that strategic coordination cannot prevent. This task is challenging under partial observability, when sensor or"
+    },
+    {
+     "title": "Prescribed Performance Guided Safe Reinforcement Learning for Roundabout Navigation of Autonomous Vehicles",
+     "date": "2026-10-20T06:54:57Z",
+     "link": "https://arxiv.org/abs/2610.27732v1",
+     "summary": "Connected and Autonomous Vehicles (CAVs) face significant challenges in roundabout navigation due to dense traffic interactions and unpredictable agent behaviors, necessitating high levels of adaptabi"
+    },
+    {
+     "title": "Robust Multi-Agent Pursuit with Preemptive Communication via Reachability-Based Control Barrier Functions",
+     "date": "2026-10-15T16:50:41Z",
+     "link": "https://arxiv.org/abs/2610.22198v1",
+     "summary": "Safe multi-agent coordination typically assumes what real-world, deployed, resource-constrained robots cannot provide: continuous, perfect state sharing. Robust control strategies must be complemented"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "arxiv-q-robot-learning-eval",
+   "class": "arxiv",
+   "url": "https://export.arxiv.org/api/query?search_query=(cat%3Acs.RO%20OR%20cat%3Acs.LG)%20AND%20(all%3A%22vision-language-action%22%20OR%20all%3A%22robot%20learning%22%20OR%20all%3A%22sim-to-real%22)%20AND%20(all%3Aevaluation%20OR%20all%3Abenchmark%20OR%20all%3Arecovery)&start=0&max_results=50&sortBy=submittedDate&sortOrder=descending",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "Google Frontend",
+   "bytes": 135459,
+   "ms": 1141,
+   "items": 50,
+   "sample": [
+    {
+     "title": "Fast Motion Retargeting Pipeline for Scalable Humanoid Robot Learning",
+     "date": "2026-10-20T16:22:00Z",
+     "link": "https://arxiv.org/abs/2610.28470v1",
+     "summary": "While large-scale human motion capture datasets provide a rich source of demonstrations for humanoid robot learning, retargeting the diverse motions to different humanoid robots remains a nontrivial c"
+    },
+    {
+     "title": "Physical AI for Intralogistics: Benchmarking the NVIDIA Sim-to-Real Ecosystem for Cosmos-Enhanced COMPASS Navigation on Industrial Mobile Robots",
+     "date": "2026-10-20T15:59:27Z",
+     "link": "https://arxiv.org/abs/2610.28432v1",
+     "summary": "Classical robot navigation stacks are reliable but often require re-engineering for each new robot type and site. Learning-based navigation shifts this effort from hand-tuned parameters to data genera"
+    },
+    {
+     "title": "FIT-MAC: A Closed-Loop Multi-Agent Framework for Robust Vision-Language-Action Models",
+     "date": "2026-10-20T12:21:24Z",
+     "link": "https://arxiv.org/abs/2610.28109v1",
+     "summary": "Vision-language-action (VLA) models have achieved strong performance on standard robotic manipulation benchmarks. However, their reliability can degrade substantially when task conditions deviate from"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "rss-proceedings-rss22",
+   "class": "proceedings",
+   "url": "https://www.roboticsproceedings.org/rss22/index.html",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html",
+   "server": "Apache",
+   "bytes": 100786,
+   "ms": 1327,
+   "items": 210,
+   "sample": [
+    {
+     "title": "One-Shot Real-World Demonstration Synthesis for Scalable Bimanual Manipulation",
+     "link": "p001.html"
+    },
+    {
+     "title": "Supervised Mixture-of-Experts for Surgical Grasping and Retraction",
+     "link": "p002.html"
+    }
+   ],
+   "machineReadable": true,
+   "feedLinkTags": []
+  },
+  {
+   "id": "rss-proceedings-root",
+   "class": "proceedings",
+   "url": "https://www.roboticsproceedings.org/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html",
+   "server": "Apache",
+   "bytes": 17768,
+   "ms": 247,
+   "items": 136,
+   "sample": [],
+   "title": "Robotics: Science and Systems - Online Proceedings",
+   "feedLinkTags": [],
+   "machineReadable": false,
+   "challenge": false
+  },
+  {
+   "id": "rss-proceedings-feed-guess",
+   "class": "proceedings",
+   "url": "https://www.roboticsproceedings.org/feed.xml",
+   "attempts": 1,
+   "status": 404,
+   "contentType": "text/html",
+   "server": "Apache",
+   "bytes": 1699,
+   "ms": 278,
+   "bodyHint": "File Not Found body { background-color: #eee; } body, h1, p { font-family: \"Helvetica Neue\", \"Segoe UI\", Segoe, Helvetica, Arial, \"Lucida Grande\", sans-serif; f"
+  },
+  {
+   "id": "openreview-v2-corl2026-venueid",
+   "class": "proceedings",
+   "url": "https://api2.openreview.net/notes?content.venueid=robot-learning.org/CoRL/2026/Conference&limit=5",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html; charset=utf-8",
+   "server": "nginx",
+   "bytes": 4957,
+   "ms": 947,
+   "finalUrl": "https://openreview.net/challenge?redirect=https%3A%2F%2Fapi2.openreview.net%2Fnotes%3Fcontent.venueid%3Drobot-learning.org%2FCoRL%2F2026%2FConference%26limit%3D5",
+   "items": 0,
+   "sample": [],
+   "machineReadable": false,
+   "parseError": true
+  },
+  {
+   "id": "openreview-v2-corl2026-submission",
+   "class": "proceedings",
+   "url": "https://api2.openreview.net/notes?invitation=robot-learning.org/CoRL/2026/Conference/-/Submission&limit=5",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html; charset=utf-8",
+   "server": "nginx",
+   "bytes": 4977,
+   "ms": 768,
+   "finalUrl": "https://openreview.net/challenge?redirect=https%3A%2F%2Fapi2.openreview.net%2Fnotes%3Finvitation%3Drobot-learning.org%2FCoRL%2F2026%2FConference%2F-%2FSubmission%26limit%3D5",
+   "items": 0,
+   "sample": [],
+   "machineReadable": false,
+   "parseError": true
+  },
+  {
+   "id": "openreview-v2-group",
+   "class": "proceedings",
+   "url": "https://api2.openreview.net/groups?id=robot-learning.org/CoRL/2026/Conference",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/json; charset=utf-8",
+   "server": "nginx",
+   "bytes": 11885,
+   "ms": 317,
+   "items": 1,
+   "sample": [],
+   "machineReadable": true
+  },
+  {
+   "id": "pmlr-v305-html",
+   "class": "proceedings",
+   "url": "https://proceedings.mlr.press/v305/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html; charset=utf-8",
+   "server": "GitHub.com",
+   "bytes": 269600,
+   "ms": 413,
+   "items": 263,
+   "sample": [
+    {
+     "title": "Data Retrieval with Importance Weights for Few-Shot Imitation Learning"
+    },
+    {
+     "title": "$\\pi_0.5$: a Vision-Language-Action Model with Open-World Generalization"
+    }
+   ],
+   "machineReadable": true,
+   "feedLinkTags": [
+    "<link type=\"application/atom+xml\" rel=\"alternate\" href=\"https://proceedings.mlr.press/v305/feed.xml\" title=\"Proceedings of Machine Learning Research\" />"
+   ]
+  },
+  {
+   "id": "pmlr-v305-rss-guess",
+   "class": "proceedings",
+   "url": "https://proceedings.mlr.press/v305/assets/rss/feed.xml",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/xml",
+   "server": "GitHub.com",
+   "bytes": 458153,
+   "ms": 360,
+   "items": 263,
+   "sample": [
+    {
+     "title": "GraspQP: Differentiable Optimization of Force Closure for Diverse and Robust Dexterous Grasping",
+     "date": "Tue, 07 Oct 2025 00:00:00 +0000",
+     "link": "https://proceedings.mlr.press/v305/zurbrugg25a.html",
+     "summary": "Dexterous robotic hands enable versatile interactions through the flexibility and adaptability of a multi-finger setup, allowing for a wise range of task-specific grasp configurations in diverse envir"
+    },
+    {
+     "title": "Embrace Contacts: humanoid shadowing with full body ground contacts",
+     "date": "Tue, 07 Oct 2025 00:00:00 +0000",
+     "link": "https://proceedings.mlr.press/v305/zhuang25b.html",
+     "summary": "Previous humanoid robot research works treat the robot as a bipedal mobile manipulation platform, where only the feet and hands contact the environment. However, we humans use all body parts to intera"
+    },
+    {
+     "title": "MirrorDuo: Reflection-Consistent Visuomotor Learning from Mirrored Demonstration Pairs",
+     "date": "Tue, 07 Oct 2025 00:00:00 +0000",
+     "link": "https://proceedings.mlr.press/v305/zhuang25a.html",
+     "summary": "Image-based behaviour cloning leverages demonstrations captured from ubiquitous RGB cameras, enabling impressive visuomotor performance. However, it remains constrained by the cost of collecting suffi"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "pmlr-v305-feed-guess",
+   "class": "proceedings",
+   "url": "https://proceedings.mlr.press/v305/feed.xml",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/xml",
+   "server": "GitHub.com",
+   "bytes": 12896,
+   "ms": 266,
+   "items": 10,
+   "sample": [
+    {
+     "title": "CUPID: Curating Data your Robot Loves with Influence Functions",
+     "date": "2025-10-07T00:00:00+00:00",
+     "link": "https://proceedings.mlr.press/v305/agia25a.html",
+     "summary": ""
+    },
+    {
+     "title": "Towards Embodiment Scaling Laws in Robot Locomotion",
+     "date": "2025-10-07T00:00:00+00:00",
+     "link": "https://proceedings.mlr.press/v305/ai25a.html",
+     "summary": ""
+    },
+    {
+     "title": "Distributed Upload and Active Labeling for Resource-Constrained Fleet Learning",
+     "date": "2025-10-07T00:00:00+00:00",
+     "link": "https://proceedings.mlr.press/v305/akcin25a.html",
+     "summary": ""
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "pmlr-corl-index",
+   "class": "proceedings",
+   "url": "https://proceedings.mlr.press/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html; charset=utf-8",
+   "server": "GitHub.com",
+   "bytes": 42976,
+   "ms": 246,
+   "items": 373,
+   "sample": [],
+   "title": "Proceedings of Machine Learning Research | The Proceedings of Machine Learning Research (formerly JMLR Workshop and Conf",
+   "feedLinkTags": [
+    "<link type=\"application/atom+xml\" rel=\"alternate\" href=\"https://proceedings.mlr.press/feed.xml\" title=\"Proceedings of Machine Learning Research\" />"
+   ],
+   "machineReadable": "feed-advertised",
+   "challenge": false
+  },
+  {
+   "id": "lab-cmu-ri",
+   "class": "lab",
+   "url": "https://www.ri.cmu.edu/feed/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/rss+xml; charset=UTF-8",
+   "server": "Apache/2.4.37 (Red Hat Enterprise Linux)",
+   "bytes": 608870,
+   "ms": 5363,
+   "items": 100,
+   "sample": [
+    {
+     "title": "Bajcsy Awarded Packard Fellowship for Science and Engineering",
+     "date": "Thu, 15 Oct 2026 17:38:49 +0000",
+     "link": "https://www.ri.cmu.edu/bajcsy-awarded-packard-fellowship-for-science-and-engineering/",
+     "summary": "Andrea Bajcsy, an assistant professor in Carnegie Mellon University's Kenneth C. Griffin School of Computer Science, has received a 2026 Packard Fellowship for Science and Engineering. The fellowship,"
+    },
+    {
+     "title": "Bajcsy Named 2026 AI2050 Early Career Fellow",
+     "date": "Wed, 14 Oct 2026 19:33:26 +0000",
+     "link": "https://www.ri.cmu.edu/bajcsy-named-among-2026-ai2050-early-career-fellows/",
+     "summary": "Robotics Institute Assistant Professor Andrea Bajcsy joins the Language Technologies Institute's faculty members Akari Asai and Daniel Fried as recipients of the Schmidt Sciences honor. The post Bajcs"
+    },
+    {
+     "title": "Peg-in-Hole Isn’t Kid Stuff",
+     "date": "Wed, 07 Oct 2026 13:00:25 +0000",
+     "link": "https://www.ri.cmu.edu/peg-in-hole-isnt-kid-stuff/",
+     "summary": "A rendering shows Northrop Grumman's Mission Robotic Vehicle. (Northrop Grumman) Placing a peg in a hole is literally child’s play, but when the peg and the hole are more than 22,000 miles above Earth"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "lab-bair",
+   "class": "lab",
+   "url": "https://bair.berkeley.edu/blog/feed.xml",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/xml",
+   "server": "Apache",
+   "bytes": 289139,
+   "ms": 1026,
+   "items": 10,
+   "sample": [
+    {
+     "title": "From CUDA to MLX: How K-Search Brings Decades of Kernel Expertise to Apple Silicon",
+     "date": "Wed, 29 Jul 2026 02:00:00 -0700",
+     "link": "http://bair.berkeley.edu/blog/2026/07/29/cuda-to-mlx-k-search/",
+     "summary": "Figure 1: CUDA-to-MLX optimization translation map. CUDA optimization knowledge can be translated into architecture-native MLX strategies rather than copied instruction-for-instruction. We face a new "
+    },
+    {
+     "title": "Teaching LLMs to Update Beliefs for Efficient Long-Horizon Interaction",
+     "date": "Sun, 26 Jul 2026 02:00:00 -0700",
+     "link": "http://bair.berkeley.edu/blog/2026/07/26/abbel/",
+     "summary": ".abbel-fig { display: block; text-align: center; margin: 2.4em 0; line-height: 1.4; max-width: 100%; } .abbel-fig img { display: block; margin: 0.65em auto 0; height: auto; max-width: 100%; } /* Image"
+    },
+    {
+     "title": "Intelligence is Free, Now What? <br> Data Systems for, of, and by Agents",
+     "date": "Tue, 07 Jul 2026 02:00:00 -0700",
+     "link": "http://bair.berkeley.edu/blog/2026/07/07/intelligence-is-free-now-what/",
+     "summary": "... government of the people, by the people, for the people ... &nbsp;&nbsp;&nbsp;&nbsp;&mdash; Abraham Lincoln, Gettysburg Address (1863) The cost of AI is dropping rapidly. GPT-4-class capabilities "
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "lab-uzh-rpg-html",
+   "class": "lab",
+   "url": "https://rpg.ifi.uzh.ch/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html",
+   "server": "Apache",
+   "bytes": 245820,
+   "ms": 1188,
+   "items": 451,
+   "sample": [],
+   "title": "Robotics and Perception Group",
+   "feedLinkTags": [],
+   "machineReadable": false,
+   "challenge": false
+  },
+  {
+   "id": "lab-uzh-rpg-rss-guess",
+   "class": "lab",
+   "url": "https://rpg.ifi.uzh.ch/rss.xml",
+   "attempts": 1,
+   "status": 404,
+   "contentType": "text/html; charset=iso-8859-1",
+   "server": "Apache",
+   "bytes": 236,
+   "ms": 238,
+   "bodyHint": "404 Not Found Not Found The requested URL was not found on this server."
+  },
+  {
+   "id": "lab-eth-asl-html",
+   "class": "lab",
+   "url": "https://asl.ethz.ch/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html;charset=utf-8",
+   "server": "",
+   "bytes": 47668,
+   "ms": 889,
+   "items": 52,
+   "sample": [],
+   "title": "Homepage – Autonomous Systems Lab | ETH Zurich",
+   "feedLinkTags": [],
+   "machineReadable": false,
+   "challenge": false
+  },
+  {
+   "id": "lab-eth-asl-rss-guess",
+   "class": "lab",
+   "url": "https://asl.ethz.ch/news-and-events.rss",
+   "attempts": 1,
+   "status": 404,
+   "contentType": "text/html;charset=utf-8",
+   "server": "",
+   "bytes": 7854,
+   "ms": 232,
+   "bodyHint": "@media screen and (min-width: 1025px) { #contentContainer { margin-top: 3.25rem; } } 404&nbsp;Page not found Page not found The page you want to visit cannot be"
+  },
+  {
+   "id": "lab-iiith-rrc-html",
+   "class": "lab",
+   "url": "https://robotics.iiit.ac.in/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html; charset=utf-8",
+   "server": "GitHub.com",
+   "bytes": 17603,
+   "ms": 419,
+   "items": 36,
+   "sample": [],
+   "title": "RRC - Home",
+   "feedLinkTags": [],
+   "machineReadable": false,
+   "challenge": false
+  },
+  {
+   "id": "lab-iiith-rrc-feed-guess",
+   "class": "lab",
+   "url": "https://robotics.iiit.ac.in/feed/",
+   "attempts": 1,
+   "status": 404,
+   "contentType": "text/html; charset=utf-8",
+   "server": "GitHub.com",
+   "bytes": 10277,
+   "ms": 246,
+   "bodyHint": "Page Not Found (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createE"
+  },
+  {
+   "id": "lab-stanford-asl-feed",
+   "class": "lab",
+   "url": "https://stanfordasl.github.io/feed.xml",
+   "attempts": 1,
+   "status": 404,
+   "contentType": "text/html; charset=utf-8",
+   "server": "GitHub.com",
+   "bytes": 6831,
+   "ms": 355,
+   "bodyHint": "404: This page could not be found. Autonomous Systems Lab - Stanford University body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid r"
+  },
+  {
+   "id": "lab-stanford-asl-html",
+   "class": "lab",
+   "url": "https://stanfordasl.github.io/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html; charset=utf-8",
+   "server": "GitHub.com",
+   "bytes": 89701,
+   "ms": 264,
+   "items": 21,
+   "sample": [],
+   "title": "Autonomous Systems Lab - Stanford University",
+   "feedLinkTags": [],
+   "machineReadable": false,
+   "challenge": false
+  },
+  {
+   "id": "lab-upenn-grasp-feed-guess",
+   "class": "lab",
+   "url": "https://www.grasp.upenn.edu/news/feed/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/rss+xml; charset=UTF-8",
+   "server": "Apache",
+   "bytes": 242214,
+   "ms": 4349,
+   "items": 10,
+   "sample": [
+    {
+     "title": "AI platform allows real-time conversation between patients and their medical devices",
+     "date": "Thu, 15 Oct 2026 14:41:43 +0000",
+     "link": "https://www.grasp.upenn.edu/news/ai-platform-allows-real-time-conversation-between-patients-and-their-medical-devices/",
+     "summary": "Original ArticleA new AI-driven platform could allow people to interact with their medical devices by sending messages using a smartphone [&#8230;]"
+    },
+    {
+     "title": "A Delaware hub dedicated to ‘Human-AI cooperation’ launches with $21.5 million to study AI in healthcare",
+     "date": "Tue, 13 Oct 2026 14:14:48 +0000",
+     "link": "https://www.grasp.upenn.edu/news/a-delaware-hub-dedicated-to-human-ai-cooperation-launches-with-21-5-million-to-study-ai-in-healthcare/",
+     "summary": "Original Article Scientists at a new Delaware research hub envision a future where AI-powered sensorsassess a patient’s injury from the [&#8230;]"
+    },
+    {
+     "title": "Harnessing technology to help farmers assess crop health earlier",
+     "date": "Mon, 12 Oct 2026 20:35:38 +0000",
+     "link": "https://www.grasp.upenn.edu/news/harnessing-technology-to-help-farmers-assess-crop-health-earlier/",
+     "summary": "As the fall harvest arrives, Cherie Kagan and Akhila Mallavarapu of the Penn-led Internet of Things for Precision Agriculture center [&#8230;]"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "lab-upenn-grasp-feed2-guess",
+   "class": "lab",
+   "url": "https://www.grasp.upenn.edu/feed/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/rss+xml; charset=UTF-8",
+   "server": "Apache",
+   "bytes": 9940,
+   "ms": 2857,
+   "items": 2,
+   "sample": [
+    {
+     "title": "Protected: GRASP holds its first Volunteer Awards Ceremony",
+     "date": "Tue, 03 Jun 2025 21:03:10 +0000",
+     "link": "https://www.grasp.upenn.edu/uncategorized/grasp-holds-its-first-volunteer-awards-ceremony/",
+     "summary": "There is no excerpt because this is a protected post."
+    },
+    {
+     "title": "Kirigami Structures Pull Water from the Air",
+     "date": "Thu, 02 Mar 2023 16:06:48 +0000",
+     "link": "https://www.grasp.upenn.edu/uncategorized/kirigami-structures-pull-water-from-the-air/",
+     "summary": "Original Article Written by Melissa Pappas. Read the Original article here! Climate change is forcing us to reshape our relationship [&#8230;]"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "rel-ros2",
+   "class": "release",
+   "url": "https://github.com/ros2/ros2/releases.atom",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "github.com",
+   "bytes": 18749,
+   "ms": 850,
+   "items": 10,
+   "sample": [
+    {
+     "title": "ROS 2 Humble Hawksbill - Patch Release 15",
+     "date": "2026-09-14T18:34:12Z",
+     "link": "https://github.com/ros2/ros2/releases/tag/release-humble-20260914",
+     "summary": "These are the binary packages for ROS 2 Humble Hawksbill Patch Release 15 (2026-09-14) For runtime dependencies, see the binary package installation instructions . Your system must be up-to-date to be"
+    },
+    {
+     "title": "ROS Lyrical Luth - Patch Release 2 (2026/08/07)",
+     "date": "2026-08-08T00:05:41Z",
+     "link": "https://github.com/ros2/ros2/releases/tag/release-lyrical-20260807",
+     "summary": "These are the binary packages for ROS Lyrical Luth Patch Release 2 (2026/08/07) For runtime dependencies, see the binary package installation instructions . Your system must be up-to-date to be compat"
+    },
+    {
+     "title": "ROS Lyrical Luth - Patch Release 1 (2026/06/23)",
+     "date": "2026-06-23T20:32:22Z",
+     "link": "https://github.com/ros2/ros2/releases/tag/release-lyrical-20260623",
+     "summary": "These are the binary packages for ROS Lyrical Luth Patch Release 1 (2026/06/23) For runtime dependencies, see the binary package installation instructions . Your system must be up-to-date to be compat"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "rel-px4",
+   "class": "release",
+   "url": "https://github.com/PX4/PX4-Autopilot/releases.atom",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "github.com",
+   "bytes": 109907,
+   "ms": 881,
+   "items": 10,
+   "sample": [
+    {
+     "title": "v1.18.0-rc1",
+     "date": "2026-09-10T20:09:29Z",
+     "link": "https://github.com/PX4/PX4-Autopilot/releases/tag/v1.18.0-rc1",
+     "summary": "What's Changed This is a pre-release for flight testing, full release notes can be found here . Fixes since beta2: Estimator: correct sequential fusion and external-position reset-by-fusion ( #28273 ,"
+    },
+    {
+     "title": "v1.18.0-beta2",
+     "date": "2026-08-09T04:44:58Z",
+     "link": "https://github.com/PX4/PX4-Autopilot/releases/tag/v1.18.0-beta2",
+     "summary": "What's Changed This is a pre-release for flight testing, full release notes can be found here . Fixes since beta1: Fixed-wing: NaN eas2tas from zero-airspeed division in lat/lon control ( #28107 ), ta"
+    },
+    {
+     "title": "v1.18.0-beta1",
+     "date": "2026-07-08T20:52:39Z",
+     "link": "https://github.com/PX4/PX4-Autopilot/releases/tag/v1.18.0-beta1",
+     "summary": "What's Changed This is a pre-release for flight testing, full release notes can be found here . Full Changelog : v1.17.0-alpha1...v1.18.0-beta1"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "rel-mujoco",
+   "class": "release",
+   "url": "https://github.com/google-deepmind/mujoco/releases.atom",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "github.com",
+   "bytes": 162481,
+   "ms": 492,
+   "items": 10,
+   "sample": [
+    {
+     "title": "3.16.0",
+     "date": "2026-10-14T09:29:02Z",
+     "link": "https://github.com/google-deepmind/mujoco/releases/tag/3.16.0",
+     "summary": "Version 3.16.0 (October 14, 2026) Significant new features cf89a6375 , 4316935b3 , 6d98d9fab , 5f17e92eb , 89d59b11f , 147dc67d0 Frames can now scale their contents at compile time—without modifying t"
+    },
+    {
+     "title": "3.15.0",
+     "date": "2026-10-05T14:58:18Z",
+     "link": "https://github.com/google-deepmind/mujoco/releases/tag/3.15.0",
+     "summary": "Version 3.15.0 (October 5, 2026) General 1aa68e1ca .mjz archives written on Windows now always use / separators. 1aa68e1ca Assets in a meshdir or texturedir now resolve correctly in .mjz archives when"
+    },
+    {
+     "title": "3.14.0",
+     "date": "2026-09-22T16:52:58Z",
+     "link": "https://github.com/google-deepmind/mujoco/releases/tag/3.14.0",
+     "summary": "Version 3.14.0 (September 22, 2026) General 458189298 Added the ipc flag , an experimental contact mode of the discrete integrator for penetration-free flex contact. Each step minimizes an incremental"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "rel-gz-sim",
+   "class": "release",
+   "url": "https://github.com/gazebosim/gz-sim/releases.atom",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "github.com",
+   "bytes": 7965,
+   "ms": 412,
+   "items": 10,
+   "sample": [
+    {
+     "title": "gz-sim11_11.0.0-pre3: Prepare for 11.0.0 pre3 (#4087)",
+     "date": "2026-10-20T22:23:56Z",
+     "link": "https://github.com/gazebosim/gz-sim/releases/tag/gz-sim11_11.0.0-pre3",
+     "summary": "Signed-off-by: Addisu Z. Taddese addisuzt@intrinsic.ai"
+    },
+    {
+     "title": "gz-sim11_11.0.0-pre2: Prepare for 11.0.0 pre2 (#4037)",
+     "date": "2026-10-07T04:08:36Z",
+     "link": "https://github.com/gazebosim/gz-sim/releases/tag/gz-sim11_11.0.0-pre2",
+     "summary": "Signed-off-by: Addisu Z. Taddese addisuzt@intrinsic.ai"
+    },
+    {
+     "title": "gz-sim11_11.0.0-pre1: Fix graded buoyancy for rotated collision shapes (#3880)",
+     "date": "2026-08-20T08:51:36Z",
+     "link": "https://github.com/gazebosim/gz-sim/releases/tag/gz-sim11_11.0.0-pre1",
+     "summary": "Assisted-by: Claude Fable 5 noreply@anthropic.com Signed-off-by: Carlos Agüero caguero@honurobotics.com"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "rel-nav2",
+   "class": "release",
+   "url": "https://github.com/ros-navigation/navigation2/releases.atom",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "github.com",
+   "bytes": 5900,
+   "ms": 503,
+   "items": 10,
+   "sample": [
+    {
+     "title": "1.5.3",
+     "date": "2026-10-17T00:02:17Z",
+     "link": "https://github.com/ros-navigation/navigation2/releases/tag/1.5.3",
+     "summary": "Lyrical sync Oct 16"
+    },
+    {
+     "title": "1.3.14",
+     "date": "2026-10-17T00:34:50Z",
+     "link": "https://github.com/ros-navigation/navigation2/releases/tag/1.3.14",
+     "summary": "Jazzy Sync Oct 16"
+    },
+    {
+     "title": "1.5.2",
+     "date": "2026-09-16T00:33:28Z",
+     "link": "https://github.com/ros-navigation/navigation2/releases/tag/1.5.2",
+     "summary": "Lyrical Sync 1: Sept 15, 2026"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "rel-qgc",
+   "class": "release",
+   "url": "https://github.com/mavlink/qgroundcontrol/releases.atom",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "github.com",
+   "bytes": 53907,
+   "ms": 470,
+   "items": 10,
+   "sample": [
+    {
+     "title": "QGroundControl V5.1 - Stable",
+     "date": "2026-10-01T17:43:23Z",
+     "link": "https://github.com/mavlink/qgroundcontrol/releases/tag/v5.1.5",
+     "summary": "This is the stable release of QGroundControl v5.1. What's New See the What's New page for a summary of user-facing changes since V5.0. Important The HUD pitch display direction has been corrected in V"
+    },
+    {
+     "title": "v5.2.0-dev",
+     "date": "2026-09-19T18:30:56Z",
+     "link": "https://github.com/mavlink/qgroundcontrol/releases/tag/v5.2.0-dev",
+     "summary": "QGroundControl v5.2 daily version base"
+    },
+    {
+     "title": "QGroundControl V5.1 - Stable",
+     "date": "2026-08-30T21:51:45Z",
+     "link": "https://github.com/mavlink/qgroundcontrol/releases/tag/v5.1.4",
+     "summary": "This is the stable release of QGroundControl v5.1. What's New See the What's New page for a summary of user-facing changes since V5.0. Important The HUD pitch display direction has been corrected in V"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "rel-mavsdk",
+   "class": "release",
+   "url": "https://github.com/mavlink/MAVSDK/releases.atom",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/atom+xml; charset=utf-8",
+   "server": "github.com",
+   "bytes": 247875,
+   "ms": 1534,
+   "items": 10,
+   "sample": [
+    {
+     "title": "v4.0.6",
+     "date": "2026-10-08T14:30:07Z",
+     "link": "https://github.com/mavlink/MAVSDK/releases/tag/v4.0.6",
+     "summary": "What's Changed jni: run JNI test with -Xcheck:jni by @JonasVautherin in #3154 Full Changelog : v4.0.5...v4.0.6"
+    },
+    {
+     "title": "v4.0.5",
+     "date": "2026-10-07T08:13:37Z",
+     "link": "https://github.com/mavlink/MAVSDK/releases/tag/v4.0.5",
+     "summary": "What's Changed examples: show sending and receiving the custom GAS_SENSOR message by @julianoes in #3152 system_tests: don't keep the System in DestroyWithResultQueued by @bansiesta in #3153 Full Chan"
+    },
+    {
+     "title": "v4.0.4",
+     "date": "2026-10-07T07:12:52Z",
+     "link": "https://github.com/mavlink/MAVSDK/releases/tag/v4.0.4",
+     "summary": "What's Changed Fix discovery by @julianoes in #3150 Full Changelog : v4.0.3...v4.0.4"
+    }
+   ],
+   "machineReadable": true
+  },
+  {
+   "id": "reg-dgca-portal",
+   "class": "regulator",
+   "url": "https://www.dgca.gov.in/digigov-portal/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html;charset=utf-8",
+   "server": "",
+   "bytes": 208018,
+   "ms": 198,
+   "items": 127,
+   "sample": [],
+   "title": "Home | Directorate General of Civil Aviation | Government of India",
+   "feedLinkTags": [],
+   "machineReadable": false,
+   "challenge": false
+  },
+  {
+   "id": "reg-moca-rules",
+   "class": "regulator",
+   "url": "https://www.civilaviation.gov.in/ministry-documents/rules",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html; charset=UTF-8",
+   "server": "",
+   "bytes": 65045,
+   "ms": 182,
+   "items": 72,
+   "sample": [],
+   "title": "Rules | Ministry of Civil Aviation",
+   "feedLinkTags": [],
+   "machineReadable": false,
+   "challenge": false
+  },
+  {
+   "id": "reg-egazette",
+   "class": "regulator",
+   "url": "https://egazette.gov.in/",
+   "attempts": 2,
+   "error": "UNABLE_TO_VERIFY_LEAF_SIGNATURE"
+  },
+  {
+   "id": "reg-digitalsky",
+   "class": "regulator",
+   "url": "https://digitalsky.aai.aero/",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html",
+   "server": "nginx",
+   "bytes": 9983,
+   "ms": 103,
+   "items": 0,
+   "sample": [],
+   "title": "Welcome to DigitalSky",
+   "feedLinkTags": [],
+   "machineReadable": false,
+   "challenge": false
+  },
+  {
+   "id": "reg-aai-aim-notam",
+   "class": "regulator",
+   "url": "https://aim-india.aai.aero/notam-summaries",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "text/html; charset=utf-8",
+   "server": "",
+   "bytes": 22502,
+   "ms": 237,
+   "items": 44,
+   "sample": [],
+   "title": "Notam Summaries | AIM India",
+   "feedLinkTags": [],
+   "machineReadable": false,
+   "challenge": false
+  },
+  {
+   "id": "reg-nist-news",
+   "class": "regulator",
+   "url": "https://www.nist.gov/news-events/news/rss.xml",
+   "attempts": 1,
+   "status": 200,
+   "contentType": "application/rss+xml; charset=utf-8",
+   "server": "cloudflare",
+   "bytes": 24161,
+   "ms": 843,
+   "items": 40,
+   "sample": [
+    {
+     "title": "New Chip-Based ‘Tape Measure’ for Light Could Revolutionize Mobile Timekeeping and Enhance National Security",
+     "date": "Fri, 16 Oct 2026 12:00:00 +0000",
+     "link": "https://www.nist.gov/news-events/news/2026/10/new-chip-based-tape-measure-light-could-revolutionize-mobile-timekeeping",
+     "summary": "The new device could help provide vital navigation signals when GPS is either unavailable or has been jammed."
+    },
+    {
+     "title": "NIST Joins White House Effort to Drive ‘A New Golden Age of Science’",
+     "date": "Thu, 08 Oct 2026 12:00:00 +0000",
+     "link": "https://www.nist.gov/news-events/news/2026/10/nist-joins-white-house-effort-drive-new-golden-age-science",
+     "summary": "As the nation’s lead agency for measurement science and standards, NIST is uniquely positioned to bridge the distance between fundamental discovery and industrial capability."
+    },
+    {
+     "title": "NIST Study Shows How the Toxic Substances Mixed Into Fentanyl Vary Across the U.S. and Change Over Time",
+     "date": "Thu, 08 Oct 2026 12:00:00 +0000",
+     "link": "https://www.nist.gov/news-events/news/2026/10/nist-study-shows-how-toxic-substances-mixed-fentanyl-vary-across-us-and",
+     "summary": "Alerting first responders and law enforcement to the presence of these dangerous chemicals in local supplies of fentanyl can help save lives."
+    }
+   ],
+   "machineReadable": true
+  }
+ ]
+}
