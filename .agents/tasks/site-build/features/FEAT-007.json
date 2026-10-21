@@ -1,0 +1,48 @@
+{
+  "id": "FEAT-007",
+  "type": "feat",
+  "title": "Verification runner completion, local screenshots, verify report",
+  "goal": "`npm run verify` is the complete local and live acceptance tool (crawl, full browser audit matrix, external-link sample, meta table, print, screenshots) and the repo carries the real-build screenshot set and report that the reviewer and the ship step rely on (DR-6).",
+  "description": "Complete scripts/verify.mjs (--live, --shots, external sampling, meta table, --all matrix), finalise scripts/audit.py, commit docs/verify-report.json and the 33 local screenshots, add the README 'Verification' section, bring status.md up to date.",
+  "status": "pending",
+  "dependsOn": ["FEAT-006"],
+  "files": [
+    "scripts/verify.mjs", "scripts/audit.py", "docs/verify-report.json", "docs/screenshots/*.png (33 local shots)", "README.md (Verification section)", ".agents/tasks/site-build/status.md"
+  ],
+  "steps": [
+    "Read FIRST: context.json, this file, plan.md 'Verification matrix' and Decisions 23, design.md 'Verification plan', reviews/design-verdict.json DR-6, the brief's P5/P6 (in the step prompt), FEAT-002…006 findings.",
+    "scripts/verify.mjs additions: `--live <url>` (skip the local server; crawl the live pages listed by the sitemap-free rule: fetch each known page name from dist's inventory; audit against the live base URL; cache-busting `?cb=<ts>` on data/meta.json); `--shots <prefix>` → pass through to audit.py which saves viewport-only PNGs (`full_page=False`) for index, s12, plan, feed at 390×844 (dsf 1), 1440×900 (1), 1920×1080 (1), 2560×1440 (dsf 0.75 → 1920×1080 PNG) in light and dark, plus s03 at 1920 light, named `<prefix><page>-<width>-<theme>.png`; external-link sample: collect all http(s) hrefs from dist (or live) pages, group by host, take every k-th distinct host so that 40 links are sampled deterministically, HEAD then GET fallback with a 10 s timeout and the browser-like UA, record status counts (2xx/3xx/403/404/429/5xx/timeout/other) in the report, NEVER fail on 403 or anti-bot — report it; read data/meta.json (local or live) and print a per-source table (id, class, status, newest, error/note) into the report and to stdout; `--all` runs the cheap checks (overflow, fonts, contrast, controls) on all 24 section pages and the full groups on the 7 page types; print audit at 1440 on s12 (already in audit.py) included in the default run; report path default docs/verify-report.json with a `summary` {pagesAudited, widths, themes, checks, failures, minContrast: {light, dark}, minTextPx, bodyPx: {390, 2560}, contentRatio: {1920, 2560}, externalLinks: {sampled, counts}, screenshots: [...]}; exit 1 on any threshold failure, 0 otherwise.",
+    "Run `npm run verify -- --all --shots docs/screenshots/` → 33 PNGs in docs/screenshots/ named index-390-light.png … feed-2560-dark.png + s03-1920-light.png. Check every PNG's pixel dimensions with Add-Type System.Drawing (390×844, 1440×900, 1920×1080, and 1920×1080 for the 2560 set) BEFORE opening any; open at most four (one per tool call: index-1920-light, s12-390-dark, plan-1440-light, feed-1920-light) to confirm they show the real site like the mocks; note observations in findings. Never open an image larger than 1920 px per side.",
+    "README.md: add a 'Verification' section (what `npm run verify` checks, the thresholds, where the report and screenshots live, how the ship step runs it against the live site with `--live https://sudish007.github.io/physical-ai-roadmap/ --shots docs/screenshots/live-`).",
+    "status.md: one row per FEAT-001…007 with state done, commit hash and the one-line verification result; keep the DR-6 note that the 30 stale mock shots are not evidence and that docs/screenshots/*.png is the evidence set; add the verify summary numbers.",
+    "Run `npm test`. Fix ANY hard-UI-rule violation the full matrix reveals on ANY page and report it (this is the first time all 24 section pages get the full run). Set this file's status to completed; record findings: the summary numbers, external-link status counts, the per-source table, and the exact commands the fixer and the reviewer should run.",
+    "Commit on main: `feat(FEAT-007): verification runner completion, local screenshots, verify report` (includes docs/verify-report.json and docs/screenshots/*.png) with the commands and the summary numbers in the body. Never push."
+  ],
+  "acceptance": [
+    { "outcome": "The whole site passes the full audit matrix.", "audit": "`npm run verify -- --all --shots docs/screenshots/` exits 0; docs/verify-report.json: failures [] over 28 pages × 8 widths × 2 themes; minContrast ≥4.5 both themes; minTextPx ≥12; bodyPx 390 ≥17 and 2560 ≥21; contentRatio ≥0.88 at 1920/2560." },
+    { "outcome": "Real-build screenshots exist as the evidence set (DR-6).", "audit": "33 PNGs with the expected pixel sizes (System.Drawing), each ≤1920 px per side, timestamps after the FEAT-006 commit." },
+    { "outcome": "Every internal link and fragment resolves; external links are sampled honestly.", "audit": "crawl: 0 broken hrefs, 0 missing fragments; externalLinks.sampled == 40 with status counts (403s reported, not failed)." },
+    { "outcome": "The live mode is ready for the ship step.", "audit": "`node scripts/verify.mjs --live http://127.0.0.1:<port>/physical-ai-roadmap/ --no-external` against the local server behaves like the local run (same checks, same report shape)." }
+  ],
+  "acceptance_criteria": [
+    "npm run verify -- --all --shots docs/screenshots/ exits 0",
+    "33 screenshots committed with correct dimensions",
+    "docs/verify-report.json committed with failures []",
+    "README Verification section present; status.md complete"
+  ],
+  "verification": [
+    "npm test",
+    "npm run build",
+    "npm run verify -- --all --shots docs/screenshots/",
+    "PowerShell: Add-Type -AssemblyName System.Drawing; Get-ChildItem docs/screenshots/*.png | ForEach-Object { $i=[System.Drawing.Image]::FromFile($_.FullName); \"$($_.Name) $($i.Width)x$($i.Height)\"; $i.Dispose() }",
+    "node scripts/verify.mjs --live http://127.0.0.1:<port>/physical-ai-roadmap/ --no-external (with npm run serve in the background; taskkill after)"
+  ],
+  "mandatoryReviewItems": [
+    "DR-6: docs/screenshots/*.png (real build) is the evidence set; mock shots are never cited.",
+    "P5: the reviewer opens these screenshots one per call after checking dimensions and re-runs `npm run verify -- --all` itself.",
+    "P6: `node scripts/verify.mjs --live https://sudish007.github.io/physical-ai-roadmap/ --shots docs/screenshots/live-` is the ship command."
+  ],
+  "commit": "feat(FEAT-007): verification runner completion, local screenshots, verify report",
+  "blocked_reason": null,
+  "findings": ""
+}

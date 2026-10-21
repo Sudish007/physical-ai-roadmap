@@ -1,0 +1,8 @@
+{
+  "task_id": "site-build",
+  "task_description": "Build and ship the Physical AI Roadmap public static site (reading site + localStorage progress tracker + §17 research feed) from content/roadmap.md, with a GitHub Actions build-deploy workflow and live verification on GitHub Pages.",
+  "status": "pending",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003", "FEAT-004", "FEAT-005", "FEAT-006", "FEAT-007"],
+  "after_features": ["fix+review loop (max 2 iterations, pause on exhaustion; stop when reviews/code-verdict.json verdict == APPROVED)", "ship (gated on APPROVED)"],
+  "blocked_reason": null
+}

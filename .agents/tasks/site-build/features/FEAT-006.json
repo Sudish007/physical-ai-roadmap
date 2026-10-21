@@ -1,0 +1,47 @@
+{
+  "id": "FEAT-006",
+  "type": "feat",
+  "title": "build-deploy workflow, README, MIT licence, repo hygiene",
+  "goal": "One GitHub Actions workflow (push main + dispatch + daily cron at an off-peak minute) that tests, fetches (on schedule/dispatch), commits data back, builds dist/ and deploys the whole folder to Pages in a single job; a plain README; MIT for the code with the content-rights note; package metadata.",
+  "description": ".github/workflows/build-deploy.yml exactly as designed (D9), README.md (what/why/how to run, data flow, freshness sentence, source list, not-in-v1, licence), LICENSE (MIT), content/SOURCE.md rights sentence, package.json description/homepage/repository, .gitignore final.",
+  "status": "pending",
+  "dependsOn": ["FEAT-005"],
+  "files": [
+    ".github/workflows/build-deploy.yml", "README.md", "LICENSE", "content/SOURCE.md", "package.json", ".gitignore"
+  ],
+  "steps": [
+    "Read FIRST: context.json, this file, plan.md Decisions 9, 22, 27, design.md 'Actions workflow' (copy its YAML), 'Decision notes' (no 'verified' as a descriptor), the brief's D5/D9/D10/§2D (in the step prompt), the Ahead README.md for tone and structure (no marketing), FEAT-001…005 findings (scripts, source table, statuses).",
+    ".github/workflows/build-deploy.yml: name 'Build and deploy'; on: push (branches [main], paths-ignore ['data/**']), workflow_dispatch, schedule cron '23 2 * * *'; concurrency group build-deploy, cancel-in-progress false; permissions contents/pages/id-token write; ONE job build-deploy on ubuntu-latest, timeout-minutes 20, environment github-pages with url from the deployment step; steps: actions/checkout@v7 (fetch-depth 0, persist-credentials true) → actions/setup-node@v7 (node-version 24, cache npm) → npm ci → npm test → 'Fetch the §17 sources' (if schedule || workflow_dispatch; run node scripts/fetch.mjs; continue-on-error true; env FEED_RUNNER: github-actions) → 'Commit refreshed data back to main' (same if; continue-on-error true; git config github-actions[bot] name/email; git add data/feed.json data/meta.json; exit 0 when nothing staged; commit 'data: refresh <UTC stamp>'; git pull --rebase origin main; git push origin HEAD:main) → npm run build → actions/configure-pages@v6 (enablement: true) → actions/upload-pages-artifact@v5 (path: dist) → id deployment, actions/deploy-pages@v5. No secrets referenced. Comment at the top: the bot's push does not trigger another run (GITHUB_TOKEN), hence one job; upload takes the whole dist/ folder, never a file list.",
+    "README.md (plain, no marketing, no self-referential blurbs, 'verified' never used as a descriptor of the site): title 'Physical AI Roadmap'; one paragraph on what the site is (reading site for the report in content/roadmap.md, a personal progress tracker stored in the browser, a low-noise research feed from the report's own §17 sources) and the live URL https://sudish007.github.io/physical-ai-roadmap/; 'Content' (content/roadmap.md is the single source of truth, evidence cutoff 20 October 2026, labels preserved as chips, cross-references become links, nothing reworded); 'Run locally' (`npm ci`, `npm run build`, `npm run serve` → http://127.0.0.1:8790/ and /physical-ai-roadmap/, `npm test`, `npm run fetch`, `npm run verify` (needs the venv Python with Playwright and Edge), `npm run sync-content`); 'How the feed works' (sources.config.mjs registry → scripts/fetch.mjs → data/feed.json + data/meta.json; 30-day window; per-source status ok/empty/failed with the error class shown on the site; the workflow runs daily at 02:23 UTC and on dispatch; 'GitHub may delay or skip scheduled runs'; the source table: id, class, what it is, expected status with the notes from the design — yearly volumes read empty most of the year, eGazette fails TLS, NIST provisional); 'Progress tracker' (localStorage only, versioned keys, export/import, nothing leaves the browser); 'Repository layout'; 'Not in v1' (§10.4 newsletters and press feeds, OpenReview API (bot challenge), LLM summaries, any relay or paid service, reading-position restore is included); 'Licence' (code MIT, see LICENSE; content/roadmap.md © Sudish Kumar, all rights reserved unless he changes it). Keep it under ~250 lines.",
+    "LICENSE: MIT, 'Copyright (c) 2026 Sudish Kumar', standard text. content/SOURCE.md: append 'Rights: content/roadmap.md is © Sudish Kumar, all rights reserved unless he changes it; the MIT licence in LICENSE covers the code only.' package.json: description 'Physical AI, robotics and drone research roadmap with progress tracking and a low-noise research feed', homepage https://sudish007.github.io/physical-ai-roadmap/, repository git+https://github.com/Sudish007/physical-ai-roadmap.git. .gitignore final: node_modules/, dist/, *.log (nothing else).",
+    "Verify the workflow structurally with a scratch Python script in $env:TEMP using the venv's PyYAML (no repo file): load the YAML; assert on.push.branches == ['main'] and paths-ignore == ['data/**']; 'workflow_dispatch' in on; on.schedule[0].cron == '23 2 * * *' and its minute != 0; permissions == {contents: write, pages: write, id-token: write}; exactly one job; step order (names/uses/run) matches the design; the fetch and commit steps have continue-on-error true and the same if-condition; the commit step's run contains 'git pull --rebase origin main' before 'git push'; upload-pages-artifact with.path == 'dist'; configure-pages enablement true; timeout-minutes set. Remove the scratch script. Also run `npm test` and `npm run build`. String checks: README contains 'GitHub may delay or skip scheduled runs' and none of 'hand-coded', 'zero build step', 'view source', 'AI-powered'; the README title and first paragraph contain no 'verified'.",
+    "Update status.md, set this file's status to completed, record findings (anything the ship step must know: the dispatch/watch commands, that Pages must be enabled by API before the first dispatch, the NIST rule reference).",
+    "Commit on main: `feat(FEAT-006): build-deploy workflow, README, MIT licence, repo hygiene` with the commands and results in the body. Never push."
+  ],
+  "acceptance": [
+    { "outcome": "One workflow does test → fetch → data commit → build → deploy in a single job on push, dispatch and an off-peak daily cron (D9).", "audit": "PyYAML scratch check: triggers, cron '23 2 * * *' (minute 23), permissions, one job, step order, continue-on-error on fetch and commit, 'git pull --rebase' before push, upload path 'dist'." },
+    { "outcome": "The README explains what, why and how without marketing (D5).", "audit": "contains the freshness sentence; none of the banned phrases; no 'verified' in title/first paragraph; lists every npm script that exists in package.json." },
+    { "outcome": "Licensing is explicit and does not pick a content licence for the owner.", "audit": "LICENSE is MIT with 2026 Sudish Kumar; README and content/SOURCE.md carry the all-rights-reserved sentence." },
+    { "outcome": "Nothing else regressed.", "audit": "`npm test` and `npm run build` pass." }
+  ],
+  "acceptance_criteria": [
+    "workflow YAML passes the structural check",
+    "README string checks pass",
+    "LICENSE present; package.json metadata set",
+    "npm test and npm run build pass"
+  ],
+  "verification": [
+    "npm test",
+    "npm run build",
+    "venv python scratch script in $env:TEMP: PyYAML structural assertions on .github/workflows/build-deploy.yml, then Remove-Item",
+    "Select-String checks on README.md for the required and banned phrases"
+  ],
+  "mandatoryReviewItems": [
+    "D9: single job sequence; whole dist/ upload; cron minute 23; freshness sentence in site copy and README.",
+    "OF-4: 'verified' not used as a descriptor in README.",
+    "D5: no self-referential blurbs or marketing in README."
+  ],
+  "commit": "feat(FEAT-006): build-deploy workflow, README, MIT licence, repo hygiene",
+  "blocked_reason": null,
+  "findings": ""
+}

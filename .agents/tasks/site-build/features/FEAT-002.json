@@ -1,0 +1,66 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "title": "Site shell, light-first theme, fluid layout CSS, client bootstrap, browser audit tooling",
+  "goal": "Make every generated page meet D2/D3/D4/D5 in a real browser at 320–2560 px in both themes, with the theme control (OF-3), keyboard shortcuts, and a reusable audit runner (scripts/verify.mjs + scripts/audit.py) that every later FEAT extends and runs before committing.",
+  "description": "Finish assets/app.css from the mock (DR-1 data-cols rules, utility classes, nav strip, rails, details rails, card grids incl. best-10 five columns, feed-item and track-group rules for later FEATs, print, reduced motion, no prefers-color-scheme), write the client bootstrap (app.js, theme.js, keys.js, lib/store.js), add the skip link and theme-button markup to the templates, port shots/mock-audit.py to scripts/audit.py against the served site, and write scripts/verify.mjs (server spawn, crawl, audit, report).",
+  "status": "pending",
+  "dependsOn": ["FEAT-001"],
+  "files": [
+    "assets/app.css", "assets/app.js", "assets/theme.js", "assets/keys.js", "assets/lib/store.js",
+    "src/build/templates.js (theme button icon data-mode, skip link, data-page)",
+    "scripts/audit.py", "scripts/verify.mjs", "package.json (script verify)",
+    "tests/store.test.js", "tests/css.test.js", "tests/verify-cli.test.js"
+  ],
+  "steps": [
+    "Read FIRST: context.json, this file, plan.md Decisions 2, 15, 18, 19, 20, 23, design.md 'Design tokens', 'Layout grid per breakpoint', 'Verification plan', reviews/design-verdict.json DR-1, DR-3, DR-4, mocks/mock.css, shots/mock-audit.py (port it; do not re-invent), FEAT-001's findings in features/FEAT-001.json.",
+    "assets/app.css: keep every token and rule of the mock that the audit proved; add `table.wide[data-cols=\"2\"]{--cols:2}` … `[data-cols=\"10\"]{--cols:10}` and `table.wide{min-width:calc(var(--cols)*13rem)}` (DR-1); replace every inline-style dependency of the mock with classes (margins → utilities, progress bars → `.bar > i` whose width is set by JS CSSOM only); nav strip below 860 px and icon-only theme button below 860 px (label `.sr-only`, Decision 20); sticky left rail from 1024, both rails from 1440 (`top: calc(var(--header-h) + 1rem)`, `max-height`, `overflow-y:auto`); `<details class=\"inline-rail\">` styles for phones; `min-width:0` on every grid/flex child that can hold a table; `.cards` 1/2/3/4 columns at <720/720/1680/2240 and `.cards.best-10` 5 columns from 2400 px (OF-8); `.feed-item` grid areas (title/meta/summary left, actions column 9.5rem right from 820, actions horizontal row from 1440, below meta under 820 — OF-1/OF-11) and `.track-group` (one row from 1024, 2×2 below — OF-9) ready for FEAT-004/005; `.check` 44×44 label with a 22px native checkbox and `accent-color`; `@media print` (header, rails, inline rails, prevnext, buttons, triage, keys hidden; grids single flow; .table-wrap overflow visible; table.wide min-width 0; `a[href^=http]::after{content:\" (\" attr(href) \")\"}`); `@media (prefers-reduced-motion: reduce)` disables smooth scroll; NO `prefers-color-scheme` rule, no gradient, no box-shadow/text-shadow, no @keyframes (D2/D3).",
+    "assets/lib/store.js: `KEYS = { theme:'physical-ai-roadmap.v1.theme', tracker:'physical-ai-roadmap.v1.tracker', plan:'physical-ai-roadmap.v1.plan', triage:'physical-ai-roadmap.v1.triage', readpos:'physical-ai-roadmap.v1.readpos' }`; `get(key, shapeCheck)` (try/JSON.parse, returns null on corrupt or wrong shape), `set(key, value)`, `remove(key)`; pure (no DOM) so node:test imports it.",
+    "assets/theme.js (OF-3): modes light → dark → system; `apply(mode)` sets html[data-theme] (system resolved via matchMedia), updates the button: `.label` text = Light/Dark/System, svg `data-mode`, `aria-label=\"Theme: <mode>. Activate for <next>\"`; click and the `t` key cycle; persist in KEYS.theme; while mode is system, listen to `matchMedia('(prefers-color-scheme: dark)')` `change` and re-apply (Decision 15). First paint stays light for everyone (the inline bootstrap in templates.js already does this; do not add a prefers-color-scheme fallback).",
+    "assets/keys.js: `/` focuses the header search input (or the nav-strip Search link's target below 360), `t` cycles the theme, `[`/`]` navigate to `link[rel=prev]`/`link[rel=next]` when present, `Esc` closes the search panel (hook provided for FEAT-003); all ignored while the active element is an input/textarea/select/contenteditable.",
+    "assets/app.js: imports store, theme, keys; runs them on every page; dispatches to page modules by `document.body.dataset.page` (home/section/plan/feed modules are added by FEAT-003/004/005 — leave a clear dispatch table).",
+    "src/build/templates.js: add `<a class=\"skip\" href=\"#top\">Skip to content</a>` as the first body child; theme button svg carries `data-mode=\"light\"` initially; keep the CSP hash in sync (the inline script string is the single source).",
+    "scripts/audit.py: port shots/mock-audit.py. Inputs: `--base <url>`, `--pages <comma list>`, `--widths`, `--themes`, `--shots <prefix>` (viewport-only PNGs; 2560 at device_scale_factor 0.75), `--report <path>`; launch `chromium.launch(channel=\"msedge\", headless=True, args=[\"--disable-lcd-text\"])`, `new_context(viewport=…, device_scale_factor=…, reduced_motion=\"reduce\", color_scheme=…)`, `sys.stdout.reconfigure(encoding=\"utf-8\", errors=\"replace\")`. Generic checks per page × width × theme (open all <details> first): overflow (`documentElement.scrollWidth <= clientWidth`), body font-size (≥17 at ≤390, ≥21 and ≤22.5 at 2560), smallest visible text ≥12 px (skip display:none/visibility:hidden/zero-size/opacity-0), content box of `.page.layout`/`main.page` ≥ 0.88 × innerWidth at ≥1920, composited contrast of every distinct text/background pair ≥4.5 (≥3.0 for ≥24 px or bold ≥18.66 px), controls 40–44 px (button, text/date/number/search input, select, .search-box, .check), gutters equal `clamp(16px, 3.5vw, 96px)` ±0.5 px, footer text exact, `[style]` attribute count 0 (evaluate via `page.add_init_script` recording `document.querySelectorAll('[style]').length` at DOMContentLoaded before modules run), `securitypolicyviolation` events 0 (init script listener), `table.wide` computed min-width == data-cols × 13 × root font-size; DR-3: with `color_scheme=\"dark\"` and empty storage, after load `dataset.theme === 'light'`, computed `color-scheme` 'light', body/html composited background #ffffff (index, plan, s12); DR-4: at 390 and 1440 press `t` three times → aria-label sequence 'Theme: Light. Activate for Dark' → 'Theme: Dark. Activate for System' → 'Theme: System. Activate for Light' → back to Light, html[data-theme] following, svg data-mode changing, visible `.label` text equals the mode at ≥860; keys: on s11 press `]` → URL ends with s12.html, `[` → s11.html; print at 1440 via `page.emulate_media(media=\"print\")`: rails/header computed display none, every `table.wide` scrollWidth ≤ its `.table-wrap` clientWidth. Design the file so later FEATs append page-specific check groups (dict `GROUPS = {'index': fn, 'section': fn, 'plan': fn, 'feed': fn}`) without touching the generic part. Output: JSON report {pages, widths, themes, checks:[{page,width,theme,name,pass,value,threshold}], failures:[…]} and a one-line PASS/FAIL summary.",
+    "scripts/verify.mjs: find the first free port in 8790–8799 (attempt `listen`, catch EADDRINUSE), spawn `node scripts/serve.mjs` with `PORT`, poll `http://127.0.0.1:<port>/index.html` until 200 (≤15 s), crawl dist/*.html: every href without a scheme must resolve to a file in dist and every `#fragment` to an id in the target page (also `<link rel=prev/next>`), then run `audit.py` with the venv python `c:/Users/sudiskmr/Downloads/DomainClassification/.venv/Scripts/python.exe` (if absent: print why and exit 2), merge results into `docs/verify-report.json` (create docs/ if needed), kill the server in `finally`, exit 1 on any failure. Flags: `--pages` (default index,s03,s12,s15,appendix-a,plan,feed), `--all` (adds the other 21 section pages for the cheap checks: overflow, fonts, contrast, controls), `--widths` (default 320,360,390,820,1024,1440,1920,2560), `--themes` (default light,dark), `--report`, `--no-browser`. FEAT-007 adds `--live`, `--shots`, external-link sampling and the meta table — leave clear extension points. Add `\"verify\": \"node scripts/verify.mjs\"` to package.json.",
+    "Tests: tests/store.test.js (corrupt JSON → null; shape check; set/get round trip with a fake localStorage), tests/css.test.js (read assets/app.css: no `prefers-color-scheme`, no `gradient(`, no `box-shadow`, no `text-shadow`, no `@keyframes`; contains the data-cols rules 2..10 and the clamp gutter), tests/verify-cli.test.js (flag parsing, free-port probe helper).",
+    "Run `npm test`, `npm run build`, `npm run verify -- --all` and fix until every check passes. Also run `npm run verify -- --pages index,s12 --shots \"$env:TEMP\\pair-shots\\\"` once, check the PNG dimensions with System.Drawing (≤1920 px per side) and open index-1920-light and s12-390-dark (one per tool call) to confirm the shell looks like the mocks; remove the scratch folder. Fix ANY hard-UI-rule violation found on ANY page, in scope or not, and report it.",
+    "Update status.md (FEAT-002 row), set this file's status to completed, record in findings the verify summary (pages × widths × themes, min contrast light/dark, min text, body sizes at 390/2560, content ratios at 1920/2560) and the audit.py extension points for FEAT-003/004/005.",
+    "Commit on main: `feat(FEAT-002): site shell, light-first theme, fluid layout CSS, browser audit tooling` with a body listing the commands run and their results. Never push."
+  ],
+  "acceptance": [
+    { "outcome": "No page overflows horizontally at any width in either theme.", "audit": "`npm run verify -- --all`: documentElement.scrollWidth <= clientWidth on all 28 pages × 320/360/390/820/1024/1440/1920/2560 × light/dark with all <details> opened." },
+    { "outcome": "Type scale is fluid and never below the floor; controls are finger-sized.", "audit": "body font ≥17 px at 320–390 and ≥21 px (≤22.5) at 2560; smallest visible text ≥12 px; every control 40–44 px tall; gutters equal the clamp value." },
+    { "outcome": "Wide screens are used by composition, not margins.", "audit": "content box ≥ 0.88 × innerWidth at 1920 and 2560; 3-column grid at ≥1440, 2 at 1024, 1 below." },
+    { "outcome": "Every text/background pair is WCAG AA in both palettes.", "audit": "every composited pair ≥4.5:1 (≥3.0 large); pairs listed in docs/verify-report.json; expected minima ≈4.87 light / 7.12 dark." },
+    { "outcome": "Inline styles are gone and the CSP holds (DR-1).", "audit": "[style] count 0 before scripts on every page at 390 and 1920; 0 securitypolicyviolation events; table.wide min-width == data-cols × 13rem on s03, s12, s15." },
+    { "outcome": "Light is the first paint for a dark-preferring visitor (D3, DR-3).", "audit": "color_scheme=dark emulation + empty storage on index/plan/s12: data-theme light, computed color-scheme light, background #ffffff." },
+    { "outcome": "The theme control shows the current mode and cycles correctly (OF-3, DR-4).", "audit": "at 390 and 1440: aria-label sequence Light→Dark→System→Light on three `t` presses and on clicks; html[data-theme] and svg data-mode follow; visible label equals the mode at ≥860." },
+    { "outcome": "Keyboard navigation works.", "audit": "`]` on s11 → s12.html, `[` → s11.html; `/` focuses the search input; `t` cycles." },
+    { "outcome": "Print output is readable and unclipped.", "audit": "emulate print at 1440 on s12: header/rails display none; every table.wide scrollWidth ≤ its wrap clientWidth." },
+    { "outcome": "The stylesheet obeys D2/D3 structurally.", "audit": "tests/css.test.js: no prefers-color-scheme, gradient, box-shadow, text-shadow, @keyframes in assets/app.css." }
+  ],
+  "acceptance_criteria": [
+    "npm test passes",
+    "npm run verify -- --all exits 0 with every generic check passing",
+    "docs/verify-report.json lists 0 failures",
+    "theme cycle and first-paint checks pass at 390 and 1440"
+  ],
+  "verification": [
+    "npm test",
+    "npm run build",
+    "npm run verify -- --all",
+    "npm run verify -- --pages index,s12 --shots \"$env:TEMP\\pair-shots\\\" (dimension check + open two PNGs one per call, then Remove-Item the scratch folder)"
+  ],
+  "mandatoryReviewItems": [
+    "DR-1: CSS data-cols rules 2..10; zero [style] and zero CSP violations in the audit; wide min-width check on s03/s12/s15.",
+    "DR-3: dark-emulated first paint audit on index/plan/s12.",
+    "DR-4: theme audit at 390 and 1440 with the exact aria-label sequence and icon data-mode.",
+    "OF-3: label + icon + aria-label update on click and on `t`.",
+    "OF-7: screenshots and audits run with --disable-lcd-text; prose-colour check added to audit.py (FEAT-003 asserts it on s12).",
+    "OF-8: .cards.best-10 five columns from 2400 px (geometry asserted in FEAT-003).",
+    "OF-10: .anchor-h .copy opacity 0 until hover/focus-visible (asserted in FEAT-003)."
+  ],
+  "commit": "feat(FEAT-002): site shell, light-first theme, fluid layout CSS, browser audit tooling",
+  "blocked_reason": null,
+  "findings": ""
+}

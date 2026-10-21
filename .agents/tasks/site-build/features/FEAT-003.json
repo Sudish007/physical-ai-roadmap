@@ -1,0 +1,61 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "title": "Home composition, section-page behaviours, client-side search",
+  "goal": "Finish the reading site: the home page summarises (hero + legend, 7 session cards, 10 best-10 cards, 3 track cards, progress rows, latest-feed widget), every section page has its kicker, legend, anchors, scrollspy, prev/next and reading-position restore, and the search box works from a build-time index with the `/` shortcut.",
+  "description": "Template work on index.html and the section pages (OF-4, OF-5, OF-8, OF-10, DR-2, DR-9 wording), the client modules search.js/lib/score.js, sections.js (scrollspy, copy-link, read position), home.js + lib/format.js (latest feed widget, formatLastUpdated), and the `index` and `section` check groups in scripts/audit.py.",
+  "status": "pending",
+  "dependsOn": ["FEAT-002"],
+  "files": [
+    "src/build/templates.js", "src/build/home-data.js",
+    "assets/search.js", "assets/lib/score.js", "assets/sections.js", "assets/home.js", "assets/lib/format.js", "assets/app.js (dispatch entries)", "assets/app.css (home/search/section additions)",
+    "scripts/audit.py (index and section groups)",
+    "tests/score.test.js", "tests/format.test.js", "tests/home-template.test.js"
+  ],
+  "steps": [
+    "Read FIRST: context.json, this file, plan.md Decisions 2, 3, 5, 10, 11, 19, design.md 'Page inventory' (Home, Section pages, Search, Keyboard, 404), ORCHESTRATOR FINDINGS OF-4/OF-5/OF-7/OF-8/OF-10, reviews/design-verdict.json DR-2, DR-9, mocks/home.html, mocks/section.html, FEAT-001 and FEAT-002 findings.",
+    "Home template (src/build/templates.js + home-data): hero sentence 'A source-checked learning-and-research roadmap for physical AI, robotics and autonomous drones, written for a software builder in India, with a personal progress tracker and a low-noise research feed.' (OF-4 — the word 'verified' never appears as a site descriptor), the cutoff line once ('Evidence cutoff 20 October 2026. …'), three buttons (Read from §0 → s00.html, Set up My plan → plan.html, Open the feed → feed.html); `.hero-grid` two columns from 1440 with `.hero-legend` 'Labels used throughout' (five chips + §0 meanings verbatim) on the right and nowhere else on the page (OF-5); 'Start this week' = 7 cards (checkbox s02:sessions:N, 'N. Session title', time, Output to keep, link 'What to do, in §2' → s02.html#t-s02-sessions-N); 'The best 10 resources' = 10 cards `.cards.best-10` (checkbox s03:best-10:N, h3 'N. <DR-2 title>', purpose, time and cost, first link with .dom hint); 'Three tracks' = 3 cards from §14.1 (header cell as title; rows Fit profile / Month 24 outcome / Mandatory 24 h branch; the default marked with the report's own JUDGMENT chip 'Default: Track B'; link s14.html#s14-1); two columns from 1024: 'Your progress' (one `li[data-set]` per set with label, `<span data-done>0</span> of N`, `.bar > i`; overall line 'Overall 0 of N items (plan months are counted once a plan is chosen)' — DR-9) and 'Latest from the feed' (`<ol id=\"latest-feed\">` + line 'Feed last updated <span data-last-updated></span>. GitHub may delay or skip scheduled runs.' + link to feed.html; noscript fallbacks for both).",
+    "Section templates: kicker 'Section N of 24' / 'Appendix A · part 21 of 24' (Decision 10); `<details class=\"legend\">` under the h1 on all 24 pages (summary = the five chips; body = §0 meanings verbatim); `.anchor-h .copy` pills hidden until hover/`:focus-visible` via opacity (OF-10; stays in tab order); s00.html front matter block; collapsed `<details class=\"inline-rail\">` 'Contents: 24 sections' above the article below 1024 and 'On this page · <set> N of M done' below 1440; right rail 'Keys' box (`/` search · `t` theme · `[` `]` previous/next); the §17.3 fenced query block gets a client-added 'Copy' button (Decision 11; the button is UI, not content).",
+    "assets/lib/score.js (pure): tokenise (lowercase, ASCII-fold, split on non-alphanumerics, drop 1-char tokens), score(record, terms) (all terms must match in h or x; title hits weigh 3, snippet hits 1, earlier position bonus), group by page in report order, cap 8 per group / 60 total, snippet with matched terms wrapped for <mark>.",
+    "assets/search.js: lazy-load search-index.json on first focus of the header input or `/`; `role=dialog` panel under the header with `aria-label=\"Search results\"`; results grouped by section page, heading + snippet with <mark>; Enter opens the first hit; Esc closes and returns focus; arrow keys move between hits; no external service.",
+    "assets/sections.js: IntersectionObserver scrollspy sets `aria-current=\"true\"` on the right-rail link of the h3 nearest the top (and the inline rail's summary text); copy-link buttons copy `location.href.split('#')[0] + '#id'` via navigator.clipboard with a brief 'Copied' label change; reading-position restore (Decision 3): on `pagehide` write `{ [page]: scrollY }` under KEYS.readpos; on load, when `location.hash` is empty and the stored value is a finite number ≤ scrollHeight, `scrollTo(0, value)`; the §17.3 Copy button.",
+    "assets/lib/format.js (pure): `formatLastUpdated(iso)` → 'D MMM YYYY, HH:mm UTC' (e.g. '21 Oct 2026, 02:31 UTC'); null/invalid → 'not yet'; `formatDate(iso)` → 'D MMM YYYY'. assets/home.js: fetch data/feed.json and data/meta.json with `cache: 'no-cache'`, render the 5 newest items whose id is not marked drop in KEYS.triage (title link with rel noopener external, source name, formatDate, matchedQuery or class), 'No feed items yet' when items is empty, set [data-last-updated] from formatLastUpdated(meta.generatedAt); progress rows are filled by FEAT-004's tracker.js (leave the data-set hooks).",
+    "scripts/audit.py: add GROUPS['index'] — `.hero-grid` has 2 children with non-empty text at ≥1440; 'Labels used throughout' occurs exactly once in body text; `.hero` text has no /verified/i; `document.title` has no /verified/i (also run on plan, feed, 404); the ten `.cards.best-10 h3` texts start with 'N. <DR-2 title>' for N = 1..10; best-10 geometry: distinct `left` counts 1 at 390, 2 at 1024 and 1440, 3 at 1920, 5 at 2560 with exactly 2 distinct `top` values at 2560 (OF-8); 'Evidence cutoff' occurs exactly twice in index body text (hero + footer) and once on other pages; the site name occurs once outside content (`.wordmark`). GROUPS['section'] (s12, s03, s15, appendix-a): kicker text matches /^(Section \\d+ of 24|Appendix [A-D] · part \\d+ of 24)$/; `.legend` present with 5 `.chip`; `.copy` computed opacity 0 at rest and 1 after `.focus()`; right-rail 'On this page' link count == article h3 count; after `scrollIntoView` of the third h3, its rail link has aria-current=true (allow 500 ms); prev/next hrefs exist in dist; OF-7: at 390 and 2560 every text node outside <a> inside `.article` has computed colour equal to the `--fg` token value, and `.article a` count equals the markdown link count passed in via the report's per-page metadata (verify.mjs exports it); reading position: on s06 `scrollTo(0,1500)` → `pagehide` (navigate away and back) → `scrollY` within ±50 px of 1500; search: press `/` → active element is the search input; type 'quadrotor' → ≥1 result group; Enter → navigation to a page whose text contains 'quadrotor'; Esc closes the panel.",
+    "Tests: tests/score.test.js (tokenise, ranking order, group caps), tests/format.test.js (fixed ISO → exact string; null → 'not yet'), tests/home-template.test.js (render index from the real content into a string: hero sentence present, 'verified' absent from the hero, legend once, 7 + 10 + 3 cards, overall-line wording, no style attributes).",
+    "Run `npm test`, `npm run build`, `npm run verify` (7 page types; add `--all` if time allows). Fix ANY hard-UI-rule violation found on ANY page, in scope or not, and report it. Update status.md, set this file's status to completed, record findings (search-index.json size, card counts, anything FEAT-004 needs about the progress rows and data-set ids).",
+    "Commit on main: `feat(FEAT-003): home composition, section-page behaviours, client-side search` with the commands and results in the body. Never push."
+  ],
+  "acceptance": [
+    { "outcome": "The home page summarises the report with real cards and no duplicated facts (OF-4, OF-5, OF-8, DR-2, DR-9).", "audit": "index group: hero halves both carry content at 1920/2560; legend once; hero has no 'verified'; ten best-10 h3 titles exact; 5 columns × 2 rows at 2560, 1 column at 390; 'Evidence cutoff' exactly twice; overall-line wording matches." },
+    { "outcome": "Every section page has kicker, legend, anchors, working rails and prev/next (D6 legend on every page, OF-10).", "audit": "section group on s03/s12/s15/appendix-a: kicker regex; .legend with 5 chips on all 24 pages (crawl); .copy opacity 0 → 1 on focus; on-this-page count == h3 count; scrollspy aria-current after scrolling; prev/next resolve." },
+    { "outcome": "Prose links exist only where the markdown has a link; prose colour is uniform (OF-7).", "audit": "s12 at 390 and 2560: non-link text colour == --fg; .article a count == markdown link count for §12." },
+    { "outcome": "Search works offline from the build-time index.", "audit": "`/` focuses the input; 'quadrotor' yields ≥1 group; Enter navigates to a page containing the term; Esc closes; search-index.json ≤ 500 KB." },
+    { "outcome": "Reading position is restored per page.", "audit": "s06: scroll to 1500, leave, return → scrollY within ±50 px." },
+    { "outcome": "The latest-feed widget is honest with the placeholder data.", "audit": "index shows 'No feed items yet' and 'Feed last updated not yet' while data/feed.json has no items; after FEAT-005 it lists 5 real items." },
+    { "outcome": "All FEAT-002 generic thresholds still pass.", "audit": "`npm run verify` exit 0 on the 7 page types × 8 widths × 2 themes." }
+  ],
+  "acceptance_criteria": [
+    "npm test passes",
+    "npm run verify exits 0 including the index and section groups",
+    "the ten best-10 card titles equal the DR-2 list",
+    "search, scrollspy, copy-link, reading-position behaviours verified in the browser"
+  ],
+  "verification": [
+    "npm test",
+    "npm run build",
+    "npm run verify",
+    "npm run verify -- --all (if under 15 minutes; otherwise record the 7-page run and leave --all to the fixer)"
+  ],
+  "mandatoryReviewItems": [
+    "DR-2: index best-10 h3 texts start with 'N. <title>' (crawl check in the index group).",
+    "DR-9: home progress wording 'Overall 0 of N items (plan months are counted once a plan is chosen)'.",
+    "OF-4: hero copy 'source-checked'; no 'verified' as a site descriptor in hero or titles.",
+    "OF-5: hero two columns ≥1440 with the legend; legend not repeated lower on the page.",
+    "OF-7: prose-colour + link-parity audit on s12 at 390 and 2560.",
+    "OF-8: five best-10 columns from 2400 px (geometry audit at 2560).",
+    "OF-10: anchor pills hover/focus-visible only, keyboard reachable."
+  ],
+  "commit": "feat(FEAT-003): home composition, section-page behaviours, client-side search",
+  "blocked_reason": null,
+  "findings": ""
+}

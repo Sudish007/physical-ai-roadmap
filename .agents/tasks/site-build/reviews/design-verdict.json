@@ -1,0 +1,76 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "id": "DR-1",
+      "severity": "MEDIUM",
+      "title": "CSP style-src 'self' blocks the design's own inline style attributes (table --cols, progress bars)",
+      "detail": "Build step 13 sets a CSP meta with style-src 'self' while step 7 emits <table class=\"wide\" style=\"--cols:N\"> and the mocks use 53 inline style attributes (bars style=\"width:0%\", margins). HTML style attributes are blocked under that CSP, so --cols would be undefined, wide tables would lose their min-width (D4/D5 degradation) and bars would collapse. Fix: emit no style attributes; use data-cols=\"N\" with CSS table.wide[data-cols=\"6\"]{--cols:6} for 2..10 (or .cols-N classes), utility classes for margins, and JS el.style.width for bars (CSSOM writes are allowed). Keep style-src 'self'.",
+      "proof": "On every page type at 390 and 1920: document.querySelectorAll('[style]').length === 0 before scripts run; 0 securitypolicyviolation events during the full browser audit; parseFloat(getComputedStyle(table.wide).minWidth) === cols * 13 * rootFontSize for the §3, §12.2 and §15.3 tables."
+    },
+    {
+      "id": "DR-2",
+      "severity": "MEDIUM",
+      "title": "§3 best-10 card title rule returns the venue name for resources 8 and 9; #5 has no italic/quoted span",
+      "detail": "Build step 10 takes the first *italic* span before a quoted span. In #8 and #9 the first italic span is the journal/venue (*IEEE Robotics and Automation Letters*, *Robotics: Science and Systems XIX*), not the paper title; #5 (ROS 2 Jazzy official tutorials) has neither span. Fix: title = whichever of {first *italic* span, first \"...\"/“...” quoted span} starts earliest in the cell; else first link text; else whole cell. Test against the fixed list of ten titles (see design-review.md DR-2).",
+      "proof": "node:test home-data asserts the exact ten titles; crawl check that the ten index.html best-10 card h3 texts start with 'N. <title>' for N = 1..10."
+    },
+    {
+      "id": "DR-3",
+      "severity": "MEDIUM",
+      "title": "<meta name=\"color-scheme\" content=\"light dark\"> contradicts D3 (light first paint regardless of prefers-color-scheme)",
+      "detail": "Page inventory and mocks/home.html line 6 declare the meta; CSS already sets color-scheme per theme (:root light, [data-theme=dark] dark). The meta lets a dark-preferring UA paint canvas/form controls dark without the stylesheet. Fix: delete the meta; keep per-theme color-scheme in CSS only.",
+      "proof": "With prefers-color-scheme: dark emulated and empty localStorage, after loading index.html, plan.html and s12.html: document.documentElement.dataset.theme === 'light', getComputedStyle(document.documentElement).colorScheme === 'light', composited html/body background #ffffff."
+    },
+    {
+      "id": "DR-4",
+      "severity": "MEDIUM",
+      "title": "OF-3 and OF-9 acceptance not fully covered by the verification plan",
+      "detail": "The theme-control audit runs only at 1440 (the button is icon-only below 860 px) and OF-9 (track selector on one row) has no audit. Fix: run the theme audit at 390 and 1440 and add an OF-9 geometry check.",
+      "proof": "At 390 and 1440 pressing t three times yields aria-label 'Theme: Light. Activate for Dark' -> 'Theme: Dark. Activate for System' -> 'Theme: System. Activate for Light' -> back, html[data-theme] following, icon mode attribute changing, visible label equal to the mode at >=860. OF-9: at 1024/1440/1920/2560 the four .track-group buttons share one getBoundingClientRect().top; at 390/820 exactly two distinct tops with two buttons each."
+    },
+    {
+      "id": "DR-5",
+      "severity": "MEDIUM",
+      "title": "Feed 'Weekly protocol' card adds a row index (1, 2, 3) that §17.1 does not contain",
+      "detail": "mocks/feed.html numbers the three Normal-week rows 1/2/3 under the header 'Normal week'; the source first cells are 'Normal week', '', ''. D6 forbids numbers the report does not state and the index reads like session numbering. Fix: render the source's own cells (or drop the first column); no added numbers.",
+      "proof": "Build-time assertion or crawl check: every td text in the protocol card equals a cell string of the §17.1 table in content/roadmap.md."
+    },
+    {
+      "id": "DR-6",
+      "severity": "NIT",
+      "title": "30 of 32 mock screenshots predate the OF fixes",
+      "detail": "Only mock-section-2560-light.png and mock-feed-1920-light.png (05:24Z) post-date the mock edits (05:22Z); the rest (05:15Z) still show 'verified', the empty hero half, 'Light' in dark mode, the OF-9 wrap and the pre-OF-1 feed layout. This follows the orchestrator's re-shoot instruction; note it in status.md and never cite a mock shot as acceptance evidence.",
+      "proof": "Committed docs/screenshots/live-*.png (390/1440/1920/2560 x light/dark x index/s12/plan/feed, each <=1920 px per side) carry timestamps later than the last FEAT commit."
+    },
+    {
+      "id": "DR-7",
+      "severity": "NIT",
+      "title": "Tracker row-key wording leaves books/media key and the 8-word cap open to two readings",
+      "detail": "Prose says 'first *italic* span or first link text ... capped at 8 words (books, media)'; the table says books = italic title (col 2), media = first link text. Italic-first for media would collide (two *The Robot Brains Podcast*, two *Sense Think Act* rows). Fix: write the rule once: leading identifier regex ^\\*{0,2}([A-Za-z]{0,2}-?\\d+)\\*{0,2}(?=[.\\s(]|$) lowercased; books = first italic span of column 2; media = full text of the first link; '8 words' = first 8 whitespace tokens containing an ASCII alphanumeric, then lowercase, ASCII-fold, [^a-z0-9]+ -> '-', trim.",
+      "proof": "manifest test asserts the 26 media ids and 14 book ids against a fixture list (including s10:talks:ri-seminar-max-simchowitz-generative-control-action-chunking); collision check fails the build."
+    },
+    {
+      "id": "DR-8",
+      "severity": "NIT",
+      "title": "Two renderer claims are wrong (harmless for this content)",
+      "detail": "markdown-it 14.1.0's table escapedSplit honours only backslash escapes, not backticks (no table row in the content has a pipe inside a code span, so nothing mangles today); the '94 **[link](url)** cases' figure is 0 (18 links inside bold runs, 32 italic-inside-link). Fix: correct both sentences; add a build assertion that every table row has exactly the header's cell count.",
+      "proof": "tables test: a fixture row containing `a|b` inside backticks fails the row-arity assertion; the real content passes."
+    },
+    {
+      "id": "DR-9",
+      "severity": "NIT",
+      "title": "Copy/markup details: health glyph spacing, ellipsis, progress wording",
+      "detail": "Mock renders '■ok' (design says '■ ok'); mock summaries end with '...' while the normaliser writes '…'; 'Overall 0 of 114 items outside the plan months' -> 'Overall 0 of 114 items (plan months are counted once a plan is chosen)'.",
+      "proof": "String checks in the crawl: health strip text matches /■ ok \\d+ · □ empty \\d+ · ✕ failed \\d+/; no feed summary ends with '...'; home progress line matches the agreed wording."
+    },
+    {
+      "id": "DR-10",
+      "severity": "NIT",
+      "title": "Parser details to state explicitly",
+      "detail": "§15.3 totals are **1,040** / **2,080** (strip ** and thousands separators before Number()); §3 quoted-title detection must accept straight \" and curly “” quotes (§3 uses straight quotes, §0 prose uses curly).",
+      "proof": "plan-data test asserts totals 1040 and 2080; DR-2 title test covers quote handling."
+    }
+  ],
+  "reviewDoc": "c:/Users/sudiskmr/Downloads/DomainClassification/physical-ai-roadmap/.agents/tasks/site-build/reviews/design-review.md"
+}

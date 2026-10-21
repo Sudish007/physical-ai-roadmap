@@ -1,0 +1,55 @@
+{
+  "id": "FEAT-004",
+  "type": "feat",
+  "title": "Local progress tracker and My plan page",
+  "goal": "Every trackable checkbox persists in localStorage and updates every count live (rails, home, cards); the My plan page derives week/month/quarter, expected vs logged hours, the month table, the gate checklist, the quarter budget and the §4 answers from the report's own tables for the chosen plan and track, with Export/Import/Reset.",
+  "description": "assets/tracker.js, assets/lib/derive.js, assets/plan.js, the full plan.html template, import/export validation in lib/store.js, the `plan` check group in scripts/audit.py, and node:test coverage of all arithmetic.",
+  "status": "pending",
+  "dependsOn": ["FEAT-003"],
+  "files": [
+    "assets/tracker.js", "assets/lib/derive.js", "assets/plan.js", "assets/lib/store.js (validateImport, mergeImport)",
+    "src/build/templates.js (plan page)", "assets/app.css (plan additions)", "assets/app.js (dispatch)",
+    "scripts/audit.py (plan group)",
+    "tests/derive.test.js", "tests/import-export.test.js", "tests/tracker-logic.test.js"
+  ],
+  "steps": [
+    "Read FIRST: context.json, this file, plan.md Decisions 7, 14, 21, design.md 'Tracker' (ids, storage, derived numbers, export/import/reset) and 'Page inventory' (My plan), ORCHESTRATOR FINDINGS OF-2 and OF-9, reviews/design-verdict.json DR-4 (OF-9 proof), mocks/my-plan.html, mocks/section.html (checked-row style), FEAT-001…003 findings, dist/tracker-manifest.json and dist/plan-data.json from a fresh build.",
+    "assets/tracker.js: on every page bind all `input[data-track]`; state = KEYS.tracker `{ items: { id: { done: true, at: ISO } } }`; tick writes, untick deletes; all inputs sharing an id stay in sync (same page and via the `storage` event across tabs); checked rows get `data-done` on the <tr>, checked cards a `data-done` attribute; counts: for each `[data-set]` row on the page (right rail and home) set `[data-done]` = number of manifest ids of that set present in state (stale ids ignored) and the bar width via `el.style.width = pct + '%'` (CSSOM, allowed under CSP); overall per design: plan set counted = the chosen plan's (`plan-10h` or `plan-20h`) or neither when no plan is chosen; percentages are Math.round(100 × done / total) of real counts (D6).",
+    "assets/lib/derive.js (pure, unit-tested): `progress(manifest, trackerState, planState)` → { sets: [{id, done, total}], overall: {done, total} }; `planPosition(planData, plan, today)` → { completedWeeks = clamp(floor((today − startDate)/7d), 0, 104), currentWeek = min(completedWeeks + 1, 104), startsInDays when today < startDate, currentMonth = the §15.5 row whose [weekStart, weekEnd] contains currentWeek, currentQuarter = ceil(currentMonth / 3), expectedHours = completedWeeks × hoursPerWeek, loggedHours = Σ weeklyHours, difference }; lookups: monthRow(month), gate(quarter), budget(plan, quarter), substitution(month, track) from §14.3 for month ≥ 10; every function returns null (never a made-up number) when its row is missing, so the UI can fall back to raw cell text.",
+    "assets/lib/store.js additions: `validateImport(obj)` requires version === 1 and object-typed tracker/plan/triage (missing fields allowed); `mergeImport(current, imported)` — imported entries overwrite existing ones, nothing else is touched; `exportBundle()` → { version: 1, exportedAt, tracker, plan, triage }.",
+    "plan.html template (src/build/templates.js, static structure readable without JS; all numbers filled by plan.js from plan-data.json): prompt card shown until a plan is chosen, quoting the §4 Q7 rule verbatim ('≤12 → 10 h plan. ≥18 → 20 h plan. Between → …' — take the exact text from the content) and saying what to choose; setup row: hours segmented control (10 h / 20 h, `aria-pressed`), `.track-group` buttons Undecided · A · B (default) · C in ONE row from 1024 and an explicit 2×2 below (OF-9), start-date `<input type=date>`, Export JSON / Import JSON (hidden file input) / Reset…; stat grid (Week N of 104 or 'starts in N days'; Month N with week range and planned hours; Quarter N with its §15.3 emphasis; expected hours; logged hours with '+N h ahead' / '−N h behind'); 'This month' card (Shared work, Required deliverable, the chosen plan's column; from month 10 with a chosen track the §14.3 cell replaces the Track-B wording, with the Track-B text shown when undecided plus the note that the choice happens at the end of month 9); 'Gate Qn' card (the §15.6 row: clause checkboxes with ids s15:gates:qN:k (Decision 7 — clauses live only here; the gate checkbox s15:gates:qN is the one counted), 'If it fails', 'Added 20 h evidence' when 20 h is chosen); 'Hours log' (week number input defaulting to currentWeek, hours input, Save; list of entries with delete; stored in plan.weeklyHours); 'Month by month' (24 rows of the chosen plan with the plan-10h/plan-20h checkboxes — same ids as s15.html — current month `aria-current=\"true\"` and highlighted); 'Quarter n budget' (two-column table of the §15.3 row: F/P/B/E/W/C/R/Total + Emphasis); 'Personalization questions' (§4's 18 questions, each with the decision rule in a collapsed <details> and a textarea saved under plan.answers['s04:questions:n'] on input, debounced). If a row cannot be parsed, show the raw cell text with a single checkbox (never invented structure).",
+    "assets/plan.js: wires the above; reads/writes KEYS.plan `{ hoursPerWeek: 10|20|null, track: 'A'|'B'|'C'|null, startDate: 'YYYY-MM-DD'|null, weeklyHours: {week: hours}, answers: {id: text} }`; Export downloads physical-ai-roadmap-export-<date>.json via a Blob URL; Import reads the file, validateImport, `confirm()` stating that imported entries overwrite existing ones, then mergeImport and re-render; malformed → inline error, nothing written; Reset → `confirm('Remove all tracker, plan and triage data stored in this browser?')` → remove tracker/plan/triage keys (theme kept) and re-render. Section pages: tracker.js fills the right-rail 'Section progress' rows; s04 shows 'Answers N of 18' = non-empty answers (Decision 21).",
+    "scripts/audit.py GROUPS['plan']: inject fixture state via `context.add_init_script` → localStorage KEYS.plan = {hoursPerWeek:10, track:'B', startDate: (today − 14 days) as YYYY-MM-DD, weeklyHours:{1:10,2:8}, answers:{}} and load plan.html: stat grid text contains 'Week 3 of 104', 'Month 1', 'Quarter 1', expected 20 h, logged 18 h, '−2 h behind'; the month-1 row has aria-current=true; quarter budget shows F 50 … Total 130; OF-9: the four `.track-group button` share one `getBoundingClientRect().top` at 1024/1440/1920/2560 and have exactly two distinct tops with two buttons each at 390/820; `.check` labels 44×44 and native checkbox 22 px on plan/s12/s03/index; tracker round trip: on s12 click the Rung 0 checkbox → right rail 'Section progress' rungs row reads '1 of 9' → navigate to index.html → rungs row reads '1 of 9' → back on s12 the box is still checked; Export: click → `expect_download` → JSON parses with version 1 and keys tracker/plan/triage; Import of a malformed file (set_input_files with a scratch file in $env:TEMP) → inline error element visible and localStorage unchanged; Reset: accept the dialog → tracker/plan/triage keys absent, theme key present; with empty storage plan.html shows the prompt card with the Q7 rule and no numbers.",
+    "Tests: tests/derive.test.js (start 2026-10-20 / today 2026-10-21 → completedWeeks 0, currentWeek 1, month 1, quarter 1, expected 0; today 2027-01-05 → 11 weeks, currentWeek 12, month 3 (W9–13), Q1; today 2028-10-30 → clamp 104; today before start → startsInDays; 10 h × weeks and 20 h × weeks; logged sum; progress ignores stale ids; plan-set rule with/without a chosen plan; month ≥10 substitution for A/B/C from the real plan-data.json), tests/import-export.test.js (validateImport accepts version 1, rejects version 2 / non-object fields / arrays; mergeImport overwrites only imported ids), tests/tracker-logic.test.js (pure count function with a fake manifest and state).",
+    "Run `npm test`, `npm run build`, `npm run verify` (7 page types, plan group included). Fix ANY hard-UI-rule violation found on ANY page, in scope or not, and report it. Update status.md, set this file's status to completed, record findings (fixture used, any plan-data row that fell back to raw text — expected none).",
+    "Commit on main: `feat(FEAT-004): local progress tracker and My plan page` with the commands and results in the body. Never push."
+  ],
+  "acceptance": [
+    { "outcome": "Ticking any trackable item persists and every count follows (D6 real counts, OF-2).", "audit": "plan group: s12 Rung 0 click → rail '1 of 9' → index rungs row '1 of 9' → still checked after reload; .check 44×44, checkbox 22 px." },
+    { "outcome": "My plan derives its numbers from the report's tables for the chosen plan.", "audit": "fixture start = today − 14 d, 10 h, Track B: 'Week 3 of 104', 'Month 1', 'Quarter 1', expected 20 h, logged 18 h, '−2 h behind', month-1 row aria-current, Q1 budget F 50 … Total 130; tests/derive.test.js passes." },
+    { "outcome": "The track selector keeps one row on desktop and an explicit 2×2 on phones (OF-9, DR-4).", "audit": "four .track-group buttons share one top at 1024/1440/1920/2560; exactly two distinct tops with two buttons each at 390/820." },
+    { "outcome": "Export / Import / Reset behave as designed.", "audit": "download JSON has version 1 + tracker/plan/triage; malformed import → inline error and unchanged storage; Reset removes the three data keys and keeps theme." },
+    { "outcome": "Before a choice the page prompts instead of guessing.", "audit": "empty storage: prompt card contains the §4 Q7 rule text verbatim; stat grid shows no week/hour numbers." },
+    { "outcome": "All generic thresholds still pass on plan.html.", "audit": "`npm run verify`: plan.html at 8 widths × 2 themes passes overflow/font/contrast/controls." }
+  ],
+  "acceptance_criteria": [
+    "npm test passes incl. derive/import-export/tracker-logic",
+    "npm run verify exits 0 with the plan group",
+    "tracker round trip across s12 → index verified in the browser",
+    "OF-9 geometry verified at six widths"
+  ],
+  "verification": [
+    "npm test",
+    "npm run build",
+    "npm run verify"
+  ],
+  "mandatoryReviewItems": [
+    "DR-4 (OF-9 part): track-group geometry audit at 1024/1440/1920/2560 and 390/820.",
+    "OF-2: in-place 44 px checkboxes bound and counted live; checked-state style; rail count updates.",
+    "D6: progress percentages from real checkbox counts; plan months counted only once a plan is chosen.",
+    "Decision 7: gates counted as 8; clause checkboxes independent and My-plan-only."
+  ],
+  "commit": "feat(FEAT-004): local progress tracker and My plan page",
+  "blocked_reason": null,
+  "findings": ""
+}
