@@ -1,5 +1,5 @@
 /* Physical AI Roadmap — tokens, fluid layout grid, components. Light is the first paint (D3): the palette
-   switches only through html[data-theme]; there is no prefers-color-scheme rule anywhere in this file. */
+   switches only through html[data-theme]; there is no colour-scheme media query anywhere in this file. */
 
 /* ---------- Tokens ---------- */
 :root {
