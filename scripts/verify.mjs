@@ -18,6 +18,7 @@ import { existsSync, readFileSync, readdirSync, mkdirSync, writeFileSync, rmSync
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { splitSections } from '../src/build/parse.js';
 
 export const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const DEFAULT_PAGES = ['index', 's03', 's12', 's15', 'appendix-a', 'plan', 'feed'];
@@ -92,6 +93,19 @@ export function crawl(distDir) {
     prevNext += (html.match(/<link rel="(prev|next)" href="/g) || []).length;
   }
   return { pages: pages.size, refs, broken, styleAttrs, prevNext };
+}
+
+/**
+ * OF-7 link-parity reference for audit.py: page name → number of http(s) markdown links in that section of
+ * content/roadmap.md (s00 includes the front matter). The five relative dossier links render as text and
+ * are not counted; tests/build-dist.test.js applies the same rule to the built HTML.
+ */
+export function linkCounts(markdown) {
+  const { frontMatter, sections } = splitSections(markdown);
+  const count = (md) => (md.match(/\]\(https?:\/\//g) || []).length;
+  const out = {};
+  for (const s of sections) out[s.slug] = count(s.body) + (s.slug === 's00' ? count(frontMatter.markdown) : 0);
+  return out;
 }
 
 async function waitFor200(url, ms) {
@@ -194,6 +208,8 @@ export async function main(argv = process.argv.slice(2)) {
         report.base = base;
         const args = ['--base', base, '--pages', opts.pages.join(','), '--widths', opts.widths.join(','), '--themes', opts.themes.join(','), '--report', tmpReport];
         if (extraPages.length) args.push('--extra-pages', extraPages.join(','));
+        const links = linkCounts(readFileSync(path.join(REPO, 'content', 'roadmap.md'), 'utf8'));
+        args.push('--link-counts', Object.entries(links).map(([k, v]) => `${k}=${v}`).join(','));
         if (opts.shots) args.push('--shots', opts.shots);
         const code = await runAudit(args);
         if (existsSync(tmpReport)) {

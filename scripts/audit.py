@@ -10,8 +10,9 @@ Generic checks run for every page x width x theme with all <details> opened: hor
 font size, smallest visible text, content box ratio, composited WCAG contrast, control heights, gutters,
 footer text, [style] attribute count before scripts, securitypolicyviolation events, wide-table min-width
 (DR-1). Pages given with --pages also get: the DR-3 dark-emulated first paint (index, plan, s12), the DR-4
-theme cycle at 390 and 1440, keyboard navigation (s11), print at 1440 (s12), and their page-type GROUPS.
-Pages given with --extra-pages get the generic checks only (verify.mjs --all).
+theme cycle at 390 and 1440, and their page-type GROUPS. Specials run once per audit unless --no-specials:
+keyboard navigation (s11), print at 1440 (s12), reading-position restore (s06) and search (index at 1440
+and 390). Pages given with --extra-pages get the generic checks only (verify.mjs --all).
 
 Later FEATs append page-type checks: GROUPS["index"].append(fn) where fn(page, width, theme, ctx) returns a
 list of Check dicts (see `check()`); `ctx.page` is the live Playwright page, `ctx.name` the page name.
@@ -20,8 +21,10 @@ import argparse
 import datetime
 import json
 import pathlib
+import re
 import sys
 import traceback
+import urllib.parse
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -58,9 +61,65 @@ THRESHOLDS = {
     "print": "emulate print at 1440: header and rails display none; every table.wide scrollWidth <= its .table-wrap clientWidth",
     "layoutColumns": "section grid tracks: 3 at >=1440, 2 at 1024..1439, 1 below",
     "proseMeasure": "computed max-width of .prose > p <= 80ch",
-    "proseColour": "OF-7: text nodes in .prose paragraphs/lists outside links, chips, kbd have the body colour",
+    "proseColour": "OF-7: text nodes in .prose paragraphs/lists outside links, chips, kbd have the body colour, which equals the --fg token",
     "copyHidden": "OF-10: every .anchor-h .copy has opacity 0 at rest",
+    # FEAT-003: home composition (index group)
+    "heroHalves": "OF-5: .hero-grid has two children with text; two columns (2 distinct left edges) at >=1440, stacked below",
+    "legendOnce": "D5/OF-5: 'Labels used throughout' occurs exactly once in the body text",
+    "heroNoVerified": "OF-4: .hero text has no 'verified'",
+    "titleNoVerified": "OF-4: document.title has no 'verified' (index, plan, feed, 404)",
+    "best10Titles": "DR-2: the ten .cards.best-10 h3 texts start with 'N. <title>' for the fixed DR-2 list",
+    "best10Geometry": "OF-8: .cards.best-10 columns (distinct left edges) 1 <720, 2 <1680, 3 <2240, 4 <2400, 5 at >=2400; exactly 2 rows at 2560",
+    "cardsGeometry": "D4: .cards columns 1/2/3/4 at <720/720/1680/2240 (sessions 7 cards; tracks min(3, cols))",
+    "cutoffCount": "D5: 'Evidence cutoff' exactly twice on index (hero + footer) and once outside the content elsewhere",
+    "siteNameOnce": "D1/D5: the site name occurs once outside the content (the .wordmark)",
+    "overallWording": "DR-9: progress line 'Overall N of M items (plan months are counted once a plan is chosen).'",
+    "feedWidget": "D6: #latest-feed lists real items or 'No feed items yet'; note 'Feed last updated <formatLastUpdated>. GitHub may delay or skip scheduled runs.'",
+    # FEAT-003: section-page behaviours (section group)
+    "kicker": "kicker matches ^(Section \\d+ of 24|Appendix [A-D] · part \\d+ of 24)$",
+    "legendChips": "D6: details.legend present with 5 chips in the summary and 5 definitions",
+    "copyFocus": "OF-10: the first .anchor-h .copy has opacity 0 at rest and 1 after focus()",
+    "onPageCount": "right-rail and inline 'On this page' link counts == .prose h3.anchor-h count",
+    "scrollspy": "after scrollIntoView of the third h3 (or the last when fewer), its rail link has aria-current=true within 500 ms and no other does",
+    "prevNext": "<link rel=prev|next> and the .prevnext links resolve (HEAD 200) and match",
+    "linkParity": "OF-7: .prose a[href^=http] count == markdown http link count of the section (verify.mjs --link-counts)",
+    "codeCopy": "Decision 11: every .prose pre has a client-added Copy button (40-44px); on s17 clicking it puts the block's text in the clipboard and the label reads Copied",
+    "copyLink": "clicking an .anchor-h .copy pill on s17 copies location without fragment + #id, sets the hash, and flashes 'Copied' then 'link'",
+    # FEAT-003: specials
+    "readingPosition": "Decision 3: s06 scrollTo 1500, leave, return without a fragment -> scrollY within +-50px; with a fragment the heading wins",
+    "search": "/ focuses #search (opens the box below 860px); 'quadrotor' -> >=1 group; ArrowDown/Up move focus; Esc closes and leaves; Enter opens the first hit on a page containing the term",
 }
+
+# DR-2: the ten best-10 titles (also asserted by tests/home-data.test.js)
+DR2_TITLES = [
+    "Mathematics for Machine Learning",
+    "Modern Robotics: Mechanics, Planning, and Control",
+    "Control Engineering for Robotics",
+    "State Estimation for Robotics",
+    "ROS 2 Jazzy official tutorials",
+    "Principles of Perception and Planning for Aerial Vehicles",
+    "Deep Learning for Computer Vision",
+    "Safe-Control-Gym: A Unified Benchmark Suite for Safe Learning-Based Control and Reinforcement Learning in Robotics",
+    "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion",
+    "Underactuated Robotics: Algorithms for Walking, Running, Swimming, Flying, and Manipulation",
+]
+READPOS_PAGE = "s06"
+READPOS_Y = 1500
+CLIPBOARD_PAGE = "s17"  # has h3 copy-link pills and the §17.3 fenced query block
+COPIED_MS = 1500
+SEARCH_PAGE = "index"
+SEARCH_TERM = "quadrotor"
+SEARCH_WIDTHS = [1440, 390]
+# page name -> markdown http link count, filled from --link-counts (verify.mjs computes it from content/roadmap.md)
+LINK_COUNTS = {}
+
+
+def card_columns(width, maximum=4, five_from=None):
+    """Expected .cards columns at a viewport width (app.css breakpoints); best-10 adds a fifth from 2400px."""
+    cols = 1 if width < 720 else 2 if width < 1680 else 3 if width < 2240 else 4
+    if five_from and width >= five_from:
+        cols = 5
+    return min(cols, maximum)
 
 INIT_JS = r"""
 (() => {
@@ -181,7 +240,82 @@ SECTION_JS = r"""
     if (c !== fg) { off++; if (offSamples.length < 3) offSamples.push({ text: n.textContent.trim().slice(0, 30), color: c }); }
   }
   const copies = [...new Set([...document.querySelectorAll('.anchor-h .copy')].map((c) => getComputedStyle(c).opacity))];
-  return { tracks, eightyCh: Math.round(eightyCh * 10) / 10, maxW, paragraphs: paras.length, nodes, off, offSamples, copyOpacities: copies };
+  // OF-7: the body colour must be the --fg token itself (the check above compares every text node with it)
+  const fgToken = getComputedStyle(document.documentElement).getPropertyValue('--fg').trim();
+  const hexToRgb = (hex) => { const m = /^#([0-9a-f]{6})$/i.exec(hex); if (!m) return null; const n = parseInt(m[1], 16); return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`; };
+  return { tracks, eightyCh: Math.round(eightyCh * 10) / 10, maxW, paragraphs: paras.length, nodes, off, offSamples, copyOpacities: copies, fgToken, fgTokenRgb: hexToRgb(fgToken), bodyColor: fg };
+}
+"""
+
+INDEX_JS = r"""
+() => {
+  const txt = (el) => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
+  const count = (needle, hay) => hay.split(needle).length - 1;
+  const body = txt(document.body);
+  const rect = (el) => { const r = el.getBoundingClientRect(); return { left: Math.round(r.left), top: Math.round(r.top), width: Math.round(r.width) }; };
+  const geometry = (sel) => { const els = [...document.querySelectorAll(sel)]; const rs = els.map(rect); return { n: els.length, lefts: new Set(rs.map((r) => r.left)).size, tops: new Set(rs.map((r) => r.top)).size }; };
+  const grid = document.querySelector('.hero-grid');
+  const halves = grid ? [...grid.children].map((c) => ({ chars: txt(c).length, ...rect(c) })) : [];
+  const best = [...document.querySelectorAll('.cards.best-10 > li')].map((li) => txt(li.querySelector('h3')));
+  const note = document.querySelector('[data-feed-updated]');
+  return {
+    halves,
+    heroText: txt(document.querySelector('.hero')),
+    title: document.title,
+    legendCount: count('Labels used throughout', body),
+    cutoffCount: count('Evidence cutoff', body),
+    siteNameCount: count('Physical AI Roadmap', body),
+    wordmarks: document.querySelectorAll('.wordmark').length,
+    bestTitles: best,
+    bestGeometry: geometry('.cards.best-10 > li'),
+    sessionsGeometry: geometry('section[aria-labelledby="h-week"] .cards > li'),
+    tracksGeometry: geometry('section[aria-labelledby="h-tracks"] .cards > li'),
+    overall: txt(document.querySelector('.progress-note')),
+    feedItems: document.querySelectorAll('#latest-feed > li').length,
+    feedText: txt(document.getElementById('latest-feed')),
+    feedNote: txt(note),
+    feedNoteHidden: note ? note.hidden : null,
+  };
+}
+"""
+
+SECTION_BEHAVIOUR_JS = r"""
+() => {
+  const txt = (el) => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
+  const count = (needle, hay) => hay.split(needle).length - 1;
+  const body = txt(document.body); const prose = txt(document.querySelector('.prose'));
+  const legend = document.querySelector('details.legend');
+  const abs = (href) => (href ? new URL(href, location.href).href : null);
+  const linkRel = (rel) => { const l = document.querySelector(`link[rel="${rel}"]`); return l ? l.href : null; };
+  const navRel = (rel) => { const a = document.querySelector(`.prevnext a[rel="${rel}"]`); return a ? abs(a.getAttribute('href')) : null; };
+  const pres = [...document.querySelectorAll('.prose pre')];
+  const copyBtns = pres.map((p) => { const b = p.parentElement && p.parentElement.classList.contains('code-block') ? p.parentElement.querySelector('button.copy-code') : null; return b ? Math.round(b.getBoundingClientRect().height) : null; });
+  return {
+    kicker: txt(document.querySelector('.article-head .kicker')),
+    legendPresent: !!legend,
+    legendSummaryChips: legend ? legend.querySelectorAll('summary .chip').length : 0,
+    legendDefs: legend ? legend.querySelectorAll('dl dd').length : 0,
+    h3s: document.querySelectorAll('.prose h3.anchor-h').length,
+    railLinks: document.querySelectorAll('.rail-right a[href^="#"]').length,
+    inlineLinks: document.querySelectorAll('.onpage-inline a[href^="#"]').length,
+    httpLinks: document.querySelectorAll('.prose a[href^="http"]').length,
+    prev: { link: linkRel('prev'), nav: navRel('prev') },
+    next: { link: linkRel('next'), nav: navRel('next') },
+    cutoffOutsideProse: count('Evidence cutoff', body) - count('Evidence cutoff', prose),
+    siteNameOutsideProse: count('Physical AI Roadmap', body) - count('Physical AI Roadmap', prose),
+    wordmarks: document.querySelectorAll('.wordmark').length,
+    pres: pres.length,
+    copyBtns,
+  };
+}
+"""
+
+SHELL_TEXT_JS = r"""
+() => {
+  const txt = (el) => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
+  const count = (needle, hay) => hay.split(needle).length - 1;
+  const body = txt(document.body);
+  return { title: document.title, cutoffCount: count('Evidence cutoff', body), siteNameCount: count('Physical AI Roadmap', body), wordmarks: document.querySelectorAll('.wordmark').length };
 }
 """
 
@@ -228,8 +362,107 @@ def section_checks(page, width, theme, ctx):
     out = [check("layoutColumns", s["tracks"] == exp_tracks, {"tracks": s["tracks"], "expected": exp_tracks})]
     out.append(check("proseMeasure", s["maxW"] is not None and s["maxW"] <= s["eightyCh"] + 0.5, {"maxWidth": s["maxW"], "eightyCh": s["eightyCh"], "paragraphs": s["paragraphs"]}))
     if width in (390, 2560):
-        out.append(check("proseColour", s["off"] == 0 and s["nodes"] > 0, {"nodes": s["nodes"], "off": s["off"], "samples": s["offSamples"]}))
+        fg_ok = s["fgTokenRgb"] is not None and s["fgTokenRgb"] == s["bodyColor"]
+        out.append(check("proseColour", s["off"] == 0 and s["nodes"] > 0 and fg_ok, {"nodes": s["nodes"], "off": s["off"], "samples": s["offSamples"], "fgToken": s["fgToken"], "bodyColor": s["bodyColor"]}))
     out.append(check("copyHidden", s["copyOpacities"] == ["0"] or s["copyOpacities"] == [], {"opacities": s["copyOpacities"]}))
+    return out
+
+
+KICKER_RE = re.compile(r"^(Section \d+ of 24|Appendix [A-D] · part \d+ of 24)$")
+FEED_NOTE_RE = re.compile(r"^Feed last updated (not yet|\d{1,2} [A-Z][a-z]{2} \d{4}, \d{2}:\d{2} UTC)\. GitHub may delay or skip scheduled runs\.$")
+OVERALL_RE = re.compile(r"^Overall \d+ of \d+ items \(plan months are counted once a plan is chosen\)\.")
+
+
+def index_checks(page, width, theme, ctx):
+    """FEAT-003 home composition: OF-4, OF-5, OF-8, DR-2, DR-9, D5 counts and the feed widget."""
+    try:  # home.js fills the widget after fetching data/*.json; wait once for it
+        ctx.page.wait_for_selector("[data-feed-updated]:not([hidden])", timeout=4000)
+    except Exception:
+        pass
+    s = ctx.page.evaluate(INDEX_JS)
+    out = []
+    halves = s["halves"]
+    lefts = len({h["left"] for h in halves})
+    halves_ok = len(halves) == 2 and all(h["chars"] > 0 for h in halves) and lefts == (2 if width >= 1440 else 1)
+    out.append(check("heroHalves", halves_ok, {"halves": halves, "distinctLefts": lefts}))
+    out.append(check("legendOnce", s["legendCount"] == 1, s["legendCount"]))
+    out.append(check("heroNoVerified", "verified" not in s["heroText"].lower(), s["heroText"][:80]))
+    out.append(check("titleNoVerified", "verified" not in s["title"].lower(), s["title"]))
+    titles_ok = len(s["bestTitles"]) == 10 and all(t.startswith(f"{i + 1}. {DR2_TITLES[i]}") for i, t in enumerate(s["bestTitles"]))
+    out.append(check("best10Titles", titles_ok, s["bestTitles"]))
+    bg = s["bestGeometry"]
+    exp_best = card_columns(width, maximum=10, five_from=2400)
+    best_ok = bg["n"] == 10 and bg["lefts"] == exp_best and (bg["tops"] == 2 if width >= 2400 else True)
+    out.append(check("best10Geometry", best_ok, {**bg, "expectedColumns": exp_best}))
+    sg, tg = s["sessionsGeometry"], s["tracksGeometry"]
+    exp_cols = card_columns(width)
+    cards_ok = sg["n"] == 7 and sg["lefts"] == exp_cols and tg["n"] == 3 and tg["lefts"] == min(3, exp_cols)
+    out.append(check("cardsGeometry", cards_ok, {"sessions": sg, "tracks": tg, "expectedColumns": exp_cols}))
+    out.append(check("cutoffCount", s["cutoffCount"] == 2, s["cutoffCount"]))
+    out.append(check("siteNameOnce", s["siteNameCount"] == 1 and s["wordmarks"] == 1, {"bodyCount": s["siteNameCount"], "wordmarks": s["wordmarks"]}))
+    out.append(check("overallWording", bool(OVERALL_RE.match(s["overall"])), s["overall"]))
+    feed_ok = bool(FEED_NOTE_RE.match(s["feedNote"])) and s["feedNoteHidden"] is False and (s["feedItems"] >= 1) and (s["feedText"].startswith("No feed items yet") or s["feedItems"] <= 5)
+    out.append(check("feedWidget", feed_ok, {"items": s["feedItems"], "note": s["feedNote"], "hidden": s["feedNoteHidden"], "text": s["feedText"][:80]}))
+    return out
+
+
+def shell_text_checks(page, width, theme, ctx):
+    """FEAT-003 D1/D5/OF-4 string checks on the non-content pages (plan, feed, 404)."""
+    s = ctx.page.evaluate(SHELL_TEXT_JS)
+    return [
+        check("titleNoVerified", "verified" not in s["title"].lower(), s["title"]),
+        check("cutoffCount", s["cutoffCount"] == 1, s["cutoffCount"]),
+        check("siteNameOnce", s["siteNameCount"] == 1 and s["wordmarks"] == 1, {"bodyCount": s["siteNameCount"], "wordmarks": s["wordmarks"]}),
+    ]
+
+
+def section_behaviours(page, width, theme, ctx):
+    """FEAT-003 section pages: kicker, legend, anchors, rails, scrollspy, prev/next, OF-7 link parity, code Copy."""
+    p = ctx.page
+    s = p.evaluate(SECTION_BEHAVIOUR_JS)
+    out = [check("kicker", bool(KICKER_RE.match(s["kicker"])), s["kicker"])]
+    out.append(check("legendChips", s["legendPresent"] and s["legendSummaryChips"] == 5 and s["legendDefs"] == 5, {"summaryChips": s["legendSummaryChips"], "definitions": s["legendDefs"]}))
+    if s["h3s"]:
+        focus = p.evaluate("""() => { const c = document.querySelector('.anchor-h .copy'); const rest = getComputedStyle(c).opacity;
+            c.focus({ preventScroll: true }); const focused = getComputedStyle(c).opacity; const active = document.activeElement === c; c.blur();
+            return { rest, focused, active, after: getComputedStyle(c).opacity }; }""")
+        out.append(check("copyFocus", focus["rest"] == "0" and focus["focused"] == "1" and focus["active"] and focus["after"] == "0", focus))
+    out.append(check("onPageCount", s["railLinks"] == s["h3s"] and s["inlineLinks"] == s["h3s"], {"h3": s["h3s"], "rail": s["railLinks"], "inline": s["inlineLinks"]}))
+    if s["h3s"]:
+        target = p.evaluate("""() => { const hs = [...document.querySelectorAll('.prose h3.anchor-h')]; const h = hs[Math.min(2, hs.length - 1)]; h.scrollIntoView(); return h.id; }""")
+        ok = True
+        try:
+            p.wait_for_function("(id) => document.querySelectorAll(`a[href=\"#${id}\"][aria-current=\"true\"]`).length >= 1", arg=target, timeout=500)
+        except Exception:
+            ok = False
+        state = p.evaluate("""(id) => ({ current: [...document.querySelectorAll('a[aria-current="true"][href^="#"]')].map((a) => a.getAttribute('href')), target: '#' + id, scrollY: Math.round(scrollY) })""", target)
+        others = [h for h in state["current"] if h != state["target"]]
+        out.append(check("scrollspy", ok and not others and state["target"] in state["current"], state))
+        p.evaluate("() => scrollTo(0, 0)")
+    else:
+        out.append(check("scrollspy", True, "no h3 on this page"))
+    if width == 390 and theme == "light":
+        resolved = {}
+        for rel in ("prev", "next"):
+            link = s[rel]["link"]
+            nav = s[rel]["nav"]
+            if link is None and nav is None:
+                resolved[rel] = "none"
+                continue
+            status = None
+            try:
+                status = p.request.head(link).status if link else None
+            except Exception as e:
+                status = f"{type(e).__name__}"
+            resolved[rel] = {"status": status, "sameTarget": link == nav}
+        ok = all(v == "none" or (v["status"] == 200 and v["sameTarget"]) for v in resolved.values()) and not (resolved["prev"] == "none" and resolved["next"] == "none")
+        out.append(check("prevNext", ok, resolved))
+    if width in (390, 2560) and page in LINK_COUNTS:
+        out.append(check("linkParity", s["httpLinks"] == LINK_COUNTS[page], {"rendered": s["httpLinks"], "markdown": LINK_COUNTS[page]}))
+    out.append(check("cutoffCount", s["cutoffOutsideProse"] == 1, s["cutoffOutsideProse"]))
+    out.append(check("siteNameOnce", s["siteNameOutsideProse"] == 1 and s["wordmarks"] == 1, {"outsideContent": s["siteNameOutsideProse"], "wordmarks": s["wordmarks"]}))
+    if s["pres"]:
+        out.append(check("codeCopy", all(h is not None and 40 <= h <= 44 for h in s["copyBtns"]), {"pre": s["pres"], "buttonHeights": s["copyBtns"]}))
     return out
 
 
@@ -237,11 +470,11 @@ def section_checks(page, width, theme, ctx):
 # FEAT-004 to "plan", FEAT-005 to "feed". Each fn(page_name, width, theme, ctx) -> [check, ...].
 # They run after the generic evaluation, with every <details> open and html[data-theme] set directly.
 GROUPS = {
-    "index": [],
-    "section": [section_checks],
-    "plan": [],
-    "feed": [],
-    "404": [],
+    "home": [index_checks],  # index.html carries body[data-page="home"]
+    "section": [section_checks, section_behaviours],
+    "plan": [shell_text_checks],
+    "feed": [shell_text_checks],
+    "404": [shell_text_checks],
 }
 
 # Extra init script per page NAME (e.g. FEAT-004: PAGE_INIT["plan"] = "localStorage.setItem('physical-ai-roadmap.v1.plan', ...)")
@@ -427,6 +660,109 @@ class Audit:
         finally:
             ctx.close()
 
+    # ---- reading position (Decision 3) ----------------------------------------------------------
+    def reading_position(self, browser):
+        ctx = self.new_context(browser, 1440, 900)
+        try:
+            page = ctx.new_page()
+            page.goto(self.url(READPOS_PAGE), wait_until="load")
+            page.evaluate("(y) => scrollTo(0, y)", READPOS_Y)
+            page.wait_for_timeout(100)
+            before = page.evaluate("() => Math.round(scrollY)")
+            page.goto(self.url(KEYS_PAGE), wait_until="load")  # pagehide on s06 writes the position
+            stored = page.evaluate("() => localStorage.getItem('physical-ai-roadmap.v1.readpos')")
+            page.goto(self.url(READPOS_PAGE), wait_until="load")
+            restored = None
+            try:
+                page.wait_for_function("(y) => Math.abs(scrollY - y) <= 50", arg=READPOS_Y, timeout=1500)
+                restored = page.evaluate("() => Math.round(scrollY)")
+            except Exception:
+                restored = page.evaluate("() => Math.round(scrollY)")
+            # with a fragment the heading wins over the stored position
+            frag = page.evaluate("() => { const h = document.querySelectorAll('.prose h3.anchor-h'); return h.length > 2 ? h[2].id : h[0].id; }")
+            page.goto(f"{self.url(READPOS_PAGE)}#{frag}", wait_until="load")
+            page.wait_for_timeout(300)
+            frag_state = page.evaluate("(id) => { const h = document.getElementById(id); return { headingTop: Math.round(h.getBoundingClientRect().top), scrollY: Math.round(scrollY) }; }", frag)
+            ok = before == READPOS_Y and restored is not None and abs(restored - READPOS_Y) <= 50 and stored is not None and f'"{READPOS_PAGE}.html":{READPOS_Y}' in stored.replace(" ", "") and 0 <= frag_state["headingTop"] <= 120
+            self.record(READPOS_PAGE, 1440, "light", [check("readingPosition", ok, {"before": before, "stored": stored, "restored": restored, "fragment": frag, "fragmentState": frag_state})])
+            print(f"{READPOS_PAGE:11}  1440 reading-position {'OK' if ok else 'FAIL'} before={before} restored={restored} stored={stored} frag={frag_state}")
+        finally:
+            ctx.close()
+
+    # ---- search ---------------------------------------------------------------------------------
+    def search(self, browser, width):
+        ctx = self.new_context(browser, width, HEIGHTS.get(width, 900))
+        try:
+            page = ctx.new_page()
+            page.goto(self.url(SEARCH_PAGE), wait_until="load")
+            page.wait_for_timeout(100)
+            page.keyboard.press("/")
+            focused = page.evaluate("() => { const a = document.activeElement; const r = a ? a.getBoundingClientRect() : null; return { id: a && a.id, visible: !!r && r.width > 1 && r.height > 1, open: document.querySelector('.site-header').classList.contains('search-open') }; }")
+            page.keyboard.type(SEARCH_TERM)
+            groups = 0
+            try:
+                page.wait_for_selector(".search-panel:not([hidden]) .search-group", timeout=6000)
+                groups = page.evaluate("() => document.querySelectorAll('.search-panel .search-group').length")
+            except Exception:
+                groups = 0
+            panel = page.evaluate("""() => { const p = document.querySelector('.search-panel'); const marks = p.querySelectorAll('mark').length; const hits = p.querySelectorAll('a[href]').length;
+                const r = p.getBoundingClientRect(); return { role: p.getAttribute('role'), label: p.getAttribute('aria-label'), hits, marks, status: (p.querySelector('.search-status') || {}).textContent || '', right: Math.round(r.right), left: Math.round(r.left), top: Math.round(r.top), headerBottom: Math.round(document.querySelector('.site-header').getBoundingClientRect().bottom), overflow: document.documentElement.scrollWidth <= document.documentElement.clientWidth, firstHref: (p.querySelector('a[href]') || {}).getAttribute ? p.querySelector('a[href]').getAttribute('href') : null }; }""")
+            page.keyboard.press("ArrowDown")
+            arrow_down = page.evaluate("() => { const a = document.activeElement; return { tag: a.tagName, inPanel: !!a.closest('.search-panel') }; }")
+            page.keyboard.press("ArrowDown")
+            arrow_down2 = page.evaluate("() => { const a = document.activeElement; const links = [...document.querySelectorAll('.search-panel a[href]')]; return links.indexOf(a); }")
+            page.keyboard.press("ArrowUp")
+            page.keyboard.press("ArrowUp")
+            arrow_up = page.evaluate("() => document.activeElement && document.activeElement.id")
+            page.keyboard.press("Escape")
+            after_esc = page.evaluate("() => ({ hidden: document.querySelector('.search-panel').hidden, active: document.activeElement.tagName, open: document.querySelector('.site-header').classList.contains('search-open') })")
+            page.keyboard.press("/")
+            reopened = False
+            try:
+                page.wait_for_selector(".search-panel:not([hidden]) .search-group", timeout=3000)
+                reopened = True
+            except Exception:
+                reopened = False
+            with page.expect_navigation(wait_until="load"):
+                page.keyboard.press("Enter")
+            landed = page.evaluate("(term) => ({ url: location.href, hasTerm: document.body.innerText.toLowerCase().includes(term), page: document.body.dataset.page })", SEARCH_TERM)
+            ok = (focused["id"] == "search" and focused["visible"] and groups >= 1 and panel["role"] == "dialog" and panel["label"] == "Search results" and panel["marks"] >= 1
+                  and panel["top"] >= panel["headerBottom"] - 1 and panel["overflow"] and arrow_down["tag"] == "A" and arrow_down["inPanel"] and arrow_down2 == 1 and arrow_up == "search"
+                  and after_esc["hidden"] is True and after_esc["active"] == "BODY" and after_esc["open"] is False and reopened and landed["hasTerm"] and landed["url"].endswith(panel["firstHref"] or "∅"))
+            self.record(SEARCH_PAGE, width, "light", [check("search", ok, {"focused": focused, "groups": groups, "panel": panel, "arrowDown": arrow_down, "arrowDown2": arrow_down2, "arrowUp": arrow_up, "afterEsc": after_esc, "reopened": reopened, "landed": landed})])
+            print(f"{SEARCH_PAGE:11} {width:5} search {'OK' if ok else 'FAIL'} groups={groups} hits={panel['hits']} marks={panel['marks']} esc={after_esc} landed={landed['url'].rsplit('/', 1)[-1]} hasTerm={landed['hasTerm']}")
+        finally:
+            ctx.close()
+
+    # ---- clipboard: copy-link pills and the code Copy button (s17 has both) -----------------------
+    def clipboard(self, browser):
+        ctx = self.new_context(browser, 1440, 900)
+        try:
+            u = urllib.parse.urlsplit(self.base)
+            ctx.grant_permissions(["clipboard-read", "clipboard-write"], origin=f"{u.scheme}://{u.netloc}")
+            page = ctx.new_page()
+            page.goto(self.url(CLIPBOARD_PAGE), wait_until="load")
+            page.wait_for_selector(".code-block button.copy-code", timeout=4000)
+            before = page.evaluate("""() => { const c = document.querySelector('.anchor-h .copy'); return { href: c.getAttribute('href'), label: c.textContent, expected: location.href.split('#')[0] + c.getAttribute('href') }; }""")
+            page.click(".anchor-h .copy")
+            page.wait_for_timeout(150)
+            link = page.evaluate("""async () => { const c = document.querySelector('.anchor-h .copy'); return { label: c.textContent, clip: await navigator.clipboard.readText(), hash: location.hash }; }""")
+            page.wait_for_timeout(COPIED_MS + 200)
+            link_after = page.evaluate("() => document.querySelector('.anchor-h .copy').textContent")
+            code = page.evaluate("""() => { const b = document.querySelectorAll('.code-block'); return { blocks: b.length, pres: document.querySelectorAll('.prose pre').length,
+                buttons: [...document.querySelectorAll('.code-block button.copy-code')].map((x) => Math.round(x.getBoundingClientRect().height)), text: b[0].querySelector('code').textContent.replace(/\\n$/, '') }; }""")
+            page.click(".code-block button.copy-code")
+            page.wait_for_timeout(150)
+            copied = page.evaluate("""async () => ({ label: document.querySelector('.code-block button.copy-code').textContent, clip: await navigator.clipboard.readText() })""")
+            ok_link = link["clip"] == before["expected"] and link["label"] == "Copied" and link_after == "link" and link["hash"] == before["href"]
+            clip_text = copied["clip"].replace("\r\n", "\n")  # the Windows clipboard stores CRLF
+            ok_code = code["blocks"] == code["pres"] >= 1 and all(40 <= h <= 44 for h in code["buttons"]) and clip_text == code["text"] and copied["label"] == "Copied" and "THESIS NARROW" in code["text"]
+            self.record(CLIPBOARD_PAGE, 1440, "light", [check("copyLink", ok_link, {"expected": before["expected"], "clipboard": link["clip"], "label": link["label"], "labelAfter": link_after, "hash": link["hash"]}),
+                                                         check("codeCopy", ok_code, {"blocks": code["blocks"], "pre": code["pres"], "buttonHeights": code["buttons"], "clipboardChars": len(copied["clip"]), "label": copied["label"], "startsWith": copied["clip"][:40]})])
+            print(f"{CLIPBOARD_PAGE:11}  1440 clipboard copy-link {'OK' if ok_link else 'FAIL'} code-copy {'OK' if ok_code else 'FAIL'} clip={link['clip'].rsplit('/', 1)[-1]} code={copied['clip'][:30]!r}")
+        finally:
+            ctx.close()
+
     # ---- screenshots ----------------------------------------------------------------------------
     def shots(self, browser, names, prefix):
         written = []
@@ -467,6 +803,10 @@ class Audit:
                 if not self.args.no_specials:
                     self.keys(browser)
                     self.print_check(browser)
+                    self.reading_position(browser)
+                    self.clipboard(browser)
+                    for w in SEARCH_WIDTHS:
+                        self.search(browser, w)
                 if self.args.shots:
                     report["shots"] = self.shots(browser, self.args.shot_pages or self.args.pages, self.args.shots)
             finally:
@@ -516,7 +856,8 @@ def parse_args(argv=None):
     ap.add_argument("--shots", default="", help="PNG path prefix; writes <prefix><page>-<width>-<theme>.png (viewport only, 2560 at dsf 0.75)")
     ap.add_argument("--shot-pages", default="", help="pages to screenshot (default: --pages)")
     ap.add_argument("--report", default="", help="write the JSON report here")
-    ap.add_argument("--no-specials", action="store_true", help="skip the keyboard (s11) and print (s12) checks")
+    ap.add_argument("--no-specials", action="store_true", help="skip the keyboard (s11), print (s12), reading-position (s06) and search (index) checks")
+    ap.add_argument("--link-counts", default="", help="OF-7 link parity reference: page=markdownHttpLinks pairs, e.g. s12=21,s03=23 (verify.mjs computes them)")
     a = ap.parse_args(argv)
     split = lambda s: [x.strip() for x in s.split(",") if x.strip()]  # noqa: E731
     a.pages = split(a.pages)
@@ -524,6 +865,10 @@ def parse_args(argv=None):
     a.widths = [int(x) for x in split(a.widths)]
     a.themes = split(a.themes)
     a.shot_pages = split(a.shot_pages)
+    for pair in split(a.link_counts):
+        name, _, n = pair.partition("=")
+        if name and n.isdigit():
+            LINK_COUNTS[name] = int(n)
     return a
 
 

@@ -160,6 +160,7 @@ export function sectionPage(o) {
   const kicker = s.kind === 'number' ? `Section ${n} of ${sections.length}` : `Appendix ${s.letter} · part ${n} of ${sections.length}`;
   const headExtra = html`${o.prev ? html`<link rel="prev" href="${o.prev.file}">\n` : ''}${o.next ? html`<link rel="next" href="${o.next.file}">\n` : ''}`;
   const onPage = join(s.headings.map((h) => html`<li><a href="#${h.id}">${h.text}</a></li>`));
+  const onPageList = s.headings.length ? html`<ul>\n${onPage}\n</ul>` : '';
   const sets = o.sets || [];
   const progressList = sets.length ? html`<ul class="progress-list">${progressRows(sets)}</ul>` : '';
   const body = html`<div class="page layout">
@@ -178,12 +179,10 @@ ${contentsList(sections, s.slug, false)}
 <h1 class="anchor-h" id="top">${raw(o.headingHtml)}</h1>
 ${legendDetails(o.legend)}
 </header>
-<details class="inline-rail onpage-inline"><summary>On this page</summary><div>
-<ul>
-${onPage}
-</ul>
+${s.headings.length || sets.length ? html`<details class="inline-rail onpage-inline"><summary>On this page</summary><div>
+${onPageList}
 ${progressList}
-</div></details>
+</div></details>` : ''}
 <div class="prose">
 ${o.frontMatterHtml ? html`<h2 id="front-matter">Front matter</h2>\n${raw(o.frontMatterHtml)}` : ''}${raw(o.proseHtml)}</div>
 <nav class="prevnext" aria-label="Previous and next section">
@@ -192,12 +191,10 @@ ${o.next ? html`<a href="${o.next.file}" rel="next">${o.next.headingText} <span 
 </nav>
 </article>
 <aside class="rail rail-right" aria-label="On this page">
-<div class="rail-block">
+${s.headings.length ? html`<div class="rail-block">
 <h2>On this page</h2>
-<ul>
-${onPage}
-</ul>
-</div>
+${onPageList}
+</div>` : ''}
 ${sets.length ? html`<div class="rail-block">
 <h2>Section progress</h2>
 ${progressList}
@@ -275,8 +272,8 @@ ${planRow}
 </section>
 <section class="section-block" aria-labelledby="h-feed">
 <h2 id="h-feed">Latest from the feed <a class="more" href="feed.html">Stay ahead: filters, triage, source health</a></h2>
-<ul class="feed-list" data-latest-feed></ul>
-<p class="small muted feed-note" data-feed-updated></p>
+<ol class="feed-list" id="latest-feed"></ol>
+<p class="small muted feed-note" data-feed-updated hidden>Feed last updated <span data-last-updated></span>. ${SITE.freshness}</p>
 <noscript><p class="small muted">The feed list needs JavaScript here; open <a href="feed.html">the feed page</a> or read <a href="data/feed.json">data/feed.json</a>.</p></noscript>
 </section>
 </div>

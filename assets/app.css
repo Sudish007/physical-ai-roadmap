@@ -146,8 +146,11 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
   .nav-strip { display: flex; gap: 0.25rem 1rem; overflow-x: auto; border-top: 1px solid var(--line); scrollbar-width: none; }
   .nav-strip a { color: var(--fg); text-decoration: none; font-size: var(--text-sm); min-height: var(--control-h); display: inline-flex; align-items: center; padding: 0 0.25rem; border-bottom: 2px solid transparent; white-space: nowrap; }
   .nav-strip a[aria-current="page"] { border-bottom-color: var(--fg); font-weight: 600; }
-  .search-box { min-width: 0; width: var(--control-h); padding: 0; justify-content: center; }
+  .search-box { min-width: 0; width: var(--control-h); padding: 0; justify-content: center; cursor: pointer; }
   .search-box input, .search-box kbd { display: none; }
+  /* The icon, the `/` key or the strip's "Search" link reveal the box on its own header row (search.js adds the class) */
+  .site-header.search-open .search-box { display: inline-flex; flex-basis: 100%; width: auto; padding: 0 0.6rem; justify-content: flex-start; margin-bottom: 0.4rem; cursor: text; }
+  .site-header.search-open .search-box input { display: block; }
   .theme-btn { width: var(--control-h); padding: 0; }
   .theme-btn .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
@@ -157,6 +160,26 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
   .nav-strip .search-link { display: inline-flex; }
 }
 .nav-strip .search-link { display: none; }
+
+/* Search results panel (role=dialog) under the header; hidden until there is a query */
+.search-panel {
+  position: absolute; top: 100%; right: var(--gutter); z-index: 11;
+  width: min(46rem, calc(100% - 2 * var(--gutter)));
+  max-height: min(70vh, 44rem); overflow-y: auto; scrollbar-width: thin;
+  background: var(--bg); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 var(--radius) var(--radius);
+  padding: 0.75rem 1rem 1rem;
+}
+.search-panel[hidden] { display: none; }
+.search-status { margin: 0 0 0.5rem; }
+.search-group { margin: 0 0 0.75rem; }
+.search-group h3 { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-2); margin: 0.5rem 0 0.25rem; font-weight: 600; }
+.search-group ol { list-style: none; margin: 0; padding: 0; }
+.search-group li { margin: 0; }
+.search-group a { display: grid; gap: 0.1rem; color: var(--fg); text-decoration: none; padding: 0.45rem 0.6rem; border-left: 2px solid transparent; font-size: var(--text-sm); line-height: 1.4; }
+.search-group a:hover, .search-group a:focus-visible { background: var(--bg-2); border-left-color: var(--fg); }
+.search-group .hit-h { font-weight: 600; }
+.search-group .hit-x { color: var(--fg-2); }
+mark { background: var(--bg-3); color: var(--fg); padding: 0 1px; border-radius: 0; font-weight: 650; }
 
 /* ---------- Buttons and controls (40–44px) ---------- */
 .btn {
@@ -262,6 +285,10 @@ details.inline-rail .progress-list { columns: auto; padding: 0; margin-top: 0.75
 /* OF-10: heading anchor shown on hover/focus only; stays in the tab order (opacity, not display) */
 .anchor-h .copy { opacity: 0; margin-left: 0.4rem; font-size: var(--text-xs); font-weight: 400; text-decoration: none; color: var(--fg-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 0 0.4em; vertical-align: middle; }
 .anchor-h:hover .copy, .anchor-h .copy:focus-visible { opacity: 1; color: var(--fg); border-color: var(--fg); }
+/* Fenced code blocks get a client-added Copy button in a toolbar row above the block (Decision 11) */
+.code-block { margin: 0 0 1rem; }
+.code-block .code-tools { display: flex; justify-content: flex-end; margin-bottom: 0.35rem; }
+.code-block pre { margin: 0; }
 /* OF-2: checked state for trackable rows and cards */
 tr[data-done] > td:first-child { color: var(--fg-2); }
 tr[data-done] > td:first-child strong { color: var(--fg-2); }
@@ -383,6 +410,11 @@ details.health-details > summary::-webkit-details-marker { display: none; }
 }
 .rule { border: 1px solid var(--line); border-radius: var(--radius); padding: 0.75rem 1rem; background: var(--bg-2); font-size: var(--text-sm); margin: 0 0 1rem; }
 .rule p:last-child { margin: 0; }
+/* Home "Latest from the feed": title, source, date, query or class (no triage column) */
+.feed-brief { display: grid; gap: 0.25rem; padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
+.feed-brief h3 { margin: 0; font-size: 1rem; line-height: 1.35; }
+.feed-brief .meta { color: var(--fg-2); font-size: var(--text-sm); display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; }
+.feed-note { margin-top: 0.75rem; }
 
 /* My plan */
 .plan-grid { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1fr); align-items: start; }
@@ -407,7 +439,7 @@ details.rule-details > summary { cursor: pointer; font-size: var(--text-sm); col
 
 /* ---------- Print ---------- */
 @media print {
-  .skip, .site-header, .rail, .inline-rail, .prevnext, .btn, .triage, .keys, .copy, .search-box { display: none !important; }
+  .skip, .site-header, .rail, .inline-rail, .prevnext, .btn, .triage, .keys, .copy, .search-box, .search-panel, .code-tools { display: none !important; }
   .layout, .two-col, .plan-grid, .hero-grid, .cards { display: block; }
   .table-wrap { overflow: visible; border: 0; }
   table.wide { min-width: 0; }
