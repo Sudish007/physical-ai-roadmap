@@ -117,7 +117,7 @@ export function buildManifest(sections, plainMd) {
     if (set.clauses && clauses.length !== set.clauses.expectedTotal) {
       throw new Error(`Set ${set.id}: expected ${set.clauses.expectedTotal} clauses, found ${clauses.length}`);
     }
-    const out = { id: set.id, label: set.label, page: `${set.section}.html`, items: [...items.values()].map(({ id, label, anchor }) => ({ id, label, anchor })) };
+    const out = { id: set.id, label: set.label, short: set.short || set.label, page: `${set.section}.html`, items: [...items.values()].map(({ id, label, anchor }) => ({ id, label, anchor })) };
     if (set.clauses) out.clauses = clauses;
     if (set.answers) { out.kind = 'answers'; questions = out; } else sets.push(out);
     if (!setsBySection.has(section.slug)) setsBySection.set(section.slug, []);

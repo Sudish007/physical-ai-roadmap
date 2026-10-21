@@ -268,7 +268,10 @@ td .chip, th .chip, .legend .chip, .legend-full .chip { white-space: nowrap; }
 details.inline-rail { border: 1px solid var(--line); border-radius: var(--radius); margin: 0 0 1rem; }
 details.inline-rail > summary { min-height: var(--control-h); display: flex; align-items: center; padding: 0 0.9rem; cursor: pointer; font-weight: 600; font-size: var(--text-sm); list-style: none; }
 details.inline-rail > summary::-webkit-details-marker { display: none; }
-details.inline-rail > summary::after { content: "+"; margin-left: auto; color: var(--fg-2); }
+details.inline-rail > summary::after { content: "+"; margin-left: auto; padding-left: 0.5rem; color: var(--fg-2); }
+/* FEAT-004: the summary title keeps its width; the live counts span (' · Rungs 1 of 9 done') shrinks and wraps */
+details.inline-rail > summary > .t { flex: none; }
+details.inline-rail > summary > [data-summary-counts] { flex: 0 1 auto; min-width: 0; margin-left: 0.3em; font-weight: 400; }
 details.inline-rail[open] > summary::after { content: "–"; }
 details.inline-rail > div { padding: 0 0.9rem 0.9rem; }
 details.inline-rail ol, details.inline-rail ul { margin: 0; padding-left: 1.2rem; font-size: var(--text-sm); columns: 18rem; column-gap: 2rem; }
@@ -419,18 +422,40 @@ details.health-details > summary::-webkit-details-marker { display: none; }
 /* My plan */
 .plan-grid { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1fr); align-items: start; }
 @media (min-width: 1440px) { .plan-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); } }
+/* Prompt card shown until a plan is chosen (quotes the §4 Q7 rule in a .notice) */
+.plan-prompt { border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.25rem 0.9rem; margin: 1.5rem 0 0; }
+.plan-prompt h2 { margin-top: 0; border: 0; padding: 0; font-size: 1.15rem; }
+.plan-prompt p, .plan-prompt .notice { max-width: 80ch; }
+/* Setup row: columns of at least 20rem so the two hours buttons, the four track options (OF-9, one row from
+   1024px) and the three data buttons each keep one line; one column on phones */
+.plan-setup { grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr)); }
+@media (min-width: 720px) { .log-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; } }
+.plan-msg { border-left: 3px solid var(--line-2); padding-left: 0.6rem; margin: 1rem 0 0; max-width: 80ch; }
+.plan-msg.error { border-left-color: var(--fg); font-weight: 600; }
+#plan-month [data-body] p, #plan-gate [data-body] p { max-width: 80ch; margin-bottom: 0.6rem; }
+.log-list { list-style: none; margin: 1rem 0 0; padding: 0; font-size: var(--text-sm); }
+.log-list li { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 0 1rem; align-items: center; border-bottom: 1px solid var(--line); padding: 0.15rem 0; }
+.log-list li .btn { justify-self: end; }
 .month-list { list-style: none; margin: 0; padding: 0; }
-.month-list li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.5rem 0.75rem; align-items: start; padding: 0.6rem 0; border-bottom: 1px solid var(--line); font-size: var(--text-sm); }
+/* Month rows: label and text stacked with the checkbox at the right below 720px; one line of three from 720px */
+.month-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "m check" "body check"; gap: 0.35rem 0.75rem; align-items: start; padding: 0.6rem 0; border-bottom: 1px solid var(--line); font-size: var(--text-sm); }
+.month-list li > .m { grid-area: m; }
+.month-list li > div { grid-area: body; }
+.month-list li > .check { grid-area: check; }
+@media (min-width: 720px) { .month-list li { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "m body check"; gap: 0.5rem 0.75rem; } }
 .month-list li.current, .month-list li[aria-current="true"] { background: var(--bg-2); outline: 1px solid var(--line-2); padding-inline: 0.5rem; }
 .month-list .m { font-weight: 650; min-width: 7.5em; }
 .month-list li > .check { margin-block: -11px; }
-.gate-list { list-style: none; margin: 0; padding: 0; }
+.month-list li[data-done] > .m, .month-list li[data-done] > div { color: var(--fg-2); }
+.gate-list { list-style: none; margin: 0 0 0.75rem; padding: 0; }
 .gate-list li { display: flex; gap: 0.25rem; align-items: flex-start; padding: 0.25rem 0; font-size: var(--text-sm); }
 .gate-list li .check { margin-top: -10px; }
+.gate-list li[data-done] > span { color: var(--fg-2); }
 .q-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
 .q-list li { display: grid; gap: 0.4rem; }
 .q-list .q { font-weight: 650; }
-details.rule-details > summary { cursor: pointer; font-size: var(--text-sm); color: var(--fg-2); min-height: 28px; }
+details.rule-details > summary { cursor: pointer; font-size: var(--text-sm); color: var(--fg-2); min-height: var(--control-h); display: flex; align-items: center; }
+details.rule-details > p { margin: 0 0 0.5rem; }
 
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--line); margin-top: 3rem; padding-block: 1.25rem 2rem; color: var(--fg-2); font-size: var(--text-sm); display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: center; }

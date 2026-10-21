@@ -3,14 +3,14 @@
 import { initTheme, cycle } from './theme.js';
 import { initKeys } from './keys.js';
 import { initSearch } from './search.js';
+import { init as initTracker } from './tracker.js';
 
 // Page modules, loaded on demand. Each module exports init({ keys }). Later FEATs fill the table:
-//   FEAT-004  plan: () => import('./plan.js')   (+ tracker.js on every page with input[data-track])
 //   FEAT-005  feed: () => import('./feed.js')
 const PAGE_MODULES = {
   home: () => import('./home.js'),
   section: () => import('./sections.js'),
-  plan: null,
+  plan: () => import('./plan.js'),
   feed: null,
   '404': null,
 };
@@ -18,6 +18,7 @@ const PAGE_MODULES = {
 initTheme();
 const keys = initKeys({ theme: cycle });
 initSearch(keys);
+initTracker(); // every page: binds input[data-track], fills [data-set] counts (FEAT-004)
 
 const page = document.body.dataset.page;
 const load = PAGE_MODULES[page];

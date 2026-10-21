@@ -79,36 +79,37 @@ export function slugify(text) {
     .replace(/^-+|-+$/g, '');
 }
 
+// `short` = the compact label used in the phone 'On this page' summary ('On this page · Rungs 1 of 9 done').
 // `headers` = the leading header cells (plain text) a table must start with.
 // `all: true` = collect every matching table in the section (ids are shared across them).
 export const TRACKABLE = Object.freeze([
   {
-    id: 'sessions', label: 'Start-this-week sessions (§2)', section: 's02', expectedCount: 7,
+    id: 'sessions', label: 'Start-this-week sessions (§2)', short: 'Sessions', section: 's02', expectedCount: 7,
     tables: [{ slug: 'sessions', headers: ['Session', 'Time', 'Do', 'Output to keep'] }],
     keyRule: 'leading-id', keyColumn: 1,
   },
   {
-    id: 'best-10', label: 'Best 10 resources (§3)', section: 's03', expectedCount: 10,
+    id: 'best-10', label: 'Best 10 resources (§3)', short: 'Best 10', section: 's03', expectedCount: 10,
     tables: [{ slug: 'best-10', headers: ['#', 'Resource (exact identity)'] }],
     keyRule: 'leading-id', keyColumn: 1, labelPrefix: 'Resource',
   },
   {
-    id: 'reading-map', label: 'Reading map RL-1 to RL-36 (§7)', section: 's07', expectedCount: 36, shared: true,
+    id: 'reading-map', label: 'Reading map RL-1 to RL-36 (§7)', short: 'Reading map', section: 's07', expectedCount: 36, shared: true,
     tables: [{ slug: 'reading-map', headers: ['ID'], all: true }],
     keyRule: 'leading-id', keyColumn: 1,
   },
   {
-    id: 'modules', label: 'Curriculum modules M0–M11 (§8)', section: 's08', expectedCount: 12,
+    id: 'modules', label: 'Curriculum modules M0–M11 (§8)', short: 'Modules', section: 's08', expectedCount: 12,
     tables: [{ slug: 'modules', headers: ['Module', 'Exact course, instructors, institution, term'] }],
     keyRule: 'leading-id', keyColumn: 1, rowFilter: (key) => /^m\d+$/.test(key), skipKeyless: true,
   },
   {
-    id: 'books', label: 'Books (§9)', section: 's09', expectedCount: 14,
+    id: 'books', label: 'Books (§9)', short: 'Books', section: 's09', expectedCount: 14,
     tables: [{ slug: 'books', headers: ['Tier', 'Exact book, edition, access'] }],
     keyRule: 'italic-col2', keyColumn: 2,
   },
   {
-    id: 'media', label: 'Lectures, talks and episodes (§10)', section: 's10', expectedCount: 26,
+    id: 'media', label: 'Lectures, talks and episodes (§10)', short: 'Media', section: 's10', expectedCount: 26,
     tables: [
       { slug: 'series', headers: ['Series', 'Verified activity and scope'] },
       { slug: 'talks', headers: ['Item', 'Metadata'] },
@@ -116,29 +117,29 @@ export const TRACKABLE = Object.freeze([
     keyRule: 'first-link-text', keyColumn: 1,
   },
   {
-    id: 'rungs', label: 'Project rungs 0–8 (§12)', section: 's12', expectedCount: 9, shared: true,
+    id: 'rungs', label: 'Project rungs 0–8 (§12)', short: 'Rungs', section: 's12', expectedCount: 9, shared: true,
     tables: [{ slug: 'rungs', headers: ['Rung'], all: true }],
     keyRule: 'leading-id', keyColumn: 1, labelPrefix: 'Rung', skipKeyless: true, // the Totals row has no leading id
   },
   {
-    id: 'plan-10h', label: 'Plan months, 10 h plan (§15)', section: 's15', expectedCount: 24,
+    id: 'plan-10h', label: 'Plan months, 10 h plan (§15)', short: 'Months, 10 h plan', section: 's15', expectedCount: 24,
     tables: [{ slug: 'plan-10h', headers: ['Month (weeks; 10 h/20 h)', 'Shared work'] }],
     keyRule: 'leading-id', keyColumn: 1, checkboxColumn: 4, labelPrefix: 'Month', ariaSuffix: '10 h plan',
   },
   {
-    id: 'plan-20h', label: 'Plan months, 20 h plan (§15)', section: 's15', expectedCount: 24,
+    id: 'plan-20h', label: 'Plan months, 20 h plan (§15)', short: 'Months, 20 h plan', section: 's15', expectedCount: 24,
     tables: [{ slug: 'plan-20h', headers: ['Month (weeks; 10 h/20 h)', 'Shared work'] }],
     keyRule: 'leading-id', keyColumn: 1, checkboxColumn: 5, labelPrefix: 'Month', ariaSuffix: '20 h plan',
     rowIdFrom: 'plan-10h', // the row element already carries the plan-10h anchor
   },
   {
-    id: 'gates', label: 'Quarterly gates (§15.6)', section: 's15', expectedCount: 8,
+    id: 'gates', label: 'Quarterly gates (§15.6)', short: 'Gates', section: 's15', expectedCount: 8,
     tables: [{ slug: 'gates', headers: ['Gate', 'Pass evidence', 'If it fails', 'Added 20 h evidence'] }],
     keyRule: 'leading-id', keyColumn: 1,
     clauses: { column: 2, separator: '; ', expectedTotal: 36 }, // s15:gates:qN:k — My plan only (Decision 7)
   },
   {
-    id: 'questions', label: 'Personalization answers (§4)', section: 's04', expectedCount: 18,
+    id: 'questions', label: 'Personalization answers (§4)', short: 'Answers', section: 's04', expectedCount: 18,
     tables: [{ slug: 'questions', headers: ['#', 'Question', 'Decision rule'] }],
     keyRule: 'leading-id', keyColumn: 1, labelPrefix: 'Question',
     answers: true, // typed answers on My plan; no checkbox on s04 (Decision 21)

@@ -41,6 +41,20 @@ function timeTable(table, hoursPerWeek, expectedTotal) {
   return { hoursPerWeek, quarters, totals };
 }
 
+/** §15.3 "Columns: F foundations/coursework; P …; R review/buffer." → [{ key: 'F', label: 'foundations/coursework' }, …] */
+export function parseColumns(body) {
+  const m = /Columns: ([^\n]*?)\.(?:\s|$)/.exec(body);
+  if (!m) throw new Error('§15.3 "Columns:" sentence not found');
+  const columns = m[1].split(';').map((part) => {
+    const c = /^\s*([A-Z]) (.+?)\s*$/.exec(part);
+    if (!c) throw new Error(`§15.3 column definition does not parse: "${part}"`);
+    return { key: c[1], label: c[2] };
+  });
+  const keys = columns.map((c) => c.key).join('');
+  if (keys !== QUARTER_COLS.slice(0, -1).join('')) throw new Error(`§15.3 columns are ${keys}, expected ${QUARTER_COLS.slice(0, -1).join('')}`);
+  return columns;
+}
+
 export function buildPlanData(sections, plainMd, renderInline) {
   const s15 = sectionBySlug(sections, 's15');
   const s14 = sectionBySlug(sections, 's14');
@@ -53,6 +67,10 @@ export function buildPlanData(sections, plainMd, renderInline) {
   const timeTables = t15.filter((t) => headersMatch(t, ['Quarter', 'Emphasis', 'F']));
   if (timeTables.length !== 2) throw new Error(`§15.3: expected two time-accounting tables, found ${timeTables.length}`);
   const budgets = { '10': timeTable(timeTables[0], 10, 1040), '20': timeTable(timeTables[1], 20, 2080) };
+  // §15.3 prose: the quarter sentence and the column letters ("Columns: F foundations/coursework; P …; R review/buffer.")
+  const columns = parseColumns(s15.body);
+  const quarterNote = /^(104 weeks in eight 13-week quarters:[^.]*\.)/m.exec(s15.body);
+  if (!quarterNote) throw new Error('§15.3 quarter sentence ("104 weeks in eight 13-week quarters: …") not found');
 
   // §15.5 — 24 months
   const monthTables = t15.filter((t) => headersMatch(t, ['Month (weeks; 10 h/20 h)', 'Shared work']));
@@ -142,6 +160,8 @@ export function buildPlanData(sections, plainMd, renderInline) {
     version: 1,
     source: 'content/roadmap.md §15.3, §15.5, §15.6, §14.3, §4',
     budgets,
+    columns,
+    quarterNote: quarterNote[1],
     months,
     gates,
     substitutions,

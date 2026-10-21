@@ -179,7 +179,7 @@ ${contentsList(sections, s.slug, false)}
 <h1 class="anchor-h" id="top">${raw(o.headingHtml)}</h1>
 ${legendDetails(o.legend)}
 </header>
-${s.headings.length || sets.length ? html`<details class="inline-rail onpage-inline"><summary>On this page</summary><div>
+${s.headings.length || sets.length ? html`<details class="inline-rail onpage-inline"><summary><span class="t">On this page</span></summary><div>
 ${onPageList}
 ${progressList}
 </div></details>` : ''}
@@ -284,11 +284,91 @@ ${planRow}
 // ---------------------------------------------------------------------------
 // My plan, Feed, 404
 
-export function planPage() {
+const thousands = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+/**
+ * My plan. The static structure (prompt card with the §4 Q7 rule, setup controls, empty stat cards and
+ * section shells, the 18 §4 questions) is readable without JS; assets/plan.js fills every number from
+ * plan-data.json and the stored plan. Dynamic sections start hidden so a page without JS shows no empty
+ * headings; checkbox ids for months and gate clauses are rendered by plan.js (they depend on the chosen plan).
+ * @param {{ planData: object }} o
+ */
+export function planPage(o) {
+  const d = o.planData;
+  const stat = (key, label) => html`<div class="stat" data-stat="${key}"><div class="v" data-v>—</div><div class="k" data-k>${label}</div></div>`;
+  const questions = join(d.questions.map((q) => html`<li id="q-${q.n}"><span class="q">${q.n}. ${raw(q.questionHtml)}</span><details class="rule-details"><summary>Decision rule</summary><p class="small">${raw(q.ruleHtml)}</p></details><textarea data-answer="${q.id}" aria-label="Answer to question ${q.n}" placeholder="Your answer" rows="3"></textarea></li>`));
   const body = html`<main class="page">
+<header class="article-head mt-6">
 <p class="kicker">Personal tracker · stored in this browser only</p>
 <h1 id="top">My plan</h1>
-<div id="plan-app"></div>
+<p class="muted measure">Choose 10 h/week or 20 h/week, a start date and, at the end of month 9, a track. Every number below is taken from the report's own tables (<a href="s15.html#s15-3">§15.3 time accounting</a>, <a href="s15.html#s15-5">§15.5 month by month</a>, <a href="s15.html#s15-6">§15.6 quarterly gates</a>, <a href="s14.html#s14-3">§14.3 substitutions</a>) and from what you record here.</p>
+</header>
+<div id="plan-app">
+<section class="plan-prompt" id="plan-prompt" aria-labelledby="h-prompt">
+<h2 id="h-prompt">Choose a plan first</h2>
+<p>Pick 10 h or 20 h per week below, then your start date. The month list, gate card and quarter budget appear once a plan is chosen; the week and hour figures also need the start date. Nothing is filled in before that. The report's rule for the choice (<a href="s04.html#t-s04-questions-7">§4, question 7</a>):</p>
+<blockquote class="notice" data-hours-rule><p>${raw(d.hoursRule.ruleHtml)}</p></blockquote>
+<p class="small muted mb-0">The track is chosen at the end of month 9 (<a href="s14.html#s14-1">§14.1</a>); leave it Undecided until then. Track B is the report's default.</p>
+</section>
+<section class="section-block" aria-labelledby="h-setup">
+<h2 id="h-setup">Plan</h2>
+<div class="form-grid plan-setup">
+<div class="field"><span id="l-hours">Hours per week</span><div class="btn-row" role="group" aria-labelledby="l-hours"><button class="btn" type="button" data-hours="10" aria-pressed="false">10 h/week · ${thousands(d.budgets['10'].totals.Total)} h</button><button class="btn" type="button" data-hours="20" aria-pressed="false">20 h/week · ${thousands(d.budgets['20'].totals.Total)} h</button></div></div>
+<div class="field field-track"><span id="l-track">Track (choose at the end of month 9)</span><div class="track-group" role="group" aria-labelledby="l-track"><button class="btn" type="button" data-track-choice="" aria-pressed="true">Undecided</button><button class="btn" type="button" data-track-choice="A" aria-pressed="false">A</button><button class="btn" type="button" data-track-choice="B" aria-pressed="false">B (default)</button><button class="btn" type="button" data-track-choice="C" aria-pressed="false">C</button></div></div>
+<label class="field"><span>Start date (week 1 begins)</span><input type="date" id="plan-start"></label>
+<div class="field"><span id="l-data">Your data</span><div class="btn-row" role="group" aria-labelledby="l-data"><button class="btn" type="button" id="plan-export">Export JSON</button><button class="btn" type="button" id="plan-import">Import JSON</button><input type="file" id="plan-import-file" accept=".json,application/json" hidden><button class="btn quiet" type="button" id="plan-reset">Reset…</button></div></div>
+</div>
+<p class="small plan-msg" id="plan-msg" role="status" hidden></p>
+</section>
+<div class="stat-grid mt-6" id="plan-stats" hidden>
+${stat('week', 'of 104')}
+${stat('month', 'current month')}
+${stat('quarter', 'current quarter')}
+${stat('expected', 'expected so far')}
+${stat('logged', 'logged (manual weekly entries)')}
+</div>
+<div class="plan-grid">
+<div>
+<section class="section-block" aria-labelledby="h-month" id="plan-month" hidden>
+<h2 id="h-month"><span data-title>This month</span> <a class="more small" href="s15.html#s15-5">§15.5</a></h2>
+<div data-body></div>
+</section>
+<section class="section-block" aria-labelledby="h-gate" id="plan-gate" hidden>
+<h2 id="h-gate"><span data-title>Gate</span> <a class="more small" href="s15.html#s15-6">§15.6</a></h2>
+<div data-body></div>
+</section>
+<section class="section-block" aria-labelledby="h-log" id="plan-log" hidden>
+<h2 id="h-log">Hours log</h2>
+<div class="form-grid log-form">
+<label class="field"><span>Week</span><input type="number" id="log-week" min="1" max="104" step="1" inputmode="numeric"></label>
+<label class="field"><span>Hours worked</span><input type="number" id="log-hours" min="0" max="168" step="0.5" placeholder="0" inputmode="decimal"></label>
+<div class="field"><span aria-hidden="true">&nbsp;</span><button class="btn primary" type="button" id="log-save">Save week</button></div>
+</div>
+<ul class="log-list" data-log-list></ul>
+<p class="small muted mt-3" data-log-note>No entries yet. Expected-versus-logged compares completed weeks × hours/week with the sum of these entries.</p>
+</section>
+<section class="section-block" aria-labelledby="h-months" id="plan-months" hidden>
+<h2 id="h-months"><span data-title>Month by month</span> <a class="more small" href="s15.html#s15-5">§15.5</a></h2>
+<p class="small muted" data-note></p>
+<ul class="month-list" data-month-list></ul>
+</section>
+</div>
+<div>
+<section class="section-block" aria-labelledby="h-budget" id="plan-budget" hidden>
+<h2 id="h-budget"><span data-title>Quarter budget</span> <a class="more small" href="s15.html#s15-3">§15.3</a></h2>
+<div data-body></div>
+<p class="small muted">${d.quarterNote}</p>
+</section>
+<section class="section-block" aria-labelledby="h-q4" id="plan-questions">
+<h2 id="h-q4">Personalization questions <a class="more small" href="s04.html">§4</a></h2>
+<p class="small muted">Answer these in writing; the decision rule under each question is the report's. Answers stay in this browser and travel with Export JSON.</p>
+<ol class="q-list">
+${questions}
+</ol>
+</section>
+</div>
+</div>
+</div>
 <noscript><p>My plan needs JavaScript: it keeps your plan choice, hours and progress in this browser only.</p></noscript>
 </main>`;
   return shell({ page: 'plan', title: 'My plan', body });

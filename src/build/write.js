@@ -69,7 +69,7 @@ export function buildSite(markdown) {
   const home = buildHomeData(sections, plainMd, (s) => renderInline(s, dataEnv()));
   const planData = buildPlanData(sections, plainMd, (s) => renderInline(s, dataEnv()));
   pages.set('index.html', homePage({ home, manifest }));
-  pages.set('plan.html', planPage());
+  pages.set('plan.html', planPage({ planData }));
   pages.set('feed.html', feedPage());
   pages.set('404.html', notFoundPage());
 

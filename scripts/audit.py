@@ -11,18 +11,22 @@ font size, smallest visible text, content box ratio, composited WCAG contrast, c
 footer text, [style] attribute count before scripts, securitypolicyviolation events, wide-table min-width
 (DR-1). Pages given with --pages also get: the DR-3 dark-emulated first paint (index, plan, s12), the DR-4
 theme cycle at 390 and 1440, and their page-type GROUPS. Specials run once per audit unless --no-specials:
-keyboard navigation (s11), print at 1440 (s12), reading-position restore (s06) and search (index at 1440
-and 390). Pages given with --extra-pages get the generic checks only (verify.mjs --all).
+keyboard navigation (s11), print at 1440 (s12), reading-position restore (s06), search (index at 1440
+and 390), the tracker round trip s12 -> index -> s12 (+ s04 answers) and the My plan behaviours (prompt,
+export, import, reset). Pages given with --extra-pages get the generic checks only (verify.mjs --all).
 
 Later FEATs append page-type checks: GROUPS["index"].append(fn) where fn(page, width, theme, ctx) returns a
 list of Check dicts (see `check()`); `ctx.page` is the live Playwright page, `ctx.name` the page name.
 """
 import argparse
 import datetime
+import html as html_mod
 import json
+import os
 import pathlib
 import re
 import sys
+import tempfile
 import traceback
 import urllib.parse
 
@@ -88,6 +92,22 @@ THRESHOLDS = {
     # FEAT-003: specials
     "readingPosition": "Decision 3: s06 scrollTo 1500, leave, return without a fragment -> scrollY within +-50px; with a fragment the heading wins",
     "search": "/ focuses #search (opens the box below 860px); 'quadrotor' -> >=1 group; ArrowDown/Up move focus; Esc closes and leaves; Enter opens the first hit on a page containing the term",
+    # FEAT-004: My plan (plan group, fixture state 10 h / Track B / start today-14 d / weeks 1-2 logged 10+8 h)
+    "planStats": "stat cards read 'Week 3 of 104 …', 'Month 1 W1–4 · 40 h planned (10 h plan)', 'Quarter 1 <§15.3 emphasis>', '20 h expected so far (2 completed weeks × 10 h)', '18 h logged · −2 h behind'; prompt card hidden; 10 h and B pressed",
+    "planMonthCurrent": "the 24-row month list marks month 1 aria-current=true; the 'This month' card shows month 1 (W1–4) with the plan-10h box",
+    "planBudget": "quarter budget table == the §15.3 Q1 row of the 10 h plan: F 50, P 10, B 35, E 8, W 12, C 5, R 10, Total 130 (labels from the §15.3 'Columns:' sentence)",
+    "planGate": "Gate Q1 (W13) foundations: 5 clause boxes s15:gates:q1:1..5 plus the one gate box s15:gates:q1 (Decision 7)",
+    "planLog": "hours log: the week input defaults to the current week (3); entries 'Week 1 10 h' and 'Week 2 8 h' listed",
+    "trackGroup": "OF-9/DR-4: the four .track-group buttons share one top at >=1024; exactly two distinct tops with two buttons each below 1024",
+    "checkSize": "OF-2: every visible label.check is 44x44 and its native checkbox 22x22 (plan, index, section pages)",
+    # FEAT-004: specials
+    "trackerRoundTrip": "D6/OF-2: tick Rung 0 on s12 -> rail 'Rungs 1 of 9', tr[data-done], both inputs checked -> index rungs row '1 of 9', overall 1 of 122 -> 10 h plan + month 1 ticked: plan row '1 of 24', overall 2 of 146 -> back on s12 the box is still checked",
+    "answersCount": "Decision 21: with two non-empty plan.answers the s04 rail reads 'Answers (§4) 2 of 18' and the inline summary ' · Answers 2 of 18'",
+    "planPrompt": "empty storage: prompt card visible, its quote == the §4 Q7 rule text of plan-data.json, no stat grid, no month rows, no digits in the stat values",
+    "planExport": "Export JSON downloads physical-ai-roadmap-export-<YYYY-MM-DD>.json with version 1, keys tracker/plan/triage and the fixture plan",
+    "planImportInvalid": "a version-2 file and a non-JSON file each show #plan-msg.error and leave localStorage byte-identical",
+    "planImportMerge": "a valid file after confirm(): imported entries overwrite (track C, rung 3 added), the rest stays (10 h, start date, rung 0)",
+    "planReset": "Reset after confirm(): tracker/plan/triage keys absent, theme key kept, prompt card visible again",
 }
 
 # DR-2: the ten best-10 titles (also asserted by tests/home-data.test.js)
@@ -319,6 +339,60 @@ SHELL_TEXT_JS = r"""
 }
 """
 
+PLAN_JS = r"""
+() => {
+  const txt = (el) => (el ? el.textContent.replace(/\s+/g, ' ').trim() : '');
+  const stats = {};
+  for (const s of document.querySelectorAll('#plan-stats .stat')) stats[s.dataset.stat] = [...s.children].map(txt).join(' ');
+  const hidden = (id) => { const e = document.getElementById(id); return e ? e.hidden : null; };
+  return {
+    ready: !!document.querySelector('#plan-app[data-ready]'),
+    stats, statsHidden: hidden('plan-stats'), promptHidden: hidden('plan-prompt'),
+    pressedHours: [...document.querySelectorAll('button[data-hours]')].map((b) => b.getAttribute('aria-pressed')),
+    pressedTrack: [...document.querySelectorAll('.track-group button')].map((b) => b.getAttribute('aria-pressed')),
+    trackTops: [...document.querySelectorAll('.track-group button')].map((b) => Math.round(b.getBoundingClientRect().top)),
+    monthRows: document.querySelectorAll('.month-list li').length,
+    currentMonths: [...document.querySelectorAll('.month-list li[aria-current="true"]')].map((li) => li.dataset.month),
+    monthTitle: txt(document.querySelector('#plan-month [data-title]')),
+    monthBox: [...document.querySelectorAll('#plan-month input[data-track]')].map((i) => i.dataset.track),
+    budgetTitle: txt(document.querySelector('#plan-budget [data-title]')),
+    budget: [...document.querySelectorAll('#plan-budget tbody tr')].map((tr) => [...tr.children].map(txt)),
+    gateTitle: txt(document.querySelector('#plan-gate [data-title]')),
+    gateClauses: [...document.querySelectorAll('#plan-gate .gate-list input[data-track]')].map((i) => i.dataset.track),
+    gateBox: [...document.querySelectorAll('#plan-gate .check-row input[data-track]')].map((i) => i.dataset.track),
+    logWeek: (document.getElementById('log-week') || {}).value,
+    logEntries: [...document.querySelectorAll('[data-log-list] li')].map((li) => [...li.children].map(txt).join(' ')),
+    ruleText: txt(document.querySelector('[data-hours-rule]')),
+    statValues: [...document.querySelectorAll('#plan-stats [data-v]')].map(txt),
+  };
+}
+"""
+
+CHECK_JS = r"""
+() => {
+  const labels = [...document.querySelectorAll('label.check')].filter((l) => l.getClientRects().length && l.querySelector('input'));
+  const sizes = labels.map((l) => { const r = l.getBoundingClientRect(); const ir = l.querySelector('input').getBoundingClientRect(); return [Math.round(r.width), Math.round(r.height), Math.round(ir.width), Math.round(ir.height)]; });
+  const bad = sizes.filter((s) => s[0] !== 44 || s[1] !== 44 || s[2] !== 22 || s[3] !== 22);
+  return { n: labels.length, bad: bad.slice(0, 5), distinct: [...new Set(sizes.map((s) => s.join('x')))] };
+}
+"""
+
+Q1_BUDGET_10H = [["F foundations/coursework", "50"], ["P paper discovery and deep reading", "10"], ["B implementation", "35"], ["E controlled experiments", "8"], ["W writing", "12"], ["C community, mentors, career", "5"], ["R review/buffer", "10"], ["Total", "130"]]
+PLAN_KEY = "physical-ai-roadmap.v1.plan"
+TRACKER_KEY = "physical-ai-roadmap.v1.tracker"
+TRIAGE_KEY = "physical-ai-roadmap.v1.triage"
+DATA_KEYS_JS = "['%s', '%s', '%s']" % (TRACKER_KEY, PLAN_KEY, TRIAGE_KEY)
+
+
+def plan_fixture():
+    """The FEAT-004 audit fixture: 10 h plan, Track B, started 14 days ago, weeks 1 and 2 logged (10 h, 8 h)."""
+    start = (datetime.date.today() - datetime.timedelta(days=14)).isoformat()
+    return {"hoursPerWeek": 10, "track": "B", "startDate": start, "weeklyHours": {"1": 10, "2": 8}, "answers": {}}
+
+
+def storage_init_js(key, value):
+    return "(() => { try { localStorage.setItem(%s, %s); } catch (e) {} })();" % (json.dumps(key), json.dumps(json.dumps(value)))
+
 
 def check(name, ok, value, threshold=None):
     """One check result. The threshold text lives once in report["thresholds"][name]; pass one here only for ad-hoc names."""
@@ -466,20 +540,59 @@ def section_behaviours(page, width, theme, ctx):
     return out
 
 
+def plan_checks(page, width, theme, ctx):
+    """FEAT-004 My plan with the PAGE_INIT fixture: derived numbers, current month, budget, gate, log, OF-9 geometry."""
+    p = ctx.page
+    try:
+        p.wait_for_selector("#plan-app[data-ready]", timeout=4000)
+    except Exception:
+        pass
+    s = p.evaluate(PLAN_JS)
+    st = s["stats"]
+    stats_ok = (s["ready"] and s["statsHidden"] is False and s["promptHidden"] is True
+                and st.get("week", "").startswith("Week 3 of 104") and st.get("month", "").startswith("Month 1 W1–4 · 40 h planned (10 h plan)")
+                and st.get("quarter", "").startswith("Quarter 1 Numerical work, mathematics, mechanics, research habits")
+                and st.get("expected", "") == "20 h expected so far (2 completed weeks × 10 h)" and st.get("logged", "") == "18 h logged · −2 h behind"
+                and s["pressedHours"] == ["true", "false"] and s["pressedTrack"] == ["false", "false", "true", "false"])
+    out = [check("planStats", stats_ok, {"stats": st, "statsHidden": s["statsHidden"], "promptHidden": s["promptHidden"], "pressedHours": s["pressedHours"], "pressedTrack": s["pressedTrack"]})]
+    out.append(check("planMonthCurrent", s["monthRows"] == 24 and s["currentMonths"] == ["1"] and s["monthTitle"].startswith("This month: 1 (W1–4)") and s["monthBox"] == ["s15:plan-10h:1"],
+                     {"rows": s["monthRows"], "current": s["currentMonths"], "title": s["monthTitle"], "box": s["monthBox"]}))
+    out.append(check("planBudget", s["budget"] == Q1_BUDGET_10H and s["budgetTitle"] == "Quarter 1 budget, 10 h plan", {"title": s["budgetTitle"], "rows": s["budget"]}))
+    out.append(check("planGate", s["gateTitle"] == "Gate Q1 (W13) foundations" and s["gateClauses"] == [f"s15:gates:q1:{k}" for k in range(1, 6)] and s["gateBox"] == ["s15:gates:q1"],
+                     {"title": s["gateTitle"], "clauses": s["gateClauses"], "gateBox": s["gateBox"]}))
+    out.append(check("planLog", s["logWeek"] == "3" and s["logEntries"] == ["Week 1 10 h Remove", "Week 2 8 h Remove"], {"weekInput": s["logWeek"], "entries": s["logEntries"]}))
+    tops = s["trackTops"]
+    distinct = sorted(set(tops))
+    if width >= 1024:
+        geo_ok = len(tops) == 4 and len(distinct) == 1
+    else:
+        geo_ok = len(tops) == 4 and len(distinct) == 2 and all(tops.count(t) == 2 for t in distinct)
+    out.append(check("trackGroup", geo_ok, {"tops": tops, "distinct": distinct, "expectedRows": 1 if width >= 1024 else 2}))
+    return out
+
+
+def check_geometry(page, width, theme, ctx):
+    """OF-2 / FEAT-004: every visible label.check is 44x44 with a 22x22 native checkbox."""
+    s = ctx.page.evaluate(CHECK_JS)
+    return [check("checkSize", s["n"] == 0 or len(s["bad"]) == 0, s if s["n"] else "no checkboxes on this page")]
+
+
 # Page-type check groups, keyed by body[data-page]. FEAT-003 appends to "index" and "section",
 # FEAT-004 to "plan", FEAT-005 to "feed". Each fn(page_name, width, theme, ctx) -> [check, ...].
 # They run after the generic evaluation, with every <details> open and html[data-theme] set directly.
 GROUPS = {
-    "home": [index_checks],  # index.html carries body[data-page="home"]
-    "section": [section_checks, section_behaviours],
-    "plan": [shell_text_checks],
+    "home": [index_checks, check_geometry],  # index.html carries body[data-page="home"]
+    "section": [section_checks, section_behaviours, check_geometry],
+    "plan": [shell_text_checks, plan_checks, check_geometry],
     "feed": [shell_text_checks],
     "404": [shell_text_checks],
 }
 
-# Extra init script per page NAME (e.g. FEAT-004: PAGE_INIT["plan"] = "localStorage.setItem('physical-ai-roadmap.v1.plan', ...)")
-# so a fixture state exists before the page's modules run. Not applied to the first-paint (DR-3) contexts.
-PAGE_INIT = {}
+# Extra init script per page NAME so a fixture state exists before the page's modules run. Not applied to the
+# first-paint (DR-3) contexts. FEAT-004: the My plan fixture (also used for the plan screenshots).
+PAGE_INIT = {
+    "plan": storage_init_js(PLAN_KEY, plan_fixture()),
+}
 
 
 class Ctx:
@@ -763,6 +876,164 @@ class Audit:
         finally:
             ctx.close()
 
+    # ---- FEAT-004: tracker round trip s12 -> index -> s12, plan-set rule, s04 answers ---------------
+    def tracker_round_trip(self, browser):
+        ctx = self.new_context(browser, 1440, 900)
+        try:
+            page = ctx.new_page()
+            rail = """() => { const txt = (el) => (el ? el.textContent.replace(/\\s+/g, ' ').trim() : ''); const li = document.querySelector('.rail-right li[data-set="rungs"]');
+                return { count: txt(li && li.querySelector('.count')), bar: li ? li.querySelector('[data-bar]').style.width : null,
+                  checked: [...document.querySelectorAll('input[data-track="s12:rungs:0"]')].map((i) => i.checked), rowDone: document.getElementById('t-s12-rungs-0').hasAttribute('data-done'),
+                  summary: txt(document.querySelector('.onpage-inline summary')) }; }"""
+            page.goto(self.url("s12"), wait_until="load")
+            page.wait_for_selector(".rail-right li[data-set='rungs'] [data-bar]", state="attached", timeout=4000)
+            page.wait_for_timeout(150)  # tracker.js fetches the manifest before the first count
+            before = page.evaluate(rail)
+            page.locator('input[data-track="s12:rungs:0"]').first.check()
+            try:
+                page.wait_for_function("() => document.querySelector('.rail-right li[data-set=\"rungs\"] [data-done]').textContent === '1'", timeout=3000)
+            except Exception:
+                pass
+            after = page.evaluate(rail)
+            stored = page.evaluate("(k) => JSON.parse(localStorage.getItem(k) || 'null')", TRACKER_KEY)
+            s12_ok = (before["count"] == "0 of 9" and before["checked"] == [False, False] and after["count"] == "1 of 9" and after["checked"] == [True, True]
+                      and after["rowDone"] is True and after["bar"] == "11%" and after["summary"] == "On this page · Rungs 1 of 9 done"
+                      and stored and stored["items"]["s12:rungs:0"]["done"] is True)
+            home = """() => { const txt = (el) => (el ? el.textContent.replace(/\\s+/g, ' ').trim() : ''); const li = document.querySelector('li[data-set="rungs"]'); const plan = document.querySelector('li[data-set="plan"]');
+                return { rungs: txt(li.querySelector('.count')), plan: txt(plan.querySelector('.count')), planLabel: txt(plan.querySelector(':scope > span')), overall: txt(document.querySelector('.progress-note')) }; }"""
+            page.goto(self.url("index"), wait_until="load")
+            try:
+                page.wait_for_function("() => document.querySelector('li[data-set=\"rungs\"] [data-done]').textContent === '1'", timeout=3000)
+            except Exception:
+                pass
+            h1 = page.evaluate(home)
+            home_ok = h1["rungs"] == "1 of 9" and h1["plan"] == "0 of 24" and h1["planLabel"] == "Plan months (§15, choose a plan first)" and h1["overall"].startswith("Overall 1 of 122 items (plan months are counted once a plan is chosen).")
+            # D6 plan-set rule: with a 10 h plan the plan row resolves to plan-10h and joins the overall count
+            page.evaluate("(a) => { localStorage.setItem(a[0], JSON.stringify({ hoursPerWeek: 10 })); const t = JSON.parse(localStorage.getItem(a[1])); t.items['s15:plan-10h:1'] = { done: true, at: 'audit' }; t.items['s15:plan-20h:2'] = { done: true, at: 'audit' }; localStorage.setItem(a[1], JSON.stringify(t)); }", [PLAN_KEY, TRACKER_KEY])
+            page.reload(wait_until="load")
+            try:
+                page.wait_for_function("() => document.querySelector('li[data-set=\"plan\"] [data-done]').textContent === '1'", timeout=3000)
+            except Exception:
+                pass
+            h2 = page.evaluate(home)
+            plan_ok = h2["rungs"] == "1 of 9" and h2["plan"] == "1 of 24" and h2["planLabel"] == "Plan months, 10 h plan (§15)" and h2["overall"].startswith("Overall 2 of 146 items")
+            page.goto(self.url("s12"), wait_until="load")
+            page.wait_for_timeout(200)
+            back = page.evaluate(rail)
+            back_ok = back["checked"] == [True, True] and back["count"] == "1 of 9" and back["rowDone"] is True
+            ok = s12_ok and home_ok and plan_ok and back_ok
+            self.record("s12", 1440, "light", [check("trackerRoundTrip", ok, {"s12Before": before, "s12After": after, "index": h1, "indexWithPlan": h2, "s12Back": back})])
+            print(f"{'s12':11}  1440 tracker round trip {'OK' if ok else 'FAIL'} s12={after['count']} index={h1['rungs']} plan={h2['plan']} overall={h2['overall'][:22]} back={back['checked']}")
+            # Decision 21: s04 answers count
+            page.evaluate("(k) => localStorage.setItem(k, JSON.stringify({ hoursPerWeek: 10, answers: { 's04:questions:1': 'yes', 's04:questions:7': '12', 's04:questions:9': '   ' } }))", PLAN_KEY)
+            page.goto(self.url("s04"), wait_until="load")
+            try:
+                page.wait_for_function("() => document.querySelector('li[data-set=\"questions\"] [data-done]').textContent === '2'", timeout=3000)
+            except Exception:
+                pass
+            a = page.evaluate("""() => { const txt = (el) => (el ? el.textContent.replace(/\\s+/g, ' ').trim() : ''); const li = document.querySelector('.rail-right li[data-set="questions"]');
+                return { label: txt(li.querySelector(':scope > span')), count: txt(li.querySelector('.count')), summary: txt(document.querySelector('.onpage-inline summary')), bar: li.querySelector('[data-bar]').style.width }; }""")
+            a_ok = a["label"] == "Answers (§4)" and a["count"] == "2 of 18" and a["summary"] == "On this page · Answers 2 of 18" and a["bar"] == "11%"
+            self.record("s04", 1440, "light", [check("answersCount", a_ok, a)])
+            print(f"{'s04':11}  1440 answers count {'OK' if a_ok else 'FAIL'} {a}")
+        finally:
+            ctx.close()
+
+    # ---- FEAT-004: My plan behaviours: prompt, export, import (invalid + merge), reset ---------------
+    def plan_behaviours(self, browser):
+        snapshot = "(keys) => Object.fromEntries(keys.concat(['%s']).map((k) => [k, localStorage.getItem(k)]))" % THEME_KEY
+        keys_js = [TRACKER_KEY, PLAN_KEY, TRIAGE_KEY]
+        # 1. empty storage: the prompt card with the Q7 rule, no numbers
+        ctx = self.new_context(browser, 1440, 900)
+        try:
+            page = ctx.new_page()
+            page.goto(self.url("plan"), wait_until="load")
+            page.wait_for_selector("#plan-app[data-ready]", timeout=4000)
+            s = page.evaluate(PLAN_JS)
+            rule_html = page.request.get(f"{self.base}plan-data.json").json()["hoursRule"]["ruleHtml"]
+            rule_text = re.sub(r"\s+", " ", html_mod.unescape(re.sub(r"<[^>]+>", "", rule_html))).strip()
+            ok = (s["promptHidden"] is False and s["ruleText"] == rule_text and rule_text.startswith("≤12 → 10 h plan. ≥18 → 20 h plan. Between →")
+                  and s["statsHidden"] is True and s["monthRows"] == 0 and all(v == "—" for v in s["statValues"]) and not re.search(r"\d", "".join(s["statValues"])))
+            self.record("plan", 1440, "light", [check("planPrompt", ok, {"promptHidden": s["promptHidden"], "rule": s["ruleText"][:90], "ruleMatches": s["ruleText"] == rule_text, "statsHidden": s["statsHidden"], "statValues": s["statValues"], "monthRows": s["monthRows"]})])
+            print(f"{'plan':11}  1440 prompt(empty storage) {'OK' if ok else 'FAIL'} rule={s['ruleText'][:50]!r}")
+        finally:
+            ctx.close()
+        # 2–4. with the fixture: export, invalid import, merge import, reset
+        ctx = self.new_context(browser, 1440, 900, name="plan")
+        scratch = []
+        try:
+            page = ctx.new_page()
+            page.goto(self.url("plan"), wait_until="load")
+            page.wait_for_selector("#plan-app[data-ready='plan']", timeout=4000)
+            with page.expect_download(timeout=5000) as dl:
+                page.click("#plan-export")
+            download = dl.value
+            with open(download.path(), "r", encoding="utf-8") as f:
+                exported = json.load(f)
+            name_ok = re.fullmatch(r"physical-ai-roadmap-export-\d{4}-\d{2}-\d{2}\.json", download.suggested_filename) is not None
+            exp_ok = (name_ok and exported.get("version") == 1 and all(k in exported for k in ("tracker", "plan", "triage", "exportedAt"))
+                      and exported["plan"].get("hoursPerWeek") == 10 and exported["plan"].get("track") == "B" and exported["plan"].get("weeklyHours") == {"1": 10, "2": 8})
+            self.record("plan", 1440, "light", [check("planExport", exp_ok, {"filename": download.suggested_filename, "keys": sorted(exported.keys()), "version": exported.get("version"), "plan": exported.get("plan")})])
+            print(f"{'plan':11}  1440 export {'OK' if exp_ok else 'FAIL'} {download.suggested_filename} keys={sorted(exported.keys())}")
+            # invalid imports: version 2, then non-JSON — inline error, storage unchanged
+            tmpdir = tempfile.gettempdir()
+            results = []
+            for label, content in (("version2", '{"version": 2, "tracker": {"items": {}}}'), ("notjson", "not json at all")):
+                path = os.path.join(tmpdir, f"pair-import-{label}-{os.getpid()}.json")
+                with open(path, "w", encoding="utf-8") as f:
+                    f.write(content)
+                scratch.append(path)
+                before = page.evaluate(snapshot, keys_js)
+                page.evaluate("() => { const m = document.getElementById('plan-msg'); m.hidden = true; m.textContent = ''; m.classList.remove('error'); }")
+                page.set_input_files("#plan-import-file", path)
+                try:
+                    page.wait_for_selector("#plan-msg.error:not([hidden])", timeout=3000)
+                except Exception:
+                    pass
+                msg = page.evaluate("() => { const m = document.getElementById('plan-msg'); const r = m.getBoundingClientRect(); return { text: m.textContent, error: m.classList.contains('error'), hidden: m.hidden, visible: r.width > 1 && r.height > 1, role: m.getAttribute('role') }; }")
+                after = page.evaluate(snapshot, keys_js)
+                results.append({"file": label, "msg": msg, "unchanged": before == after})
+            inv_ok = all(r["msg"]["error"] and r["msg"]["visible"] and r["msg"]["text"].startswith("Import failed") and r["unchanged"] for r in results)
+            self.record("plan", 1440, "light", [check("planImportInvalid", inv_ok, results)])
+            print(f"{'plan':11}  1440 import(invalid) {'OK' if inv_ok else 'FAIL'} {[r['msg']['text'][:60] for r in results]}")
+            # valid import merges after confirm(): track C and rung 3 arrive, 10 h / start date / rung 0 stay
+            page.evaluate("(k) => localStorage.setItem(k, JSON.stringify({ items: { 's12:rungs:0': { done: true, at: 'audit' } } }))", TRACKER_KEY)
+            good = os.path.join(tmpdir, f"pair-import-good-{os.getpid()}.json")
+            with open(good, "w", encoding="utf-8") as f:
+                json.dump({"version": 1, "exportedAt": "2026-10-21T00:00:00Z", "tracker": {"items": {"s12:rungs:3": {"done": True, "at": "import"}}}, "plan": {"track": "C"}}, f)
+            scratch.append(good)
+            page.once("dialog", lambda d: d.accept())
+            page.set_input_files("#plan-import-file", good)
+            try:
+                page.wait_for_function("() => { const m = document.getElementById('plan-msg'); return !m.hidden && !m.classList.contains('error') && m.textContent.startsWith('Imported'); }", timeout=3000)
+            except Exception:
+                pass
+            merged = page.evaluate("(a) => ({ tracker: JSON.parse(localStorage.getItem(a[0])), plan: JSON.parse(localStorage.getItem(a[1])), msg: document.getElementById('plan-msg').textContent, pressedTrack: [...document.querySelectorAll('.track-group button')].map((b) => b.getAttribute('aria-pressed')) })", [TRACKER_KEY, PLAN_KEY])
+            merge_ok = (set(merged["tracker"]["items"].keys()) == {"s12:rungs:0", "s12:rungs:3"} and merged["plan"].get("track") == "C" and merged["plan"].get("hoursPerWeek") == 10
+                        and merged["plan"].get("startDate") == plan_fixture()["startDate"] and merged["plan"].get("weeklyHours") == {"1": 10, "2": 8}
+                        and merged["pressedTrack"] == ["false", "false", "false", "true"] and merged["msg"].startswith("Imported 2 entries"))
+            self.record("plan", 1440, "light", [check("planImportMerge", merge_ok, {"trackerIds": sorted(merged["tracker"]["items"].keys()), "plan": merged["plan"], "msg": merged["msg"], "pressedTrack": merged["pressedTrack"]})])
+            print(f"{'plan':11}  1440 import(merge) {'OK' if merge_ok else 'FAIL'} ids={sorted(merged['tracker']['items'].keys())} track={merged['plan'].get('track')} hours={merged['plan'].get('hoursPerWeek')}")
+            # reset: the three data keys go, the theme stays
+            page.evaluate("(k) => localStorage.setItem(k, 'dark')", THEME_KEY)
+            page.once("dialog", lambda d: d.accept())
+            page.click("#plan-reset")
+            try:
+                page.wait_for_selector("#plan-prompt:not([hidden])", timeout=3000)
+            except Exception:
+                pass
+            after_reset = page.evaluate(snapshot, keys_js)
+            reset_ok = all(after_reset[k] is None for k in keys_js) and after_reset[THEME_KEY] == "dark" and page.evaluate("() => document.getElementById('plan-prompt').hidden") is False
+            self.record("plan", 1440, "light", [check("planReset", reset_ok, after_reset)])
+            print(f"{'plan':11}  1440 reset {'OK' if reset_ok else 'FAIL'} {after_reset}")
+        finally:
+            ctx.close()
+            for pth in scratch:
+                try:
+                    os.remove(pth)
+                except OSError:
+                    pass
+
     # ---- screenshots ----------------------------------------------------------------------------
     def shots(self, browser, names, prefix):
         written = []
@@ -807,6 +1078,8 @@ class Audit:
                     self.clipboard(browser)
                     for w in SEARCH_WIDTHS:
                         self.search(browser, w)
+                    self.tracker_round_trip(browser)
+                    self.plan_behaviours(browser)
                 if self.args.shots:
                     report["shots"] = self.shots(browser, self.args.shot_pages or self.args.pages, self.args.shots)
             finally:
@@ -856,7 +1129,7 @@ def parse_args(argv=None):
     ap.add_argument("--shots", default="", help="PNG path prefix; writes <prefix><page>-<width>-<theme>.png (viewport only, 2560 at dsf 0.75)")
     ap.add_argument("--shot-pages", default="", help="pages to screenshot (default: --pages)")
     ap.add_argument("--report", default="", help="write the JSON report here")
-    ap.add_argument("--no-specials", action="store_true", help="skip the keyboard (s11), print (s12), reading-position (s06) and search (index) checks")
+    ap.add_argument("--no-specials", action="store_true", help="skip the keyboard (s11), print (s12), reading-position (s06), search (index), tracker round trip (s12/index/s04) and My plan behaviour checks")
     ap.add_argument("--link-counts", default="", help="OF-7 link parity reference: page=markdownHttpLinks pairs, e.g. s12=21,s03=23 (verify.mjs computes them)")
     a = ap.parse_args(argv)
     split = lambda s: [x.strip() for x in s.split(",") if x.strip()]  # noqa: E731

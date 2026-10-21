@@ -1,8 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { html, raw, escapeHtml, shell, THEME_BOOTSTRAP, cspValue, FOOTER_TEXT, planPage, feedPage, notFoundPage, legendDetails } from '../src/build/templates.js';
 import { SITE } from '../src/build/content-map.mjs';
+import { buildSite } from '../src/build/write.js';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const planData = buildSite(readFileSync(path.join(ROOT, 'content', 'roadmap.md'), 'utf8')).planData;
 
 test('the html tag escapes every interpolated string and passes nested templates through', () => {
   const user = '<img src=x onerror="alert(1)"> & "quotes" \'single\'';
@@ -53,10 +60,28 @@ test('header and footer match the mock structure; footer text is exact', () => {
 });
 
 test('plan, feed and 404 shells', () => {
-  const plan = planPage();
+  const plan = planPage({ planData });
   assert.ok(plan.includes('<body data-page="plan">'));
-  assert.ok(plan.includes('<h1 id="top">My plan</h1>\n<div id="plan-app"></div>\n<noscript>'));
+  assert.ok(plan.includes('<h1 id="top">My plan</h1>'));
+  assert.ok(plan.includes('<div id="plan-app">'));
   assert.ok(plan.includes('<a href="plan.html" aria-current="page">My plan</a>'));
+  // FEAT-004: static structure readable without JS — prompt card quoting the §4 Q7 rule verbatim, setup controls,
+  // empty stat cards and section shells (hidden until plan.js fills them), the 18 §4 questions with textareas.
+  assert.ok(plan.includes(`<blockquote class="notice" data-hours-rule><p>${planData.hoursRule.ruleHtml}</p></blockquote>`));
+  assert.ok(planData.hoursRule.ruleHtml.startsWith('≤12 → 10 h plan. ≥18 → 20 h plan. Between →'));
+  assert.ok(plan.includes('<button class="btn" type="button" data-hours="10" aria-pressed="false">10 h/week · 1,040 h</button><button class="btn" type="button" data-hours="20" aria-pressed="false">20 h/week · 2,080 h</button>'));
+  assert.ok(plan.includes('<div class="track-group" role="group" aria-labelledby="l-track"><button class="btn" type="button" data-track-choice="" aria-pressed="true">Undecided</button><button class="btn" type="button" data-track-choice="A" aria-pressed="false">A</button><button class="btn" type="button" data-track-choice="B" aria-pressed="false">B (default)</button><button class="btn" type="button" data-track-choice="C" aria-pressed="false">C</button></div>'));
+  assert.ok(plan.includes('<input type="date" id="plan-start">'));
+  assert.ok(plan.includes('<button class="btn" type="button" id="plan-export">Export JSON</button><button class="btn" type="button" id="plan-import">Import JSON</button><input type="file" id="plan-import-file" accept=".json,application/json" hidden><button class="btn quiet" type="button" id="plan-reset">Reset…</button>'));
+  assert.equal((plan.match(/<div class="stat" data-stat="/g) || []).length, 5);
+  for (const id of ['plan-stats', 'plan-month', 'plan-gate', 'plan-log', 'plan-months', 'plan-budget']) assert.ok(new RegExp(`id="${id}" hidden>`).test(plan), `${id} starts hidden`);
+  assert.ok(plan.includes('<section class="plan-prompt" id="plan-prompt" aria-labelledby="h-prompt">'), 'the prompt is visible without JS');
+  assert.equal((plan.match(/<textarea data-answer="s04:questions:\d+" aria-label="Answer to question \d+"/g) || []).length, 18);
+  assert.equal((plan.match(/<details class="rule-details"><summary>Decision rule<\/summary>/g) || []).length, 18);
+  assert.ok(plan.includes('<span class="q">7. Hours per week you can protect for 104 weeks (not a best week)?</span>'));
+  assert.ok(plan.includes(`<p class="small muted">${planData.quarterNote}</p>`));
+  assert.equal((plan.match(/data-track="/g) || []).length, 0, 'month and clause checkboxes are rendered by plan.js for the chosen plan');
+  assert.equal((plan.match(/Evidence cutoff/g) || []).length, 1, 'footer only');
   const feed = feedPage();
   assert.ok(feed.includes('<body data-page="feed">'));
   assert.ok(feed.includes('<p class="kicker">Stay ahead · the §17 monitoring system, fetched daily</p>'));
