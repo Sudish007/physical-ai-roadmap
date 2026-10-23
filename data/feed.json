@@ -1,7 +1,155 @@
 {
- "generatedAt": "2026-10-22T07:45:21Z",
+ "generatedAt": "2026-10-23T07:43:22Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "url:ec15ed8c38809161",
+   "title": "3.17.0",
+   "url": "https://github.com/google-deepmind/mujoco/releases/tag/3.17.0",
+   "source": "google-deepmind/mujoco releases",
+   "sourceId": "rel-mujoco",
+   "sourceClass": "release",
+   "publishedAt": "2026-10-22T21:45:20Z",
+   "summary": "Version 3.17.0 (October 22, 2026) Significant new features c00ed8153 Added a batch API in mujoco/mjbatch.h (in Python as mujoco.batch ): many simulations of one model stepped on a thread pool of its own, each held as its integration state and loaded into an mjData for each call, so memory scales…",
+   "matchedQuery": null,
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.31670",
+   "title": "Sensorimotor Alignment: A Platonic Proxy for Embodied Policy Success",
+   "url": "https://arxiv.org/abs/2610.31670",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-22T17:59:51Z",
+   "summary": "Robotic foundation models are typically evaluated through costly closed-loop rollouts, which motivates cheap offline proxies for model capability. The Platonic Representation Hypothesis (PRH) suggests that as representations improve, different modalities such as vision and language converge toward…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.31569",
+   "title": "Echo: Coupled Action and Task Status Signal Denoising for Vision Language Action Models",
+   "url": "https://arxiv.org/abs/2610.31569",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-22T17:12:16Z",
+   "summary": "Recognizing task completion and failure enables robots to stop upon success and initiate recovery or replanning after failure. Existing methods augment Vision Language Action (VLA) policies with task status signal prediction to support these execution decisions. However, learning and integrating…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2610.31472",
+   "title": "VecTile: A Low-Cost Flexible Tactile Array for 3-DoF Force Sensing",
+   "url": "https://arxiv.org/abs/2610.31472",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-22T16:00:09Z",
+   "summary": "Tactile sensing provides robots with contact information difficult to obtain from vision alone. Shear force is particularly important for understanding tangential contact, guiding corrective motions, and maintaining grasp stability, yet flexible and low-cost tactile arrays often measure only normal…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.31427",
+   "title": "FastHarness: Experience-Driven Review Scheduling for Vision-Language-Action Policies",
+   "url": "https://arxiv.org/abs/2610.31427",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-22T15:27:10Z",
+   "summary": "Agentic robot systems combine language-model reasoning with robot policies to monitor execution and recover from failures. However, reviewing every action chunk incurs substantial overhead, even in familiar situations. We introduce FastHarness, an experience-driven execution harness that adaptively…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2610.31423",
+   "title": "FocusVLA: Future-Intent Guided Dynamic View Routing for Vision-Language-Action Models",
+   "url": "https://arxiv.org/abs/2610.31423",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-22T15:25:02Z",
+   "summary": "Vision-language-action (VLA) models have become an important paradigm for robotic manipulation by unifying visual perception, language understanding, and action generation. Since reliable manipulation requires sufficient observation of objects, end-effectors, and their spatial relationships…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.31334",
+   "title": "GelSlim 5.0: Unifying Vision and Touch with a Single Fingertip Camera",
+   "url": "https://arxiv.org/abs/2610.31334",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-22T14:22:01Z",
+   "summary": "Vision and touch provide complementary cues for object pose and local contact geometry, but external cameras are often occluded at the contact site. We present GelSlim 5.0, a fingertip sensor that acquires visual and tactile observations with one fixed camera and a continuous UV-responsive contact…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.31166",
+   "title": "Memory before Goal: Role of Pre-History Memory for Humanoid Loco-Manipulation",
+   "url": "https://arxiv.org/abs/2610.31166",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-22T12:24:25Z",
+   "summary": "Humanoid loco-manipulation in dynamic scenes is non-Markovian: cues vanish as objects change or are hidden, or leave the view as the robot turns and walks, yet whole-body vision-language-action (VLA) policies see only the present. We present WholeBodyMem, an object-guided perceptual memory that…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.31095",
+   "title": "To Route or to Adapt? Multi-Expert Diffusion Planners in Unseen Regions",
+   "url": "https://arxiv.org/abs/2610.31095",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-22T11:06:48Z",
+   "summary": "Diffusion trajectory planners with domain-specific experts face a practical question in unseen regions: can they rely on selecting among existing experts, or must the planner itself adapt? We study this question using a planner with a shared adapter and per-domain expert adapters. Across three…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.29203",
+   "title": "NavBind: Diagnosing Instruction-Action Binding at Route Forks in Navigation VLAs",
+   "url": "https://arxiv.org/abs/2610.29203",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-22T03:05:14Z",
+   "summary": "Vision-language-action (VLA) navigation models translate visual observations and instructions into actions. Navigation success assesses whether an agent reaches the goal. However, reaching the goal successfully does not establish whether the model genuinely follows the instructions or relies on…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.30323",
+   "title": "Dynamic Active Fleet Sizing of Heterogeneous UAV Relays for Post-Disaster Communication Networks",
+   "url": "https://arxiv.org/abs/2610.30323",
+   "source": "arXiv eess.SY listing",
+   "sourceId": "arxiv-eess.SY",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-21T18:37:36Z",
+   "summary": "Uncrewed aerial vehicle (UAV) communication systems are increasingly used to provide temporary connectivity when ground communication infrastructure is damaged by disasters such as hurricanes and wildfires. However, the amount of aerial support required changes as ground networks recover and…",
+   "matchedQuery": "eess.SY listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.27414",
+   "title": "Real-Time Disturbance-Aware Koopman Model Predictive Control for Quadrotors in Spatially Varying Winds",
+   "url": "https://arxiv.org/abs/2610.27414",
+   "source": "arXiv eess.SY listing",
+   "sourceId": "arxiv-eess.SY",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-21T18:27:58Z",
+   "summary": "Reliable quadrotor flight in disturbed environments requires predictive models that remain accurate as unmodeled aerodynamic effects change during deployment. We introduce a disturbance-aware Koopman Control Family (DA-KCF) framework that preserves an offline-identified nominal model while learning…",
+   "matchedQuery": "eess.SY listing",
+   "alsoMatched": []
+  },
   {
    "id": "arxiv:2610.28432",
    "title": "Physical AI for Intralogistics: Benchmarking the NVIDIA Sim-to-Real Ecosystem for Cosmos-Enhanced COMPASS Navigation on Industrial Mobile Robots",
@@ -113,30 +261,16 @@
    "alsoMatched": []
   },
   {
-   "id": "arxiv:2610.29203",
-   "title": "NavBind: Diagnosing Instruction-Action Binding at Route Forks in Navigation VLAs",
-   "url": "https://arxiv.org/abs/2610.29203",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-21T04:50:26Z",
-   "summary": "Vision-language-action (VLA) navigation models translate visual observations and instructions into actions. Navigation success assesses whether an agent reaches the goal. However, reaching the goal successfully does not establish whether the model genuinely follows the instructions or relies on…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
    "id": "arxiv:2610.29161",
    "title": "SimPT: An Automated Simulation Framework for Intervention-Based VLA Post-Training",
    "url": "https://arxiv.org/abs/2610.29161",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-21T03:53:00Z",
    "summary": "Human-in-the-loop (HIL) post-training improves vision-language-action (VLA) policies through expert corrections, but costly human supervision and repeated real-robot evaluation limit algorithm exploration and development. We introduce SimPT (Simulation-based Post-Training), a simulation framework…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2610.25043",
@@ -328,18 +462,6 @@
    "publishedAt": "2026-10-20T06:54:57Z",
    "summary": "Connected and Autonomous Vehicles (CAVs) face significant challenges in roundabout navigation due to dense traffic interactions and unpredictable agent behaviors, necessitating high levels of adaptability and safety. While the combination of Reinforcement Learning (RL) and Model Predictive Control…",
    "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.27414",
-   "title": "Real-Time Disturbance-Aware Koopman Model Predictive Control for Quadrotors in Spatially Varying Winds",
-   "url": "https://arxiv.org/abs/2610.27414",
-   "source": "arXiv eess.SY listing",
-   "sourceId": "arxiv-eess.SY",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-20T00:09:22Z",
-   "summary": "Reliable quadrotor flight in disturbed environments requires predictive models that remain accurate as unmodeled aerodynamic effects change during deployment. We introduce a disturbance-aware Koopman Control Family (DA-KCF) framework that preserves an offline-identified nominal model while learning…",
-   "matchedQuery": "eess.SY listing",
    "alsoMatched": []
   },
   {
@@ -1637,42 +1759,6 @@
    "sourceClass": "arxiv",
    "publishedAt": "2026-09-23T16:36:11Z",
    "summary": "Control barrier functions (CBF) are a popular safety filter to ensure safety for nonlinear dynamical systems. However, when the system is subject to uncertainties and disturbances, this requires the use of robust variants of CBFs, which can be difficult to construct and can be overly conservative…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.27312",
-   "title": "Turning Safety into Competence: Minimally Exploitable Robot Policies via Safety-Filtered Reinforcement Learning",
-   "url": "https://arxiv.org/abs/2609.27312",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-23T03:44:21Z",
-   "summary": "Robots deployed for competitive tasks must outmaneuver their opponents without sacrificing safety. Existing approaches, including safe reinforcement learning (RL), train a single policy to achieve task success and avoid failures simultaneously. This coupling can complicate training and leave the…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:354b4c0df812c9af",
-   "title": "3.14.0",
-   "url": "https://github.com/google-deepmind/mujoco/releases/tag/3.14.0",
-   "source": "google-deepmind/mujoco releases",
-   "sourceId": "rel-mujoco",
-   "sourceClass": "release",
-   "publishedAt": "2026-09-22T16:52:58Z",
-   "summary": "Version 3.14.0 (September 22, 2026) General 458189298 Added the ipc flag , an experimental contact mode of the discrete integrator for penetration-free flex contact. Each step minimizes an incremental potential subject to linearized contact constraints, using a barrier-free augmented Lagrangian…",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.25994",
-   "title": "Safety-Constrained Model Predictive Control for an Omnidirectional Walking Assistive Robot Using Control Barrier Function",
-   "url": "https://arxiv.org/abs/2609.25994",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-22T10:51:27Z",
-   "summary": "Providing safe and effective mobility assistance plays a crucial role in restoring independence and enhancing the quality of life for individuals with motor impairments. In this context, robotic walking assistive devices have recently emerged as promising solutions to provide physically compliant…",
    "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   }
