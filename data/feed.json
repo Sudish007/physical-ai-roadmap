@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-23T07:43:22Z",
+ "generatedAt": "2026-10-24T07:25:52Z",
  "windowDays": 30,
  "items": [
   {
@@ -1748,18 +1748,6 @@
    "publishedAt": "2026-09-24T18:43:54Z",
    "summary": "Original Article Since its founding in the late 1990s, Penn Engineering’s Bachelor of Science in Engineering in Digital Media Design […]",
    "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.28364",
-   "title": "LEAP-CBF: A Safety Filter for Uncertain Systems with Least-Effort Adversarial Potentials",
-   "url": "https://arxiv.org/abs/2609.28364",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-23T16:36:11Z",
-   "summary": "Control barrier functions (CBF) are a popular safety filter to ensure safety for nonlinear dynamical systems. However, when the system is subject to uncertainties and disturbances, this requires the use of robust variants of CBFs, which can be difficult to construct and can be overly conservative…",
-   "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   }
  ]
