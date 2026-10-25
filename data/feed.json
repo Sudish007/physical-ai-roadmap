@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T07:25:52Z",
+ "generatedAt": "2026-10-25T07:40:44Z",
  "windowDays": 30,
  "items": [
   {
@@ -1723,30 +1723,6 @@
    "sourceClass": "lab",
    "publishedAt": "2026-09-25T20:49:46Z",
    "summary": "The General Robotics, Automation, Sensing & Perception (GRASP) Laboratory at the University of Pennsylvania is proud to share all of […]",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.30495",
-   "title": "Memory-Aware Multi-Sensor Perception for Efficient and Safe Navigation in Dynamic Environments",
-   "url": "https://arxiv.org/abs/2609.30495",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-24T19:33:28Z",
-   "summary": "Autonomous navigation in previously unseen environments requires effective perception, persistent environmental representation, and collision avoidance while maintaining progress toward a goal. Existing perception-based methods often rely on prior maps or short-horizon observations, limiting their…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:2bb39fb9c6ab2657",
-   "title": "Penn Engineering Evolves Digital Media Design into Visual and Interactive Computing",
-   "url": "https://www.grasp.upenn.edu/news/penn-engineering-evolves-digital-media-design-into-visual-and-interactive-computing",
-   "source": "UPenn GRASP news",
-   "sourceId": "lab-grasp",
-   "sourceClass": "lab",
-   "publishedAt": "2026-09-24T18:43:54Z",
-   "summary": "Original Article Since its founding in the late 1990s, Penn Engineering’s Bachelor of Science in Engineering in Digital Media Design […]",
    "matchedQuery": null,
    "alsoMatched": []
   }
