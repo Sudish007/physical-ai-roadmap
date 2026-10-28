@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-27T08:02:29Z",
+ "generatedAt": "2026-10-28T08:44:12Z",
  "windowDays": 30,
  "items": [
   {
@@ -1953,54 +1953,6 @@
    "publishedAt": "2026-09-28T12:00:00Z",
    "summary": "The presentations highlighted the importance of NIST applying its own expertise and the expertise of others through collaborations and contracts.",
    "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.34574",
-   "title": "Robust Variable-Horizon MPC for Landing a Multirotor UAV on a Moving Platform",
-   "url": "https://arxiv.org/abs/2609.34574",
-   "source": "arXiv query: Aerial autonomy",
-   "sourceId": "arxiv-q-aerial-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-28T08:21:53Z",
-   "summary": "Landing a multirotor Unmanned Aerial Vehicle (UAV) on a moving platform is challenging because a UAV is underactuated and the desired landing state is generally a non-equilibrium state. Shrinking- and variable-horizon approaches are promising for reaching such non-equilibrium targets, but often…",
-   "matchedQuery": "Aerial autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.34486",
-   "title": "Model-Informed Safe Reinforcement Learning for Bipedal Locomotion via Step-to-Step Prediction",
-   "url": "https://arxiv.org/abs/2609.34486",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-28T07:39:55Z",
-   "summary": "Humanoid robots promise versatile mobility in cluttered, human-centric environments, but real deployment demands principled safety. Classical model-based gait generators yield interpretable motions but often lack the robustness and adaptability of modern reinforcement learning (RL) based…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.34356",
-   "title": "Predictive Semantic Safety: From Visual Physical Reasoning to Safety-Critical Control",
-   "url": "https://arxiv.org/abs/2609.34356",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-28T05:32:33Z",
-   "summary": "Physical interactions can create future hazards that are not apparent from the robot's current geometric surroundings. We present a framework termed Predictive Semantic Safety (PSS), which connects visual physical reasoning to backup-based safety filtering. A vision-language model (VLM) predicts…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.33337",
-   "title": "Safe Score Matching: Diffusion Policies with Hamilton-Jacobi Reachability for Online Safe Reinforcement Learning",
-   "url": "https://arxiv.org/abs/2609.33337",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-27T08:09:52Z",
-   "summary": "Online safe reinforcement learning (RL) seeks policies that maximize reward while satisfying safety constraints. A popular line of research in safe RL relaxes safety to a soft expected-cost constraint and solves the resulting Constrained Markov Decision Process via primal-dual Lagrangian updates…",
-   "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   }
  ]
