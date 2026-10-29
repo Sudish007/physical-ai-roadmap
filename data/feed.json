@@ -1,7 +1,209 @@
 {
- "generatedAt": "2026-10-28T08:44:12Z",
+ "generatedAt": "2026-10-29T08:40:33Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "url:20a705619db9f54c",
+   "title": "v3.17.5",
+   "url": "https://github.com/mavlink/MAVSDK/releases/tag/v3.17.5",
+   "source": "mavlink/MAVSDK releases",
+   "sourceId": "rel-mavsdk",
+   "sourceClass": "release",
+   "publishedAt": "2026-10-28T19:36:49Z",
+   "summary": "What's Changed v3: telemetry: map ODOMETRY frame ids by name instead of casting by @julianoes in #3077 ci: only save third_party caches on the v3 branch by @julianoes in #3095 docs: point v3 readers at v4 by @julianoes in #3108 docs: match the v3 version menu to main by @julianoes in #3116…",
+   "matchedQuery": null,
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.37652",
+   "title": "Pushing Dexterity and Safety for In-Hand Object Pose Reaching That Works Remarkably Well",
+   "url": "https://arxiv.org/abs/2610.37652",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T17:58:20Z",
+   "summary": "Dexterous manipulation with multi-fingered hands is the next frontier of robotics, yet learned hand skills remain limited to simple grasps or basic repeated motions, such as rotating an object. As robots attempt more demanding in-hand maneuvers, safety, such as not dropping the object, becomes…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "eess.SY listing"
+   ]
+  },
+  {
+   "id": "arxiv:2610.37557",
+   "title": "Learning Visuomotor Quadrotor Flight Through Dynamic Narrow Gaps via Differentiable Simulation",
+   "url": "https://arxiv.org/abs/2610.37557",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T17:05:05Z",
+   "summary": "Threading a quadrotor through a moving narrow gap is a demanding test of agile flight, requiring centimeter-level spatial alignment and precise temporal execution. We address this challenge using a control policy that operates directly on onboard visual and inertial measurements to output…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.37518",
+   "title": "World Dreamer v5-lite: A Multi-Robot World Action Model with One Dreamer",
+   "url": "https://arxiv.org/abs/2610.37518",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T16:40:10Z",
+   "summary": "Multi-robot control requires integrating distributed camera views while predicting separate action sequences. Most vision-language-action and world-action models target one robot. Combining multiple views alone does not establish spatial correspondence between them. World Dreamer v5-lite is a…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2610.37381",
+   "title": "PDRVLA: A Vision-Language-Action Model with Physical Dynamics Representations",
+   "url": "https://arxiv.org/abs/2610.37381",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T15:09:10Z",
+   "summary": "Vision--Language--Action (VLA) models generate robot actions from visual observations and language instructions, but their understanding of physical dynamics remains limited. Video world models can capture scene dynamics, yet generating future videos introduces high latency into the control loop.…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.37378",
+   "title": "VLA-Stem: A Lightweight Safety Mechanism for Vision-Language-Action Models via Reinforcement Learning",
+   "url": "https://arxiv.org/abs/2610.37378",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T15:07:29Z",
+   "summary": "Vision-Language-Action (VLA) models integrate high-level reasoning with low-level action execution for end-to-end robotic control. However, most VLA models target static manipulation in unconstrained environments, overlooking spatial constraints and dynamic obstacles. Fine-tuning VLAs on…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.37330",
+   "title": "Tokens of Motion: Primitive Motion Learning for Human-Humanoid Skill Transfer",
+   "url": "https://arxiv.org/abs/2610.37330",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T14:37:30Z",
+   "summary": "Vision-language-action (VLA) models provide a promising paradigm for scalable robotic manipulation, yet their reliance on success-only behavioral cloning leaves them brittle; lacking corrective training signals, minor execution errors rapidly compound into unrecoverable, out-of-distribution…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2610.37219",
+   "title": "Vision-Language-Action or World-Action? Just Action Models",
+   "url": "https://arxiv.org/abs/2610.37219",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T13:29:28Z",
+   "summary": "The vision-language-action (VLA) and world-action model (WAM) communities debate whether control policies should inherit pretrained knowledge from vision-language models or from visual generators. The debate, however, bundles three separable choices: backbone initialization, the objective applied…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.37217",
+   "title": "KEPT: Conformal Keepouts Kept in Planning for Enclosed-Space Navigation in Degraded Sensing",
+   "url": "https://arxiv.org/abs/2610.37217",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T13:28:42Z",
+   "summary": "Autonomous vehicles in enclosed spaces such as tunnels and mines rely on range maps that smoke, dust and fog make inaccurate. Conformal prediction calibrates a keepout around the mapped walls that covers the true unsafe set at a chosen probability. Typically an unmodified planner treats the keepout…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.37215",
+   "title": "Retrieve to Act: Motion Primitive Graph Retrieval for Robust VLA Execution",
+   "url": "https://arxiv.org/abs/2610.37215",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T13:28:33Z",
+   "summary": "Vision-Language-Action (VLA) policies demonstrate remarkable semantic generalization, yet remain highly vulnerable to out-of-distribution (OOD) visual shifts during execution. While existing test-time methods attempt to suppress spurious visual cues, they fundamentally overlook the rich…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2610.34717",
+   "title": "VLA-HWBench: Where the Time Goes When VLA Models Run on Edge Hardware",
+   "url": "https://arxiv.org/abs/2610.34717",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T12:56:57Z",
+   "summary": "Vision-language-action (VLA) models increasingly run on edge devices aboard robots, where inference latency constrains closed-loop robot control. However, it remains unclear how to design VLA models, their inference software and edge hardware so that robots can run VLA inference in real time. Most…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.37111",
+   "title": "RAVEN: A Unified Active SLAM System for Rapid Autonomous Visual Exploration with Aerial Robots under Localization Uncertainty",
+   "url": "https://arxiv.org/abs/2610.37111",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T12:08:37Z",
+   "summary": "Active simultaneous localization and mapping (SLAM) addresses the problem of planning robot motion to build complete and accurate maps of unknown environments through efficient exploration while maintaining high localization accuracy. This raises a dilemma between exploring unknown spaces to expand…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.36968",
+   "title": "Omni-IGN: Onboard Image-Goal Navigation for Drones with Omnidirectional Vision",
+   "url": "https://arxiv.org/abs/2610.36968",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T10:24:19Z",
+   "summary": "Image-goal navigation (ImageNav) requires an agent to reach a location specified by a goal image in an unknown environment. For drones, this task demands exploration, goal- directed navigation, and collision avoidance under limited onboard computing resources. Existing aerial ImageNav methods are…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.36859",
+   "title": "ActiveAlign: Aligning Egocentric Manipulation via Active Perception",
+   "url": "https://arxiv.org/abs/2610.36859",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T08:54:27Z",
+   "summary": "Real-to-Sim-to-Real (Real2Sim2Real) enables structured world representations for planning, interpretability, and safe execution. Most existing approaches rely on passive perception, which creates real2sim gaps due to imperfect observation. Inspired by how humans perceive actively through actions…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.36823",
+   "title": "TAPESTRY: A Single Backbone for Video Generation and Robot Control",
+   "url": "https://arxiv.org/abs/2610.36823",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T08:23:30Z",
+   "summary": "Pretrained video generation models encode rich priors about physical interactions, but leveraging them for robot control typically requires either resource-intensive video generation at test time or action heads trained from scratch that do not fully utilize the pretrained backbone. We introduce…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.36761",
+   "title": "Making Self-Driving Laboratories Auditable:A Unified Framework for Hybrid Actions,Measurements, and Safe Execution",
+   "url": "https://arxiv.org/abs/2610.36761",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T07:17:24Z",
+   "summary": "Self-driving laboratories (SDLs) are laboratory systems that couple experimental planning, automated execution, and measurement feedback in a closed loop. Integrating flexible robot control with the typed application programming interfaces (APIs) and continuous measurements exposed by laboratory…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
   {
    "id": "url:4596a2a98f72a376",
    "title": "v4.1.0",
@@ -12,6 +214,44 @@
    "publishedAt": "2026-10-27T06:17:08Z",
    "summary": "What's Changed Add mavlink direct server to wrappers by @JonasVautherin in #3157 action: support the RTL altitude on ArduCopter by @JonasVautherin in #3158 build(deps): bump source-map-js from 1.2.1 to 1.2.2 in /docs by @dependabot [bot] in #3155 build(deps): bump @vue/server-renderer and vue in…",
    "matchedQuery": null,
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.36685",
+   "title": "RoboSTD: Zero-Shot Single-to-Dual Transfer via Sagittal Mirroring for Bimanual Learning",
+   "url": "https://arxiv.org/abs/2610.36685",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T05:56:15Z",
+   "summary": "Bimanual robot manipulation plays an important role in real-world robotic applications, but the high cost of collecting bimanual demonstrations limits the scalable development of bimanual policy learning. Meanwhile, existing single-arm manipulation data are difficult to directly transfer to…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.36681",
+   "title": "From Biological Curves to Soft Modular Robots: Learning-Based Inverse Design with Uncertainty-Guided Refinement",
+   "url": "https://arxiv.org/abs/2610.36681",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-27T05:51:24Z",
+   "summary": "Animals exhibit diverse shape-changing behaviors, from the undulatory swimming of eels to the arching movements of inchworms. Reproducing these biological shapes with modular soft robots offers a promising approach to developing versatile bioinspired robotic systems. However, translating a desired…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2610.36285",
+   "title": "ASPEN: Adaptive Semantic Reasoning via Command Persistence Prediction for Efficient Navigation VLAs",
+   "url": "https://arxiv.org/abs/2610.36285",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-26T21:10:50Z",
+   "summary": "Navigation vision-language-action (VLA) policies repeatedly invoke costly semantic reasoning even when the next command remains unchanged. Command reuse can reduce computation but risks missing instruction-dependent turns or stops. We introduce ASPEN, an event-triggered scheduler based on command…",
+   "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
   {
@@ -39,6 +279,18 @@
    "alsoMatched": []
   },
   {
+   "id": "arxiv:2610.35582",
+   "title": "Distributed Predictive Flocking for a Swarm of Miniature Vibration-Driven Robots in a Confined Arena",
+   "url": "https://arxiv.org/abs/2610.35582",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-26T15:14:10Z",
+   "summary": "Coordinating many miniature robots in a confined arena, with no leader, central planner, or global map, is a core challenge for swarm robotics. As the swarm grows denser, collision avoidance becomes the limiting factor, and the number of safely coexisting robots depends on the formulation of the…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
+  {
    "id": "arxiv:2610.35051",
    "title": "VISTA: Active Exploration for Self-Improvement in Embodied Agents",
    "url": "https://arxiv.org/abs/2610.35051",
@@ -48,6 +300,18 @@
    "publishedAt": "2026-10-26T09:00:17Z",
    "summary": "Agentic embodied intelligence plays a foundational role in open-ended, dynamic physical environments. Rather than treating policy learning as an end-to-end mapping from instructions to actions, recent studies reveal that embodied systems depend not only on pre-trained foundation models, but also on…",
    "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.35040",
+   "title": "Context-dependent Runtime Construction of Safe Regions of Attraction from Design-Time Identification for Multi-Candidate Simplex Architectures",
+   "url": "https://arxiv.org/abs/2610.35040",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-26T08:53:49Z",
+   "summary": "Deploying safety-critical cyber-physical systems requires control strategies that reconcile high performance and adaptability with rigorous safety guarantees. Classical control strategies offer stability proofs but are conservative, while advanced optimization- and learning-based controllers…",
+   "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   },
   {
@@ -102,15 +366,13 @@
    "id": "arxiv:2610.34649",
    "title": "RobotAgentBench: Towards Open-world Robot Autonomy",
    "url": "https://arxiv.org/abs/2610.34649",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-26T00:26:30Z",
    "summary": "Recent advances in vision-language-action (VLA) and world-action models (WAMs) have significantly improved robotic manipulation, yet deploying robots in the open world demands a higher level of autonomy beyond executing predefined tasks. Robot agents offer a promising paradigm for this transition…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2610.34583",
@@ -128,15 +390,13 @@
    "id": "arxiv:2610.34538",
    "title": "Dual Gradient Consensus for Adaptive Learning to Transient Out-of-Distribution Disturbances in Quadrotor Control",
    "url": "https://arxiv.org/abs/2610.34538",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv eess.SY listing",
+   "sourceId": "arxiv-eess.SY",
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-25T20:00:33Z",
    "summary": "Quadrotor trajectory tracking under unmodeled disturbances often relies on online residual adaptation, but short out-domain residuals can corrupt the learned disturbance model when constant-step updates treat every residual gradient uniformly. We propose Dual Gradient Consensus (DGC), an…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "eess.SY listing"
-   ]
+   "matchedQuery": "eess.SY listing",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2610.34452",
@@ -190,15 +450,13 @@
    "id": "arxiv:2610.34108",
    "title": "RoboDuo: Attempt, Check and Atomic Recovery through Code for Vision-Language-Action Models",
    "url": "https://arxiv.org/abs/2610.34108",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-25T07:08:25Z",
    "summary": "Vision-Language-Action (VLA) models map a language instruction and the current observation directly to actions, without checking whether the instruction has been completed. For long-horizon tasks, a single failed step therefore goes unnoticed and leaves the whole task unfinished. Such failed…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2610.33852",
@@ -210,6 +468,18 @@
    "publishedAt": "2026-10-24T18:46:10Z",
    "summary": "Language is a natural way to command robots, but converting a single instruction into a long-horizon, contact-rich hand-object interaction remains challenging: synthesized references are noisy, human-to-robot retargeting introduces embodiment bias, and fixed-reference tracking lets small errors…",
    "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.33494",
+   "title": "RBGA: Residual-Budget Guide Arbitration for Offline-to-Online Safe Reinforcement Learning in Dexterous Manipulation",
+   "url": "https://arxiv.org/abs/2610.33494",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-24T06:52:11Z",
+   "summary": "Dexterous manipulation requires robots to leverage existing datasets for rapid skill acquisition while maintaining safety during real-world deployment to prevent damage to the robot or its surroundings. Offline-to-online safe reinforcement learning (O2O safe RL) provides a promising solution for…",
+   "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   },
   {
@@ -1797,7 +2067,9 @@
    "publishedAt": "2026-10-02T18:36:57Z",
    "summary": "This paper addresses autonomous landing of unmanned aerial vehicle (UAV) rotorcrafts on a heaving ship deck using a recurrent policy trained via asymmetric actor-critic reinforcement learning: the critic sees 6 s of future deck height during training, while the actor sees only what the onboard…",
    "matchedQuery": "Aerial autonomy",
-   "alsoMatched": []
+   "alsoMatched": [
+    "Safe autonomy"
+   ]
   },
   {
    "id": "arxiv:2610.03132",
@@ -1881,78 +2153,6 @@
    "publishedAt": "2026-09-29T09:32:47Z",
    "summary": "Safe navigation against obstacles that can actively maneuver within bounded capabilities remains challenging: robust control barrier function methods typically treat obstacle actions as generic disturbances, while differential-game approaches are computationally expensive for online navigation. We…",
    "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.25905",
-   "title": "Control Barrier Functions for Safe Free-Flying Robotic Spacecraft Operations in Tumbling Target Capture",
-   "url": "https://arxiv.org/abs/2609.25905",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-29T07:47:04Z",
-   "summary": "This paper presents a modular control barrier function (CBF) framework for safe free-flying robotic spacecraft operations during tumbling target capture. Motivated by latest ESA guidelines for safe close proximity operations, safety zones and requirements are translated into dedicated CBFs. The…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.36520",
-   "title": "Distilling Privileged Control Barrier Functions into RGB-Only Safety Filters for Dynamic Visual Navigation",
-   "url": "https://arxiv.org/abs/2609.36520",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-29T02:12:33Z",
-   "summary": "RGB-only end-to-end visual navigation policies remain vulnerable to collisions in real-world dynamic environments, motivating a dedicated safety layer. Existing visual Control Barrier Function (CBF) approaches seek to provide safety from RGB observations, but often rely on real-time rendering or…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:fc0e76d5441bd1ba",
-   "title": "v4.0.1",
-   "url": "https://github.com/mavlink/MAVSDK/releases/tag/v4.0.1",
-   "source": "mavlink/MAVSDK releases",
-   "sourceId": "rel-mavsdk",
-   "sourceClass": "release",
-   "publishedAt": "2026-09-28T21:47:45Z",
-   "summary": "What's Changed py: make destroy() safe against concurrent calls by @julianoes in #3117 docs: describe the bindings in this repo in the README by @julianoes in #3119 ci: build the Python wheels optimized by @julianoes in #3120 examples: custom message for MavlinkDirect, add Python example by…",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.35482",
-   "title": "ForVis: An In-Field Dataset and Benchmark for VIO Using Under-Canopy UAV Flights in Forests",
-   "url": "https://arxiv.org/abs/2609.35482",
-   "source": "arXiv query: Aerial autonomy",
-   "sourceId": "arxiv-q-aerial-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-09-28T15:57:39Z",
-   "summary": "Visual-inertial Simultaneous Localization and Mapping (VI-SLAM) for UAVs remains difficult to evaluate in real forest environments, where motion, illumination changes, repetitive vegetation, and vibration can all affect estimation. We present ForVis, an in-field dataset and benchmark for evaluating…",
-   "matchedQuery": "Aerial autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:edfe8abdd1b2ddb6",
-   "title": "New Certificate of Study in AI and Law",
-   "url": "https://www.grasp.upenn.edu/news/new-certificate-of-study-in-ai-and-law",
-   "source": "UPenn GRASP news",
-   "sourceId": "lab-grasp",
-   "sourceClass": "lab",
-   "publishedAt": "2026-09-28T13:03:05Z",
-   "summary": "Original ArticleThe certificate is now available to Penn Carey Law students. The University of Pennsylvania Carey Law School and Penn […]",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "url:dd6ce6ecd8042e8c",
-   "title": "NIST Provides Updates on National Construction Safety Team Activities",
-   "url": "https://www.nist.gov/news-events/news/2026/09/nist-provides-updates-national-construction-safety-team-activities",
-   "source": "NIST news (filtered)",
-   "sourceId": "reg-nist",
-   "sourceClass": "regulator",
-   "publishedAt": "2026-09-28T12:00:00Z",
-   "summary": "The presentations highlighted the importance of NIST applying its own expertise and the expertise of others through collaborations and contracts.",
-   "matchedQuery": null,
    "alsoMatched": []
   }
  ]
