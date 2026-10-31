@@ -1,7 +1,19 @@
 {
- "generatedAt": "2026-10-30T08:46:42Z",
+ "generatedAt": "2026-10-31T08:33:41Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "url:06828329c5c6e263",
+   "title": "Foundry Robotics Raises $100 Million Series A to Build America’s First Autonomous Factory for Assembly",
+   "url": "https://www.grasp.upenn.edu/news/foundry-robotics-raises-100-million-series-a-to-build-americas-first-autonomous-factory-for-assembly",
+   "source": "UPenn GRASP news",
+   "sourceId": "lab-grasp",
+   "sourceClass": "lab",
+   "publishedAt": "2026-10-30T20:46:59Z",
+   "summary": "Original Article Foundry Robotics today announced its oversubscribed $100 million Series A funding round led by Marlinspike Partners. Participating in […]",
+   "matchedQuery": null,
+   "alsoMatched": []
+  },
   {
    "id": "url:eb44ac8c74a1b76c",
    "title": "The Missing Link Between Event Cameras and Robot Vision",
@@ -2427,18 +2439,6 @@
    "sourceClass": "release",
    "publishedAt": "2026-10-01T17:43:23Z",
    "summary": "This is the stable release of QGroundControl v5.1. What's New See the What's New page for a summary of user-facing changes since V5.0. Important The HUD pitch display direction has been corrected in V5.1: pitching nose-down now moves the pitch indicator down, matching the roll convention. See the…",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "url:cd3ec1abd7b450ec",
-   "title": "v4.0.2",
-   "url": "https://github.com/mavlink/MAVSDK/releases/tag/v4.0.2",
-   "source": "mavlink/MAVSDK releases",
-   "sourceId": "rel-mavsdk",
-   "sourceClass": "release",
-   "publishedAt": "2026-10-01T00:01:37Z",
-   "summary": "What's Changed ci: publish to PyPI without a manual step by @julianoes in #3127 core: don't report a send error before a UDP remote is known by @julianoes in #3128 ci: publish debug symbols for the Python wheels by @julianoes in #3130 examples: fix OBSTACLE_DISTANCE JSON in MavlinkDirect sender by…",
    "matchedQuery": null,
    "alsoMatched": []
   }
