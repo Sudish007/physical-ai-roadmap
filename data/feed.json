@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-31T08:33:41Z",
+ "generatedAt": "2026-11-01T09:25:23Z",
  "windowDays": 30,
  "items": [
   {
@@ -2404,42 +2404,6 @@
    "publishedAt": "2026-10-02T10:52:47Z",
    "summary": "Generative planners based on diffusion/flow matching can learn to synthesize long-horizon trajectories from demonstrations. However, real-world deployment requires (i) enforcing safety constraints during execution and (ii) tight online replanning at fast execution rates. Prior safe diffusion/flow…",
    "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:5818e4652b7ecb69",
-   "title": "v4.0.3",
-   "url": "https://github.com/mavlink/MAVSDK/releases/tag/v4.0.3",
-   "source": "mavlink/MAVSDK releases",
-   "sourceId": "rel-mavsdk",
-   "sourceClass": "release",
-   "publishedAt": "2026-10-01T20:42:50Z",
-   "summary": "What's Changed examples: add a MavlinkDirect receiver by @julianoes in #3148 system_tests: move the custom message ids out of the common range by @julianoes in #3147 py: fix handle lifetime bugs in the bindings by @julianoes in #3145 kt: fix handle lifetime bugs, and add a first end-to-end test by…",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.02341",
-   "title": "Filter-Aware Fine-Tuning for Safe Humanoid Whole-Body Tracking",
-   "url": "https://arxiv.org/abs/2610.02341",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-01T18:14:41Z",
-   "summary": "Safe whole-body motion is essential for deploying humanoid robots in unstructured environments. Modern humanoid control commonly separates reference specification from execution, with a planner, teleoperator, or motion generator providing a reference that a reinforcement-learning policy tracks…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:c10431a44e5d460a",
-   "title": "QGroundControl V5.1 - Stable",
-   "url": "https://github.com/mavlink/qgroundcontrol/releases/tag/v5.1.5",
-   "source": "mavlink/qgroundcontrol releases",
-   "sourceId": "rel-qgc",
-   "sourceClass": "release",
-   "publishedAt": "2026-10-01T17:43:23Z",
-   "summary": "This is the stable release of QGroundControl v5.1. What's New See the What's New page for a summary of user-facing changes since V5.0. Important The HUD pitch display direction has been corrected in V5.1: pitching nose-down now moves the pitch indicator down, matching the roll convention. See the…",
-   "matchedQuery": null,
    "alsoMatched": []
   }
  ]
