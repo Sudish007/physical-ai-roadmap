@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-01T09:25:23Z",
+ "generatedAt": "2026-11-02T09:40:03Z",
  "windowDays": 30,
  "items": [
   {
@@ -15,6 +15,104 @@
    "alsoMatched": []
   },
   {
+   "id": "arxiv:2610.42053",
+   "title": "REA: A Routed Embodied Agent Runtime for Asynchronous Brain-Cerebellum Control",
+   "url": "https://arxiv.org/abs/2610.42053",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-30T17:18:13Z",
+   "summary": "Foundation models are becoming remarkably reliable at high-level reasoning, yet they remain too slow and costly to serve as fine-grained controllers. Conversely, fast policies like VLAs and whole-body controllers offer more efficient reflexes, but struggle to generalize. While pairing a…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.41857",
+   "title": "When the Simulator Fails, Not the Policy: Auditing Contact Artifacts in Simulated Robot Benchmarks",
+   "url": "https://arxiv.org/abs/2610.41857",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-30T15:13:11Z",
+   "summary": "Simulation benchmarks score robot policies by success rate, and every failed episode counts against the policy. Many of these failures are the simulator's fault, not the policy's; we find the cause and fix it. Testing a vision language action model and a world action model in simulation, we find…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.40016",
+   "title": "LOGIV: Graph-Verified Execution with Causal Local Repair for Long-Horizon Robot Tasks",
+   "url": "https://arxiv.org/abs/2610.40016",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-30T15:08:57Z",
+   "summary": "Agentic robots must turn a high-level goal into actions while keeping the physical conditions needed for future steps valid. A completed action does not ensure that its effects will persist: a later disturbance can invalidate support that the remaining plan still assumes. We present LOGIV, a graph…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.41275",
+   "title": "TRACE: Target-State Risk-Aligned Conditional Execution for Embodied Tracking",
+   "url": "https://arxiv.org/abs/2610.41275",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-30T05:26:41Z",
+   "summary": "Embodied visual tracking requires a robot to follow a language-specified person under occlusion, look-alike distractors, and ambiguous instructions. We show that improving tracking persistence can simultaneously increase safety violations. Using a compact 0.6B vision-language-action (VLA) tracker…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2610.41235",
+   "title": "CONSORT: Uncertainty-Constrained Multi-Robot Planning for Cooperative Localization in GPS-Denied Environments",
+   "url": "https://arxiv.org/abs/2610.41235",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-30T04:18:51Z",
+   "summary": "Centralized multi-agent path planning with cooperative localization in GPS-denied environments is generally computationally intractable when formulated in full belief space due to tightly coupled uncertainty dynamics. Prior work typically approximates belief dynamics or restricts inter-agent…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.41214",
+   "title": "Capability-Conditioned Graph Control Barrier Functions for Zero-Shot Safe Navigation of Heterogeneous Mobile Robot Teams",
+   "url": "https://arxiv.org/abs/2610.41214",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-30T03:52:02Z",
+   "summary": "Multi-robot systems are increasingly deployed as heterogeneous fleets with diverse kinematic and actuation capabilities. While graph control barrier function (GCBF) methods provide a scalable framework for decentralized safe control, existing approaches typically assume homogeneous robot dynamics.…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.41021",
+   "title": "CuPIQP: A Batched and Differentiable QP Solver on GPUs for Robot Learning and Control",
+   "url": "https://arxiv.org/abs/2610.41021",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-29T22:04:05Z",
+   "summary": "Quadratic programs (QPs) are fundamental building blocks of many robotic tasks such as inverse kinematics, whole-body control, and model predictive control. Extending these methods to large-scale robot learning and control requires solving many QPs concurrently and, for end-to-end learning…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.41009",
+   "title": "STAR: Steering Action Representations during Inference",
+   "url": "https://arxiv.org/abs/2610.41009",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-29T21:42:17Z",
+   "summary": "Vision-language-action models (VLAs) map language instructions and visual observations to robot actions, showing strong capabilities across robotic manipulation tasks. However, in our probing experiment, we find that action representations near the action output do not fully preserve task-relevant…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
    "id": "url:eb44ac8c74a1b76c",
    "title": "The Missing Link Between Event Cameras and Robot Vision",
    "url": "https://www.grasp.upenn.edu/news/the-missing-link-between-event-cameras-and-robot-vision",
@@ -24,6 +122,33 @@
    "publishedAt": "2026-10-29T21:09:10Z",
    "summary": "Original ArticleFor decades, event cameras, which emulate the biological retina by continuously monitoring changes in light intensity, have promised to […]",
    "matchedQuery": null,
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2610.40828",
+   "title": "From Teleoperation to Long-Horizon Dexterity: Evaluating Visuomotor Skills and Offline Proxies for Dexterous Manipulation",
+   "url": "https://arxiv.org/abs/2610.40828",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-29T18:07:37Z",
+   "summary": "Imitation learning policies are intended to make robotic manipulation robust to variations in object pose, appearance, and environment that challenge pre-programmed motion. However, real-world performance remains difficult to predict, as conventional optimization signals such as validation loss…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "eess.SY listing",
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2610.37381",
+   "title": "PDRVLA: A Vision-Language-Action Model with Physical Dynamics Representations",
+   "url": "https://arxiv.org/abs/2610.37381",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-29T18:00:29Z",
+   "summary": "Vision--Language--Action (VLA) models generate robot actions from visual observations and language instructions, but their understanding of physical dynamics remains limited. Video world models can capture scene dynamics, yet generating future videos introduces high latency into the control loop.…",
+   "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
   {
@@ -87,6 +212,20 @@
    "alsoMatched": []
   },
   {
+   "id": "arxiv:2610.40748",
+   "title": "WorldBridge: Bridging Video and Action for Task Generalization in World Action Models",
+   "url": "https://arxiv.org/abs/2610.40748",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-10-29T16:00:06Z",
+   "summary": "Achieving the broad task generalization of embodied models in physical environments remains a central challenge in robot learning. We study this challenge in World Action Models (WAMs) through two complementary capabilities: video generalization, which predicts the visual evolution of new tasks…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
    "id": "arxiv:2610.40207",
    "title": "RoboAtom: Large-scale Atomic-Action Supervision for Robot Learning",
    "url": "https://arxiv.org/abs/2610.40207",
@@ -109,20 +248,6 @@
    "summary": "Choosing a robot action model requires evidence about task capability, adaptation cost, deployment requirements, and the reliability of reported conclusions. Success rates alone offer limited guidance to researchers with different computing budgets and goals. We propose RoboSeed, a multidimensional…",
    "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.40016",
-   "title": "LOGIV: Graph-Verified Execution with Causal Local Repair for Long-Horizon Robot Tasks",
-   "url": "https://arxiv.org/abs/2610.40016",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-29T13:30:16Z",
-   "summary": "Agentic robots must turn a high-level goal into actions while keeping the physical conditions needed for future steps valid. A completed action does not ensure that its effects will persist: a later disturbance can invalidate support that the remaining plan still assumes. We present LOGIV, a graph…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
   },
   {
    "id": "arxiv:2610.40002",
@@ -212,15 +337,13 @@
    "id": "arxiv:2610.39379",
    "title": "Information-Driven Collaborative Autonomy for Heterogeneous UAV/UGV Teams",
    "url": "https://arxiv.org/abs/2610.39379",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv eess.SY listing",
+   "sourceId": "arxiv-eess.SY",
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-29T05:12:57Z",
    "summary": "This paper considers coordinating a heterogeneous team of unmanned aerial vehicles (UAVs) and unmanned ground vehicles (UGVs) traversing a domain containing an unknown number of potentially hazardous targets. The UAVs provide aerial sensing using onboard optical cameras, adapting their trajectories…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "eess.SY listing"
-   ]
+   "matchedQuery": "eess.SY listing",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2610.39119",
@@ -250,29 +373,25 @@
    "id": "arxiv:2610.39054",
    "title": "Robotic Data Inoculation",
    "url": "https://arxiv.org/abs/2610.39054",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-28T23:31:24Z",
    "summary": "Modern robot learning systems feed on high-quality demonstration data, and their performance hinges on coverage. Without good coverage, small errors compound and the policy can quickly go into out-of-distribution states from which it cannot recover. Yet there is no principled way of collecting…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2610.38930",
    "title": "Selective Sliding Mode Control Enhances Robustness of Aerial Robots Under Disturbances",
    "url": "https://arxiv.org/abs/2610.38930",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv eess.SY listing",
+   "sourceId": "arxiv-eess.SY",
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-28T21:18:56Z",
    "summary": "Quadrotor control under disturbances such as wind gusts and payload variations remains challenging. First-order sliding mode control (SMC) and matched/unmatched uncertainty distinction are classical approaches; however, neither tells a practitioner which loops in a cascaded controller should be…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "eess.SY listing"
-   ]
+   "matchedQuery": "eess.SY listing",
+   "alsoMatched": []
   },
   {
    "id": "url:20a705619db9f54c",
@@ -290,15 +409,13 @@
    "id": "arxiv:2610.38661",
    "title": "Quantize by Doing: Task-Guided Mixed-Precision Quantization of Vision-Language-Action Models",
    "url": "https://arxiv.org/abs/2610.38661",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-28T18:46:57Z",
    "summary": "Post-training quantization (PTQ) reduces the memory footprint of vision-language-action (VLA) models, but lowering bit widths while maintaining task performance remains challenging. Existing work has used sensitivity estimates from calibration data to assign bit widths to different model…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2610.38657",
@@ -352,15 +469,13 @@
    "id": "arxiv:2610.38104",
    "title": "Same Label, Different Interface: Beyond Action-Space Labels in Robot Learning",
    "url": "https://arxiv.org/abs/2610.38104",
-   "source": "arXiv eess.SY listing",
-   "sourceId": "arxiv-eess.SY",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-28T00:41:57Z",
    "summary": "Robot-learning studies often compare position and velocity actions as though each label identified a single experimental treatment, yet the label alone does not determine what the robot executes. Before affecting robot motion, bounded policy output passes through filtering, physical scaling…",
-   "matchedQuery": "eess.SY listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2610.35040",
@@ -419,18 +534,6 @@
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-27T16:40:10Z",
    "summary": "Multi-robot control requires integrating distributed camera views while predicting separate action sequences. Most vision-language-action and world-action models target one robot. Combining multiple views alone does not establish spatial correspondence between them. World Dreamer v5-lite is a…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.37381",
-   "title": "PDRVLA: A Vision-Language-Action Model with Physical Dynamics Representations",
-   "url": "https://arxiv.org/abs/2610.37381",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-27T15:09:10Z",
-   "summary": "Vision--Language--Action (VLA) models generate robot actions from visual observations and language instructions, but their understanding of physical dynamics remains limited. Video world models can capture scene dynamics, yet generating future videos introduces high latency into the control loop.…",
    "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
@@ -2365,44 +2468,6 @@
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-04T03:43:59Z",
    "summary": "Collision avoidance among convex bodies is a fundamental problem in robotics. Control Barrier Functions (CBFs) provide a practical framework for real-time safety filtering due to their computational efficiency. For general convex bodies, exact separation measures, such as distance or scaling…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:0ec8ce77159d42e5",
-   "title": "Teaching Robots to Do More with Less Data",
-   "url": "https://www.grasp.upenn.edu/news/teaching-robots-to-do-more-with-less-data",
-   "source": "UPenn GRASP news",
-   "sourceId": "lab-grasp",
-   "sourceClass": "lab",
-   "publishedAt": "2026-10-02T21:17:47Z",
-   "summary": "Original ArticleFor robots to become useful for everyday tasks that require physical interaction with people, they will need to do […]",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.03924",
-   "title": "Barrier-Shaped Recurrent Reinforcement Learning for Autonomous Landing on a Heaving Ship Deck",
-   "url": "https://arxiv.org/abs/2610.03924",
-   "source": "arXiv query: Aerial autonomy",
-   "sourceId": "arxiv-q-aerial-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-02T18:36:57Z",
-   "summary": "This paper addresses autonomous landing of unmanned aerial vehicle (UAV) rotorcrafts on a heaving ship deck using a recurrent policy trained via asymmetric actor-critic reinforcement learning: the critic sees 6 s of future deck height during training, while the actor sees only what the onboard…",
-   "matchedQuery": "Aerial autonomy",
-   "alsoMatched": [
-    "Safe autonomy"
-   ]
-  },
-  {
-   "id": "arxiv:2610.03132",
-   "title": "Safe Streaming Flow Planning by Aligning Sampling Dynamics with Execution Dynamics",
-   "url": "https://arxiv.org/abs/2610.03132",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-02T10:52:47Z",
-   "summary": "Generative planners based on diffusion/flow matching can learn to synthesize long-horizon trajectories from demonstrations. However, real-world deployment requires (i) enforcing safety constraints during execution and (ii) tight online replanning at fast execution rates. Prior safe diffusion/flow…",
    "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   }
