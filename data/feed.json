@@ -1,7 +1,183 @@
 {
- "generatedAt": "2026-11-03T09:43:21Z",
+ "generatedAt": "2026-11-04T09:29:50Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "arxiv:2611.05249",
+   "title": "Should the Action Expert Train the VLM? Action-Token Supervision and Gradient Routing in Mixture-of-Transformer VLAs",
+   "url": "https://arxiv.org/abs/2611.05249",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T17:35:27Z",
+   "summary": "Vision-language-action (VLA) models increasingly pair a pre-trained vision-language model (VLM) with a flow-matching expert that conditions its action predictions on the VLM's key-value representations. Those representations must carry information useful for control, yet the VLM was never trained…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.05093",
+   "title": "LoopQ: Fair, Closed-Loop Evaluation of Quantized Vision-Language-Action Models",
+   "url": "https://arxiv.org/abs/2611.05093",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T15:51:55Z",
+   "summary": "Post-training quantization (PTQ) for vision-language-action (VLA) models promises smaller and faster VLA deployments. However, when analyzing existing VLA quantization works, we realised that it is hard to reason about the performance of the suggested quantization method compared to existing…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.03446",
+   "title": "Clinician-AI Collaboration in Endovascular Neurointerventions: In-Vitro User Study of Copilot Assistance Modes for Robotic Navigation Across the Autonomy Spectrum",
+   "url": "https://arxiv.org/abs/2611.03446",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T15:45:41Z",
+   "summary": "Mechanical thrombectomy (MT) is an effective treatment for acute ischemic stroke, yet access remains limited by the availability of neurointerventional expertise. Telerobotic and AI-assisted systems may help address this challenge, but it remains unclear how clinicians interact with different…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.05080",
+   "title": "CRONOS: Benchmarking Non-Episodic Reinforcement Learning for Robotic Manipulation",
+   "url": "https://arxiv.org/abs/2611.05080",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T15:41:07Z",
+   "summary": "Reinforcement learning (RL) is promising for adapting robot policies to unstructured real-world environments. However, standard RL pipelines rely on episodic training with frequent scene resets, which is impractical for real-world deployment due to the need for substantial human intervention. While…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.05074",
+   "title": "Nested Field-of-View Barriers for Teleoperated Multi-Robot Relay Chains",
+   "url": "https://arxiv.org/abs/2611.05074",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T15:37:16Z",
+   "summary": "Teleoperation of mobile robots in communication-denied environments requires maintaining a communication link while allowing the operator to maneuver freely. We propose a shared-autonomy framework in which a teleoperated leader is followed by a chain of autonomous robots that relays a line of sight…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.04873",
+   "title": "Trusting Imagined Futures: Auditing Imagined Rewards for VLA Post-Training",
+   "url": "https://arxiv.org/abs/2611.04873",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T13:26:53Z",
+   "summary": "Video world models enable candidate actions to be evaluated through imagined outcomes, but high predicted rewards can favor trajectories with poor execution quality. We introduce Trusting Imagined Futures (TIF), an offline supervision selection method for vision-language-action (VLA) post-training…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2610.39528",
+   "title": "PRIME W0: Physical Priors from World Models for Embodied Manipulation",
+   "url": "https://arxiv.org/abs/2610.39528",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T12:11:43Z",
+   "summary": "Vision-Language-Action (VLA) models excel at instruction following, yet most remain feed-forward: they condition actions only on the current observation and discard both long-horizon temporal context and the hierarchical structure of VLM representations. We present PRIME W0, a hierarchical…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.02629",
+   "title": "DexArena: A Unified Benchmark for Long-Horizon Dexterous Manipulation",
+   "url": "https://arxiv.org/abs/2611.02629",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T07:18:38Z",
+   "summary": "Long-horizon dexterous manipulation remains a fundamental challenge for robot learning, requiring the composition of multiple skills, precise bimanual coordination, generalizable visual understanding, and robust skill transitions. Yet existing manipulation benchmarks largely emphasize isolated…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.04424",
+   "title": "ReflexArc: Bottom-Up Integration of Instantaneous Tactile Reflexes into Whole-Body Humanoid Control",
+   "url": "https://arxiv.org/abs/2611.04424",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T07:10:52Z",
+   "summary": "Humanoid robots operating in cluttered environments must react to unexpected contacts before the first impact peak, which arrives within tens of milliseconds. Learned whole-body policies running at 50 Hz introduce a policy-cycle delay and may suppress a protective withdrawal as a tracking error. To…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.04392",
+   "title": "Aero-VPA: Few-Step Flow-Matching Control over Non-Reconstructive JEPA Latents for Agile Flight on Edge Hardware",
+   "url": "https://arxiv.org/abs/2611.04392",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T06:25:06Z",
+   "summary": "Vision-Language-Action (VLA) models generalize across tasks, but their autoregressive decoders need sequential forward passes in proportion to the action horizon, each bounded below on embedded aerial platforms by streaming billions of parameters from memory. We present Aero-VPA, a lightweight…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.04368",
+   "title": "RAFT: Reasoning-Aligned Fine-Tuning Improves Robustness of VLA Post-Training",
+   "url": "https://arxiv.org/abs/2611.04368",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T05:56:28Z",
+   "summary": "Adapting a generalist vision-language-action (VLA) policy to a target task with limited demonstrations can improve nominal task success while reducing robustness to variations in appearance, objects, and instructions. We introduce reasoning-aligned fine-tuning (RAFT), a two-stage post-training…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.04226",
+   "title": "DiMuRe: Diagnosis-Guided Multilevel Recovery for Robotic Task Execution",
+   "url": "https://arxiv.org/abs/2611.04226",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T03:05:25Z",
+   "summary": "Disturbances can invalidate the conditions required by a robot's next action even when much of its task program remains useful. A recovery system must therefore choose a response suited to the current state. We present DiMuRe (diagnosis-guided multilevel recovery), a framework for robot-use agents…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.04096",
+   "title": "Online Hamilton-Jacobi Reachability Onboard the Robot Control Loop: A Real-Time GPU Solver for Safety-Critical Autonomy",
+   "url": "https://arxiv.org/abs/2611.04096",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T00:11:57Z",
+   "summary": "Hamilton-Jacobi (HJ) reachability provides certified backward reachable tubes (BRTs) for safety-critical robotic systems, but the level-set computation scales exponentially in the state dimension and has historically been performed offline. As autonomy stacks (ADAS/AV, humanoid robotics, and…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.03815",
+   "title": "AIRoA-0: Long-Horizon, Precise, Cross-Embodiment Manipulation from Handheld Data",
+   "url": "https://arxiv.org/abs/2611.03815",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-02T19:00:18Z",
+   "summary": "AIRoA-0 (A-0) is a bimanual manipulation system learned from 16,151 hours of handheld demonstrations, with no robot data collected at any stage. The demonstrations are recorded with YUBI, our open-source handheld gripper, which lets people record manipulation data anywhere with no robot present.…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
   {
    "id": "arxiv:2611.03648",
    "title": "Pixel: A Co-Designed Full-Stack Robot System for Learning General-Purpose Mobile Manipulation",
@@ -36,18 +212,6 @@
    "publishedAt": "2026-11-02T18:48:48Z",
    "summary": "Assisted-by: Claude Opus 5.5",
    "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2611.03446",
-   "title": "Clinician-AI Collaboration in Endovascular Neurointerventions: In-Vitro User Study of Copilot Assistance Modes for Robotic Navigation Across the Autonomy Spectrum",
-   "url": "https://arxiv.org/abs/2611.03446",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-11-02T16:57:50Z",
-   "summary": "Mechanical thrombectomy (MT) is an effective treatment for acute ischemic stroke, yet access remains limited by the availability of neurointerventional expertise. Telerobotic and AI-assisted systems may help address this challenge, but it remains unclear how clinicians interact with different…",
-   "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
   {
@@ -187,18 +351,6 @@
    "alsoMatched": []
   },
   {
-   "id": "arxiv:2611.02629",
-   "title": "DexArena: A Unified Benchmark for Long-Horizon Dexterous Manipulation",
-   "url": "https://arxiv.org/abs/2611.02629",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-11-02T06:54:36Z",
-   "summary": "Long-horizon dexterous manipulation remains a fundamental challenge for robot learning, requiring the composition of multiple skills, precise bimanual coordination, generalizable visual understanding, and robust skill transitions. Yet existing manipulation benchmarks largely emphasize isolated…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
    "id": "arxiv:2611.02497",
    "title": "RoboColosseum: Evaluating Physical Intelligence at Scale In-The-Wild",
    "url": "https://arxiv.org/abs/2611.02497",
@@ -298,15 +450,13 @@
    "id": "arxiv:2611.01713",
    "title": "Route-Guided CBF-QP Repair for Safe Vision-Language-Action Models",
    "url": "https://arxiv.org/abs/2611.01713",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-01T09:02:42Z",
    "summary": "Vision-language-action (VLA) models can generate task-oriented robot actions, but they do not guarantee safe execution in obstacle-rich manipulation scenes. Although CBF-QP safety filters can locally project unsafe actions into a safe set, such correction may push the robot away from the learned…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.01663",
@@ -678,18 +828,6 @@
    "publishedAt": "2026-10-29T07:48:59Z",
    "summary": "Learning-enabled cyber-physical systems (CPS), including autonomous vehicles and UAVs, increasingly incorporate foundation models, yet fragmented assurance practices provide insufficient support for system-level guarantees. We argue that restoring engineering control across stochastic neural…",
    "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.39528",
-   "title": "PRIME W0: Physical Priors from World Models for Embodied Manipulation",
-   "url": "https://arxiv.org/abs/2610.39528",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-29T07:25:08Z",
-   "summary": "Vision-Language-Action (VLA) models excel at instruction following, yet most remain feed-forward: they condition actions only on the current observation and discard both long-horizon temporal context and the hierarchical structure of VLM representations. We present PRIME W0, a hierarchical…",
-   "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
   {
@@ -2780,66 +2918,6 @@
    "publishedAt": "2026-10-05T14:31:57Z",
    "summary": "Autonomous aerial parcel collection remains constrained by package-transfer operations that require manual loading, landing, or dedicated ground infrastructure. This letter presents HexaGripper, a single-actuator, winch-deployed six-plate gripper for autonomous collection of cuboid parcels. The…",
    "matchedQuery": "Aerial autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.38873",
-   "title": "DODGER: Safety-Guided Reinforcement Learning for Robot Navigation Among Dynamic Obstacles",
-   "url": "https://arxiv.org/abs/2609.38873",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-05T06:08:15Z",
-   "summary": "Robots operating in human-centered environments must safely navigate among multiple dynamic obstacles to avoid collisions with people and surrounding infrastructure. Control barrier functions (CBFs) provide an effective mechanism for safety filtering, and recent CBF-based reinforcement learning…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.05674",
-   "title": "Bayesian Data Augmentation for DNN Retraining with Binomial Outcomes in Vision-Based UAV Landing",
-   "url": "https://arxiv.org/abs/2610.05674",
-   "source": "arXiv query: Aerial autonomy",
-   "sourceId": "arxiv-q-aerial-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-05T01:38:48Z",
-   "summary": "In GPS-denied or cluttered urban environments, vision-based landing is essential for reliable UAV missions. Real-world landing sites are often unstructured and highly variable, requiring strong generalization by the perception system. Deep Neural Networks (DNNs) trained with synthetic data…",
-   "matchedQuery": "Aerial autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.05542",
-   "title": "Neural Barriers: An Online Certifiable Learning-enhanced Adaptive High Order Safety Critical Control",
-   "url": "https://arxiv.org/abs/2610.05542",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-04T21:13:42Z",
-   "summary": "Control barrier functions are an effective model-based tool to formally certify the safety of a system. However, transferring their theoretical guarantees to real-world robotics systems requires high model fidelity. For example, payloads or wind disturbances can cause significant model…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.05381",
-   "title": "Backup Control Barrier Functions with Memory for Online Set Expansion",
-   "url": "https://arxiv.org/abs/2610.05381",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-04T17:14:18Z",
-   "summary": "Backup control barrier functions (bCBFs) construct implicit safe sets for nonlinear systems with bounded inputs using finite-horizon predictions under a backup controller. As in model predictive control, an invariant backup set serves as a terminal set that guarantees safe continuation beyond the…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.05258",
-   "title": "Safe Ergodic Control for Multi-Robot Systems via Quadratic Programming",
-   "url": "https://arxiv.org/abs/2610.05258",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-04T14:30:04Z",
-   "summary": "Ergodic control drives robots to spend time in each region in proportion to a spatial distribution of interest, making it well suited for dense spatiotemporal environmental monitoring. Existing safe ergodic controllers rely on offline trajectory optimization or hierarchical architectures, which…",
-   "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   }
  ]
