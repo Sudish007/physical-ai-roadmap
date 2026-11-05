@@ -1,7 +1,121 @@
 {
- "generatedAt": "2026-11-04T09:29:50Z",
+ "generatedAt": "2026-11-05T09:39:02Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "arxiv:2611.06710",
+   "title": "Where Is VLA Inference Time Spent? Bottlenecks and Optimization Interactions Across GPUs",
+   "url": "https://arxiv.org/abs/2611.06710",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-04T16:09:02Z",
+   "summary": "Vision-language-action (VLA) models map camera observations and language instructions to robot actions. However, their large backbones and repeated action generation can make inference take longer than the robot's real-time requirements for its next action. To reduce the load of VLA computations…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.06702",
+   "title": "When to Ask for Help: Uncertainty-Triggered Aerial Refinement for Off-Road Navigation",
+   "url": "https://arxiv.org/abs/2611.06702",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-04T16:02:59Z",
+   "summary": "Heterogeneous air-ground teams can use aerial sensing to address the limited range and viewpoint of ground-vehicle sensors, but deciding when the UGV needs assistance and what information the UAV should collect remains a challenge. This paper presents a planner-conditioned air-ground assistance…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "eess.SY listing"
+   ]
+  },
+  {
+   "id": "arxiv:2611.06447",
+   "title": "$A^3$-VLA: Automatic Perception-Guided Attention Alignment for Robot Manipulation",
+   "url": "https://arxiv.org/abs/2611.06447",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-04T12:50:54Z",
+   "summary": "Vision-Language-Action Models (VLAs) enable robots to perform manipulation tasks by leveraging Vision-Language Models (VLMs) to process visual observations and language instructions. However, the action prediction objective itself lacks fine-grained task-specific perceptual supervision, making it…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.06184",
+   "title": "Can Astra Solve RoboMME without Breaking the Bank?",
+   "url": "https://arxiv.org/abs/2611.06184",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-04T09:01:53Z",
+   "summary": "Robotic manipulation often requires remembering information that is no longer visible, such as an object's location before occlusion or the order of a demonstrated action sequence. A large vision-language planner can read this history, but calling it before every action chunk is slow and costly. We…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.05938",
+   "title": "Reflection-Robust Stereo Visual-Inertial Odometry via Kalman-Filtered Ground-Height Estimation",
+   "url": "https://arxiv.org/abs/2611.05938",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-04T04:26:39Z",
+   "summary": "Visual-inertial odometry relies on visual features that correspond to 3D points with consistent projections across sequential frames. In reflective indoor-floor environments, however, specular floor patterns can be detected and triangulated as virtual features below the physical ground plane…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.05754",
+   "title": "GRASP: Gradient-Guided Sampling for Contact-Rich Physics-Based Motion Retargeting",
+   "url": "https://arxiv.org/abs/2611.05754",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T23:53:22Z",
+   "summary": "We study physics-based retargeting of human demonstrations for robot learning: finding robot controls that reproduce reference motions under contact dynamics. We propose GRASP (Gradient Recovery from Archived Samples for Proposals), which combines sampling-based exploration with gradient-guided…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.05738",
+   "title": "OdorSpaces: Visual-Olfactory Embodied Navigation in 3D Environments",
+   "url": "https://arxiv.org/abs/2611.05738",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T23:21:27Z",
+   "summary": "Olfaction provides critical information about airborne chemical cues, yet it remains largely underexplored in embodied AI, with limited prior machine olfaction work focusing primarily on semantic odor perception. We introduce OdorSpaces, a physics-based simulation platform and benchmark for…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.05667",
+   "title": "Correct Robots Before They Make Mistakes: Proactive Human-in-the-Loop Intervention via Preference Learning",
+   "url": "https://arxiv.org/abs/2611.05667",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T21:54:27Z",
+   "summary": "This paper presents Proactive Human-in-the-Loop (PHIL), a framework for proactive policy correction and preference-based post-training. PHIL enables operators to preview policy-predicted future motion and intervene before anticipated undesirable actions. During takeover, PHIL continues querying the…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.05567",
+   "title": "MESA: An Evaluation Framework for Compositional, Semantic, and Spatial Generalization in Robotics",
+   "url": "https://arxiv.org/abs/2611.05567",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-03T20:01:03Z",
+   "summary": "Despite growing interest in foundation models for robotic manipulation, systematic evaluation of their capabilities remains elusive. Existing benchmarks are either narrow and saturated, offering little signal on SOTA methods, broadly scoped, providing diversity at the cost of controlled…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
   {
    "id": "arxiv:2611.05249",
    "title": "Should the Action Expert Train the VLM? Action-Token Supervision and Gradient Routing in Mixture-of-Transformer VLAs",
@@ -118,15 +232,13 @@
    "id": "arxiv:2611.04392",
    "title": "Aero-VPA: Few-Step Flow-Matching Control over Non-Reconstructive JEPA Latents for Agile Flight on Edge Hardware",
    "url": "https://arxiv.org/abs/2611.04392",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-03T06:25:06Z",
    "summary": "Vision-Language-Action (VLA) models generalize across tasks, but their autoregressive decoders need sequential forward passes in proportion to the action horizon, each bounded below on embedded aerial platforms by streaming billions of parameters from memory. We present Aero-VPA, a lightweight…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.04368",
@@ -144,15 +256,13 @@
    "id": "arxiv:2611.04226",
    "title": "DiMuRe: Diagnosis-Guided Multilevel Recovery for Robotic Task Execution",
    "url": "https://arxiv.org/abs/2611.04226",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-03T03:05:25Z",
    "summary": "Disturbances can invalidate the conditions required by a robot's next action even when much of its task program remains useful. A recovery system must therefore choose a response suited to the current state. We present DiMuRe (diagnosis-guided multilevel recovery), a framework for robot-use agents…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.04096",
@@ -290,29 +400,25 @@
    "id": "arxiv:2611.03103",
    "title": "VLALagBench: Understanding When and Why VLA Inference Latency Matters",
    "url": "https://arxiv.org/abs/2611.03103",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-02T13:18:36Z",
    "summary": "Vision-language-action (VLA) models offer a promising path toward general-purpose robot manipulation. While inference latency can affect task success in a constantly evolving physical world, the relationship between latency and task success rate remains poorly understood. In this paper, we…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.03091",
    "title": "KlaskTron-IL: A Contact-Rich Adversarial Imitation Learning Benchmark with a Validated Sim-to-Real Bridge",
    "url": "https://arxiv.org/abs/2611.03091",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-02T13:11:21Z",
    "summary": "KlaskTron is an open-hardware physical platform for two-player adversarial reinforcement learning, with a learned actuator model that supports zero-shot sim-to-real transfer of trained policies. Building on this platform, we contribute KlaskTron-IL: a multi-tier imitation learning dataset (80k…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.02922",
@@ -2882,42 +2988,6 @@
    "publishedAt": "2026-10-06T10:36:41Z",
    "summary": "Hamilton-Jacobi reachability constructs safety certificates for specified dynamics and safety constraints, tying each certificate to the deployment context for which it is synthesized. We ask whether a single certificate can instead represent a family of context-dependent safety problems and be…",
    "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.06629",
-   "title": "Vector Field Following for Quadrotors via Reduced Attitude Representations with Applications to Safety-Critical Control",
-   "url": "https://arxiv.org/abs/2610.06629",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-05T16:24:06Z",
-   "summary": "Vector field tracking for quadrotors provides a systematic framework for specifying complex behaviors at the translational level and transferring them to the full vehicle dynamics. Objectives such as safety, for example, can be encoded into a low-dimensional vector field, which is then embedded…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:19b6ed7f3fb4192a",
-   "title": "3.15.0",
-   "url": "https://github.com/google-deepmind/mujoco/releases/tag/3.15.0",
-   "source": "google-deepmind/mujoco releases",
-   "sourceId": "rel-mujoco",
-   "sourceClass": "release",
-   "publishedAt": "2026-10-05T14:58:18Z",
-   "summary": "Version 3.15.0 (October 5, 2026) General 1aa68e1ca .mjz archives written on Windows now always use / separators. 1aa68e1ca Assets in a meshdir or texturedir now resolve correctly in .mjz archives when rewritten or when the directory path is absolute, uses .. , or uses a URI scheme. Engine Warning…",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.08259",
-   "title": "HexaGripper: A Single-Actuator, Winch-Deployed Gripper for Autonomous Aerial Parcel Collection",
-   "url": "https://arxiv.org/abs/2610.08259",
-   "source": "arXiv query: Aerial autonomy",
-   "sourceId": "arxiv-q-aerial-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-05T14:31:57Z",
-   "summary": "Autonomous aerial parcel collection remains constrained by package-transfer operations that require manual loading, landing, or dedicated ground infrastructure. This letter presents HexaGripper, a single-actuator, winch-deployed six-plate gripper for autonomous collection of cuboid parcels. The…",
-   "matchedQuery": "Aerial autonomy",
    "alsoMatched": []
   }
  ]
