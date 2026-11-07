@@ -1,7 +1,19 @@
 {
- "generatedAt": "2026-11-06T09:31:59Z",
+ "generatedAt": "2026-11-07T08:56:43Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "url:1516eb0c44e8304d",
+   "title": "4.0.0",
+   "url": "https://github.com/google-deepmind/mujoco/releases/tag/4.0.0",
+   "source": "google-deepmind/mujoco releases",
+   "sourceId": "rel-mujoco",
+   "sourceClass": "release",
+   "publishedAt": "2026-11-06T17:42:40Z",
+   "summary": "Version 4.0.0 (November 6, 2026) Significant new features 89daf8d19 Added the speculative enable flag for speculative contacts to prevent fast-moving convex geoms from tunneling through thin obstacles within a single timestep. On the right, one step of conservative advancement between two rotating…",
+   "matchedQuery": null,
+   "alsoMatched": []
+  },
   {
    "id": "arxiv:2611.08425",
    "title": "Failure Prediction and Classification in Vision-Language-Action Models Via Calibrated Latent Probing",
@@ -2998,42 +3010,6 @@
    "publishedAt": "2026-10-08T14:00:00Z",
    "summary": "Text by Jillian Mallon, Photos by Sylvia Zhang. The University of Pennsylvania’s General Robotics, Automation, Sensing, and Perception (GRASP) Laboratory […]",
    "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.11130",
-   "title": "A User-Triggered UAV Dispatching System for Precise and Timely Mountain Search Missions",
-   "url": "https://arxiv.org/abs/2610.11130",
-   "source": "arXiv query: Aerial autonomy",
-   "sourceId": "arxiv-q-aerial-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-08T02:56:49Z",
-   "summary": "Smartphones carried by hikers routinely record routes, locations, and requests for assistance, and these records can provide precise clues for mountain search. However, they are rarely transformed in a direct and timely way into unmanned aerial vehicle (UAV) missions that support search and rescue.…",
-   "matchedQuery": "Aerial autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.10987",
-   "title": "Constructive Safety-Critical Control for a Class of Underactuated Systems: A Hierarchical Approach",
-   "url": "https://arxiv.org/abs/2610.10987",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-07T23:21:44Z",
-   "summary": "Underactuated systems with nontrivial geometry are abundant in practical robotic problems. However, little is known about constructive safety-critical control design in the presence of underactuation. In this work, we provide a constructive framework for synthesizing safe control architectures and…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.09967",
-   "title": "Borrowed Eyes: Markerless Nano-UAV Flight with an Active Quadruped Observer",
-   "url": "https://arxiv.org/abs/2610.09967",
-   "source": "arXiv query: Aerial autonomy",
-   "sourceId": "arxiv-q-aerial-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-07T12:38:19Z",
-   "summary": "Nano unmanned aerial vehicles (nano-UAVs) can navigate confined spaces that larger robots cannot, but their payload capacity severely limits the sensors and compute available for self-localization in global navigation satellite system (GNSS)-denied environments. We present a vision-based system…",
-   "matchedQuery": "Aerial autonomy",
    "alsoMatched": []
   }
  ]
