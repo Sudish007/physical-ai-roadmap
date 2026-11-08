@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-07T08:56:43Z",
+ "generatedAt": "2026-11-08T09:12:39Z",
  "windowDays": 30,
  "items": [
   {
@@ -9,8 +9,8 @@
    "source": "google-deepmind/mujoco releases",
    "sourceId": "rel-mujoco",
    "sourceClass": "release",
-   "publishedAt": "2026-11-06T17:42:40Z",
-   "summary": "Version 4.0.0 (November 6, 2026) Significant new features 89daf8d19 Added the speculative enable flag for speculative contacts to prevent fast-moving convex geoms from tunneling through thin obstacles within a single timestep. On the right, one step of conservative advancement between two rotating…",
+   "publishedAt": "2026-11-07T16:10:11Z",
+   "summary": "Version 4.0.0 (November 6, 2026) Important Read the MuJoCo 4.0 announcement for an overview of everything new since 3.0, the interactive showcase at mujoco.org , MuJoCo Live browser demos, visual showcases, and maintainer Q&A. Significant new features 89daf8d19 Added the speculative enable flag for…",
    "matchedQuery": null,
    "alsoMatched": []
   },
@@ -2974,42 +2974,6 @@
    "publishedAt": "2026-10-09T12:21:51Z",
    "summary": "We propose a safety-critical framework for the cooperative transportation of passive targets in microgravity, where a team of chaser robots acts through unilateral pushing contacts to track a human-provided desired twist while ensuring safe target motion. The pushing-only nature of the interaction…",
    "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.13190",
-   "title": "Prediction-Informed Landing Window Planning for UAV Landing on USV in High Sea States",
-   "url": "https://arxiv.org/abs/2610.13190",
-   "source": "arXiv query: Aerial autonomy",
-   "sourceId": "arxiv-q-aerial-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-09T08:12:13Z",
-   "summary": "Autonomous landing of unmanned aerial vehicle (UAV) on unmanned surface vehicle (USV) is difficult in high sea states. Existing hierarchical landing methods often infer future USV motion only implicitly from short observation histories, which limits their ability to adapt to severe and rapidly…",
-   "matchedQuery": "Aerial autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:ae31e610ec14c6e5",
-   "title": "v4.0.6",
-   "url": "https://github.com/mavlink/MAVSDK/releases/tag/v4.0.6",
-   "source": "mavlink/MAVSDK releases",
-   "sourceId": "rel-mavsdk",
-   "sourceClass": "release",
-   "publishedAt": "2026-10-08T14:30:07Z",
-   "summary": "What's Changed jni: run JNI test with -Xcheck:jni by @JonasVautherin in #3154 Full Changelog : v4.0.5...v4.0.6",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "url:f16a90da4a967401",
-   "title": "GRASP Laboratory and DSTA Singapore Sign a New Master Research Agreement to Advance Multi-Robot System Research",
-   "url": "https://www.grasp.upenn.edu/news/grasp-and-dsta-singapore-master-research-agreement",
-   "source": "UPenn GRASP news",
-   "sourceId": "lab-grasp",
-   "sourceClass": "lab",
-   "publishedAt": "2026-10-08T14:00:00Z",
-   "summary": "Text by Jillian Mallon, Photos by Sylvia Zhang. The University of Pennsylvania’s General Robotics, Automation, Sensing, and Perception (GRASP) Laboratory […]",
-   "matchedQuery": null,
    "alsoMatched": []
   }
  ]
