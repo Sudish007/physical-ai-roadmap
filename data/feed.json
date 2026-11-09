@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-08T09:12:39Z",
+ "generatedAt": "2026-11-09T09:56:56Z",
  "windowDays": 30,
  "items": [
   {
@@ -12,6 +12,158 @@
    "publishedAt": "2026-11-07T16:10:11Z",
    "summary": "Version 4.0.0 (November 6, 2026) Important Read the MuJoCo 4.0 announcement for an overview of everything new since 3.0, the interactive showcase at mujoco.org , MuJoCo Live browser demos, visual showcases, and maintainer Q&A. Significant new features 89daf8d19 Added the speculative enable flag for…",
    "matchedQuery": null,
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.09892",
+   "title": "On Agentic Manipulation Policies",
+   "url": "https://arxiv.org/abs/2611.09892",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T18:59:34Z",
+   "summary": "Recent work on robot manipulation has focused on specialist policies trained on demonstrations. We show that generalist AI models can control manipulators more reliably than specialist policies such as vision-language-action models (VLAs) and world-action models (WAMs). We systematically analyze…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.09708",
+   "title": "A wearable input/output interface learns personalized models of haptic perception",
+   "url": "https://arxiv.org/abs/2611.09708",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T16:50:24Z",
+   "summary": "Wearable haptic interfaces deliver physical stimuli to the skin, yet perceived locations vary widely across users and diverge from actuator locations, particularly for emergent tactile-feedback techniques. We developed a wearable haptic input/output (I/O) device integrating a 36-channel…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.09684",
+   "title": "SURE:Spatiotemporal Uncertainty Representation for Efficient Vision-Language-Action Learning",
+   "url": "https://arxiv.org/abs/2611.09684",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T16:32:49Z",
+   "summary": "Vision-language-action (VLA) policies have become a promising paradigm for end-to-end robot control, but their effectiveness still depends heavily on large volumes of demonstration data. In manipulation tasks, this dependence is compounded by structured spatiotemporal uncertainty in the action…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.09679",
+   "title": "Autonomous Particle Image Velocimetry Using Zero-Shot Sim-to-Real Reinforcement Learning",
+   "url": "https://arxiv.org/abs/2611.09679",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T16:27:25Z",
+   "summary": "Particle image velocimetry (PIV) reconstructs a flow field from the motion of tracer particles but the reconstruction quality is bounded by how well the flow structure of interest is resolved in the images. The acquisition position is typically fixed by the operator before the measurement. We cast…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.09640",
+   "title": "LACART: Lookahead-Augmented Collision Avoidance and Reference Tracking Strategies for Safety-Critical Robots",
+   "url": "https://arxiv.org/abs/2611.09640",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T15:52:50Z",
+   "summary": "Autonomous racing provides a demanding testbed for collision avoidance under tight geometric and computational constraints. Building on a recent conference contribution and a master's dissertation, LACART combines lookahead-based control barrier functions (CBFs), a relaxed control Lyapunov function…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.09344",
+   "title": "Probably Safe Sim-to-Real Transfer with Lifetime Validity",
+   "url": "https://arxiv.org/abs/2611.09344",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T11:41:47Z",
+   "summary": "We present Dejavu, a method that makes sim-to-real transfer of reinforcement learning policies in constrained Markov decision processes probably safe over an unbounded sequence of policy updates. An anytime valid test using per-decision importance sampling and a betting confidence sequence…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.09145",
+   "title": "Augmentron: Scalable Multi-View Visual Augmentation for Robot Learning",
+   "url": "https://arxiv.org/abs/2611.09145",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T08:20:03Z",
+   "summary": "Robot policies trained on visually narrow demonstrations can become sensitive to environmental features that are unrelated to the task. Existing generative augmentation methods can introduce visual diversity, but processing every frame and camera view independently is computationally expensive and…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.09124",
+   "title": "Toward the Era of Agentic Embodied Intelligence",
+   "url": "https://arxiv.org/abs/2611.09124",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T08:02:15Z",
+   "summary": "Foundation models increasingly guide robot actions, yet sustained autonomy requires efficient control and failure recovery. We introduce A2-MEAS, an embodied multi-agent framework built around code as a scaling interface. Learned correction codes combine corrective language, spatial evidence…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.09112",
+   "title": "Safe Circumnavigation on Heterogeneous Orbits: A Range-Only HOCBF-QP Framework for Nonholonomic Multi-Agent Systems",
+   "url": "https://arxiv.org/abs/2611.09112",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T07:46:43Z",
+   "summary": "Circumnavigating a stationary target with a team of robots requires each robot to hold its own standoff distance, to stay evenly spaced from its neighbours, and to avoid collisions with the target and with each other at every instant. The task becomes arduous when the robots are assigned different…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.08857",
+   "title": "STRIDE: Learning Humanoid Locomotion in Minutes with Acceleration-Based Rewards",
+   "url": "https://arxiv.org/abs/2611.08857",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-06T01:27:34Z",
+   "summary": "Learning locomotion directly on a humanoid robot is a promising direction to avoid the sim-to-real gap. However, locomotion rewards in Reinforcement Learning (RL) typically track the base velocity, which cannot be measured onboard without an external motion capture system or well-calibrated state…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.08577",
+   "title": "Meituan-Robotics-0: A Vision-Language-Action Foundation Model for Desktop Manipulation",
+   "url": "https://arxiv.org/abs/2611.08577",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-05T18:55:42Z",
+   "summary": "We present Meituan-Robotics-0 (MR0), a vision-language-action foundation model and embodied-agent system for stationary-base desktop manipulation. MR0 combines 147 million vision-language samples with 15,060 hours of curated robot trajectories spanning 12 embodiments. A three-stage training recipe…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.08576",
+   "title": "Q-OIL: Optimistic Exploration in Learning from Human Interventions",
+   "url": "https://arxiv.org/abs/2611.08576",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-05T18:44:48Z",
+   "summary": "As robots are deployed in the real world, they will inevitably make mistakes. Human interventions provide valuable feedback for improving their behavior, enabling them to adapt online to new scenarios. However, studying human-in-the-loop robot learning is difficult: real-world experiments are slow…",
+   "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
   {
@@ -61,6 +213,18 @@
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-05T16:55:55Z",
    "summary": "Robot-mediated rehabilitation has the potential to deliver high-intensity, individualized therapy, but existing systems (which have not consistently improved outcomes) typically prescribe kinematic trajectories rather than explicitly targeting the neuromotor activations thought to support recovery.…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.06817",
+   "title": "Open-HumanWAM: An Open Recipe for Scaling Human and Robot Experience for Embodied Foundation Models",
+   "url": "https://arxiv.org/abs/2611.06817",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-05T16:35:16Z",
+   "summary": "Egocentric human video offers a scalable source of manipulation priors for robot learning, yet translating raw data scale into generalizable robot policies demands rigorous data curation and training recipes. We introduce Open-HumanWAM, the first fully open recipe for scaling egocentric pretraining…",
    "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
@@ -178,15 +342,13 @@
    "id": "arxiv:2611.07261",
    "title": "An Empirical Study of Reinforcement Learning for Keypoint Positioning of Deformable Linear Objects",
    "url": "https://arxiv.org/abs/2611.07261",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-05T00:27:32Z",
    "summary": "Deformable linear object (DLO) manipulation is challenging because high-dimensional configurations, nonlinear contact dynamics, and diverse material and geometric properties produce a broad range of object responses that are both difficult to model and data-intensive to learn. This work studies…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.06710",
@@ -204,15 +366,13 @@
    "id": "arxiv:2611.06702",
    "title": "When to Ask for Help: Uncertainty-Triggered Aerial Refinement for Off-Road Navigation",
    "url": "https://arxiv.org/abs/2611.06702",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv eess.SY listing",
+   "sourceId": "arxiv-eess.SY",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-04T16:02:59Z",
    "summary": "Heterogeneous air-ground teams can use aerial sensing to address the limited range and viewpoint of ground-vehicle sensors, but deciding when the UGV needs assistance and what information the UAV should collect remains a challenge. This paper presents a planner-conditioned air-ground assistance…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "eess.SY listing"
-   ]
+   "matchedQuery": "eess.SY listing",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.06447",
@@ -2949,30 +3109,6 @@
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-10T15:23:16Z",
    "summary": "While asynchronous execution enables VLA models to operate in real-time environments by predicting the next chunk during execution, it inevitably introduces boundary misalignment with the committed action stream. Existing delay-aware solutions address this at the prohibitive cost of extensive…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.14522",
-   "title": "Safety-Critical Quadrotor Navigation Using Fourth-Order Control Barrier Functions with Full Nonlinear Quadrotor Dynamics",
-   "url": "https://arxiv.org/abs/2610.14522",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-10T03:32:35Z",
-   "summary": "Safety-critical quadrotor navigation in cluttered environments typically relies on hierarchical architectures in which a high-level safety filter modifies position references that are then tracked by a separate attitude controller. However, this separation can create a mismatch between…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2609.24376",
-   "title": "Multi-Agent Transportation of Free-Flyers in Microgravity Via Pushing Interaction Under Human-in-the-Loop Control",
-   "url": "https://arxiv.org/abs/2609.24376",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-09T12:21:51Z",
-   "summary": "We propose a safety-critical framework for the cooperative transportation of passive targets in microgravity, where a team of chaser robots acts through unilateral pushing contacts to track a human-provided desired twist while ensuring safe target motion. The pushing-only nature of the interaction…",
    "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   }
