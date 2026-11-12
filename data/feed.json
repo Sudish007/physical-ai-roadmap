@@ -1,7 +1,19 @@
 {
- "generatedAt": "2026-11-11T09:36:52Z",
+ "generatedAt": "2026-11-12T09:57:35Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "url:66f82c32eabf4c33",
+   "title": "4.0.1",
+   "url": "https://github.com/google-deepmind/mujoco/releases/tag/4.0.1",
+   "source": "google-deepmind/mujoco releases",
+   "sourceId": "rel-mujoco",
+   "sourceClass": "release",
+   "publishedAt": "2026-11-11T15:47:30Z",
+   "summary": "Version 4.0.1 (November 11, 2026) Compiler 21a076966 Added mjs_getInStringVec to read entries from an mjStringVec by index. Python bindings a937a4f91 Enabled the MuJoCo Studio Web Viewer ( mujoco-studio --gfx=web and mujoco.studio.launch_web ) on Windows by shipping the precompiled browser client…",
+   "matchedQuery": null,
+   "alsoMatched": []
+  },
   {
    "id": "arxiv:2611.14432",
    "title": "One Policy for 100 Household Tasks: Our Solution for the 2026 BEHAVIOR Challenge",
@@ -3451,30 +3463,6 @@
    "sourceClass": "lab",
    "publishedAt": "2026-10-13T14:14:48Z",
    "summary": "Original Article Scientists at a new Delaware research hub envision a future where AI-powered sensorsassess a patient’s injury from the […]",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.17799",
-   "title": "Beyond Safe Execution: Safe Online Reinforcement Learning for Autonomous Driving with Value Calibration and Adaptive Guidance",
-   "url": "https://arxiv.org/abs/2610.17799",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-13T06:28:47Z",
-   "summary": "Online reinforcement learning (RL) enables driving policies to adapt to changing deployment conditions, but requires safe exploration throughout training. Safety filtering alone does not ensure stable policy improvement or reduced dependence on corrections. We propose Safe Online Adaptive…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:ff24891acd0a2f6c",
-   "title": "Harnessing technology to help farmers assess crop health earlier",
-   "url": "https://www.grasp.upenn.edu/news/harnessing-technology-to-help-farmers-assess-crop-health-earlier",
-   "source": "UPenn GRASP news",
-   "sourceId": "lab-grasp",
-   "sourceClass": "lab",
-   "publishedAt": "2026-10-12T20:35:38Z",
-   "summary": "As the fall harvest arrives, Cherie Kagan and Akhila Mallavarapu of the Penn-led Internet of Things for Precision Agriculture center […]",
    "matchedQuery": null,
    "alsoMatched": []
   }
