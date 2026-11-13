@@ -1,7 +1,153 @@
 {
- "generatedAt": "2026-11-12T09:57:35Z",
+ "generatedAt": "2026-11-13T09:45:06Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "url:b21348a0cbfbb833",
+   "title": "v4.2.0",
+   "url": "https://github.com/mavlink/MAVSDK/releases/tag/v4.2.0",
+   "source": "mavlink/MAVSDK releases",
+   "sourceId": "rel-mavsdk",
+   "sourceClass": "release",
+   "publishedAt": "2026-11-12T23:01:09Z",
+   "summary": "What's Changed third_party: single source of truth for the MAVLink hash by @bansiesta in #3186 docs: update Offboard guide to match available setpoints by @timothyanderson096-ocdealcheck in #3187 docs: fix two broken API reference links by @mmporong in #3185 apple: include dSYM in artifacts by…",
+   "matchedQuery": null,
+   "alsoMatched": []
+  },
+  {
+   "id": "url:67c4949a8191a747",
+   "title": "QGroundControl Daily Build",
+   "url": "https://github.com/mavlink/qgroundcontrol/releases/tag/daily",
+   "source": "mavlink/qgroundcontrol releases",
+   "sourceId": "rel-qgc",
+   "sourceClass": "release",
+   "publishedAt": "2026-11-12T19:52:16Z",
+   "summary": "Development build of master at 19e4246b24 (committed 2026-11-12T19:05:07Z), published 2026-11-12 19:52 UTC by Publish Builds . This release is replaced whenever every platform has built the packages of a newer master commit, so its files change without notice and are not tested like a stable…",
+   "matchedQuery": null,
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.08577",
+   "title": "Meituan-Robotics-0: A Vision-Language-Action Foundation Model for Desktop Manipulation",
+   "url": "https://arxiv.org/abs/2611.08577",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-12T16:51:56Z",
+   "summary": "We present Meituan-Robotics-0 (MR0), a vision-language-action foundation model and embodied-agent system for stationary-base desktop manipulation. MR0 combines 147 million vision-language samples with 15,060 hours of curated robot trajectories spanning 12 embodiments. A three-stage training recipe…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.16822",
+   "title": "A Class of Bayesian Conjugate Distributions on $SE_n(3)$ for Motion Estimation",
+   "url": "https://arxiv.org/abs/2611.16822",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-12T13:58:05Z",
+   "summary": "This paper proposes a novel class of Bayesian Conjugate Distributions (BCDs) on extended special Euclidean groups SE_n(3) for global motion uncertainty representation and estimation. BCDs are constructed by restricting matrix Gaussian distributions on ambient Euclidean space to SE_n(3), avoiding…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.16589",
+   "title": "STVLA: Spatial-aware and Temporal-memory forVision-Language-Action Models",
+   "url": "https://arxiv.org/abs/2611.16589",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-12T10:21:49Z",
+   "summary": "Robotic manipulation often requires both spatial scene understanding and task history. However, many vision-language-action (VLA) policies rely primarily on current observations, without explicitly integrating spatial structure and task history. Appearance-based memories can be sensitive to…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.11854",
+   "title": "Decoupled Asynchronous System for Humanoids (DASH): Latency-Agnostic Scaling of Vision-Language-Action Models for Humanoid Manipulation",
+   "url": "https://arxiv.org/abs/2611.11854",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-12T07:42:29Z",
+   "summary": "Vision-language-action (VLA) models pair a vision-language backbone with an action head, but in closed-loop control the backbone sits on the control-critical path: while it computes, the robot keeps moving, so each executed action is conditioned on an increasingly stale observation. A larger…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.16374",
+   "title": "ManiLadder: Benchmarking Robot Manipulation Through a Categorized and Multi-Difficulty Level Task Ladder",
+   "url": "https://arxiv.org/abs/2611.16374",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-12T06:42:31Z",
+   "summary": "Recent advances in robotic manipulation have enabled increasingly complex and dexterous behaviors, yet existing benchmarks still focus on simple pick-and-place tasks and lack a systematic framework for measuring progress in robot learning along the axis of task difficulty. We present ManiLadder, a…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.16218",
+   "title": "A Coupled Control Barrier Function Approach to Deadlock-Free Multi-Robot Conflict Resolution",
+   "url": "https://arxiv.org/abs/2611.16218",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-12T03:09:36Z",
+   "summary": "Many robotic applications involve scenarios where multiple robots interact and the decisions of one robot influence the behavior of others. This paper presents a quadratic programming (QP)-based feedback controller for multi-robot conflict resolution with input constraints. Safety is enforced using…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.16116",
+   "title": "Robo-SWE: An Executable Issue-Resolution Dataset Mined from Robot Software Repositories",
+   "url": "https://arxiv.org/abs/2611.16116",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T23:51:27Z",
+   "summary": "Coding agents are evaluated mostly on general-purpose software, but domain-specific systems require domain-aware evaluation. Robot software is a particularly challenging case: Robot Operating System 2 (ROS 2) packages have their own build tools, simulators and learning frameworks are built on…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15937",
+   "title": "MOSAIC: Modular Obstacle and Spatial-Aware Framework for Manipulation In Cluttered Scenes",
+   "url": "https://arxiv.org/abs/2611.15937",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T19:32:35Z",
+   "summary": "Vision-Language-Action (VLA) models have demonstrated strong performance in robotic manipulation, yet most rely primarily on 2D visual observations and language instructions, leaving scene geometry and obstacle relationships to be inferred implicitly. This limitation is particularly problematic in…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15658",
+   "title": "Embedded Sim-to-Real Visual Servoing: Learned Reaching and Force-Guided Placement",
+   "url": "https://arxiv.org/abs/2611.15658",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T16:07:04Z",
+   "summary": "Embedded perception-to-control systems must combine visual targeting with reliable contact handling under tight computational constraints. We present a shared architecture on an NVIDIA Jetson AGX Orin controlling a Franka Research 3 through Cartesian impedance control. RealSense D435i observations…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15651",
+   "title": "Recover, Don't Just Continue: Learning from Feedback for Physical Failure Understanding and Correction",
+   "url": "https://arxiv.org/abs/2611.15651",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T16:01:28Z",
+   "summary": "Multimodal large language models are regarded as the cognitive foundation of embodied intelligence, but planning from instructions alone cannot make them reliable. During execution, actions deviate from intended effects, constrained by the embodiment and environment. An embodied brain must…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
   {
    "id": "url:66f82c32eabf4c33",
    "title": "4.0.1",
@@ -15,6 +161,222 @@
    "alsoMatched": []
   },
   {
+   "id": "arxiv:2611.15524",
+   "title": "Reading the Table: Sim-to-Real Game State Detection for the Chef's Hat Card Game",
+   "url": "https://arxiv.org/abs/2611.15524",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T14:14:19Z",
+   "summary": "Tabletop games offer a compelling scenario to study the interaction between artificial and human agents, combining social interaction with game state tracking and physical manipulation. To assess the game state, a robot needs to precisely detect closely related game objects, such as different card…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15498",
+   "title": "Estimation-Aware Control on Quadrotor State Manifolds via Anisotropic Covariance Filtering",
+   "url": "https://arxiv.org/abs/2611.15498",
+   "source": "arXiv eess.SY listing",
+   "sourceId": "arxiv-eess.SY",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T13:58:09Z",
+   "summary": "Conventional nonlinear flight controllers operate under the implicit assumption of reliable, high-confidence state feedback. During transient sensing degradation or partial unobservability, state estimation uncertainty is frequently misinterpreted as physical tracking error, triggering aggressive…",
+   "matchedQuery": "eess.SY listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15491",
+   "title": "What Makes a VLA Reactive? A Study of Execution Strategies for Dynamic Manipulation",
+   "url": "https://arxiv.org/abs/2611.15491",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T13:53:09Z",
+   "summary": "Vision-language-action (VLA) models predict chunks of future actions, and when objects move, those chunks go stale before they are executed. We study what makes a pretrained VLA reactive, using \\pihalf{} on two dynamic simulation benchmarks and three real-robot tasks. We vary the prediction and…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15490",
+   "title": "ActionCodec2: A Streaming Action Tokenizer",
+   "url": "https://arxiv.org/abs/2611.15490",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T13:50:13Z",
+   "summary": "Most action tokenizers for autoregressive vision language action (VLA) models compress motion into chunks that must be decoded in full before their actions become executable. We introduce ActionCodec2, a non-neural streaming tokenizer that releases actions incrementally while keeping trajectory…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15386",
+   "title": "Actuation and Control of Passive Tendon-Driven Soft Extensions Through Rigid Manipulator Motion",
+   "url": "https://arxiv.org/abs/2611.15386",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T12:10:22Z",
+   "summary": "Industrial manipulators offer reach and precision but can damage nearby structures in confined spaces. Soft robots provide compliant contact but typically have limited reach. Rigid-soft systems combine their advantages, although they often require dedicated actuation and control hardware. We…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15381",
+   "title": "Low-Cost Mobile Bimanual Manipulation for Long-Horizon Toilet Cleaning",
+   "url": "https://arxiv.org/abs/2611.15381",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T11:59:55Z",
+   "summary": "Vision-Language-Action (VLA) models have shown promising capabilities for robot manipulation, but their performance on accessible mobile bimanual platforms remains underexplored. We present a low-cost and reproducible mobile bimanual platform integrating two LeRobot SO-101 manipulators with a…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15368",
+   "title": "Bind-WAM: Binding-Uncertainty-Guided Selective Future Imagination in World Action Models",
+   "url": "https://arxiv.org/abs/2611.15368",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T11:48:40Z",
+   "summary": "World Action Models (WAMs) can improve robot learning by jointly predicting future visual states and actions, but generating a visual future at every replanning step is expensive and sometimes unnecessary. This raises a critical question: when should a robot policy imagine the future? In this…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15277",
+   "title": "DroneDiffusion: Uncertainty-Guided Diffusion Path Planner for UAV Navigation",
+   "url": "https://arxiv.org/abs/2611.15277",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T10:08:50Z",
+   "summary": "We present DroneDiffusion, a perception-aware diffusion planner for local 3-D UAV trajectory generation that explicitly models and avoids failure zones caused by lens flare, overexposure, and reflective surfaces. A vision-language perceptual safety estimator produces a pixel-aligned reliability map…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.11098",
+   "title": "Efficient VLA Inference via Retrieval-Based Speculation and Hardware Acceleration",
+   "url": "https://arxiv.org/abs/2611.11098",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T08:33:20Z",
+   "summary": "Vision-language-action (VLA) models enable robots to understand and execute complex instructions, but their autoregressive (AR) action generation introduces significant latency on resource-constrained robotic platforms. Speculative decoding can accelerate AR-based inference by parallelizing action…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15117",
+   "title": "PolyMorphWBC: Whole-Body Control from End-Effector Trajectories for Quadrupedal Mobile Manipulation across Arm Morphologies with Extended Reach",
+   "url": "https://arxiv.org/abs/2611.15117",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T06:51:08Z",
+   "summary": "Quadrupedal mobile manipulators can extend their manipulation workspace by coordinating the mounted arm with the mobile base. At the task level, short-horizon end-effector (EE) trajectories provide an interface for specifying the desired manipulation motion without prescribing how it should be…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15082",
+   "title": "Prediction or Persistence? What Future-Prediction Scores Miss About World Models",
+   "url": "https://arxiv.org/abs/2611.15082",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T05:56:50Z",
+   "summary": "Pretrained video world models are compared and chosen as components for robot learning largely by future-prediction scores. On its own, such a score cannot be read as evidence of prediction, because it mixes encoder quality, the near future's resemblance to the recent past, and the predictor's own…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15078",
+   "title": "CrowdMAPS: Crowdsourcing Multiple Actions per State for Real-World Imitation Learning",
+   "url": "https://arxiv.org/abs/2611.15078",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T05:53:58Z",
+   "summary": "Real-world robot imitation learning is often limited by the cost of collecting physical demonstrations, which typically yield only one action label per visited state. We present CrowdMAPS, a web-based crowdsourcing paradigm for augmenting real-robot datasets with Multiple Actions per State (MAPS).…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15066",
+   "title": "MiniPose: Miniature-Based Real Data Collection for 6D Pose Estimation of Large Industrial Pipe Segments",
+   "url": "https://arxiv.org/abs/2611.15066",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T05:34:49Z",
+   "summary": "6-DOF pose estimation of large and heavy industrial objects, such as large piping systems in shipyards and structural components in petrochemical plants, remains relatively underexplored in robotic perception. Repeatedly repositioning large objects is physically and spatially demanding, making it…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15048",
+   "title": "Does Your World Model Know Actions Have Consequences?",
+   "url": "https://arxiv.org/abs/2611.15048",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T05:21:33Z",
+   "summary": "Embodied world models (WMs) are implicit learning systems that predict the next future latent state directly from observations and actions. Unique from other end-to-end learning systems, the dynamics predictor of WMs can simulate the environment's response to alternative actions without physical…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.15020",
+   "title": "Genie Sim Benchmark: Real-to-Sim Fidelity and Evaluation",
+   "url": "https://arxiv.org/abs/2611.15020",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T04:25:57Z",
+   "summary": "We evaluate Genie Sim Benchmark through paired real-simulation tasks and complementary system-identification studies. Across 22 robot-task pairs spanning 16 task names, task-specific pi0.5 policies fine-tuned on real-robot data achieve a descriptive Score correlation of 0.9686, MAE 0.0405, RMSE…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.14969",
+   "title": "Scaling VLA Serving Under Robotic Execution Constraints",
+   "url": "https://arxiv.org/abs/2611.14969",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T03:28:58Z",
+   "summary": "Vision-language-action (VLA) models have emerged as a promising paradigm for general-purpose robotic manipulation. In our production setting, hundreds of VLA-powered robots are already operating in real-world environments, creating an immediate need for efficient fleet serving. We present XInfer, a…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.14853",
+   "title": "Can I join you? Extended Social Force Based Model with Predictive Control and Barrier Functions for Humanoid Group Repositioning Amidst Obstacles",
+   "url": "https://arxiv.org/abs/2611.14853",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-11T00:06:35Z",
+   "summary": "As social and service robots increasingly share interaction spaces in public, they may form groups while coordinating tasks or interacting with humans. Initial group formation alone is insufficient in dynamic settings, because it can be disrupted when a person or another agent joins, leaves, or…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.14834",
+   "title": "Learning Low-Latency Action Verification for Frozen Vision-Language-Action Models",
+   "url": "https://arxiv.org/abs/2611.14834",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-10T23:32:12Z",
+   "summary": "Vision-language-action (VLA) models have made significant progress in general-purpose robotic manipulation. However, sampled action sequences can be ineffective, while evaluating alternatives with computationally expensive verifiers adds latency at each policy query. In this work, we propose HDH, a…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
    "id": "arxiv:2611.14432",
    "title": "One Policy for 100 Household Tasks: Our Solution for the 2026 BEHAVIOR Challenge",
    "url": "https://arxiv.org/abs/2611.14432",
@@ -23,18 +385,6 @@
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-10T18:06:16Z",
    "summary": "We describe our solution for the 2026 BEHAVIOR Challenge: 100 long-horizon household tasks in the OmniGibson simulator. We placed 9th on the final leaderboard, the only independent team in the top 10. The core of the solution is a single vision-language-action (VLA) model, one checkpoint for all…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2611.08577",
-   "title": "Meituan-Robotics-0: A Vision-Language-Action Foundation Model for Desktop Manipulation",
-   "url": "https://arxiv.org/abs/2611.08577",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-11-10T14:57:39Z",
-   "summary": "We present Meituan-Robotics-0 (MR0), a vision-language-action foundation model and embodied-agent system for stationary-base desktop manipulation. MR0 combines 147 million vision-language samples with 15,060 hours of curated robot trajectories spanning 12 embodiments. A three-stage training recipe…",
    "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
@@ -164,15 +514,13 @@
    "id": "arxiv:2611.13067",
    "title": "Control Barrier Functions for Counting Tasks in Multi-Agent Systems",
    "url": "https://arxiv.org/abs/2611.13067",
-   "source": "arXiv eess.SY listing",
-   "sourceId": "arxiv-eess.SY",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-09T18:52:41Z",
    "summary": "Multi-agent systems increasingly operate in dynamic environments and execute complex tasks that require coordination, posing significant computational challenges. Counting tasks, which require a minimum number of agents to satisfy a given condition, arise naturally in such systems. Examples include…",
-   "matchedQuery": "eess.SY listing",
-   "alsoMatched": [
-    "Safe autonomy"
-   ]
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.12804",
@@ -214,15 +562,13 @@
    "id": "arxiv:2611.12383",
    "title": "PCTac: Mechanochromic Photonic-Crystal Tactile Sensor for Dexterous Manipulation",
    "url": "https://arxiv.org/abs/2611.12383",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-09T13:20:49Z",
    "summary": "Modern visuotactile sensors primarily sense contact by imaging the deformation of a compliant interface. Using techniques such as photometric stereo, they can recover detailed contact geometry, often represented as surface normals or depth. However, force-related information typically still needs…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.12378",
@@ -297,18 +643,6 @@
    "alsoMatched": []
   },
   {
-   "id": "arxiv:2611.11854",
-   "title": "Decoupled Asynchronous System for Humanoids (DASH): Latency-Agnostic Scaling of Vision-Language-Action Models for Humanoid Manipulation",
-   "url": "https://arxiv.org/abs/2611.11854",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-11-09T04:23:14Z",
-   "summary": "Vision-language-action (VLA) models pair a vision-language backbone with an action head, but in closed-loop control the backbone sits on the control-critical path: while it computes, the robot keeps moving, so each executed action is conditioned on an increasingly stale observation. A larger…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
    "id": "arxiv:2611.11798",
    "title": "PAIR: Proprioception-Aligned Image-Ray Representations for Viewpoint-Robust Manipulation",
    "url": "https://arxiv.org/abs/2611.11798",
@@ -353,18 +687,6 @@
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-08T04:30:08Z",
    "summary": "We present a pipeline for transferring Awa Odori, a traditional Japanese festival dance, from monocular video to a commercial Unitree G1 EDU humanoid. The pipeline combines human mesh recovery, kinematic retargeting, reinforcement learning for motion tracking in simulation, and onboard deployment…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2611.11098",
-   "title": "Efficient VLA Inference via Retrieval-Based Speculation and Hardware Acceleration",
-   "url": "https://arxiv.org/abs/2611.11098",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-11-08T03:28:09Z",
-   "summary": "Vision-language-action (VLA) models enable robots to understand and execute complex instructions, but their autoregressive (AR) action generation introduces significant latency on resource-constrained robotic platforms. Speculative decoding can accelerate AR-based inference by parallelizing action…",
    "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
@@ -3440,30 +3762,6 @@
    "publishedAt": "2026-10-14T14:25:46Z",
    "summary": "Despite the Markov assumption, safety failures in robot reinforcement learning rarely occur instantaneously; they typically emerge over several steps as the policy enters unfamiliar states under disturbances and domain shift. We address this limitation by learning a receding-horizon safety critic…",
    "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:5d41676d08d91c4b",
-   "title": "3.16.0",
-   "url": "https://github.com/google-deepmind/mujoco/releases/tag/3.16.0",
-   "source": "google-deepmind/mujoco releases",
-   "sourceId": "rel-mujoco",
-   "sourceClass": "release",
-   "publishedAt": "2026-10-14T09:29:02Z",
-   "summary": "Version 3.16.0 (October 14, 2026) Significant new features cf89a6375 , 4316935b3 , 6d98d9fab , 5f17e92eb , 89d59b11f , 147dc67d0 Frames can now scale their contents at compile time—without modifying the mjSpec —via the new scale , scaling , and massscale attributes. The default similar policy…",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "url:982ac3797b0af1e2",
-   "title": "A Delaware hub dedicated to ‘Human-AI cooperation’ launches with $21.5 million to study AI in healthcare",
-   "url": "https://www.grasp.upenn.edu/news/a-delaware-hub-dedicated-to-human-ai-cooperation-launches-with-21-5-million-to-study-ai-in-healthcare",
-   "source": "UPenn GRASP news",
-   "sourceId": "lab-grasp",
-   "sourceClass": "lab",
-   "publishedAt": "2026-10-13T14:14:48Z",
-   "summary": "Original Article Scientists at a new Delaware research hub envision a future where AI-powered sensorsassess a patient’s injury from the […]",
-   "matchedQuery": null,
    "alsoMatched": []
   }
  ]
