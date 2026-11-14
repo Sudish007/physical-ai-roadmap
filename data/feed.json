@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-13T09:45:06Z",
+ "generatedAt": "2026-11-14T09:07:15Z",
  "windowDays": 30,
  "items": [
   {
@@ -3726,42 +3726,6 @@
    "publishedAt": "2026-10-15T10:02:57Z",
    "summary": "Recent Vision-Language Models (VLMs) enable automated preference labeling for robotic manipulation, yet their deployment remains impractical since each query incurs substantial inference cost, while VLMs frequently abstain on visually challenging comparisons. We propose SPEAR, a framework that…",
    "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.20895",
-   "title": "BubbleCBF: Constructive Safety for Second-Order Systems and Application to Autonomous Robot Navigation in Unknown Environments",
-   "url": "https://arxiv.org/abs/2610.20895",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-14T20:24:47Z",
-   "summary": "Satisfying safety constraints for systems with second-order dynamics is challenging because a position constraint may require infeasible deceleration. Higher-order control barrier functions (CBFs) provide an approach for expressing safety conditions for such systems but feasibility depends on the…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.20433",
-   "title": "A Practical Framework for Incremental Testing and Technology Maturation of Spacecraft Autonomy",
-   "url": "https://arxiv.org/abs/2610.20433",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-14T16:24:11Z",
-   "summary": "This paper addresses the \"trust gap\" in deploying AI-enabled spacecraft autonomy through an integrated verification framework combining offline ground testing with online flight monitoring. The offline phase progresses systematically through simulation studies, processor-in-the-loop (PIL)…",
-   "matchedQuery": "Safe autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.20255",
-   "title": "Safe Reinforcement Learning with Receding-Horizon Safety Critic and Differentiable Action Shields",
-   "url": "https://arxiv.org/abs/2610.20255",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-14T14:25:46Z",
-   "summary": "Despite the Markov assumption, safety failures in robot reinforcement learning rarely occur instantaneously; they typically emerge over several steps as the policy enters unfamiliar states under disturbances and domain shift. We address this limitation by learning a receding-horizon safety critic…",
-   "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   }
  ]
