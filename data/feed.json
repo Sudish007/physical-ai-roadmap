@@ -1,7 +1,74 @@
 {
- "generatedAt": "2026-11-15T09:38:15Z",
+ "generatedAt": "2026-11-16T09:55:43Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "arxiv:2611.18562",
+   "title": "Training Reasoning Models in Simulation to Natively Use Real Robots",
+   "url": "https://arxiv.org/abs/2611.18562",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-13T18:59:02Z",
+   "summary": "Robot-use agents (RUAs) have emerged as a promising approach to general-purpose robot control. However, strong performance has so far been achieved only by frontier proprietary models such as GPT-6 Astra and Claude Fable 5.2, whereas open-weight models remain substantially less capable. We show…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.18390",
+   "title": "CS-MPC: Contraction-Certified Sampling-Based MPC for Nonlinear Systems Under Uncertainty",
+   "url": "https://arxiv.org/abs/2611.18390",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-13T16:33:06Z",
+   "summary": "We present contraction-certified sampling-based model predictive control (CS-MPC) for tracking and safety of nonlinear robotic systems under parametric uncertainty, disturbances, and safety constraints that are revealed online. CS-MPC uses a contraction-certified tracking feedback inside every…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "eess.SY listing",
+    "Thesis narrow",
+    "Aerial autonomy",
+    "Safe autonomy"
+   ]
+  },
+  {
+   "id": "arxiv:2611.18372",
+   "title": "Vision-Language-Action Models: A Life-Cycle Survey of Design, Training and Deployment",
+   "url": "https://arxiv.org/abs/2611.18372",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-13T16:17:00Z",
+   "summary": "Vision-language-action (VLA) models adapt web-pretrained vision-language models to output robot actions, so that web knowledge carries over to physical control. In under 4 years the field has moved from RT-2, the first VLA, to open models that fine-tune on a single consumer GPU and to proprietary…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.18176",
+   "title": "ESI: An Embodied Self-Improvement Flywheel for LLM-VLA Agents",
+   "url": "https://arxiv.org/abs/2611.18176",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-13T13:44:42Z",
+   "summary": "Independently pretrained language models and vision-language-action (VLA) policies provide complementary building blocks for embodied agents, but connecting them does not automatically produce coordinated behavior. The VLA may generate actions that diverge from the LLM's intended subtask and, upon…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.17859",
+   "title": "Per-Agent-Safe Navigation of Globally Driven Robot Collectives via Affine Field Design",
+   "url": "https://arxiv.org/abs/2611.17859",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-13T07:48:08Z",
+   "summary": "Safe navigation of robot collectives requires coordinating motion and deformation so that the collective can traverse constrained environments while ensuring each robot's safety. Existing controllers for swarmalator collectives largely rely on local control, where each robot receives an individual…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
   {
    "id": "url:b21348a0cbfbb833",
    "title": "v4.2.0",
@@ -3426,102 +3493,6 @@
    "publishedAt": "2026-10-17T13:45:31Z",
    "summary": "Indoor robotics research increasingly relies on micro-UAV platforms whose airframes, electronics, and control software are open to modification. Off-the-shelf platforms often lack the low-level access that such modifications require, while building a custom vehicle demands substantial engineering…",
    "matchedQuery": "Aerial autonomy",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.24590",
-   "title": "Scene-Adaptive VLA: Efficient Autonomous Driving via Dynamic Layer Routing",
-   "url": "https://arxiv.org/abs/2610.24590",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-17T09:53:47Z",
-   "summary": "Vision-Language-Action (VLA) models offer a promising paradigm for autonomous driving. However, the massive parameter scale of VLAs strains onboard computational resources during real-time inference. This directly increases energy consumption and limits vehicle battery range, making it critical to…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.24587",
-   "title": "LIBERO-Pro2.0: A Benchmark for Evaluating the Robustness of Embodied Foundation Models",
-   "url": "https://arxiv.org/abs/2610.24587",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-17T09:48:08Z",
-   "summary": "LIBERO has emerged as a widely adopted benchmark for evaluating robotic manipulation policies. However, strong performance on LIBERO does not necessarily indicate robust embodied capabilities, as models may exploit benchmark-specific regularities rather than generalize to diverse operating…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.24573",
-   "title": "Retrieval-triggered Action Projection Adjustment for Frozen VLA Policies: An Empirical Study and Failure Analysis",
-   "url": "https://arxiv.org/abs/2610.24573",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-17T09:08:32Z",
-   "summary": "Frozen Vision-Language-Action (VLA) policies cannot incorporate previously encountered failures without updating the underlying model. We present retrieval-triggered projection correction (RTPC), an auditable external-memory wrapper for frozen OpenVLA policies that retrieves stress-collected…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:41ee6090b2b5ef7d",
-   "title": "1.3.14",
-   "url": "https://github.com/ros-navigation/navigation2/releases/tag/1.3.14",
-   "source": "ros-navigation/navigation2 releases",
-   "sourceId": "rel-nav2",
-   "sourceClass": "release",
-   "publishedAt": "2026-10-17T00:34:50Z",
-   "summary": "Jazzy Sync Oct 16",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "url:a31d8c112466e8f9",
-   "title": "1.5.3",
-   "url": "https://github.com/ros-navigation/navigation2/releases/tag/1.5.3",
-   "source": "ros-navigation/navigation2 releases",
-   "sourceId": "rel-nav2",
-   "sourceClass": "release",
-   "publishedAt": "2026-10-17T00:02:17Z",
-   "summary": "Lyrical sync Oct 16",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.23438",
-   "title": "No Eyes, No Problem: What Does Touch Contribute to Blind Baoding Ball Manipulation?",
-   "url": "https://arxiv.org/abs/2610.23438",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-16T13:22:03Z",
-   "summary": "Humans manipulate objects within their hands through touch alone with remarkable ease, but for robots, achieving sustained real-world manipulation without vision remains an open challenge. Although reinforcement learning (RL) can generate sophisticated blind manipulation policies in simulation…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:cdf60f54cbafd470",
-   "title": "Ten years of innovation, entrepreneurship, and impact at Pennovation Works",
-   "url": "https://www.grasp.upenn.edu/news/ten-years-of-innovation-entrepreneurship-and-impact-at-pennovation-works",
-   "source": "UPenn GRASP news",
-   "sourceId": "lab-grasp",
-   "sourceClass": "lab",
-   "publishedAt": "2026-10-16T12:44:46Z",
-   "summary": "Marking a decade of helping companies launch, grow, and attract investment, Pennovation Works, the University’s 23-acre innovation hub, aims to […]",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.23372",
-   "title": "Beyond Success Rate: Interventional Evaluation of Memory in Vision-Language-Action Systems",
-   "url": "https://arxiv.org/abs/2610.23372",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-16T12:23:56Z",
-   "summary": "When we say that a robot uses memory, does that memory actually play a role? Success-rate ablations alone cannot establish the use of task-relevant facts: they change information and computation together, while aggregate rates can hide offsetting gains and losses. We propose an Interventional…",
-   "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   }
  ]
