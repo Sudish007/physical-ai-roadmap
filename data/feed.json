@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-20T10:11:52Z",
+ "generatedAt": "2026-11-21T09:58:13Z",
  "windowDays": 30,
  "items": [
   {
@@ -3832,102 +3832,6 @@
    "sourceClass": "arxiv",
    "publishedAt": "2026-10-22T11:06:48Z",
    "summary": "Diffusion trajectory planners with domain-specific experts face a practical question in unseen regions: can they rely on selecting among existing experts, or must the planner itself adapt? We study this question using a planner with a shared adapter and per-domain expert adapters. Across three…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.29203",
-   "title": "NavBind: Diagnosing Instruction-Action Binding at Route Forks in Navigation VLAs",
-   "url": "https://arxiv.org/abs/2610.29203",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-22T03:05:14Z",
-   "summary": "Vision-language-action (VLA) navigation models translate visual observations and instructions into actions. Navigation success assesses whether an agent reaches the goal. However, reaching the goal successfully does not establish whether the model genuinely follows the instructions or relies on…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.30323",
-   "title": "Dynamic Active Fleet Sizing of Heterogeneous UAV Relays for Post-Disaster Communication Networks",
-   "url": "https://arxiv.org/abs/2610.30323",
-   "source": "arXiv eess.SY listing",
-   "sourceId": "arxiv-eess.SY",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-21T18:37:36Z",
-   "summary": "Uncrewed aerial vehicle (UAV) communication systems are increasingly used to provide temporary connectivity when ground communication infrastructure is damaged by disasters such as hurricanes and wildfires. However, the amount of aerial support required changes as ground networks recover and…",
-   "matchedQuery": "eess.SY listing",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.27414",
-   "title": "Real-Time Disturbance-Aware Koopman Model Predictive Control for Quadrotors in Spatially Varying Winds",
-   "url": "https://arxiv.org/abs/2610.27414",
-   "source": "arXiv eess.SY listing",
-   "sourceId": "arxiv-eess.SY",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-21T18:27:58Z",
-   "summary": "Reliable quadrotor flight in disturbed environments requires predictive models that remain accurate as unmodeled aerodynamic effects change during deployment. We introduce a disturbance-aware Koopman Control Family (DA-KCF) framework that preserves an offline-identified nominal model while learning…",
-   "matchedQuery": "eess.SY listing",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.29730",
-   "title": "Post-hoc Epistemic Uncertainty for Vision-Language-Action Policies",
-   "url": "https://arxiv.org/abs/2610.29730",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-21T13:34:03Z",
-   "summary": "Vision-language-action (VLA) policies need to recognize gaps in their training knowledge to request useful demonstrations or assistance in new situations, especially when failures are costly. Disagreement within an ensemble of independently trained policies can guide these decisions, but requires…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.29692",
-   "title": "FlowVLA: Learning Flow-Aware Physical Completion for Quantitative Robotic Pouring",
-   "url": "https://arxiv.org/abs/2610.29692",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-21T13:07:39Z",
-   "summary": "During steady pouring, images and robot pose may remain nearly unchanged while transferred mass accumulates, making the return decision ambiguous for a whole-task vision-language-action (VLA) policy. We present FlowVLA, which separates motor generation from physical-completion estimation. A shared…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.29677",
-   "title": "Toward Recursive Self-Improvement in Physical AI",
-   "url": "https://arxiv.org/abs/2610.29677",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-21T12:54:50Z",
-   "summary": "Recursive self-improvement (RSI) describes a system that improves not only its behavior but also the process by which it improves. Recent digital agents test this idea by rewriting their own code and checking each version with executable tests. Bringing these mechanisms into the physical world…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.29676",
-   "title": "DriveMLP: When Training Strategy Outperforms Model Complexity in Autonomous Driving",
-   "url": "https://arxiv.org/abs/2610.29676",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-21T12:53:21Z",
-   "summary": "Learning motion planning policies that remain reliable under closed-loop execution is a central challenge in Autonomous Driving (AD). Imitation Learning (IL) scales well to large AD datasets but suffers from distribution shift, causal confusion, and compounding errors under closed-loop execution.…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.29560",
-   "title": "From VLM Planners to Robotic Agents: Self-Evolving Harnesses for History-Dependent Manipulation",
-   "url": "https://arxiv.org/abs/2610.29560",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-21T10:49:49Z",
-   "summary": "Vision-language-action (VLA) models achieve strong performance across embodied manipulation tasks by unifying visual understanding, language conditioning, and action generation. However, long-horizon tasks can involve non-Markovian dependencies: successful decisions may require retaining task…",
    "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   }
