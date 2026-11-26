@@ -1,7 +1,245 @@
 {
- "generatedAt": "2026-11-25T11:29:02Z",
+ "generatedAt": "2026-11-26T11:07:32Z",
  "windowDays": 30,
  "items": [
+  {
+   "id": "arxiv:2611.34914",
+   "title": "Cairn: Object-Centric 3D Trajectory Priors for Steering Frozen VLAs",
+   "url": "https://arxiv.org/abs/2611.34914",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T18:57:29Z",
+   "summary": "Vision-language-action models (VLAs) are capable low-level controllers, but they tie where objects go to the layouts they were trained on: when objects are moved or obstacles block the way, they carry them to the wrong place or into collisions. Fine-tuning on new layouts needs robot data for each…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34778",
+   "title": "Toward Agentic Robotics: A Large-Scale Study of Harness Design for Robot-Use Agents",
+   "url": "https://arxiv.org/abs/2611.34778",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T17:39:10Z",
+   "summary": "Recent vision-language models (VLMs) can act as robot-use agents that understand diverse scenes and control robots through policy code and tools. However, they predict 3D gripper poses poorly even with extended reasoning, struggling with precise manipulation. Vision-language-action (VLA) and…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34569",
+   "title": "Riding the Wave: Sim-to-Real Humanoid Control on Elastic Terrain",
+   "url": "https://arxiv.org/abs/2611.34569",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T15:36:13Z",
+   "summary": "Humanoid robots on deformable elastic terrains face a surface whose position and motion are coupled in space and time: deflection and rebound persist between contacts, and load at one foothold alters the support at others, so training must capture how each contact changes the support that follows.…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34540",
+   "title": "Reference-Model-Guided Distributed MPC for UAV Swarm Formation Flying Under Switching Directed Graphs",
+   "url": "https://arxiv.org/abs/2611.34540",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T15:21:09Z",
+   "summary": "Distributed formation control of unmanned aerial vehicle (UAV) swarms in complex environments faces several challenges, including switching inter-agent connectivity, limited communication, external disturbances, and collision avoidance. To address these challenges, we propose a…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34538",
+   "title": "Dynamic Task Update Benchmark (DTU-Bench): Evaluating Runtime Task Adaptation in Robotic Manipulation",
+   "url": "https://arxiv.org/abs/2611.34538",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T15:20:36Z",
+   "summary": "Vision-language-action (VLA) policies perform well on fixed-instruction robotic manipulation benchmarks, but their ability to adapt to instruction changes during execution remains understudied. We introduce the Dynamic Task Update Benchmark (DTU-Bench), evaluating 40 task revisions across seven…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34480",
+   "title": "ProManO: Beyond Sim(3) for Metric Upgrade of Feed-Forward Geometry with Visual-Inertial Anchors",
+   "url": "https://arxiv.org/abs/2611.34480",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T14:43:18Z",
+   "summary": "Upgrading feed-forward geometry to metric scale with visual-inertial odometry (VIO) raises the question of which correction should align dense feed-forward prediction with sparse metric VIO anchors. Existing methods use either a similarity transformation, which cannot represent depth-dependent…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34463",
+   "title": "Least Restrictive Halfplane Control Barrier Functions for an Autonomous Hydrofoil Boat with Moving Obstacles",
+   "url": "https://arxiv.org/abs/2611.34463",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T14:35:37Z",
+   "summary": "Finding valid Control Barrier Functions (CBFs) is difficult for non-linear systems subject to actuation constraints and moving in complex environments. One way to enable analytically derived CBFs is to represent obstacles as supporting halfplanes, allowing the agent to move safely on one side. In…",
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34449",
+   "title": "HoloBrain-0.5 Technical Report",
+   "url": "https://arxiv.org/abs/2611.34449",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T14:28:05Z",
+   "summary": "We present HoloBrain-0.5, a family of vision-language-action (VLA) models for manipulation across robot embodiments. The policies plan in a shared action space using robot state, kinematic structure, and calibrated camera observations. We standardize joint axes, coordinate frames, and tool-center…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2606.27603",
+   "title": "Learning to Throw: Agile and Accurate Cable-Suspended Payload Delivery with a Quadrotor",
+   "url": "https://arxiv.org/abs/2606.27603",
+   "source": "arXiv query: Aerial autonomy",
+   "sourceId": "arxiv-q-aerial-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T13:08:47Z",
+   "summary": "Quadrotors offer the agility needed to rapidly transport suspended payloads during time-critical applications, including search-and-rescue and medical delivery. While suspended-payload transport and traversal for these missions are well studied, the highly dynamic targeted release of the payload…",
+   "matchedQuery": "Aerial autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34257",
+   "title": "CamAct: Learning Robotic Manipulation from In-the-Wild Videos via Camera Motion",
+   "url": "https://arxiv.org/abs/2611.34257",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T12:19:59Z",
+   "summary": "Vision-Language-Action (VLA) models benefit from large, diverse datasets for robotic manipulation, yet collecting robot demonstrations remains costly. Recent work has explored egocentric videos as a source of supervision, primarily drawing on demonstrations of human-object interaction. We show that…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34043",
+   "title": "WISER-RL: A Wake-Sleep Learning Mechanism for Robot Reinforcement Learning from One Demonstration",
+   "url": "https://arxiv.org/abs/2611.34043",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T09:22:42Z",
+   "summary": "A robot learning from one human demonstration may rarely succeed on its own, leaving reinforcement learning (RL) with little reward feedback. We introduce WISER-RL ({W}ake--sleep policy improvement loop, {I}mitation, and {S}elective {E}xperience {R}eplay), a composite reinforcement learning…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.34020",
+   "title": "Ask to Land: Learning a Mask-Conditioned Open-Vocabulary Landing Policy via Differentiable Physics",
+   "url": "https://arxiv.org/abs/2611.34020",
+   "source": "arXiv query: Aerial autonomy",
+   "sourceId": "arxiv-q-aerial-autonomy",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T09:07:53Z",
+   "summary": "Existing drone landing systems, whether model-based or learning-based, typically rely on predefined visual markers (e.g., ArUco tags) or are trained for specific platform categories, and often assume structured target motion. Recent open-vocabulary studies enable text-prompted target selection, but…",
+   "matchedQuery": "Aerial autonomy",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.33993",
+   "title": "Aegis-VLA: Reliability-Gated Action Refinement via a Trajectory World Model for Dynamic Object Manipulation",
+   "url": "https://arxiv.org/abs/2611.33993",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T08:46:50Z",
+   "summary": "Dynamic object manipulation requires maintaining spatial and temporal alignment with targets that continue to move during inference and execution. Although future prediction can inform action correction, an accurate forecast does not establish whether modifying an existing action would be…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.33816",
+   "title": "$\\widetilde{\\varepsilon}$: Does Initial Noise Induce Directional Bias in Vision-Language-Action Models?",
+   "url": "https://arxiv.org/abs/2611.33816",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T05:46:45Z",
+   "summary": "Vision-language-action models (VLAs) have widely adopted diffusion-based action generation for continuous robot motions, enabling fine-grained control across diverse tasks. However, recent studies have shown that their performance is highly sensitive to initial noise, with resulting action errors…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.33769",
+   "title": "FailPoint-X: A Policy-Matched, Failure-Anchored Benchmark for Offline VLA Post-Training from Human Takeovers",
+   "url": "https://arxiv.org/abs/2611.33769",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T04:48:42Z",
+   "summary": "Human takeovers offer corrective supervision for vision-language-action (VLA) policies, but their contribution to offline post-training must be separated from that of continued optimization. We introduce FailPoint-X, a benchmark for offline VLA post-training with human takeovers. To represent…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.33739",
+   "title": "RegHarness: Regulating What Code-as-Policy Agents Keep from Steps to Skills",
+   "url": "https://arxiv.org/abs/2611.33739",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T04:01:05Z",
+   "summary": "Code-as-Policy agents generate, execute, and revise robot programs, but often lack explicit mechanisms to govern what persists across executions: which actions are retained within a trial and which code modifications carry over to subsequent runs. This leaves two critical aspects of agent behavior…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.33635",
+   "title": "FreshVLA: Frequency-Regularized Time Scale Hierarchical Latent Actions for Vision-Language-Action Models",
+   "url": "https://arxiv.org/abs/2611.33635",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-25T02:03:41Z",
+   "summary": "Learning reusable latent actions from action-free videos offers an effective route to improving Vision-Language-Action (VLA) policies. However, reconstruction-oriented latent actions do not necessarily benefit policy learning: as they may encode task-irrelevant static appearance with scene…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.33498",
+   "title": "A 3D Simulator for Passive SPAD Imaging",
+   "url": "https://arxiv.org/abs/2611.33498",
+   "source": "arXiv cs.RO listing",
+   "sourceId": "arxiv-cs.RO",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-24T22:18:37Z",
+   "summary": "Passive single-photon avalanche diode (SPAD) cameras provide short-exposure observations for low-light perception, but collecting task annotations for these sensors remains difficult, and annotated datasets are scarce. We present a 3D simulation pipeline that generates realistic photon detections…",
+   "matchedQuery": "cs.RO listing",
+   "alsoMatched": [
+    "Robot-learning evaluation"
+   ]
+  },
+  {
+   "id": "arxiv:2611.33352",
+   "title": "Why Does Sensor Depth Fail Learned Manipulation Policies? Finding the Failure Mode with ACT",
+   "url": "https://arxiv.org/abs/2611.33352",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-24T19:38:42Z",
+   "summary": "Learned manipulation policies, from task-specific imitation policies to vision-language-action (VLA) models, rely primarily on RGB images. While some studies report gains from sensor depth, others avoid depth cameras because of measurement noise. Depth cameras introduce both noise and missing depth…",
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
+  },
   {
    "id": "arxiv:2611.33054",
    "title": "EmbodiSafety: Benchmarking Risk Understanding and Response in Embodied AI",
@@ -12,6 +250,18 @@
    "publishedAt": "2026-11-24T17:59:05Z",
    "summary": "Progress in embodied foundation models is largely measured by task success, while the physical safety of their decisions remains underexamined. Safety evaluations centered on rule following and binary judgments do not adequately assess whether embodied models understand environmental hazards and…",
    "matchedQuery": "cs.RO listing",
+   "alsoMatched": []
+  },
+  {
+   "id": "arxiv:2611.30209",
+   "title": "RoboAda: Adapting Frozen Robot Policies at Test Time to Physics They Cannot See",
+   "url": "https://arxiv.org/abs/2611.30209",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
+   "sourceClass": "arxiv",
+   "publishedAt": "2026-11-24T17:50:36Z",
+   "summary": "Pretrained robot policies decide what to do from camera images, yet some of the physics that decides whether their plans succeed is not visible. An object may look light but be 100 times heavier, and a weakened joint or a lagging controller leaves no trace in the image. When the physics at…",
+   "matchedQuery": "Robot-learning evaluation",
    "alsoMatched": []
   },
   {
@@ -102,15 +352,13 @@
    "id": "arxiv:2611.32245",
    "title": "VLAs Execute, Code Recovers: 3D Skill Envelopes Bridge the Compositional Gap in Agentic Manipulation",
    "url": "https://arxiv.org/abs/2611.32245",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-24T09:21:57Z",
    "summary": "Composing frozen Vision-Language-Action (VLA) skills under an agentic planner promises scalable long-horizon manipulation without long-horizon demonstrations, yet strong atomic skills routinely fail at seams even under a correct plan. Standard remedies reset the robot's pose or draft entry…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.32081",
@@ -128,15 +376,13 @@
    "id": "arxiv:2611.32016",
    "title": "RoboHarness-RL: Agentic Reinforcement Learning for VLM-Based Robot Manipulation",
    "url": "https://arxiv.org/abs/2611.32016",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-24T05:59:50Z",
    "summary": "Agentic harnesses enable frontier vision-language models (VLMs) to manipulate robots through perception, planning, and control tools, yet achieving comparable performance with compact open-weight VLMs remains challenging. We present RoboHarness-RL, an agentic reinforcement learning framework for…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.31954",
@@ -190,15 +436,13 @@
    "id": "arxiv:2611.31729",
    "title": "DAA for an Autonomous Delivery Drone: Maneuver Selection Policies for Near-Collision Risk Avoidance",
    "url": "https://arxiv.org/abs/2611.31729",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
+   "source": "arXiv eess.SY listing",
+   "sourceId": "arxiv-eess.SY",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-24T00:34:32Z",
    "summary": "Detect-and-avoid (DAA) systems for autonomous drones operating in shared airspace must select avoidance maneuvers under conditions that differ markedly from those assumed by conventional DAA architectures designed for crewed aircraft. Limited on-board sensing capabilities restrict detection of…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": [
-    "eess.SY listing"
-   ]
+   "matchedQuery": "eess.SY listing",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.31588",
@@ -381,18 +625,6 @@
    "alsoMatched": []
   },
   {
-   "id": "arxiv:2611.30209",
-   "title": "RoboAda: Adapting Frozen Robot Policies at Test Time to Physics They Cannot See",
-   "url": "https://arxiv.org/abs/2611.30209",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-11-23T07:47:08Z",
-   "summary": "Pretrained robot policies decide what to do from camera images, yet some of the physics that decides whether their plans succeed is not visible. An object may look light but be 100 times heavier, and a weakened joint or a lagging controller leaves no trace in the image. When the physics at…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
    "id": "arxiv:2611.27182",
    "title": "Tripwire: Robot Agents that Program Their Own Interrupts under Human Disturbance",
    "url": "https://arxiv.org/abs/2611.27182",
@@ -504,15 +736,13 @@
    "id": "arxiv:2611.29089",
    "title": "Construction of Universal Safe Stabilizing Formulas with Weighted Centroid Methodology",
    "url": "https://arxiv.org/abs/2611.29089",
-   "source": "arXiv eess.SY listing",
-   "sourceId": "arxiv-eess.SY",
+   "source": "arXiv query: Safe autonomy",
+   "sourceId": "arxiv-q-safe-autonomy",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-21T23:25:34Z",
    "summary": "Control Lyapunov and control barrier functions ensure stability and safety, respectively, by imposing state-dependent affine constraints on the control input. Controller design can therefore be viewed as the problem of selecting an admissible input from the set defined by these constraints. This…",
-   "matchedQuery": "eess.SY listing",
-   "alsoMatched": [
-    "Safe autonomy"
-   ]
+   "matchedQuery": "Safe autonomy",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.28873",
@@ -578,15 +808,13 @@
    "id": "arxiv:2611.28585",
    "title": "AsyncMixVLA: Runtime Asynchronous Robot Policy Switching for Adaptation to Dynamic Environments",
    "url": "https://arxiv.org/abs/2611.28585",
-   "source": "arXiv eess.SY listing",
-   "sourceId": "arxiv-eess.SY",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-21T05:37:57Z",
    "summary": "Vision-language-action (VLA) models translate visual observations and language instructions into robot actions, enabling general-purpose robotic control. However, environmental perturbations, such as objects moving during execution, can undermine their reliability. Different policies exhibit…",
-   "matchedQuery": "eess.SY listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.28509",
@@ -604,15 +832,13 @@
    "id": "arxiv:2611.28289",
    "title": "Intervention-Robust VLA: Diverse Demonstrations for Robot Deployment with Safety Filters",
    "url": "https://arxiv.org/abs/2611.28289",
-   "source": "arXiv eess.SY listing",
-   "sourceId": "arxiv-eess.SY",
+   "source": "arXiv query: Robot-learning evaluation",
+   "sourceId": "arxiv-q-robot-learning-eval",
    "sourceClass": "arxiv",
    "publishedAt": "2026-11-20T20:12:56Z",
    "summary": "Vision-Language-Action models (VLAs) have shown strong potential for learning complex robotic behaviors from demonstrations. However, learning safe behavior directly from data requires extensive coverage of safety-critical situations, which is often impractical in real-world settings. Test-time…",
-   "matchedQuery": "eess.SY listing",
-   "alsoMatched": [
-    "Robot-learning evaluation"
-   ]
+   "matchedQuery": "Robot-learning evaluation",
+   "alsoMatched": []
   },
   {
    "id": "arxiv:2611.28274",
@@ -4147,126 +4373,6 @@
    "publishedAt": "2026-10-27T12:08:37Z",
    "summary": "Active simultaneous localization and mapping (SLAM) addresses the problem of planning robot motion to build complete and accurate maps of unknown environments through efficient exploration while maintaining high localization accuracy. This raises a dilemma between exploring unknown spaces to expand…",
    "matchedQuery": "cs.RO listing",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.36968",
-   "title": "Omni-IGN: Onboard Image-Goal Navigation for Drones with Omnidirectional Vision",
-   "url": "https://arxiv.org/abs/2610.36968",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-27T10:24:19Z",
-   "summary": "Image-goal navigation (ImageNav) requires an agent to reach a location specified by a goal image in an unknown environment. For drones, this task demands exploration, goal- directed navigation, and collision avoidance under limited onboard computing resources. Existing aerial ImageNav methods are…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.36859",
-   "title": "ActiveAlign: Aligning Egocentric Manipulation via Active Perception",
-   "url": "https://arxiv.org/abs/2610.36859",
-   "source": "arXiv cs.RO listing",
-   "sourceId": "arxiv-cs.RO",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-27T08:54:27Z",
-   "summary": "Real-to-Sim-to-Real (Real2Sim2Real) enables structured world representations for planning, interpretability, and safe execution. Most existing approaches rely on passive perception, which creates real2sim gaps due to imperfect observation. Inspired by how humans perceive actively through actions…",
-   "matchedQuery": "cs.RO listing",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.36823",
-   "title": "TAPESTRY: A Single Backbone for Video Generation and Robot Control",
-   "url": "https://arxiv.org/abs/2610.36823",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-27T08:23:30Z",
-   "summary": "Pretrained video generation models encode rich priors about physical interactions, but leveraging them for robot control typically requires either resource-intensive video generation at test time or action heads trained from scratch that do not fully utilize the pretrained backbone. We introduce…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.36761",
-   "title": "Making Self-Driving Laboratories Auditable:A Unified Framework for Hybrid Actions,Measurements, and Safe Execution",
-   "url": "https://arxiv.org/abs/2610.36761",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-27T07:17:24Z",
-   "summary": "Self-driving laboratories (SDLs) are laboratory systems that couple experimental planning, automated execution, and measurement feedback in a closed loop. Integrating flexible robot control with the typed application programming interfaces (APIs) and continuous measurements exposed by laboratory…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:4596a2a98f72a376",
-   "title": "v4.1.0",
-   "url": "https://github.com/mavlink/MAVSDK/releases/tag/v4.1.0",
-   "source": "mavlink/MAVSDK releases",
-   "sourceId": "rel-mavsdk",
-   "sourceClass": "release",
-   "publishedAt": "2026-10-27T06:17:08Z",
-   "summary": "What's Changed Add mavlink direct server to wrappers by @JonasVautherin in #3157 action: support the RTL altitude on ArduCopter by @JonasVautherin in #3158 build(deps): bump source-map-js from 1.2.1 to 1.2.2 in /docs by @dependabot [bot] in #3155 build(deps): bump @vue/server-renderer and vue in…",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.36685",
-   "title": "RoboSTD: Zero-Shot Single-to-Dual Transfer via Sagittal Mirroring for Bimanual Learning",
-   "url": "https://arxiv.org/abs/2610.36685",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-27T05:56:15Z",
-   "summary": "Bimanual robot manipulation plays an important role in real-world robotic applications, but the high cost of collecting bimanual demonstrations limits the scalable development of bimanual policy learning. Meanwhile, existing single-arm manipulation data are difficult to directly transfer to…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.36285",
-   "title": "ASPEN: Adaptive Semantic Reasoning via Command Persistence Prediction for Efficient Navigation VLAs",
-   "url": "https://arxiv.org/abs/2610.36285",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-26T21:10:50Z",
-   "summary": "Navigation vision-language-action (VLA) policies repeatedly invoke costly semantic reasoning even when the next command remains unchanged. Command reuse can reduce computation but risks missing instruction-dependent turns or stops. We introduce ASPEN, an event-triggered scheduler based on command…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "url:b221b3a3d02557be",
-   "title": "Penn’s Schlein Center for Cybersecurity to combat AI threats and more",
-   "url": "https://www.grasp.upenn.edu/news/penns-schlein-center-for-cybersecurity-to-combat-ai-threats-and-more",
-   "source": "UPenn GRASP news",
-   "sourceId": "lab-grasp",
-   "sourceClass": "lab",
-   "publishedAt": "2026-10-26T21:06:44Z",
-   "summary": "Penn’s new Schlein Center for Cybersecurity, founded thanks to a gift from University Trustee Ted Schlein, will bring together engineers, […]",
-   "matchedQuery": null,
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.35832",
-   "title": "Profiling a Frontier Agent with EBench: From Direct Control to Harness with Policy",
-   "url": "https://arxiv.org/abs/2610.35832",
-   "source": "arXiv query: Robot-learning evaluation",
-   "sourceId": "arxiv-q-robot-learning-eval",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-26T17:51:02Z",
-   "summary": "Frontier multimodal large language models (MLLMs) can control robots without robot-specific training, but how their capabilities compare and interact with post-trained vision-language-action (VLA) and world action model (WAM) policies across manipulation demands remains to be thoroughly evaluated.…",
-   "matchedQuery": "Robot-learning evaluation",
-   "alsoMatched": []
-  },
-  {
-   "id": "arxiv:2610.35582",
-   "title": "Distributed Predictive Flocking for a Swarm of Miniature Vibration-Driven Robots in a Confined Arena",
-   "url": "https://arxiv.org/abs/2610.35582",
-   "source": "arXiv query: Safe autonomy",
-   "sourceId": "arxiv-q-safe-autonomy",
-   "sourceClass": "arxiv",
-   "publishedAt": "2026-10-26T15:14:10Z",
-   "summary": "Coordinating many miniature robots in a confined arena, with no leader, central planner, or global map, is a core challenge for swarm robotics. As the swarm grows denser, collision avoidance becomes the limiting factor, and the number of safely coexisting robots depends on the formulation of the…",
-   "matchedQuery": "Safe autonomy",
    "alsoMatched": []
   }
  ]
